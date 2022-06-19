@@ -29,15 +29,19 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.login.LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".ui.main.DemoActivity" />
-        <activity android:name=".ui.tab_bar.activity.TabBarActivity" />
+        <activity android:name=".ui.tab_bar.activity.TabBarActivity" >
+        </activity>
         <activity android:name=".ui.viewpager.activity.ViewPagerActivity" />
+        <activity android:name=".aioui.clazz.ClazzActivity" />
+        <activity android:name=".aioui.kepu.KepuActivity" />
+        <activity android:name=".aioui.knows.KnowsActivity" />
+        <activity android:name=".aioui.notice.NoticeActivity" />
+        <activity android:name=".aioui.relax.RelaxActivity" />
+        <activity android:name=".aioui.scan.ScanActivity" />
+        <activity android:name=".aioui.test.TestActivity" />
+        <activity android:name=".aioui.zixun.ZixunActivity" />
     </application>
 
 </manifest>

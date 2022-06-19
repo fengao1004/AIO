@@ -1,8 +1,6 @@
-package com.goldze.mvvmhabit.aioui.main
+package com.goldze.mvvmhabit.aioui.clazz
 
 import android.app.Application
-import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.goldze.mvvmhabit.aioui.http.HttpRepository
 import me.goldze.mvvmhabit.base.BaseViewModel
@@ -15,7 +13,7 @@ import me.goldze.mvvmhabit.binding.command.BindingCommand
  * Date: 2022/6/19
  * Time: 4:56 下午
  */
-class MainViewModel(application: Application) : BaseViewModel<HttpRepository>(application) {
+class ClazzViewModel(application: Application) : BaseViewModel<HttpRepository>(application) {
     var fgLiveData: MutableLiveData<Int> = MutableLiveData()
 
     var showSupport: BindingCommand<String> = BindingCommand(BindingAction {

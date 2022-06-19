@@ -48,6 +48,7 @@ dependencies {
     }
     //MVVMHabit
     implementation project(':mvvmhabit')
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 //    implementation rootProject.ext.dependencies.MVVMHabit
     //内存泄漏测试
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.3'

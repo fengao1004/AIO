@@ -38,7 +38,7 @@ public class ViewAdapter {
                     });
         } else {
             RxView.clicks(view)
-                    .throttleFirst(CLICK_INTERVAL, TimeUnit.SECONDS)//1秒钟内只允许点击1次
+//                    .throttleFirst(CLICK_INTERVAL, TimeUnit.SECONDS)//1秒钟内只允许点击1次
                     .subscribe(new Consumer<Object>() {
                         @Override
                         public void accept(Object object) throws Exception {
