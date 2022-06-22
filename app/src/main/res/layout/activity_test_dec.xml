@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:binding="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.goldze.mvvmhabit.aioui.test.dec.TestDecModel" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.goldze.mvvmhabit.ui.base.widget.BaseRootView
+            android:id="@+id/br_root_view"
+            android:layout_width="match_parent"
+            android:layout_height="98dp" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="98dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="298dp"
+            android:padding="10dp"
+            android:text="心理健康评测"
+            android:textColor="@color/text_black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="348dp"
+            android:padding="10dp"
+            android:text="心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测"
+            android:textColor="@color/text_gray"
+            android:textSize="12sp" />
+
+        <TextView
+            style="@style/blue_button"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="80dp"
+            binding:onClickCommand="@{viewModel.startTest}"
+            android:text="开始评测" />
+
+
+    </FrameLayout>
+</layout>

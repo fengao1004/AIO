@@ -1,6 +1,8 @@
 package me.goldze.mvvmhabit.binding.viewadapter.view;
 
+import android.graphics.Typeface;
 import android.view.View;
+import android.widget.TextView;
 
 import com.jakewharton.rxbinding2.view.RxView;
 
@@ -90,6 +92,14 @@ public class ViewAdapter {
         } else {
             view.clearFocus();
         }
+    }
+
+    /**
+     * textView的textStyle是否需要获取焦点
+     */
+    @BindingAdapter({"setTextStyle"})
+    public static void requestFocusCommand(TextView view, final Typeface typeface) {
+        view.setTypeface(typeface);
     }
 
     /**

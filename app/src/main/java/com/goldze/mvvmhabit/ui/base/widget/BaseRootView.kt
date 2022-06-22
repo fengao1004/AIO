@@ -46,12 +46,16 @@ class BaseRootView(context: Context, attrs: AttributeSet?) : FrameLayout(context
         pageTitleView.text = pageTitle
     }
 
-    fun setLogo(url:String){
+    fun setLogo(url: String) {
         //使用Glide框架加载图片
         Glide.with(context)
             .load(url)
             .apply(RequestOptions().placeholder(R.drawable.loading))
             .into(logo)
+    }
+
+    fun hidePageTitle() {
+        pageTitleView.visibility = View.GONE
     }
 
 }

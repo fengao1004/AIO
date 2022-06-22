@@ -53,6 +53,7 @@ dependencies {
     //内存泄漏测试
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.3'
     debugImplementation 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.3'
+    implementation 'com.github.CarGuo.GSYVideoPlayer:GSYVideoPlayer:v8.3.0-release-jitpack'
     configurations.all {
         resolutionStrategy {
             force 'androidx.core:core:1.6.0'	//两个依赖根据搜索出的关键字选择

@@ -7,6 +7,8 @@
 
     <data>
 
+        <import type="me.goldze.mvvmhabit.binding.viewadapter.recyclerview.LayoutManagers" />
+
         <variable
             name="viewModel"
             type="com.goldze.mvvmhabit.aioui.test.TestModel" />
@@ -20,5 +22,85 @@
             android:id="@+id/br_root_view"
             android:layout_width="match_parent"
             android:layout_height="98dp" />
+
+        <LinearLayout
+            android:id="@+id/ll_tab_root"
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:layout_marginTop="49dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                binding:onClickCommand="@{viewModel.specialtyTClick}">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:text="专业评测"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    binding:typeface="@{viewModel.specialtyTagStyle}" />
+
+                <ImageView
+                    android:layout_width="38dp"
+                    android:layout_height="4dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="4dp"
+                    android:background="@drawable/white_tab_buttom"
+                    binding:isVisible="@{viewModel.specialtyTagVisible}" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                binding:onClickCommand="@{viewModel.normalClick}">
+
+                <TextView
+                    android:id="@+id/tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:text="趣味评测"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    binding:typeface="@{viewModel.normalTagStyle}" />
+
+                <ImageView
+                    android:layout_width="38dp"
+                    android:layout_height="4dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="4dp"
+                    android:background="@drawable/white_tab_buttom"
+                    binding:isVisible="@{viewModel.normalTagVisible}" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <!--        <androidx.recyclerview.widget.RecyclerView-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:layout_marginTop="98dp"-->
+        <!--            binding:itemBinding="@{viewModel.itemBinding}"-->
+        <!--            binding:items="@{viewModel.observableList}"-->
+        <!--            binding:layoutManager="@{LayoutManagers.linear()}" />-->
+        <FrameLayout
+            android:id="@+id/fl_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="98dp" />
     </FrameLayout>
 </layout>

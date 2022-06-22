@@ -9,6 +9,7 @@ import com.goldze.mvvmhabit.aioui.notice.NoticeActivity
 import com.goldze.mvvmhabit.aioui.relax.RelaxActivity
 import com.goldze.mvvmhabit.aioui.scan.ScanActivity
 import com.goldze.mvvmhabit.aioui.test.TestActivity
+import com.goldze.mvvmhabit.aioui.test.dec.TestDecActivity
 import com.goldze.mvvmhabit.aioui.zixun.ZixunActivity
 import me.goldze.mvvmhabit.base.BaseViewModel
 import me.goldze.mvvmhabit.binding.command.BindingAction
@@ -31,7 +32,7 @@ class MainFgViewModel(application: Application) : BaseViewModel<HttpRepository>(
     })
 
     var gotoTest: BindingCommand<String> = BindingCommand(BindingAction {
-        startActivity(TestActivity::class.java)
+        startActivity(TestDecActivity::class.java)
     })
 
     var gotoClass: BindingCommand<String> = BindingCommand(BindingAction {
