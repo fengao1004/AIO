@@ -58,6 +58,8 @@ dependencies {
         resolutionStrategy {
             force 'androidx.core:core:1.6.0'	//两个依赖根据搜索出的关键字选择
             force 'androidx.core:core-ktx:1.6.0'
+            force 'androidx.appcompat:appcompat:1.0.0'
+            force 'androidx.media:media:1.0.0'
         }
     }
 }

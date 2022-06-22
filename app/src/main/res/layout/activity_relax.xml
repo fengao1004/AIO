@@ -12,13 +12,23 @@
             type="com.goldze.mvvmhabit.aioui.relax.RelaxModel" />
     </data>
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/activity_background_color"
+        android:orientation="vertical">
 
         <com.goldze.mvvmhabit.ui.base.widget.BaseRootView
             android:id="@+id/br_root_view"
             android:layout_width="match_parent"
             android:layout_height="98dp" />
-    </FrameLayout>
+
+        <!--第一个-->
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" />
+    </LinearLayout>
+
 </layout>

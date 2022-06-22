@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tvLabel"
+    android:gravity="center"
+    android:background="@drawable/shape_stroke_label_no_select"
+    android:paddingVertical="4dp"
+    android:paddingHorizontal="22dp"
+    android:text="标签标签"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+</TextView>

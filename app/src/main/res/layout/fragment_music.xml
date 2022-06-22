@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:binding="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.goldze.mvvmhabit.aioui.relax.music.viewmodel.MusicModel" />
+
+        <import type="com.goldze.mvvmhabit.aioui.relax.music.adapter.MusicViewPagerBindingAdapter" />
+
+        <variable
+            name="viewModel"
+            type="MusicModel" />
+
+        <variable
+            name="adapter"
+            type="MusicViewPagerBindingAdapter" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/activity_background_color"
+        android:orientation="vertical">
+
+        <com.goldze.mvvmhabit.ui.base.widget.BaseRootView
+            android:id="@+id/br_root_view"
+            android:layout_width="match_parent"
+            android:layout_height="98dp" />
+
+        <!--音乐播放器-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <com.goldze.mvvmhabit.ui.corner.ShadowFrameLayout
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginEnd="6dp"
+                    app:sl_cornerRadius="80dp">
+
+                    <ImageView
+                        android:id="@+id/music_icon"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/player_music_icon" />
+
+                </com.goldze.mvvmhabit.ui.corner.ShadowFrameLayout>
+
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="44dp"
+                    android:layout_marginHorizontal="6dp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_gravity="top|start"
+                        android:text="心理图库"
+                        android:textColor="@color/text_color_title"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="14dp"
+                        android:layout_gravity="bottom|start"
+                        android:text="专业视角，深度思考"
+                        android:textColor="@color/text_color_subtitle"
+                        android:textSize="12sp" />
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="155dp"
+                    android:layout_height="100dp"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:layout_marginTop="27dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginBottom="15dp">
+
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="start|center_vertical"
+                            android:layout_marginStart="4dp"
+                            android:src="@drawable/player_back" />
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_gravity="center_horizontal|center_vertical"
+                            android:src="@drawable/player_pause" />
+
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="end|center_vertical"
+                            android:layout_marginEnd="4dp"
+                            android:src="@drawable/player_forward" />
+
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginBottom="20dp">
+
+                        <ImageView
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:layout_gravity="start|center_vertical"
+                            android:layout_marginStart="10dp"
+                            android:src="@drawable/gonggao" />
+
+                        <SeekBar
+                            android:id="@+id/volume_bar"
+                            android:layout_width="100dp"
+                            android:layout_height="8dp"
+                            android:layout_gravity="end|center_vertical"
+                            android:layout_marginStart="6dp"
+                            android:layout_marginEnd="25dp"
+                            android:max="100" />
+
+                    </FrameLayout>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginStart="14dp"
+                    android:text="0:00"
+                    android:textColor="@color/text_color_subtitle"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="14dp"
+                    android:text="4:13"
+                    android:textColor="@color/text_color_subtitle"
+                    android:textSize="10sp" />
+            </FrameLayout>
+
+            <SeekBar
+                android:id="@+id/seek"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:max="100" />
+
+        </LinearLayout>
+
+        <!--tabLayout 和 view pager 组合-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="14dp"
+                app:tabBackground="@android:color/transparent"
+                app:tabMode="scrollable"
+                app:tabPaddingStart="0dp"
+                app:tabPaddingEnd="4dp"
+                binding:tabGravity="fill"
+                binding:tabIndicatorColor="@color/colorPrimary"
+                binding:tabSelectedTextColor="@color/colorPrimary"
+                binding:tabTextColor="@android:color/black" />
+
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                binding:adapter="@{adapter}"
+                binding:itemBinding="@{viewModel.itemBinding}"
+                binding:items="@{viewModel.items}"
+                binding:onPageSelectedCommand="@{viewModel.onPageSelectedCommand}"
+                binding:pageTitles="@{viewModel.pageTitles}" />
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

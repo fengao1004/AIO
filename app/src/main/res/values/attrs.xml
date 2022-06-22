@@ -13,4 +13,10 @@
         <attr name="onRefreshCommand" format="reference" />
         <attr name="onLoadMoreCommand" format="reference" />
     </declare-styleable>
+
+    <declare-styleable name="ShadowLayout">
+        <attr name="sl_cornerRadius" format="dimension"></attr>
+        <attr name="sl_strokeWidth" format="dimension"></attr>
+        <attr name="sl_strokeColor" format="color"></attr>
+    </declare-styleable>
 </resources>
