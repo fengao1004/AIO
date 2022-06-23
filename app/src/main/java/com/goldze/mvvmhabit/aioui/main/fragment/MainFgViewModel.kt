@@ -10,6 +10,7 @@ import com.goldze.mvvmhabit.aioui.relax.RelaxActivity
 import com.goldze.mvvmhabit.aioui.scan.ScanActivity
 import com.goldze.mvvmhabit.aioui.test.TestActivity
 import com.goldze.mvvmhabit.aioui.test.dec.TestDecActivity
+import com.goldze.mvvmhabit.aioui.video.VideoActivity
 import com.goldze.mvvmhabit.aioui.zixun.ZixunActivity
 import me.goldze.mvvmhabit.base.BaseViewModel
 import me.goldze.mvvmhabit.binding.command.BindingAction
@@ -28,7 +29,7 @@ class MainFgViewModel(application: Application) : BaseViewModel<HttpRepository>(
     })
 
     var gotoScan: BindingCommand<String> = BindingCommand(BindingAction {
-        startActivity(ScanActivity::class.java)
+        startActivity(VideoActivity::class.java)
     })
 
     var gotoTest: BindingCommand<String> = BindingCommand(BindingAction {

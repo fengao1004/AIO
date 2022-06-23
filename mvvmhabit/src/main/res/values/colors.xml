@@ -5,6 +5,7 @@
     <color name="text_black">#333333</color>
     <color name="text_gray">#ababab</color>
     <color name="background_gray">#fafafa</color>
+    <color name="background_gray_2">#eeeeee</color>
     <color name="gray">#808080</color>
     <color name="yellow">#FFFF00</color>
     <color name="green">#008000</color>

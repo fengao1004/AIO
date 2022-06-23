@@ -20,5 +20,50 @@
             android:id="@+id/br_root_view"
             android:layout_width="match_parent"
             android:layout_height="98dp" />
+
+
+        <com.goldze.mvvmhabit.ui.base.widget.SampleControlVideo
+            android:id="@+id/scv_video"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="98dp" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="308dp"
+            android:text="大海"
+            android:textColor="@color/text_black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="335dp"
+            android:text="点击量xxx"
+            android:textColor="@color/text_gray"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv_look"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="335dp"
+            android:text="用手机观看 >"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/app_blue"
+            android:textSize="12sp" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="360dp"
+            android:background="@color/background_gray_2"/>
+
     </FrameLayout>
 </layout>

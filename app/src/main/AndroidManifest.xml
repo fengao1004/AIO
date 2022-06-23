@@ -45,6 +45,7 @@
         <activity android:name=".aioui.test.TestActivity" />
         <activity android:name=".aioui.zixun.ZixunActivity" />
         <activity android:name=".aioui.relax.music.MusicActivity" />
+        <activity android:name=".aioui.video.VideoActivity" />
     </application>
 
 </manifest>
