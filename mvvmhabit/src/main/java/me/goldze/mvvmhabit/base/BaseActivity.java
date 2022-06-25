@@ -82,6 +82,7 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
             }
             viewModel = (VM) createViewModel(this, modelClass);
         }
+        viewModel.activity = this;
         //关联ViewModel
         binding.setVariable(viewModelId, viewModel);
         //支持LiveData绑定xml，数据改变，UI自动会更新

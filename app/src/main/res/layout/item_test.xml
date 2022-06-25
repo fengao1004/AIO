@@ -25,17 +25,19 @@
             android:background="@drawable/blue_button_buttom_stroke"
             android:gravity="center_vertical"
             android:paddingLeft="20dp"
-            android:text="ada"
+            android:text="@{viewModel.entity.title}"
             android:textColor="@color/app_blue_lite"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            binding:testItemIsCheck="@{viewModel.entity.isCheck()}" />
 
         <ImageView
-            android:layout_centerVertical="true"
             android:layout_width="22dp"
             android:layout_height="22dp"
             android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
             android:layout_marginEnd="20dp"
-            android:src="@drawable/enter" />
+            android:src="@drawable/enter"
+            binding:isVisible="@{viewModel.entity.isCheck()}" />
 
     </RelativeLayout>
 </layout>

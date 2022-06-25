@@ -1,5 +1,6 @@
 package me.goldze.mvvmhabit.base;
 
+import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
 
@@ -25,6 +26,7 @@ import me.goldze.mvvmhabit.bus.event.SingleLiveEvent;
 public class BaseViewModel<M extends BaseModel> extends AndroidViewModel implements IBaseViewModel, Consumer<Disposable> {
     protected M model;
     private UIChangeLiveData uc;
+    public Activity activity;
     //弱引用持有
     private WeakReference<LifecycleProvider> lifecycle;
     //管理RxJava，主要针对RxJava异步操作造成的内存泄漏

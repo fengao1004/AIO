@@ -52,6 +52,160 @@
             android:text="开始评测"
             binding:onClickCommand="@{viewModel.startTest}" />
 
+        <ImageView
+            android:clickable="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#aa333333"
+            binding:isVisible="@{viewModel.showMarryChoose||viewModel.showSexChoose}" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
+            android:background="@drawable/white_button_buttom"
+            android:orientation="vertical"
+            binding:isVisible="@{viewModel.showSexChoose}">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="请选择您的性别"
+                android:textColor="@color/text_black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/text_gray" />
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="35dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/white_button_blue_stroke"
+                android:gravity="center"
+                android:text="男"
+                binding:onClickCommand="@{viewModel.sexClickA}"
+                binding:sexState="@{viewModel.sex}"
+                binding:sexValue="@{0}" />
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="35dp"
+                android:background="@drawable/gray_button_buttom"
+                android:gravity="center"
+                android:text="女"
+                binding:onClickCommand="@{viewModel.sexClickB}"
+                binding:sexState="@{viewModel.sex}"
+                binding:sexValue="@{1}" />
+
+            <TextView
+                style="@style/blue_button"
+                android:layout_marginBottom="20dp"
+                android:height="50dp"
+                binding:onClickCommand="@{viewModel.sexClick}"
+                android:text="确定" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
+            android:background="@drawable/white_button_buttom"
+            android:orientation="vertical"
+            binding:isVisible="@{viewModel.showMarryChoose}">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="请选择您的婚姻状况"
+                android:textColor="@color/text_black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/text_gray" />
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="35dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/white_button_blue_stroke"
+                android:gravity="center"
+                android:text="未婚"
+                binding:marryState="@{viewModel.marry}"
+                binding:marryValue="@{0}"
+                binding:onClickCommand="@{viewModel.marryClickA}" />
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/gray_button_buttom"
+                android:gravity="center"
+                android:text="已婚"
+                binding:marryState="@{viewModel.marry}"
+                binding:marryValue="@{1}"
+                binding:onClickCommand="@{viewModel.marryClickB}" />
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/gray_button_buttom"
+                android:gravity="center"
+                android:text="离婚"
+                binding:marryState="@{viewModel.marry}"
+                binding:marryValue="@{2}"
+                binding:onClickCommand="@{viewModel.marryClickC}" />
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="35dp"
+                android:background="@drawable/gray_button_buttom"
+                android:gravity="center"
+                android:text="丧偶"
+                binding:marryState="@{viewModel.marry}"
+                binding:marryValue="@{3}"
+                binding:onClickCommand="@{viewModel.marryClickD}" />
+
+            <TextView
+                style="@style/blue_button"
+                android:layout_marginBottom="20dp"
+                android:height="50dp"
+                binding:onClickCommand="@{viewModel.marryClick}"
+                android:text="确定" />
+
+        </LinearLayout>
+
+
 
     </FrameLayout>
 </layout>

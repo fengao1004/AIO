@@ -6,6 +6,7 @@
     tools:context=".aioui.main.MainActivity">
 
     <data>
+
         <import type="me.goldze.mvvmhabit.binding.viewadapter.recyclerview.LayoutManagers" />
 
         <variable
@@ -33,17 +34,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:text="1"
                 android:textColor="@color/app_blue"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                binding:intText="@{viewModel.index+1}" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_toRightOf="@id/tv_now"
-                android:text="/20"
+                android:text="@{viewModel.endIndex}"
                 android:textColor="@color/text_gray"
                 android:textSize="14sp" />
 
@@ -54,6 +55,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
                 android:text="上一题"
+                binding:onClickCommand="@{viewModel.lastClick}"
                 android:textColor="@color/app_blue_lite"
                 android:textSize="14sp" />
 
@@ -63,7 +65,8 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="2dp"
                 android:layout_toLeftOf="@id/tv_last"
-                android:src="@drawable/last" />
+                android:src="@drawable/last"
+                binding:onClickCommand="@{viewModel.lastClick}" />
 
         </RelativeLayout>
 
@@ -76,7 +79,7 @@
             android:max="100"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:progress="20"
+            android:progress="@{viewModel.progress}"
             android:progressDrawable="@drawable/progress_bar_background" />
 
         <TextView
@@ -85,7 +88,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="180dp"
-            android:text="标题"
+            android:text="@{String.valueOf(viewModel.testTitle.value)}"
             android:textColor="@color/text_black"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -97,5 +100,22 @@
             binding:itemBinding="@{viewModel.itemBinding}"
             binding:items="@{viewModel.observableList}"
             binding:layoutManager="@{LayoutManagers.linear()}" />
+
+
+        <TextView
+            style="@style/blue_button"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="50dp"
+            android:text="提交"
+            binding:isVisible="@{viewModel.showCommit}"
+            binding:onClickCommand="@{viewModel.commitClick}" />
+
+        <TextView
+            style="@style/blue_button"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="50dp"
+            android:text="下一题目"
+            binding:isVisible="@{viewModel.showNext}"
+            binding:onClickCommand="@{viewModel.nextClick}" />
     </FrameLayout>
 </layout>

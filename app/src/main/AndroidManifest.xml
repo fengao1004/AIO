@@ -40,6 +40,7 @@
         <activity android:name=".aioui.clazz.ClazzActivity" />
         <activity android:name=".aioui.kepu.KepuActivity" />
         <activity android:name=".aioui.knows.KnowsActivity" />
+        <activity android:name=".aioui.webview.WebViewFromUrlActivity" />
         <activity android:name=".aioui.notice.NoticeActivity" />
         <activity android:name=".aioui.relax.RelaxActivity" />
         <activity android:name=".aioui.scan.ScanActivity" />

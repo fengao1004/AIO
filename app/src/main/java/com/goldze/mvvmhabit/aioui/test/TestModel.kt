@@ -80,7 +80,8 @@ class TestModel(application: Application) : BaseViewModel<HttpRepository>(applic
             .subscribe({
                 detailLiveData.postValue(it)
             }, {
-                Log.i("fengao_xiaomi", "loadData: ")
+                it.printStackTrace()
+                Log.i("fengao_xiaomi", "loadData: ${it.message}")
             })
     }
 

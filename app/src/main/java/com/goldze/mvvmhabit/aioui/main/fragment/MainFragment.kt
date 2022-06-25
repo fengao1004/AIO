@@ -27,4 +27,9 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainFgViewModel>() {
         return BR.viewModel
     }
 
+    override fun initData() {
+        super.initData()
+        binding.ivFoucs.requestFocus()
+    }
+
 }

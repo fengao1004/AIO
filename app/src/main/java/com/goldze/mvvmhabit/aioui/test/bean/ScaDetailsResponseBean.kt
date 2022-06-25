@@ -1,5 +1,7 @@
 package com.goldze.mvvmhabit.aioui.test.bean
 
+import androidx.databinding.BaseObservable
+import androidx.databinding.ObservableBoolean
 import java.io.Serializable
 
 /**
@@ -13,12 +15,12 @@ data class ScaDetailsResponseBean(
     val data: Data,
     val message: String,
     val success: Boolean
-) : Serializable
+) : BaseObservable(), Serializable
 
 data class Data(
-    val scaRecId: String,
+    val scaRecId: Long,
     val scaVo: ScaVo
-) : Serializable
+) : BaseObservable(), Serializable
 
 data class ScaVo(
     val brief: String,
@@ -29,7 +31,7 @@ data class ScaVo(
     val id: String,
     val name: String,
     val quesList: List<Ques>
-) : Serializable
+) : BaseObservable(),Serializable
 
 data class Ques(
     val id: String,
@@ -37,12 +39,14 @@ data class Ques(
     val optList: List<Opt>,
     val sort: Int,
     val title: String,
-    val type: Int
-) : Serializable
+    val type: Int,
+    var times:Int = 0
+) : BaseObservable(),Serializable
 
 data class Opt(
     val id: String,
     val nextQuesId: String,
     val sort: Int,
-    val title: String
-) : Serializable
+    val title: String,
+    var isCheck: ObservableBoolean = ObservableBoolean(false)
+) : BaseObservable(),Serializable

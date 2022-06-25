@@ -1,5 +1,7 @@
 package com.goldze.mvvmhabit.aioui.http
 
+import com.goldze.mvvmhabit.aioui.test.bean.AnserReponseData
+import com.goldze.mvvmhabit.aioui.test.bean.AnserRequestData
 import com.goldze.mvvmhabit.aioui.test.bean.ScaDetailsRequestBean
 import com.goldze.mvvmhabit.aioui.test.bean.ScaDetailsResponseBean
 import io.reactivex.Observable
@@ -15,4 +17,8 @@ import retrofit2.http.POST
 interface Api {
     @POST("/client/scaRec/notLogin/create")
     fun getScaDetails(@Body bean: ScaDetailsRequestBean): Observable<ScaDetailsResponseBean>
+
+
+    @POST("/client/scaRec/notLogin/calc")
+    fun commit(@Body bean: AnserRequestData): Observable<AnserReponseData>
 }
