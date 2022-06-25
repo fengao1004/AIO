@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.goldze.mvvmhabit">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -43,11 +44,29 @@
         <activity android:name=".aioui.webview.WebViewFromUrlActivity" />
         <activity android:name=".aioui.notice.NoticeActivity" />
         <activity android:name=".aioui.relax.RelaxActivity" />
+        <activity android:name=".aioui.webview.WebViewActivity" />
         <activity android:name=".aioui.scan.ScanActivity" />
         <activity android:name=".aioui.test.TestActivity" />
         <activity android:name=".aioui.zixun.ZixunActivity" />
         <activity android:name=".aioui.relax.music.MusicActivity" />
         <activity android:name=".aioui.video.VideoActivity" />
+
+        <receiver
+            android:name=".aioui.relax.music.play.notification.PlayerReceiver"
+            android:exported="false"
+            tools:ignore="ExportedReceiver">
+            <intent-filter>
+                <action android:name="pure_music.kunminx.close" />
+                <action android:name="pure_music.kunminx.pause" />
+                <action android:name="pure_music.kunminx.next" />
+                <action android:name="pure_music.kunminx.play" />
+                <action android:name="pure_music.kunminx.previous" />
+                <action android:name="android.intent.action.MEDIA_BUTTON" />
+                <action android:name="android.intent.action.MEDIA_BUTTON" />
+                <action android:name="android.media.AUDIO_BECOMING_NOISY" />
+            </intent-filter>
+        </receiver>
+        <service android:name=".aioui.relax.music.play.notification.PlayerService" />
     </application>
 
 </manifest>

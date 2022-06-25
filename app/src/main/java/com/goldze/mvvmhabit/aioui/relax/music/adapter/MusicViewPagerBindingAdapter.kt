@@ -1,9 +1,7 @@
 package com.goldze.mvvmhabit.aioui.relax.music.adapter
 
-import android.util.Log
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.Observer
 import com.goldze.mvvmhabit.aioui.relax.music.viewmodel.MusicViewPagerItemViewModel
 import com.goldze.mvvmhabit.databinding.ItemViewpagerMusicBinding
 import me.tatarka.bindingcollectionadapter2.BindingViewPagerAdapter
@@ -21,6 +19,8 @@ class MusicViewPagerBindingAdapter :
         super.onBindBinding(binding, variableId, layoutRes, position, item)
         //这里可以强转成 MusicViewPagerItemViewModel 对应的 ViewDataBinding
         val mBinding = binding as ItemViewpagerMusicBinding
+
+        mBinding.adapter = MusicRecyclerViewBindingAdapter()
 
         // 销毁又重建时，binding 虽然更新了，但 viewModel 还是旧的，所以要移除之前的 observer，多个不起作用
         mBinding.viewModel!!.uiChangeObservable.finishRefreshing.removeObservers(mBinding.lifecycleOwner!!)

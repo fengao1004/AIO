@@ -16,7 +16,6 @@
         xmlns:binding="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="130dp"
-        android:background="@color/white"
         android:gravity="center_vertical"
         android:orientation="vertical"
         android:paddingHorizontal="13dp"

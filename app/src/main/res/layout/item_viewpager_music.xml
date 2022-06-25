@@ -9,9 +9,15 @@
 
         <import type="com.goldze.mvvmhabit.aioui.relax.music.viewmodel.MusicViewPagerItemViewModel" />
 
+        <import type="com.goldze.mvvmhabit.aioui.relax.music.adapter.MusicRecyclerViewBindingAdapter" />
+
         <variable
             name="viewModel"
             type="MusicViewPagerItemViewModel" />
+
+        <variable
+            name="adapter"
+            type="MusicRecyclerViewBindingAdapter" />
 
 
     </data>
@@ -34,6 +40,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                binding:adapter="@{adapter}"
                 binding:itemBinding="@{viewModel.itemBinding}"
                 binding:items="@{viewModel.observableList}"
                 binding:layoutManager="@{LayoutManagers.linear()}"

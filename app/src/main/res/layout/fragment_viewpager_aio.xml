@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:binding="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="com.goldze.mvvmhabit.aioui.common.viewpagerfragment.viewmodel.AIOViewPagerFragmentModel" />
+
+        <import type="com.goldze.mvvmhabit.aioui.common.viewpagerfragment.adapter.AIOViewPagerBindingAdapter" />
+
+        <variable
+            name="viewModel"
+            type="AIOViewPagerFragmentModel" />
+
+        <variable
+            name="adapter"
+            type="AIOViewPagerBindingAdapter" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <com.goldze.mvvmhabit.ui.base.widget.BaseRootView
+            android:id="@+id/br_root_view"
+            android:layout_width="match_parent"
+            android:layout_height="98dp" />
+
+        <!--tabLayout 和 view pager 组合-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="14dp"
+                app:tabBackground="@android:color/transparent"
+                app:tabIndicatorHeight="0dp"
+                app:tabMode="scrollable"
+                app:tabPaddingEnd="4dp"
+                app:tabPaddingStart="0dp"
+                app:tabRippleColor="@android:color/transparent"
+                binding:tabGravity="fill"
+                binding:tabIndicatorColor="@color/colorPrimary"
+                binding:tabSelectedTextColor="@color/colorPrimary"
+                binding:tabTextColor="@android:color/black" />
+
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                binding:adapter="@{adapter}"
+                binding:itemBinding="@{viewModel.itemBinding}"
+                binding:items="@{viewModel.items}"
+                binding:onPageSelectedCommand="@{viewModel.onPageSelectedCommand}"
+                binding:pageTitles="@{viewModel.pageTitles}" />
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

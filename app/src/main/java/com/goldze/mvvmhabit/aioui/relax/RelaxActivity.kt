@@ -17,6 +17,10 @@ class RelaxActivity : BaseActivity<ActivityRelaxBinding, RelaxModel>() {
     }
 
     override fun initData() {
+        binding.brRootView.backIv.setOnClickListener {
+            finish()
+        }
+        binding.brRootView.setAppTitle("心理自助服务一体机")
         binding.brRootView.setPageTitle("减压调适")
 
         val transaction = supportFragmentManager.beginTransaction()

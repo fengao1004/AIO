@@ -23,7 +23,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/activity_background_color"
+        android:background="@color/white"
         android:orientation="vertical">
 
         <com.goldze.mvvmhabit.ui.base.widget.BaseRootView
@@ -96,6 +96,7 @@
                         android:layout_marginBottom="15dp">
 
                         <ImageView
+                            android:id="@+id/player_back"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
                             android:layout_gravity="start|center_vertical"
@@ -103,12 +104,14 @@
                             android:src="@drawable/player_back" />
 
                         <ImageView
+                            android:id="@+id/playerPlayIcon"
                             android:layout_width="35dp"
                             android:layout_height="35dp"
                             android:layout_gravity="center_horizontal|center_vertical"
                             android:src="@drawable/player_pause" />
 
                         <ImageView
+                            android:id="@+id/player_forward"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
                             android:layout_gravity="end|center_vertical"
@@ -119,24 +122,24 @@
 
                     <FrameLayout
                         android:layout_width="match_parent"
-                        android:layout_height="10dp"
+                        android:layout_height="20dp"
                         android:layout_marginTop="3dp"
                         android:layout_marginBottom="20dp">
 
                         <ImageView
-                            android:layout_width="10dp"
-                            android:layout_height="10dp"
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
                             android:layout_gravity="start|center_vertical"
                             android:layout_marginStart="10dp"
                             android:src="@drawable/gonggao" />
 
                         <SeekBar
                             android:id="@+id/volume_bar"
-                            android:layout_width="100dp"
-                            android:layout_height="8dp"
+                            android:layout_width="120dp"
+                            android:layout_height="20dp"
                             android:layout_gravity="end|center_vertical"
                             android:layout_marginStart="6dp"
-                            android:layout_marginEnd="25dp"
+                            android:layout_marginEnd="15dp"
                             android:max="100" />
 
                     </FrameLayout>
@@ -151,6 +154,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:id="@+id/current_progress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
@@ -160,6 +164,7 @@
                     android:textSize="10sp" />
 
                 <TextView
+                    android:id="@+id/music_duration"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
@@ -170,11 +175,10 @@
             </FrameLayout>
 
             <SeekBar
-                android:id="@+id/seek"
+                android:id="@+id/seek_play"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:max="100" />
-
         </LinearLayout>
 
         <!--tabLayout 和 view pager 组合-->
@@ -190,9 +194,11 @@
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="14dp"
                 app:tabBackground="@android:color/transparent"
+                app:tabIndicatorHeight="0dp"
                 app:tabMode="scrollable"
-                app:tabPaddingStart="0dp"
                 app:tabPaddingEnd="4dp"
+                app:tabPaddingStart="0dp"
+                app:tabRippleColor="@android:color/transparent"
                 binding:tabGravity="fill"
                 binding:tabIndicatorColor="@color/colorPrimary"
                 binding:tabSelectedTextColor="@color/colorPrimary"

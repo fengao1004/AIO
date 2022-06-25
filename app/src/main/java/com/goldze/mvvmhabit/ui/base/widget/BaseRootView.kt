@@ -22,6 +22,7 @@ class BaseRootView(context: Context, attrs: AttributeSet?) : FrameLayout(context
     var logo: ImageView
     var appTitleView: TextView
     var pageTitleView: TextView
+    var backIv: ImageView
 
     init {
         addView(
@@ -31,6 +32,7 @@ class BaseRootView(context: Context, attrs: AttributeSet?) : FrameLayout(context
         appTitleView = baseView.findViewById<TextView>(R.id.tv_app_title)
         pageTitleView = baseView.findViewById<TextView>(R.id.tv_page_title)
         logo = baseView.findViewById<ImageView>(R.id.iv_logo)
+        backIv = baseView.findViewById<ImageView>(R.id.iv_back)
     }
 
 

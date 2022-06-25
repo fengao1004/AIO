@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+
+    <data>
+
+        <import type="com.goldze.mvvmhabit.aioui.common.viewpagerfragment.viewmodel.AIORecyclerViewItemViewModel" />
+
+        <variable
+            name="viewModel"
+            type="AIORecyclerViewItemViewModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:binding="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:paddingHorizontal="13dp"
+        binding:onClickCommand="@{viewModel.itemClick}"
+        binding:onLongClickCommand="@{viewModel.itemLongClick}">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="125dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.goldze.mvvmhabit.ui.corner.ShadowFrameLayout
+                android:layout_width="133dp"
+                android:layout_height="100dp"
+                app:sl_cornerRadius="4dp">
+
+                <ImageView
+                    android:id="@+id/cover"
+                    android:layout_width="match_parent"
+                    android:src="@drawable/relax_train"
+                    android:layout_height="match_parent"
+                    binding:url="@{viewModel.entity.img}" />
+            </com.goldze.mvvmhabit.ui.corner.ShadowFrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_marginHorizontal="6dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_gravity="top|start"
+                    android:text="腹部呼吸法"
+                    android:textColor="@color/text_color_title"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="14dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_gravity="top|start"
+                    android:text="专业视角，深度思考"
+                    android:textColor="@color/text_color_subtitle"
+                    android:textSize="12sp" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="110dp"
+                android:layout_height="100dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="4dp"
+                    android:textColor="@color/white"
+                    android:paddingHorizontal="20dp"
+                    android:background="@drawable/shape_stroke_label_select"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:text="开始训练" />
+            </FrameLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.4dp"
+            android:background="@color/gray" />
+    </LinearLayout>
+</layout>

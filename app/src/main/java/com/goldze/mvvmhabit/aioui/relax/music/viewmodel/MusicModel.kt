@@ -26,8 +26,6 @@ class MusicModel(application: Application) : BaseViewModel<HttpRepository>(appli
 
     var itemClickEvent = SingleLiveEvent<String>()
 
-    var lifecycleOwner: LifecycleOwner? = null
-
     //给ViewPager添加ObservableList
     var items: ObservableList<MusicViewPagerItemViewModel> = ObservableArrayList()
 
@@ -41,4 +39,7 @@ class MusicModel(application: Application) : BaseViewModel<HttpRepository>(appli
     var onPageSelectedCommand = BindingCommand<Int> { index ->
 
     }
+
+    // 请求当前 ViewPager 的数据，结束后数据放到 items 对应ViewModel中
+
 }

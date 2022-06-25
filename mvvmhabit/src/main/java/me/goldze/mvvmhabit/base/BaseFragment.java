@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProviders;
+
 import me.goldze.mvvmhabit.base.BaseViewModel.ParameterField;
 import me.goldze.mvvmhabit.bus.Messenger;
 import me.goldze.mvvmhabit.utils.MaterialDialogUtils;
@@ -86,13 +87,22 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
         viewModelId = initVariableId();
         viewModel = initViewModel();
         if (viewModel == null) {
-            Class modelClass;
+            // 先赋值默认兜底
+            Class modelClass = BaseViewModel.class;
             Type type = getClass().getGenericSuperclass();
-            if (type instanceof ParameterizedType) {
-                modelClass = (Class) ((ParameterizedType) type).getActualTypeArguments()[1];
-            } else {
-                //如果没有指定泛型参数，则默认使用BaseViewModel
-                modelClass = BaseViewModel.class;
+            while (type != null) {
+                // 循环查找有泛型的父类 （BaseFragment）
+                if (type instanceof ParameterizedType) {
+                    modelClass = (Class) ((ParameterizedType) type).getActualTypeArguments()[1];
+                    break;
+                } else {
+                    Class<?> superclass = getClass().getSuperclass();
+                    if (superclass != null) {
+                        type = superclass.getGenericSuperclass();
+                    } else {
+                        type = null;
+                    }
+                }
             }
             viewModel = (VM) createViewModel(this, modelClass);
         }

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+
+    <data>
+
+        <import type="com.goldze.mvvmhabit.aioui.common.viewpagerfragment.viewmodel.AIORecyclerViewItemViewModel" />
+
+        <variable
+            name="viewModel"
+            type="AIORecyclerViewItemViewModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:binding="http://schemas.android.com/apk/res-auto"
+        android:layout_width="wrap_content"
+        android:layout_height="160dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingHorizontal="13dp"
+        binding:onClickCommand="@{viewModel.itemClick}"
+        binding:onLongClickCommand="@{viewModel.itemLongClick}">
+
+
+        <com.goldze.mvvmhabit.ui.corner.ShadowFrameLayout
+            android:layout_width="150dp"
+            android:layout_height="120dp"
+            app:sl_cornerRadius="8dp">
+
+            <ImageView
+                android:id="@+id/cover"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/mind_gallery_pic"
+                binding:url="@{viewModel.entity.img}" />
+        </com.goldze.mvvmhabit.ui.corner.ShadowFrameLayout>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_height="20dp"
+            android:layout_gravity="top|start"
+            android:text="抑郁症的人都怎么了？"
+            android:textColor="@color/text_color_title"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.4dp"
+            android:background="@color/gray" />
+
+    </LinearLayout>
+</layout>

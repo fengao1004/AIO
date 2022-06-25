@@ -2,7 +2,11 @@ package com.goldze.mvvmhabit.app;
 
 import com.goldze.mvvmhabit.BuildConfig;
 import com.goldze.mvvmhabit.R;
+import com.goldze.mvvmhabit.aioui.relax.music.play.PlayerManager;
 import com.goldze.mvvmhabit.ui.login.LoginActivity;
+import com.kunminx.player.DefaultPlayerManager;
+import com.kunminx.player.contract.ICacheProxy;
+import com.kunminx.player.contract.IServiceNotifier;
 import com.squareup.leakcanary.LeakCanary;
 
 import me.goldze.mvvmhabit.base.BaseApplication;
@@ -25,6 +29,8 @@ public class AppApplication extends BaseApplication {
         if (!LeakCanary.isInAnalyzerProcess(this)) {
             LeakCanary.install(this);
         }
+
+        PlayerManager.getInstance().init(this);
     }
 
     private void initCrash() {

@@ -61,7 +61,7 @@ public class HttpDataSourceImpl implements HttpDataSource {
                 entity.setItems(itemsEntities);
                 observableEmitter.onNext(entity);
             }
-        }).delay(3, TimeUnit.SECONDS); //延迟3秒
+        }).delay(1, TimeUnit.SECONDS); //延迟3秒
     }
 
     @Override

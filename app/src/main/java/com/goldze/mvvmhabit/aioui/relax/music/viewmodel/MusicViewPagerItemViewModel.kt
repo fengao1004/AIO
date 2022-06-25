@@ -21,7 +21,7 @@ import me.tatarka.bindingcollectionadapter2.ItemBinding
 class MusicViewPagerItemViewModel(viewModel: MusicModel, application: Application, repository: DemoRepository) :
     BaseViewModel<DemoRepository>(application, repository) {
 
-    var musicViewModel: MusicModel? = null
+
 
     var deleteItemLiveData = SingleLiveEvent<MusicRvItemViewModel>()
 
@@ -40,7 +40,7 @@ class MusicViewPagerItemViewModel(viewModel: MusicModel, application: Applicatio
     var observableList: ObservableList<MusicRvItemViewModel> = ObservableArrayList()
 
     //给RecyclerView添加ItemBinding
-    var itemBinding = ItemBinding.of<MusicRvItemViewModel>(BR.viewModel, R.layout.item_music_rv)
+    var itemBinding = ItemBinding.of<MusicRvItemViewModel>(BR.viewModel, R.layout.item_rv_music)
 
 
     //下拉刷新
@@ -149,11 +149,6 @@ class MusicViewPagerItemViewModel(viewModel: MusicModel, application: Applicatio
     var text: String? = null
     var onItemClick: BindingCommand<*> = BindingCommand<Any?>(BindingAction {
         //点击之后通过 livedata 将逻辑转到 activity 中的观察者处理
-        viewModel.itemClickEvent.value = "text"
+        viewModel.itemClickEvent.value = text
     })
-
-    init {
-        this.musicViewModel = viewModel
-        this.text = "标题xx"
-    }
 }
