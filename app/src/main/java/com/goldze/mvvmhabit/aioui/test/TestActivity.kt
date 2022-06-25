@@ -1,11 +1,13 @@
 package com.goldze.mvvmhabit.aioui.test
 
+import android.content.Intent
 import android.os.Bundle
 import com.goldze.mvvmhabit.BR
 import com.goldze.mvvmhabit.R
 import com.goldze.mvvmhabit.aioui.main.MainActivity
 import com.goldze.mvvmhabit.aioui.main.fragment.IntroduceFragment
 import com.goldze.mvvmhabit.aioui.main.fragment.SupportFragment
+import com.goldze.mvvmhabit.aioui.test.dec.TestDecActivity
 import com.goldze.mvvmhabit.databinding.ActivityKnowsBinding
 import com.goldze.mvvmhabit.databinding.ActivityTestBinding
 import me.goldze.mvvmhabit.base.BaseActivity
@@ -26,19 +28,21 @@ class TestActivity : BaseActivity<ActivityTestBinding, TestModel>() {
         super.initData()
         binding.brRootView.setPageTitle("专业评测")
         binding.brRootView.hidePageTitle()
-        viewModel.isSpecialty.observe(this,{
+        viewModel.isSpecialty.observe(this, {
             showFg(it)
         })
+        viewModel.loadData()
     }
+
     fun showFg(fgTag: Boolean) {
-        var tag = if (fgTag){
+        var tag = if (fgTag) {
             "Specialty"
-        }else{
+        } else {
             "Normal"
         }
-        var fg = if (fgTag){
+        var fg = if (fgTag) {
             testA
-        }else{
+        } else {
             testB
         }
         val transaction = supportFragmentManager.beginTransaction()
@@ -50,6 +54,11 @@ class TestActivity : BaseActivity<ActivityTestBinding, TestModel>() {
             transaction.add(R.id.fl_content, fg, tag)
         }
         transaction.commitAllowingStateLoss()
+        viewModel.detailLiveData.observe(this) {
+            var intent = Intent(this, TestDecActivity::class.java)
+            intent.putExtra("bean", it)
+            startActivity(intent)
+        }
     }
 
     private fun hideAllFragment() {

@@ -2,6 +2,7 @@ package com.goldze.mvvmhabit.aioui.test
 
 import android.app.Application
 import android.graphics.Typeface
+import android.util.Log
 import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableInt
@@ -10,7 +11,12 @@ import androidx.lifecycle.MutableLiveData
 import com.goldze.mvvmhabit.BR
 import com.goldze.mvvmhabit.R
 import com.goldze.mvvmhabit.aioui.http.HttpRepository
+import com.goldze.mvvmhabit.aioui.test.bean.ScaDetailsRequestBean
+import com.goldze.mvvmhabit.aioui.test.bean.ScaDetailsResponseBean
 import com.goldze.mvvmhabit.ui.network.NetWorkItemViewModel
+import com.google.gson.Gson
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import me.goldze.mvvmhabit.base.BaseViewModel
 import me.goldze.mvvmhabit.binding.command.BindingAction
 import me.goldze.mvvmhabit.binding.command.BindingCommand
@@ -23,11 +29,12 @@ import me.tatarka.bindingcollectionadapter2.ItemBinding
  * Time: 4:56 下午
  */
 class TestModel(application: Application) : BaseViewModel<HttpRepository>(application) {
-    var isSpecialty:MutableLiveData<Boolean> = MutableLiveData()
+    var isSpecialty: MutableLiveData<Boolean> = MutableLiveData()
     var specialtyTagVisible = ObservableBoolean(true)
     var specialtyTagStyle = ObservableInt(Typeface.BOLD)
     var normalTagVisible = ObservableBoolean(false)
     var normalTagStyle = ObservableInt(Typeface.NORMAL)
+    var detailLiveData:MutableLiveData<ScaDetailsResponseBean> = MutableLiveData()
 
     var specialtyTClick = BindingCommand<String>(BindingAction {
         isSpecialty.value = true
@@ -60,6 +67,21 @@ class TestModel(application: Application) : BaseViewModel<HttpRepository>(applic
         observableList.add(TestListModel(TestBean()))
         observableList.add(TestListModel(TestBean()))
         isSpecialty.value = true
+    }
+
+    init {
+        model = HttpRepository()
+    }
+
+    fun loadData() {
+        model.api.getScaDetails(ScaDetailsRequestBean(scaCode = "XinLiFuYuanLiCeYan"))
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                detailLiveData.postValue(it)
+            }, {
+                Log.i("fengao_xiaomi", "loadData: ")
+            })
     }
 
 }

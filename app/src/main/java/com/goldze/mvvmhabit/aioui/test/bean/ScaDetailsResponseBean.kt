@@ -1,22 +1,24 @@
 package com.goldze.mvvmhabit.aioui.test.bean
 
+import java.io.Serializable
+
 /**
  * Created by Android Studio.
  * User: fengao
  * Date: 2022/6/21
  * Time: 10:40 下午
  */
-data class TestContentBean(
+data class ScaDetailsResponseBean(
     val code: String,
     val data: Data,
     val message: String,
     val success: Boolean
-)
+) : Serializable
 
 data class Data(
     val scaRecId: String,
     val scaVo: ScaVo
-)
+) : Serializable
 
 data class ScaVo(
     val brief: String,
@@ -27,7 +29,7 @@ data class ScaVo(
     val id: String,
     val name: String,
     val quesList: List<Ques>
-)
+) : Serializable
 
 data class Ques(
     val id: String,
@@ -36,11 +38,11 @@ data class Ques(
     val sort: Int,
     val title: String,
     val type: Int
-)
+) : Serializable
 
 data class Opt(
     val id: String,
     val nextQuesId: String,
     val sort: Int,
     val title: String
-)
+) : Serializable

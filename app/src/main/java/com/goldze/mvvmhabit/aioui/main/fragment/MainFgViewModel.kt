@@ -33,7 +33,7 @@ class MainFgViewModel(application: Application) : BaseViewModel<HttpRepository>(
     })
 
     var gotoTest: BindingCommand<String> = BindingCommand(BindingAction {
-        startActivity(TestDecActivity::class.java)
+        startActivity(TestActivity::class.java)
     })
 
     var gotoClass: BindingCommand<String> = BindingCommand(BindingAction {

@@ -22,15 +22,16 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginTop="98dp" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="98dp"
+            binding:url="@{viewModel.url}" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="298dp"
             android:padding="10dp"
-            android:text="心理健康评测"
+            android:text="@{viewModel.detail.data.scaVo.name}"
             android:textColor="@color/text_black"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -40,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="348dp"
             android:padding="10dp"
-            android:text="心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测心理健康评测"
+            android:text="@{viewModel.detail.data.scaVo.brief}"
             android:textColor="@color/text_gray"
             android:textSize="12sp" />
 
@@ -48,8 +49,8 @@
             style="@style/blue_button"
             android:layout_gravity="bottom"
             android:layout_marginBottom="80dp"
-            binding:onClickCommand="@{viewModel.startTest}"
-            android:text="开始评测" />
+            android:text="开始评测"
+            binding:onClickCommand="@{viewModel.startTest}" />
 
 
     </FrameLayout>

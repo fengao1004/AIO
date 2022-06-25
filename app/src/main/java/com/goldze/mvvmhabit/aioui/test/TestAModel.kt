@@ -2,12 +2,13 @@ package com.goldze.mvvmhabit.aioui.test
 
 import android.app.Application
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.goldze.mvvmhabit.aioui.http.HttpRepository
+import com.goldze.mvvmhabit.aioui.test.bean.ScaDetailsRequestBean
+import com.google.gson.Gson
+import io.reactivex.Scheduler
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import me.goldze.mvvmhabit.base.BaseViewModel
-import me.goldze.mvvmhabit.binding.command.BindingAction
-import me.goldze.mvvmhabit.binding.command.BindingCommand
 
 /**
  * Created by Android Studio.

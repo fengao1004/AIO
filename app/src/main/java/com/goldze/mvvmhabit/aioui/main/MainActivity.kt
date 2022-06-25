@@ -1,7 +1,9 @@
 package com.goldze.mvvmhabit.aioui.main
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.lifecycle.LiveData
+import android.provider.Settings
+import android.util.Log
 import com.goldze.mvvmhabit.BR
 import com.goldze.mvvmhabit.R
 import com.goldze.mvvmhabit.aioui.main.fragment.IntroduceFragment
@@ -29,12 +31,17 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         return BR.viewModel
     }
 
+    @SuppressLint("MissingPermission")
     override fun initData() {
         super.initData()
         showFg(FG_TAG_MAIN)
         viewModel.fgLiveData.observe(this) {
             showFg(it)
         }
+        val androidId: String =
+            Settings.System.getString(contentResolver, Settings.Secure.ANDROID_ID)
+
+        Log.i("fengao_xiaomi", "initData: $androidId")
     }
 
     fun showFg(fgTag: Int) {
