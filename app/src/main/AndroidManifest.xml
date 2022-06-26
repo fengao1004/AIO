@@ -40,6 +40,7 @@
         <activity android:name=".ui.viewpager.activity.ViewPagerActivity" />
         <activity android:name=".aioui.clazz.ClazzActivity" />
         <activity android:name=".aioui.kepu.KepuActivity" />
+        <activity android:name=".aioui.gonggao.GonggaoActivity" />
         <activity android:name=".aioui.knows.KnowsActivity" />
         <activity android:name=".aioui.webview.WebViewFromUrlActivity" />
         <activity android:name=".aioui.notice.NoticeActivity" />

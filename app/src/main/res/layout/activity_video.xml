@@ -55,15 +55,32 @@
             android:layout_gravity="end"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="335dp"
-            android:text="用手机观看 >"
             android:layout_marginRight="10dp"
+            android:text="用手机观看 >"
             android:textColor="@color/app_blue"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            android:visibility="gone" />
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="360dp"
-            android:background="@color/background_gray_2"/>
+            android:background="@color/background_gray_2" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="365dp"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/tv_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_black"
+                android:textSize="14sp" />
+        </ScrollView>
+
 
     </FrameLayout>
 </layout>

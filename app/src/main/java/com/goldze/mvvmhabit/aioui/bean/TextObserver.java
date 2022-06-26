@@ -1,4 +1,4 @@
-package com.goldze.mvvmhabit.aioui.test.bean;
+package com.goldze.mvvmhabit.aioui.bean;
 
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
@@ -12,7 +12,7 @@ import com.goldze.mvvmhabit.BR;
  * Time: 8:42 下午
  */
 public class TextObserver extends BaseObservable {
-    public String value;
+    private String value;
 
     public TextObserver(String value) {
         this.value = value;

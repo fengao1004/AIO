@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools">
+
+
+    <data>
+
+        <import type="com.goldze.mvvmhabit.aioui.clazz.vm.ClazzRvItemViewModel" />
+
+        <variable
+            name="viewModel"
+            type="ClazzRvItemViewModel" />
+    </data>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:binding="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <ImageView
+            android:id="@+id/iv_left"
+            android:layout_width="480px"
+            android:layout_height="450px"
+            android:layout_marginTop="10dp"
+            binding:onClickCommand="@{viewModel.clickLeft}"
+            binding:url="@{viewModel.left.faceImage}"
+            tools:ignore="PxUsage" />
+
+        <LinearLayout
+            android:layout_width="480px"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_left"
+            android:orientation="vertical"
+            binding:onClickCommand="@{viewModel.clickLeft}">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="@{viewModel.left.name}"
+                android:textColor="@color/text_black"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/eye" />
+
+                <TextView
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:gravity="center_vertical"
+                    android:text="@{viewModel.leftNum}" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <ImageView
+            binding:onClickCommand="@{viewModel.clickRight}"
+            android:id="@+id/iv_right"
+            android:layout_width="480px"
+            android:layout_height="450px"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            binding:isVisible="@{viewModel.right != null}"
+            binding:url="@{viewModel.left.faceImage}"
+            tools:ignore="PxUsage" />
+
+        <LinearLayout
+            binding:onClickCommand="@{viewModel.clickRight}"
+            android:layout_width="480px"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_right"
+            android:layout_alignParentEnd="true"
+            android:orientation="vertical"
+            binding:isVisible="@{viewModel.right != null}">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="@{viewModel.left.name}"
+                android:textColor="@color/text_black"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/eye" />
+
+                <TextView
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:gravity="center_vertical"
+                    android:text="@{viewModel.leftNum}" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
+</layout>

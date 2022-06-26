@@ -7,6 +7,12 @@
 
     <data>
 
+        <import type="com.goldze.mvvmhabit.aioui.clazz.adapter.ClazzViewPagerBindingAdapter" />
+
+        <variable
+            name="adapter"
+            type="ClazzViewPagerBindingAdapter" />
+
         <variable
             name="viewModel"
             type="com.goldze.mvvmhabit.aioui.clazz.ClazzViewModel" />
@@ -20,5 +26,37 @@
             android:id="@+id/br_root_view"
             android:layout_width="match_parent"
             android:layout_height="98dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="98dp"
+            android:orientation="vertical">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="14dp"
+                app:tabBackground="@android:color/transparent"
+                app:tabMode="scrollable"
+                app:tabPaddingEnd="4dp"
+                app:tabPaddingStart="0dp"
+                binding:tabGravity="fill"
+                binding:tabIndicatorColor="@color/colorPrimary"
+                binding:tabSelectedTextColor="@color/colorPrimary"
+                binding:tabTextColor="@android:color/black" />
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                binding:adapter="@{adapter}"
+                binding:itemBinding="@{viewModel.itemBinding}"
+                binding:items="@{viewModel.items}"
+                binding:onPageSelectedCommand="@{viewModel.onPageSelectedCommand}"
+                binding:pageTitles="@{viewModel.pageTitles}" />
+        </LinearLayout>
+
     </FrameLayout>
 </layout>

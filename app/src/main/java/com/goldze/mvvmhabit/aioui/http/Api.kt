@@ -1,12 +1,20 @@
 package com.goldze.mvvmhabit.aioui.http
 
+import com.goldze.mvvmhabit.aioui.bean.CommentRequestBean
+import com.goldze.mvvmhabit.aioui.bean.TypeResponseBean
+import com.goldze.mvvmhabit.aioui.clazz.bean.ClazzListResponseBean
+import com.goldze.mvvmhabit.aioui.main.bean.BannerBean
+import com.goldze.mvvmhabit.aioui.main.bean.GetAnnounListReponseBean
+import com.goldze.mvvmhabit.aioui.main.bean.GetAnnounListRequestBean
 import com.goldze.mvvmhabit.aioui.test.bean.AnserReponseData
 import com.goldze.mvvmhabit.aioui.test.bean.AnserRequestData
 import com.goldze.mvvmhabit.aioui.test.bean.ScaDetailsRequestBean
 import com.goldze.mvvmhabit.aioui.test.bean.ScaDetailsResponseBean
 import io.reactivex.Observable
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 /**
  * Created by Android Studio.
@@ -21,4 +29,20 @@ interface Api {
 
     @POST("/client/scaRec/notLogin/calc")
     fun commit(@Body bean: AnserRequestData): Observable<AnserReponseData>
+
+    @POST("/client/api/announcement/getPageList")
+    fun getAnnounList(@Body bean: GetAnnounListRequestBean): Observable<GetAnnounListReponseBean>
+
+    @GET("/client/moduleType/getList")
+    fun queryType(@Query("moduleCode") moduleCode: String): Observable<TypeResponseBean>
+
+    @POST("/client/api/banner/getList")
+    fun loadBanner(@Body bean: CommentRequestBean): Observable<BannerBean>
+
+    /**
+     * 获取课程列表
+     */
+    @POST("/client/api/course/getPageList")
+    fun getClazzList(@Body bean: CommentRequestBean): Observable<ClazzListResponseBean>
+
 }

@@ -35,18 +35,27 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <ImageView
-            android:id="@+id/iv_banner"
+
+        <com.stx.xhb.androidx.XBanner
+            android:id="@+id/xbanner"
             android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:layout_marginTop="49dp"
-            android:src="@drawable/banner" />
+            android:layout_height="200dp"
+            android:layout_marginTop="50dp"
+            app:AutoPlayTime="3000"
+            app:isShowIndicatorOnlyOne="true"
+            app:isShowNumberIndicator="true"
+            app:pageChangeDuration="800"
+            app:pointsContainerBackground="#44aaaaaa"
+            app:pointsPosition="RIGHT"
+            app:tipTextSize="12sp" />
+
 
         <LinearLayout
+            android:layout_marginTop="18dp"
             android:id="@+id/ll_gonggao"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_below="@id/iv_banner"
+            android:layout_below="@id/xbanner"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:background="#f1f5fe"
@@ -64,7 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="公告公告公告"
+                android:text="@{String.valueOf(viewModel.gonggao.value)}"
                 android:textColor="#3359e8"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -84,33 +93,33 @@
         <RelativeLayout
             android:id="@+id/rl_button"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="170dp"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="150dp"
+            android:layout_marginBottom="180dp"
             android:gravity="center"
             android:orientation="horizontal"
             android:paddingLeft="10dp"
             android:paddingRight="10dp">
 
             <ImageView
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:padding="10dp"
                 android:id="@+id/iv_foucs"
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                android:padding="10dp"
                 android:src="@drawable/hearttest"
                 binding:onClickCommand="@{viewModel.gotoTest}" />
 
             <ImageView
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="170dp"
+                android:layout_height="170dp"
                 android:layout_centerHorizontal="true"
                 android:padding="10dp"
                 android:src="@drawable/heartclass"
                 binding:onClickCommand="@{viewModel.gotoClass}" />
 
             <ImageView
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="170dp"
+                android:layout_height="170dp"
                 android:layout_alignParentEnd="true"
                 android:padding="10dp"
                 android:src="@drawable/heartkonws"
@@ -121,7 +130,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="170dp"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="20dp"
             android:gravity="center"
@@ -130,23 +139,23 @@
             android:paddingRight="10dp">
 
             <ImageView
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="170dp"
+                android:layout_height="170dp"
                 android:padding="10dp"
                 android:src="@drawable/relax"
                 binding:onClickCommand="@{viewModel.gotoRelax}" />
 
             <ImageView
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="170dp"
+                android:layout_height="170dp"
                 android:layout_centerHorizontal="true"
                 android:padding="10dp"
                 android:src="@drawable/kepu"
                 binding:onClickCommand="@{viewModel.gotoKepu}" />
 
             <ImageView
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="170dp"
+                android:layout_height="170dp"
                 android:layout_alignParentEnd="true"
                 android:padding="10dp"
                 android:src="@drawable/zixun"

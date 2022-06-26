@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:binding="http://schemas.android.com/apk/res-auto">
+
+
+    <data>
+
+
+        <variable
+            name="viewModel"
+            type="com.goldze.mvvmhabit.aioui.gonggao.GonggaoRVModel" />
+    </data>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="13dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <ImageView
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:src="@drawable/gonggao_logo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="12dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="@{viewModel.bean.content}"
+            android:textColor="@color/text_black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="@{viewModel.bean.createTime}"
+            android:textColor="@color/textColorHint"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="12dp"
+            android:layout_toLeftOf="@id/tv_num"
+            android:src="@drawable/eye" />
+
+        <TextView
+            android:id="@+id/tv_num"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="@{String.valueOf(viewModel.clickText+viewModel.bean.clickCount)}"
+            android:textColor="@color/textColorHint"
+            android:textSize="13sp" />
+    </RelativeLayout>
+</layout>

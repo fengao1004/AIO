@@ -9,11 +9,10 @@ import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableInt
 import com.goldze.mvvmhabit.BR
 import com.goldze.mvvmhabit.R
+import com.goldze.mvvmhabit.aioui.bean.TextObserver
 import com.goldze.mvvmhabit.aioui.http.HttpRepository
-import com.goldze.mvvmhabit.aioui.test.TestListModel
 import com.goldze.mvvmhabit.aioui.test.bean.*
 import com.goldze.mvvmhabit.aioui.webview.WebViewFromUrlActivity
-import com.goldze.mvvmhabit.aioui.webview.WebViewFromUrlModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import me.goldze.mvvmhabit.base.BaseViewModel

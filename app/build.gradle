@@ -58,6 +58,8 @@ dependencies {
     implementation 'com.kunminx.player:player:3.7.0'
     // web view 加载提速
     implementation 'com.tencent.sonic:sdk:3.1.0'
+    //androidX 版本使用下面的依赖
+    implementation 'com.github.xiaohaibin:XBanner:androidx_v1.2.6'
     configurations.all {
         resolutionStrategy {
             force 'androidx.core:core:1.6.0'	//两个依赖根据搜索出的关键字选择
