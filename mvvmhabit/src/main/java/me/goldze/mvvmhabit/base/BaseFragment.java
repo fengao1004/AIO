@@ -2,6 +2,7 @@ package me.goldze.mvvmhabit.base;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,7 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initParam();
+        Log.i("fengao_xiaomi", "onCreate: "+(getActivity() == null));
     }
 
     @Override

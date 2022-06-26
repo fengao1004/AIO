@@ -2,9 +2,13 @@ package com.goldze.mvvmhabit.aioui.main.fragment
 
 import android.annotation.SuppressLint
 import android.app.Application
+import android.provider.Settings
+import android.util.Log
+import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.MutableLiveData
 import com.goldze.mvvmhabit.aioui.Util
 import com.goldze.mvvmhabit.aioui.bean.CommentRequestBean
+import com.goldze.mvvmhabit.aioui.bean.RequestHeader
 import com.goldze.mvvmhabit.aioui.clazz.ClazzActivity
 import com.goldze.mvvmhabit.aioui.http.HttpRepository
 import com.goldze.mvvmhabit.aioui.kepu.KepuActivity
@@ -22,6 +26,7 @@ import io.reactivex.schedulers.Schedulers
 import me.goldze.mvvmhabit.base.BaseViewModel
 import me.goldze.mvvmhabit.binding.command.BindingAction
 import me.goldze.mvvmhabit.binding.command.BindingCommand
+import me.goldze.mvvmhabit.utils.SPUtils
 import me.goldze.mvvmhabit.utils.ToastUtils
 
 /**
@@ -36,8 +41,10 @@ class MainFgViewModel(application: Application) : BaseViewModel<HttpRepository>(
 //        startActivity(NoticeActivity::class.java)
 //    })
 
-    var bannerLiveData: MutableLiveData<List<BannerBeanData>> = MutableLiveData()
 
+    var showEditCode = ObservableBoolean(false)
+    var bannerLiveData: MutableLiveData<List<BannerBeanData>> = MutableLiveData()
+    var sbLiveData: MutableLiveData<String> = MutableLiveData()
     var gotoScan: BindingCommand<String> = BindingCommand(BindingAction {
         startActivity(VideoActivity::class.java)
     })
@@ -84,7 +91,50 @@ class MainFgViewModel(application: Application) : BaseViewModel<HttpRepository>(
     var hasGonggao = false
 
     @SuppressLint("CheckResult")
+    fun activate(code: String) {
+        var header = RequestHeader(code, Util.uniqueCode)
+        var bean = CommentRequestBean(CommentRequestBean.DEFAULT, header)
+        model.api.activation(bean)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                if (it.success && it.data.success) {
+                    ToastUtils.showShort("激活成功")
+                    showEditCode.set(false)
+                    Util.serialNumber = code
+                    SPUtils.getInstance().put("serialNumber", code)
+                    Util.serialNumber = code
+                    loadData()
+                } else {
+                    ToastUtils.showShort("激活失败，请确认激活码正确")
+                }
+            }, {
+                ToastUtils.showShort("激活失败，请确认激活码正确")
+            })
+    }
+
+    fun loadId(): Boolean {
+        var serialNumber = SPUtils.getInstance().getString("serialNumber", "")
+        var uniqueCode = SPUtils.getInstance().getString("uniqueCode", "")
+        if (uniqueCode.isNullOrEmpty()) {
+            uniqueCode =
+                Settings.System.getString(activity.contentResolver, Settings.Secure.ANDROID_ID)
+            SPUtils.getInstance().put("uniqueCode", uniqueCode)
+            Util.uniqueCode = uniqueCode
+        }
+        return if (serialNumber.isNullOrEmpty()) {
+            showEditCode.set(true)
+            false
+        } else {
+            true
+        }
+    }
+
+    @SuppressLint("CheckResult")
     fun loadData() {
+//        if (!loadId()) {
+//            return
+//        }
         var bean = GetAnnounListRequestBean(
             GetAnnounListRequestBeanRequestBody(0, 0, 100, "", 1),
             GetAnnounListRequestBeanRequestHeader(
@@ -104,6 +154,19 @@ class MainFgViewModel(application: Application) : BaseViewModel<HttpRepository>(
             }, {
                 gonggao.value = "暂无公告"
                 it.printStackTrace()
+            })
+        var commonBean =
+            CommentRequestBean(CommentRequestBean.DEFAULT, CommentRequestBean.getHeader())
+        model.api.getEquipmentDetail(commonBean)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                if (it.success) {
+                    Util.shebeiXq = it.data.data
+                    sbLiveData.postValue("")
+                }
+            }, {
+
             })
 
         model.api.loadBanner(

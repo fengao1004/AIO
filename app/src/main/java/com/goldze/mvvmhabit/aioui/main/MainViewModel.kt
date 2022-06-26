@@ -4,10 +4,12 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.goldze.mvvmhabit.aioui.Util
 import com.goldze.mvvmhabit.aioui.http.HttpRepository
 import me.goldze.mvvmhabit.base.BaseViewModel
 import me.goldze.mvvmhabit.binding.command.BindingAction
 import me.goldze.mvvmhabit.binding.command.BindingCommand
+import me.goldze.mvvmhabit.utils.ToastUtils
 
 /**
  * Created by Android Studio.
@@ -19,11 +21,19 @@ class MainViewModel(application: Application) : BaseViewModel<HttpRepository>(ap
     var fgLiveData: MutableLiveData<Int> = MutableLiveData()
 
     var showSupport: BindingCommand<String> = BindingCommand(BindingAction {
-        fgLiveData.postValue(2)
+        if (Util.shebeiXq == null) {
+            ToastUtils.showShort("设备初始化中，请稍后再试")
+        } else {
+            fgLiveData.postValue(2)
+        }
     })
 
     var showIntroduce: BindingCommand<String> = BindingCommand(BindingAction {
-        fgLiveData.postValue(0)
+        if (Util.shebeiXq == null) {
+            ToastUtils.showShort("设备初始化中，请稍后再试")
+        } else {
+            fgLiveData.postValue(0)
+        }
     })
     var showMain: BindingCommand<String> = BindingCommand(BindingAction {
         fgLiveData.postValue(1)

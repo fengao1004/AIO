@@ -3,9 +3,8 @@ package com.goldze.mvvmhabit.aioui.http
 import com.goldze.mvvmhabit.aioui.bean.CommentRequestBean
 import com.goldze.mvvmhabit.aioui.bean.TypeResponseBean
 import com.goldze.mvvmhabit.aioui.clazz.bean.ClazzListResponseBean
-import com.goldze.mvvmhabit.aioui.main.bean.BannerBean
-import com.goldze.mvvmhabit.aioui.main.bean.GetAnnounListReponseBean
-import com.goldze.mvvmhabit.aioui.main.bean.GetAnnounListRequestBean
+import com.goldze.mvvmhabit.aioui.knows.KnowsBean
+import com.goldze.mvvmhabit.aioui.main.bean.*
 import com.goldze.mvvmhabit.aioui.test.bean.AnserReponseData
 import com.goldze.mvvmhabit.aioui.test.bean.AnserRequestData
 import com.goldze.mvvmhabit.aioui.test.bean.ScaDetailsRequestBean
@@ -44,5 +43,14 @@ interface Api {
      */
     @POST("/client/api/course/getPageList")
     fun getClazzList(@Body bean: CommentRequestBean): Observable<ClazzListResponseBean>
+
+    @POST("/client/api/equipment/activation")
+    fun activation(@Body bean: CommentRequestBean): Observable<ActivationResponseBean>
+
+    @POST("/client/api/info/getPageList")
+    fun getKnowsList(@Body bean: CommentRequestBean): Observable<KnowsBean>
+
+    @POST("/client/api/equipment/detail")
+    fun getEquipmentDetail(@Body bean: CommentRequestBean): Observable<ShebeiXQBean>
 
 }

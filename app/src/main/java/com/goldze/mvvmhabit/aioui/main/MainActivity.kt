@@ -38,10 +38,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         viewModel.fgLiveData.observe(this) {
             showFg(it)
         }
-        val androidId: String =
-            Settings.System.getString(contentResolver, Settings.Secure.ANDROID_ID)
-
-        Log.i("fengao_xiaomi", "initData: $androidId")
     }
 
     fun showFg(fgTag: Int) {

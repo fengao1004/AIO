@@ -5,12 +5,10 @@ import android.app.Application
 import android.util.Log
 import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableList
-import androidx.lifecycle.MutableLiveData
 import com.goldze.mvvmhabit.BR
 import com.goldze.mvvmhabit.R
 import com.goldze.mvvmhabit.aioui.bean.CommentRequestBean
 import com.goldze.mvvmhabit.aioui.bean.TypeResponseBeanData
-import com.goldze.mvvmhabit.aioui.clazz.ClazzViewModel
 import com.goldze.mvvmhabit.aioui.http.HttpRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

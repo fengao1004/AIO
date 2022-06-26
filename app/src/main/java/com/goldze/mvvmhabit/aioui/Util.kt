@@ -1,5 +1,7 @@
 package com.goldze.mvvmhabit.aioui
 
+import com.goldze.mvvmhabit.aioui.main.bean.ShebeiXQBeanDataX
+
 /**
  * Created by Android Studio.
  * User: fengao
@@ -9,4 +11,5 @@ package com.goldze.mvvmhabit.aioui
 object Util {
     var serialNumber = "123456"
     var uniqueCode = "b11fbef79a625aac"
+    var shebeiXq : ShebeiXQBeanDataX? = null
 }

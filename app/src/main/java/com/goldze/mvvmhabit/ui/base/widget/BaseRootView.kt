@@ -1,5 +1,6 @@
 package com.goldze.mvvmhabit.ui.base.widget
 
+import android.app.Activity
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.goldze.mvvmhabit.R
+import com.goldze.mvvmhabit.aioui.Util
 
 /**
  * Created by Android Studio.
@@ -33,6 +35,13 @@ class BaseRootView(context: Context, attrs: AttributeSet?) : FrameLayout(context
         pageTitleView = baseView.findViewById<TextView>(R.id.tv_page_title)
         logo = baseView.findViewById<ImageView>(R.id.iv_logo)
         backIv = baseView.findViewById<ImageView>(R.id.iv_back)
+        backIv.setOnClickListener {
+            if (getContext() is Activity) {
+                (getContext() as Activity).finish()
+            }
+        }
+        setAppTitle(Util.shebeiXq?.name ?: "")
+        setLogo(Util.shebeiXq?.logo ?: "")
     }
 
 

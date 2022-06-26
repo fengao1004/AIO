@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.goldze.mvvmhabit.BR
 import com.goldze.mvvmhabit.R
+import com.goldze.mvvmhabit.aioui.Util
 import com.goldze.mvvmhabit.databinding.FragmentIntroduceBinding
 import com.goldze.mvvmhabit.databinding.FragmentMainBinding
 import me.goldze.mvvmhabit.base.BaseFragment
@@ -28,5 +29,11 @@ class IntroduceFragment : BaseFragment<FragmentIntroduceBinding, IntroduceFgView
         return BR.viewModel
     }
 
-
+    override fun initData() {
+        super.initData()
+        binding.baseRoot.setPageTitle("机构介绍")
+        binding.baseRoot.setAppTitle(Util.shebeiXq?.name ?: "")
+        binding.baseRoot.setLogo(Util.shebeiXq?.logo ?: "")
+        binding.webView.loadData(Util.shebeiXq?.deptIntroduce, "text/html", "utf-8")
+    }
 }

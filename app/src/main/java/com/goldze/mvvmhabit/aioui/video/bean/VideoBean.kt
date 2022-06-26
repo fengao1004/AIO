@@ -7,9 +7,9 @@ package com.goldze.mvvmhabit.aioui.video.bean
  * Time: 2:46 下午
  */
 class VideoBean(
-    var url: String,
-    var title: String,
-    var videoName: String,
-    var content: String,
-    var number: String,
+    var url: String, //视频地址
+    var title: String,  //页面标题
+    var videoName: String, //视频标题
+    var content: String, //文字内容
+    var number: String, //点击量 如：点击量2821
 )

@@ -17,5 +17,16 @@
         android:layout_height="match_parent"
         android:background="@color/black">
 
+        <com.goldze.mvvmhabit.ui.base.widget.BaseRootView
+            android:id="@+id/baseRoot"
+            android:layout_width="match_parent"
+            android:layout_height="98dp" />
+
+        <WebView
+            android:id="@+id/webView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="98dp" />
+
     </FrameLayout>
 </layout>

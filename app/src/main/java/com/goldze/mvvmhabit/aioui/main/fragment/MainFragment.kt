@@ -4,14 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.goldze.mvvmhabit.BR
 import com.goldze.mvvmhabit.R
+import com.goldze.mvvmhabit.aioui.Util
 import com.goldze.mvvmhabit.databinding.FragmentMainBinding
 import com.stx.xhb.androidx.entity.BaseBannerInfo
 import me.goldze.mvvmhabit.base.BaseFragment
+import me.goldze.mvvmhabit.utils.ToastUtils
+import me.goldze.mvvmhabit.utils.Utils
 
 
 /**
@@ -34,6 +38,7 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainFgViewModel>() {
 
     override fun initData() {
         super.initData()
+        viewModel.activity = activity
         binding.ivFoucs.requestFocus()
         viewModel.loadData()
         viewModel.bannerLiveData.observe(this) {
@@ -51,6 +56,23 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainFgViewModel>() {
                 .load((model as UrlBannerInfo).url)
                 .apply(RequestOptions().placeholder(R.drawable.loading))
                 .into((view as ImageView))
+        }
+
+        binding.tvEnter.setOnClickListener {
+            var code = binding.etCode.text.toString()
+            if (code.isNullOrEmpty()) {
+                ToastUtils.showShort("请输入有效激活码")
+            } else {
+                viewModel.activate(code)
+            }
+        }
+
+        viewModel.sbLiveData.observe(this) {
+            Glide.with(MainFragment@ this)
+                .load(Util.shebeiXq?.logo ?: "")
+                .apply(RequestOptions().placeholder(R.drawable.loading))
+                .into(binding.ivSmallLog)
+            binding.tvTitle.text = Util.shebeiXq?.name ?: ""
         }
     }
 }

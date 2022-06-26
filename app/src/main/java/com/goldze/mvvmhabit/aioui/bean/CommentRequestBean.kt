@@ -23,8 +23,6 @@ data class CommentRequestBean(
             return RequestHeader(Util.serialNumber, Util.uniqueCode)
         }
     }
-
-
 }
 
 data class RequestBody(
