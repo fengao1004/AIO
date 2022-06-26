@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+
+    <data>
+
+        <import type="com.goldze.mvvmhabit.aioui.common.viewpagerfragment.viewmodel.AIORecyclerViewItemViewModel" />
+
+        <variable
+            name="viewModel"
+            type="AIORecyclerViewItemViewModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:binding="http://schemas.android.com/apk/res-auto"
+        android:layout_width="120dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="5dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingHorizontal="13dp"
+        binding:onClickCommand="@{viewModel.itemClick}"
+        binding:onLongClickCommand="@{viewModel.itemLongClick}">
+
+
+        <com.goldze.mvvmhabit.ui.corner.ShadowFrameLayout
+            android:layout_width="110dp"
+            android:layout_height="150dp">
+
+            <ImageView
+                android:id="@+id/cover"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/mind_video_pic" />
+
+            <ImageView
+                android:id="@+id/cover_alpha"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:alpha="0.3"
+                android:layout_gravity="bottom"
+                android:scaleType="centerCrop"
+                android:src="@drawable/mind_video_cover" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="12dp"
+                android:layout_gravity="bottom|end"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="3dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="点击量:"
+                    android:textColor="@color/white"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/clickCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="1270"
+                    android:textColor="@color/white"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </com.goldze.mvvmhabit.ui.corner.ShadowFrameLayout>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_gravity="top|start"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="center"
+            android:text="汪汪队立大功"
+            android:textColor="@color/text_color_title"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+</layout>

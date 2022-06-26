@@ -4,7 +4,7 @@ import android.widget.TextView
 import com.goldze.mvvmhabit.R
 import com.goldze.mvvmhabit.aioui.common.viewpagerfragment.AIOViewPagerFragment
 import com.goldze.mvvmhabit.aioui.common.viewpagerfragment.viewmodel.AIOViewPagerItemViewModel
-import com.goldze.mvvmhabit.aioui.http.HttpRepository
+import com.goldze.mvvmhabit.aioui.http.impl.GalleryRepository
 import com.goldze.mvvmhabit.aioui.webview.WebViewActivity
 
 class GalleryFragment : AIOViewPagerFragment() {
@@ -26,22 +26,21 @@ class GalleryFragment : AIOViewPagerFragment() {
             val viewpagerItemViewModel = AIOViewPagerItemViewModel(
                 viewModel,
                 activity!!.application,
-                HttpRepository(),
+                GalleryRepository(),
                 R.layout.item_rv_gallery
             )
             viewModel.items.add(viewpagerItemViewModel)
-
         }
     }
 
 
-
     override fun initViewObservable() {
+        super.initViewObservable()
         viewModel.itemClickEvent.observe(this) { entity ->
             WebViewActivity.start(
                 viewModel.getApplication(),
                 "心灵成长记",
-                entity.detail,
+                entity.content,
                 "1",
                 true,
                 WebViewActivity.MODE_SONIC

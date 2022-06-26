@@ -43,8 +43,7 @@
                 binding:adapter="@{adapter}"
                 binding:itemBinding="@{viewModel.itemBinding}"
                 binding:items="@{viewModel.observableList}"
-                binding:layoutManager="@{LayoutManagers.linear()}"
-                binding:lineManager="@{LineManagers.horizontal()}" />
+                binding:layoutManager="@{LayoutManagers.linear()}" />
 
         </com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout>
 

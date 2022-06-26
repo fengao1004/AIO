@@ -94,9 +94,9 @@ class MusicFragment : BaseFragment<FragmentMusicBinding, MusicModel>() {
 
 
         Thread {
-            val source = "https://minio.xlxs.top/temp/银临 - 落英.mp3"
-            val source2 = "https://minio.xlxs.top/temp/TAKA,野田洋次郎 - By My Side.mp3"
-            val source3 = "https://minio.xlxs.top/temp/chaoxi.mp3"
+            val source = "http://cdn.xlxs.top/Piano%20Pianissimo%20-%20I%20Said%20I%27m%20Falling%20For%20You.mp3"
+            val source2 = "http://cdn.xlxs.top/Rude%20Boy%2CAlif%20Fakod%20-%20Late%20Night%20Melancholy%20%28Sape%27%20Cover%29.mp3"
+            val source3 = "http://cdn.xlxs.top/ilem%2C%E6%B4%9B%E5%A4%A9%E4%BE%9D%2C%E8%A8%80%E5%92%8C%20-%20%E8%BE%BE%E6%8B%89%E5%B4%A9%E5%90%A7.mp3"
             val aioMusic = AIOAlbum.AIOMusic().apply {
                 url = source
             }
@@ -215,6 +215,7 @@ class MusicFragment : BaseFragment<FragmentMusicBinding, MusicModel>() {
     }
 
     override fun initViewObservable() {
+        super.initViewObservable()
         viewModel.itemClickEvent.observe(this) { text -> ToastUtils.showShort("position：$text") }
     }
 

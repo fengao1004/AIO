@@ -5,10 +5,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.goldze.mvvmhabit.BR
 import com.goldze.mvvmhabit.R
-import com.goldze.mvvmhabit.aioui.common.viewpagerfragment.AIOViewPagerFragment
 import com.goldze.mvvmhabit.aioui.relax.gallery.GalleryFragment
 import com.goldze.mvvmhabit.aioui.relax.music.MusicFragment
-import com.goldze.mvvmhabit.aioui.relax.train.TrainFragment
+import com.goldze.mvvmhabit.aioui.relax.meditation.MeditationFragment
+import com.goldze.mvvmhabit.aioui.relax.film.FilmFragment
 import com.goldze.mvvmhabit.databinding.FragmentRelaxBinding
 import me.goldze.mvvmhabit.base.BaseFragment
 
@@ -28,8 +28,12 @@ class RelaxFragment : BaseFragment<FragmentRelaxBinding, RelaxFragmentModel>() {
             startContainerActivity(MusicFragment::class.java.canonicalName)
         }
 
-        binding.mindRelax.setOnClickListener {
-            startContainerActivity(TrainFragment::class.java.canonicalName)
+        binding.meditation.setOnClickListener {
+            startContainerActivity(MeditationFragment::class.java.canonicalName)
+        }
+
+        binding.mindVideo.setOnClickListener {
+            startContainerActivity(FilmFragment::class.java.canonicalName)
         }
 
         binding.mindGallery.setOnClickListener {

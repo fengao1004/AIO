@@ -40,19 +40,24 @@ open class AIOViewPagerFragment : BaseFragment<FragmentViewpagerAioBinding, AIOV
     override fun initData() {
         super.initData()
 
-
-
         binding.brRootView.setAppTitle("心理自助服务一体机")
         binding.brRootView.setPageTitle("AIO 页面")
         binding.brRootView.backIv.setOnClickListener {
             activity?.finish()
         }
 
-
         //给ViewPager设置adapter
         binding.adapter = AIOViewPagerBindingAdapter()
         // viewpager tl 关联
         binding.viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(binding.tabs))
         binding.tabs.addOnTabSelectedListener(AIOViewPagerOnTabSelectedListener(binding.viewPager))
+    }
+
+    override fun initViewObservable() {
+        super.initViewObservable()
+        // 请求第一页数据
+        if (viewModel.items.size > 0) {
+            viewModel.items[0].onRefreshCommand.execute()
+        }
     }
 }

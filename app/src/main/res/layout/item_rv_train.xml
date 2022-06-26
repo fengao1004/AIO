@@ -36,9 +36,8 @@
                 <ImageView
                     android:id="@+id/cover"
                     android:layout_width="match_parent"
-                    android:src="@drawable/relax_train"
                     android:layout_height="match_parent"
-                    binding:url="@{viewModel.entity.img}" />
+                    android:src="@drawable/relax_train" />
             </com.goldze.mvvmhabit.ui.corner.ShadowFrameLayout>
 
             <FrameLayout
@@ -48,19 +47,20 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="20dp"
                     android:layout_gravity="top|start"
+                    android:maxLines="1"
                     android:text="腹部呼吸法"
                     android:textColor="@color/text_color_title"
                     android:textSize="15sp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="14dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="top|start"
+                    android:layout_marginTop="20dp"
                     android:text="专业视角，深度思考"
                     android:textColor="@color/text_color_subtitle"
                     android:textSize="12sp" />
@@ -73,12 +73,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingVertical="4dp"
-                    android:textColor="@color/white"
-                    android:paddingHorizontal="20dp"
-                    android:background="@drawable/shape_stroke_label_select"
                     android:layout_gravity="bottom|center_horizontal"
-                    android:text="开始训练" />
+                    android:background="@drawable/shape_stroke_label_select"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="4dp"
+                    android:text="开始训练"
+                    android:textColor="@color/white" />
             </FrameLayout>
         </LinearLayout>
 

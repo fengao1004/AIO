@@ -67,7 +67,54 @@
         </LinearLayout>
         <!--第二个-->
         <LinearLayout
-            android:id="@+id/mind_relax"
+            android:id="@+id/meditation"
+            android:layout_width="match_parent"
+            android:layout_height="83dp"
+            android:layout_marginHorizontal="13dp"
+            android:layout_marginTop="13dp"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <com.goldze.mvvmhabit.ui.corner.ShadowFrameLayout
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginHorizontal="13dp"
+                android:layout_marginVertical="22dp"
+                app:sl_cornerRadius="8dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/meditation" />
+            </com.goldze.mvvmhabit.ui.corner.ShadowFrameLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginHorizontal="13dp"
+                android:layout_marginVertical="22dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|start"
+                    android:text="冥想训练"
+                    android:textColor="@color/text_color_title"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|start"
+                    android:text="坚持训练，收获惊喜"
+                    android:textColor="@color/text_color_subtitle"
+                    android:textSize="12sp" />
+            </FrameLayout>
+        </LinearLayout>
+        <!--第二个-->
+        <LinearLayout
+            android:id="@+id/mind_video"
             android:layout_width="match_parent"
             android:layout_height="83dp"
             android:layout_marginHorizontal="13dp"

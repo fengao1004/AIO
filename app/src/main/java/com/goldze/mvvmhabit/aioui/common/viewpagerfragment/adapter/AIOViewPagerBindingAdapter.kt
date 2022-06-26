@@ -41,11 +41,6 @@ class AIOViewPagerBindingAdapter(var spanCount: Int = 1) : BindingViewPagerAdapt
             mBinding.twinklingRefreshLayout.finishRefreshing()
             mBinding.twinklingRefreshLayout.finishLoadmore()
         }
-
-        // 没有旧数据就请求数据
-        if (mBinding.viewModel!!.observableList.isEmpty()) {
-            mBinding.twinklingRefreshLayout.startRefresh()
-        }
     }
 
     override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {

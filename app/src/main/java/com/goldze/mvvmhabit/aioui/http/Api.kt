@@ -2,6 +2,7 @@ package com.goldze.mvvmhabit.aioui.http
 
 import com.goldze.mvvmhabit.aioui.bean.CommentRequestBean
 import com.goldze.mvvmhabit.aioui.bean.TypeResponseBean
+import com.goldze.mvvmhabit.aioui.bean.list.*
 import com.goldze.mvvmhabit.aioui.clazz.bean.ClazzListResponseBean
 import com.goldze.mvvmhabit.aioui.knows.KnowsBean
 import com.goldze.mvvmhabit.aioui.main.bean.*
@@ -43,6 +44,18 @@ interface Api {
      */
     @POST("/client/api/course/getPageList")
     fun getClazzList(@Body bean: CommentRequestBean): Observable<ClazzListResponseBean>
+
+    @POST("/client/api/music/getPageList")
+    fun getMusicPageList(@Body bean: CommentRequestBean): Observable<CommonListResponseBean<MusicRecord>>
+
+    @POST("/client/api/cartoon/getPageList")
+    fun getCartoonPageList(@Body bean: CommentRequestBean): Observable<CommonListResponseBean<CartoonRecord>>
+
+    @POST("/client/api/meditation/getPageList")
+    fun getMeditationPageList(@Body bean: CommentRequestBean): Observable<CommonListResponseBean<MeditationRecord>>
+
+    @POST("/client/api/film/getPageList")
+    fun getFilmPageList(@Body bean: CommentRequestBean): Observable<CommonListResponseBean<VideoRecord>>
 
     @POST("/client/api/equipment/activation")
     fun activation(@Body bean: CommentRequestBean): Observable<ActivationResponseBean>

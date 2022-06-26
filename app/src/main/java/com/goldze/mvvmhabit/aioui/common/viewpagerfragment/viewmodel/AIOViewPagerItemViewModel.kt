@@ -1,19 +1,24 @@
 package com.goldze.mvvmhabit.aioui.common.viewpagerfragment.viewmodel
 
+import android.annotation.SuppressLint
 import android.app.Application
-import android.os.Handler
-import android.os.Looper
-import android.os.Message
 import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableList
 import com.goldze.mvvmhabit.BR
-import com.goldze.mvvmhabit.aioui.http.HttpRepository
-import com.goldze.mvvmhabit.entity.DemoEntity
+import com.goldze.mvvmhabit.aioui.Util
+import com.goldze.mvvmhabit.aioui.bean.CommentRequestBean
+import com.goldze.mvvmhabit.aioui.bean.list.BaseRecord
+import com.goldze.mvvmhabit.aioui.bean.list.CommonListResponseBean
+import com.goldze.mvvmhabit.aioui.http.ListRepository
+import io.reactivex.observers.DisposableObserver
 import me.goldze.mvvmhabit.base.BaseViewModel
 import me.goldze.mvvmhabit.binding.command.BindingAction
 import me.goldze.mvvmhabit.binding.command.BindingCommand
 import me.goldze.mvvmhabit.bus.event.SingleLiveEvent
+import me.goldze.mvvmhabit.http.ResponseThrowable
+import me.goldze.mvvmhabit.utils.RxUtils
 import me.goldze.mvvmhabit.utils.ToastUtils
+import me.goldze.mvvmhabit.utils.Utils
 import me.tatarka.bindingcollectionadapter2.ItemBinding
 
 /**
@@ -22,10 +27,10 @@ import me.tatarka.bindingcollectionadapter2.ItemBinding
 class AIOViewPagerItemViewModel(
     viewModel: AIOViewPagerFragmentModel,
     application: Application,
-    repository: HttpRepository,
+    repository: ListRepository,
     itemViewResId: Int
 ) :
-    BaseViewModel<HttpRepository>(application, repository) {
+    BaseViewModel<ListRepository>(application, repository) {
 
     var parentViewModel: AIOViewPagerFragmentModel? = viewModel
 
@@ -49,7 +54,7 @@ class AIOViewPagerItemViewModel(
 
     //下拉刷新
     var onRefreshCommand: BindingCommand<*> = BindingCommand<Any?>(BindingAction {
-        loadMoreData()
+        refreshData()
     })
 
     //上拉加载
@@ -57,30 +62,105 @@ class AIOViewPagerItemViewModel(
         loadMoreData()
     })
 
-    private fun loadMoreData() {
-        ToastUtils.showLong("加载ing")
-        Thread {
-            Thread.sleep(500)
-            object : Handler(Looper.getMainLooper()) {
-                override fun handleMessage(msg: Message?) {
-                    super.handleMessage(msg)
-                    for (i in 0 until 7) {
-                        observableList.add(
-                            AIORecyclerViewItemViewModel(
-                                this@AIOViewPagerItemViewModel,
-                                DemoEntity.ItemsEntity()
-                            )
-                        )
+    @SuppressLint("CheckResult")
+    private fun refreshData() {
+        model.getCommonListData(CommentRequestBean(CommentRequestBean.getEmpty(), CommentRequestBean.getHeader()))
+            .compose(RxUtils.schedulersTransformer()) //线程调度
+            .doOnSubscribe(this) //请求与ViewModel周期同步
+            .doOnSubscribe {}
+            .map {
+                it as CommonListResponseBean<BaseRecord>
+            }.subscribe(
+                object : DisposableObserver<CommonListResponseBean<BaseRecord>>() {
+                    override fun onNext(responseBean: CommonListResponseBean<BaseRecord>) {
+                        // 校验数据
+                        if (responseBean.code != "200") {
+                            ToastUtils.showShort("请求失败： ${responseBean.code}")
+                            return
+                        }
+                        val records = responseBean.data.records ?: return
+                        if (records.isNullOrEmpty()) {
+                            ToastUtils.showShort("没有更多数据")
+                            return
+                        }
+
+                        for (record in records) {
+                            val itemViewModel = AIORecyclerViewItemViewModel(this@AIOViewPagerItemViewModel, record)
+                            //双向绑定动态添加Item
+                            observableList.clear()
+                            observableList.add(itemViewModel)
+                        }
+                        //刷新完成收回
                         uiChangeObservable.finishLoadmore.call()
                         uiChangeObservable.finishRefreshing.call()
                     }
-                }
-            }.sendEmptyMessage(0)
 
-        }.start()
+                    override fun onError(throwable: Throwable) {
+                        if (throwable is ResponseThrowable) {
+                            ToastUtils.showShort((throwable as ResponseThrowable).message)
+                        }
+                        //刷新完成收回
+                        uiChangeObservable.finishLoadmore.call()
+                        uiChangeObservable.finishRefreshing.call()
+                    }
+
+                    override fun onComplete() {
+                        //刷新完成收回
+                        uiChangeObservable.finishLoadmore.call()
+                        uiChangeObservable.finishRefreshing.call()
+                    }
+                })
     }
 
-    fun onItemClick(entity: DemoEntity.ItemsEntity) {
+    @SuppressLint("CheckResult")
+    private fun loadMoreData() {
+        model.getCommonListData(CommentRequestBean(CommentRequestBean.getEmpty(), CommentRequestBean.getHeader()))
+            .compose(RxUtils.schedulersTransformer()) //线程调度
+            .doOnSubscribe(this) //请求与ViewModel周期同步
+            .doOnSubscribe {}
+            .map {
+                it as CommonListResponseBean<BaseRecord>
+            }.subscribe(
+                object : DisposableObserver<CommonListResponseBean<BaseRecord>>() {
+                    override fun onNext(responseBean: CommonListResponseBean<BaseRecord>) {
+                        // 校验数据
+                        if (responseBean.code != "200") {
+                            ToastUtils.showShort("请求失败： ${responseBean.code}")
+                            return
+                        }
+                        val records = responseBean.data.records ?: return
+                        if (records.isNullOrEmpty()) {
+                            ToastUtils.showShort("没有更多数据")
+                            return
+                        }
+                        for (record in records) {
+                            val itemViewModel = AIORecyclerViewItemViewModel(this@AIOViewPagerItemViewModel, record)
+                            //双向绑定动态添加Item
+                            observableList.add(itemViewModel)
+                        }
+                        //刷新完成收回
+                        uiChangeObservable.finishLoadmore.call()
+                        uiChangeObservable.finishRefreshing.call()
+                    }
+
+                    override fun onError(throwable: Throwable) {
+                        if (throwable is ResponseThrowable) {
+                            ToastUtils.showShort((throwable as ResponseThrowable).message)
+                        }
+                        //刷新完成收回
+                        uiChangeObservable.finishLoadmore.call()
+                        uiChangeObservable.finishRefreshing.call()
+                    }
+
+                    override fun onComplete() {
+                        //刷新完成收回
+                        uiChangeObservable.finishLoadmore.call()
+                        uiChangeObservable.finishRefreshing.call()
+                    }
+                })
+    }
+
+    fun onItemClick(entity: BaseRecord) {
         parentViewModel?.itemClickEvent?.value = entity
     }
 }
