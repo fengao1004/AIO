@@ -1,26 +1,27 @@
-package com.goldze.mvvmhabit.aioui.relax.music.adapter
+package com.goldze.mvvmhabit.aioui.relax.meditation
 
 import android.text.TextUtils
 import androidx.databinding.ViewDataBinding
+import com.goldze.mvvmhabit.aioui.bean.list.MeditationRecord
 import com.goldze.mvvmhabit.aioui.bean.list.MusicRecord
-import com.goldze.mvvmhabit.aioui.relax.music.viewmodel.MusicRvItemViewModel
-import com.goldze.mvvmhabit.databinding.ItemRvMusicBinding
+import com.goldze.mvvmhabit.aioui.common.viewpagerfragment.adapter.AIORvBindingAdapter
+import com.goldze.mvvmhabit.aioui.common.viewpagerfragment.viewmodel.AIORecyclerViewItemViewModel
+import com.goldze.mvvmhabit.databinding.ItemRvMeditationBinding
 import com.goldze.mvvmhabit.utils.ImageUtil
-import me.tatarka.bindingcollectionadapter2.BindingRecyclerViewAdapter
 
-class MusicRecyclerViewBindingAdapter : BindingRecyclerViewAdapter<MusicRvItemViewModel>() {
+class MeditationRvBindingAdapter : AIORvBindingAdapter() {
 
     override fun onBindBinding(
         binding: ViewDataBinding,
         variableId: Int,
         layoutRes: Int,
         position: Int,
-        item: MusicRvItemViewModel?
+        item: AIORecyclerViewItemViewModel?
     ) {
         super.onBindBinding(binding, variableId, layoutRes, position, item)
 
         val record = item?.entity?.get()
-        if (binding is ItemRvMusicBinding && record is MusicRecord) {
+        if (binding is ItemRvMeditationBinding && record is MeditationRecord) {
             if (!TextUtils.isEmpty(record.faceImage)) {
                 ImageUtil.display(
                     record.faceImage,
@@ -29,7 +30,9 @@ class MusicRecyclerViewBindingAdapter : BindingRecyclerViewAdapter<MusicRvItemVi
                 )
             }
             binding.title.text = record.name
-            binding.desc.text = record.musicDescribe
+            binding.desc.text = record.meditationDescribe
+
         }
+
     }
 }

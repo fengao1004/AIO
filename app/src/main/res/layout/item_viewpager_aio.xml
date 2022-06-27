@@ -9,9 +9,15 @@
 
         <import type="com.goldze.mvvmhabit.aioui.common.viewpagerfragment.viewmodel.AIOViewPagerItemViewModel" />
 
+        <import type="com.goldze.mvvmhabit.aioui.common.viewpagerfragment.adapter.AIORvBindingAdapter" />
+
         <variable
             name="viewModel"
             type="AIOViewPagerItemViewModel" />
+
+        <variable
+            name="adapter"
+            type="AIORvBindingAdapter" />
 
 
     </data>
@@ -35,6 +41,7 @@
                 android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                binding:adapter="@{adapter}"
                 binding:itemBinding="@{viewModel.itemBinding}"
                 binding:items="@{viewModel.observableList}"
                 binding:layoutManager="@{LayoutManagers.grid(1)}" />

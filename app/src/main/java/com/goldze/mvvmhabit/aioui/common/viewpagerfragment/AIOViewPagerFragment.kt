@@ -6,26 +6,26 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.goldze.mvvmhabit.BR
 import com.goldze.mvvmhabit.R
+import com.goldze.mvvmhabit.aioui.common.viewpagerfragment.adapter.AIORvBindingAdapter
 import com.goldze.mvvmhabit.aioui.common.viewpagerfragment.adapter.AIOViewPagerBindingAdapter
 import com.goldze.mvvmhabit.aioui.common.viewpagerfragment.listener.AIOViewPagerOnTabSelectedListener
 import com.goldze.mvvmhabit.aioui.common.viewpagerfragment.viewmodel.AIOViewPagerFragmentModel
 import com.goldze.mvvmhabit.aioui.common.viewpagerfragment.viewmodel.AIOViewPagerItemViewModel
-import com.goldze.mvvmhabit.aioui.http.HttpRepository
-import com.goldze.mvvmhabit.aioui.webview.WebViewActivity
-import com.goldze.mvvmhabit.aioui.webview.WebViewActivity.Companion.start
+import com.goldze.mvvmhabit.aioui.http.ListRepository
+import com.goldze.mvvmhabit.aioui.http.impl.MeditationRepository
 import com.goldze.mvvmhabit.databinding.FragmentViewpagerAioBinding
 import com.google.android.material.tabs.TabLayout
 import me.goldze.mvvmhabit.base.BaseFragment
-import me.goldze.mvvmhabit.utils.ToastUtils
 
 /**
  * 使用这个要自定义一下 recyclerview 的 item Layout
- * 还有 httpRepository 请求数据，详情查看继承的子类
- * 以及在 initViewObservable 中观察 viewModel.itemClickEvent 设置子项点击事件
- *
+ * HttpRepository 请求数据，详情查看继承的子类
+ * 观察 viewModel.itemClickEvent 设置子项点击事件
+ * 创建 AIOViewPagerBindingAdapter 时传入 AIORvBindingAdapter子类类型来指定 rv item 如何绑定
+ * tabs 请求类型
  * 例子参考子类
  */
-open class AIOViewPagerFragment : BaseFragment<FragmentViewpagerAioBinding, AIOViewPagerFragmentModel>() {
+abstract class AIOViewPagerFragment : BaseFragment<FragmentViewpagerAioBinding, AIOViewPagerFragmentModel>() {
 
     val TAG = "AIOViewPagerFragment"
 
@@ -46,8 +46,6 @@ open class AIOViewPagerFragment : BaseFragment<FragmentViewpagerAioBinding, AIOV
             activity?.finish()
         }
 
-        //给ViewPager设置adapter
-        binding.adapter = AIOViewPagerBindingAdapter()
         // viewpager tl 关联
         binding.viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(binding.tabs))
         binding.tabs.addOnTabSelectedListener(AIOViewPagerOnTabSelectedListener(binding.viewPager))
@@ -55,9 +53,37 @@ open class AIOViewPagerFragment : BaseFragment<FragmentViewpagerAioBinding, AIOV
 
     override fun initViewObservable() {
         super.initViewObservable()
-        // 请求第一页数据
-        if (viewModel.items.size > 0) {
-            viewModel.items[0].onRefreshCommand.execute()
+
+        viewModel.tabLoadComplete.observe(this) {
+            for (itemDatum in viewModel.tabItemData) {
+                val tab = binding.tabs.newTab()
+                val view = layoutInflater.inflate(R.layout.item_tablayout_topic, null)
+                val tv = view.findViewById<TextView>(R.id.tvLabel)
+                tv.text = itemDatum.name
+                tab.customView = view
+                binding.tabs.addTab(tab)
+
+                val viewpagerItemViewModel = AIOViewPagerItemViewModel(
+                    viewModel,
+                    activity!!.application,
+                    getViewPagerRepository(),
+                    getRvItemLayoutResId()
+                )
+                viewModel.items.add(viewpagerItemViewModel)
+            }
+
+            // 请求第一页数据
+            if (viewModel.items.size > 0) {
+                viewModel.items[0].onRefreshCommand.execute()
+            }
         }
+
+        viewModel.loadTabsData(getTabType())
     }
+
+    abstract fun getTabType(): String
+
+    abstract fun getRvItemLayoutResId(): Int
+
+    abstract fun getViewPagerRepository(): ListRepository
 }

@@ -34,7 +34,7 @@
                 app:sl_cornerRadius="4dp">
 
                 <ImageView
-                    android:id="@+id/cover"
+                    android:id="@+id/coverImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/relax_train" />
@@ -47,6 +47,7 @@
                 android:layout_weight="1">
 
                 <TextView
+                    android:id="@+id/title"
                     android:layout_width="match_parent"
                     android:layout_height="20dp"
                     android:layout_gravity="top|start"
@@ -57,6 +58,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/desc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="top|start"

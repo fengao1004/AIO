@@ -6,7 +6,7 @@ import com.goldze.mvvmhabit.aioui.relax.music.viewmodel.MusicViewPagerItemViewMo
 import com.goldze.mvvmhabit.databinding.ItemViewpagerMusicBinding
 import me.tatarka.bindingcollectionadapter2.BindingViewPagerAdapter
 
-class MusicViewPagerBindingAdapter :
+class MusicViewPagerBindingAdapter() :
     BindingViewPagerAdapter<MusicViewPagerItemViewModel>() {
 
     override fun onBindBinding(
@@ -34,11 +34,6 @@ class MusicViewPagerBindingAdapter :
             // 结束刷新
             mBinding.twinklingRefreshLayout.finishRefreshing()
             mBinding.twinklingRefreshLayout.finishLoadmore()
-        }
-
-        // 没有旧数据就请求数据
-        if (mBinding.viewModel!!.observableList.isEmpty()) {
-            mBinding.twinklingRefreshLayout.startRefresh()
         }
     }
 

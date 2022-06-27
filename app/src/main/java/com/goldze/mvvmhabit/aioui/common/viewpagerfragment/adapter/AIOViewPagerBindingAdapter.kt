@@ -10,7 +10,10 @@ import me.tatarka.bindingcollectionadapter2.BindingViewPagerAdapter
 /**
  * @param spanCount recyclerView 默认是一列的网格布局，如果需要多列，可以指定 spanCount
  */
-class AIOViewPagerBindingAdapter(var spanCount: Int = 1) : BindingViewPagerAdapter<AIOViewPagerItemViewModel>() {
+class AIOViewPagerBindingAdapter(
+    var spanCount: Int = 1,
+    val adapterClazz: Class<out AIORvBindingAdapter> = AIORvBindingAdapter::class.java
+) : BindingViewPagerAdapter<AIOViewPagerItemViewModel>() {
 
     override fun onBindBinding(
         binding: ViewDataBinding,
@@ -23,13 +26,15 @@ class AIOViewPagerBindingAdapter(var spanCount: Int = 1) : BindingViewPagerAdapt
         //这里可以强转成 AIOViewPagerItemViewModel 对应的 ViewDataBinding
         val mBinding = binding as ItemViewpagerAioBinding
 
+        mBinding.adapter = adapterClazz.newInstance()
+
         val layoutManager = mBinding.recyclerView.layoutManager
         if (layoutManager is GridLayoutManager) {
             layoutManager.spanCount = spanCount
         }
 
         // 销毁又重建时，binding 虽然更新了，但 viewModel 还是旧的，所以要移除之前的 observer，多个不起作用
-            mBinding.viewModel!!.uiChangeObservable.finishRefreshing.removeObservers(mBinding.lifecycleOwner!!)
+        mBinding.viewModel!!.uiChangeObservable.finishRefreshing.removeObservers(mBinding.lifecycleOwner!!)
         mBinding.viewModel!!.uiChangeObservable.finishRefreshing.observe(mBinding.lifecycleOwner!!) {
             mBinding.twinklingRefreshLayout.finishRefreshing()
             mBinding.twinklingRefreshLayout.finishLoadmore()

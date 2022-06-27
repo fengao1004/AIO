@@ -1,35 +1,37 @@
-package com.goldze.mvvmhabit.aioui.relax.music.adapter
+package com.goldze.mvvmhabit.aioui.relax.film
 
 import android.text.TextUtils
 import androidx.databinding.ViewDataBinding
-import com.goldze.mvvmhabit.aioui.bean.list.MusicRecord
-import com.goldze.mvvmhabit.aioui.relax.music.viewmodel.MusicRvItemViewModel
-import com.goldze.mvvmhabit.databinding.ItemRvMusicBinding
+import com.goldze.mvvmhabit.aioui.bean.list.FilmRecord
+import com.goldze.mvvmhabit.aioui.common.viewpagerfragment.adapter.AIORvBindingAdapter
+import com.goldze.mvvmhabit.aioui.common.viewpagerfragment.viewmodel.AIORecyclerViewItemViewModel
+import com.goldze.mvvmhabit.databinding.ItemRvFilmBinding
 import com.goldze.mvvmhabit.utils.ImageUtil
-import me.tatarka.bindingcollectionadapter2.BindingRecyclerViewAdapter
 
-class MusicRecyclerViewBindingAdapter : BindingRecyclerViewAdapter<MusicRvItemViewModel>() {
+class FilmRvBindingAdapter : AIORvBindingAdapter() {
 
     override fun onBindBinding(
         binding: ViewDataBinding,
         variableId: Int,
         layoutRes: Int,
         position: Int,
-        item: MusicRvItemViewModel?
+        item: AIORecyclerViewItemViewModel?
     ) {
         super.onBindBinding(binding, variableId, layoutRes, position, item)
 
         val record = item?.entity?.get()
-        if (binding is ItemRvMusicBinding && record is MusicRecord) {
+        if (binding is ItemRvFilmBinding && record is FilmRecord) {
             if (!TextUtils.isEmpty(record.faceImage)) {
                 ImageUtil.display(
                     record.faceImage,
-                    binding.coverImage,
+                    binding.cover,
                     0
                 )
             }
             binding.title.text = record.name
-            binding.desc.text = record.musicDescribe
+            binding.clickCount.text = record.clickCount.toString()
+
         }
+
     }
 }

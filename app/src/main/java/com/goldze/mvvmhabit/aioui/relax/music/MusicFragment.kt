@@ -16,6 +16,8 @@ import androidx.core.content.ContextCompat.getSystemService
 import com.goldze.mvvmhabit.BR
 import com.goldze.mvvmhabit.R
 import com.goldze.mvvmhabit.aioui.common.viewpagerfragment.listener.AIOViewPagerOnTabSelectedListener
+import com.goldze.mvvmhabit.aioui.http.impl.MusicRepository
+import com.goldze.mvvmhabit.aioui.relax.music.adapter.MusicRecyclerViewBindingAdapter
 import com.goldze.mvvmhabit.aioui.relax.music.adapter.MusicViewPagerBindingAdapter
 import com.goldze.mvvmhabit.aioui.relax.music.play.PlayerManager
 import com.goldze.mvvmhabit.aioui.relax.music.play.bean.AIOAlbum
@@ -23,7 +25,6 @@ import com.goldze.mvvmhabit.aioui.relax.music.play.notification.PlayerService
 import com.goldze.mvvmhabit.aioui.relax.music.play.notification.PlayerService.NOTIFY_PAUSE
 import com.goldze.mvvmhabit.aioui.relax.music.viewmodel.MusicModel
 import com.goldze.mvvmhabit.aioui.relax.music.viewmodel.MusicViewPagerItemViewModel
-import com.goldze.mvvmhabit.app.Injection
 import com.goldze.mvvmhabit.databinding.FragmentMusicBinding
 import com.google.android.material.tabs.TabLayout
 import com.kunminx.player.helper.MediaPlayerHelper
@@ -49,6 +50,7 @@ class MusicFragment : BaseFragment<FragmentMusicBinding, MusicModel>() {
     override fun onDestroy() {
         super.onDestroy()
         keepTrue = false
+//        sendBroadcast(PlayerService.NOTIFY_CLOSE)
     }
 
     override fun initData() {
@@ -75,11 +77,11 @@ class MusicFragment : BaseFragment<FragmentMusicBinding, MusicModel>() {
         binding.tabs.addOnTabSelectedListener(AIOViewPagerOnTabSelectedListener(binding.viewPager))
 
         //模拟几个ViewPager页面
-        for (i in 1..5) {
+        for (i in 1..2) {
             val viewpagerItemViewModel = MusicViewPagerItemViewModel(
                 viewModel,
                 activity!!.application,
-                Injection.provideDemoRepository()
+                MusicRepository()
             )
             viewModel.items.add(viewpagerItemViewModel)
 
@@ -95,8 +97,10 @@ class MusicFragment : BaseFragment<FragmentMusicBinding, MusicModel>() {
 
         Thread {
             val source = "http://cdn.xlxs.top/Piano%20Pianissimo%20-%20I%20Said%20I%27m%20Falling%20For%20You.mp3"
-            val source2 = "http://cdn.xlxs.top/Rude%20Boy%2CAlif%20Fakod%20-%20Late%20Night%20Melancholy%20%28Sape%27%20Cover%29.mp3"
-            val source3 = "http://cdn.xlxs.top/ilem%2C%E6%B4%9B%E5%A4%A9%E4%BE%9D%2C%E8%A8%80%E5%92%8C%20-%20%E8%BE%BE%E6%8B%89%E5%B4%A9%E5%90%A7.mp3"
+            val source2 =
+                "http://cdn.xlxs.top/Rude%20Boy%2CAlif%20Fakod%20-%20Late%20Night%20Melancholy%20%28Sape%27%20Cover%29.mp3"
+            val source3 =
+                "http://cdn.xlxs.top/ilem%2C%E6%B4%9B%E5%A4%A9%E4%BE%9D%2C%E8%A8%80%E5%92%8C%20-%20%E8%BE%BE%E6%8B%89%E5%B4%A9%E5%90%A7.mp3"
             val aioMusic = AIOAlbum.AIOMusic().apply {
                 url = source
             }
@@ -113,7 +117,9 @@ class MusicFragment : BaseFragment<FragmentMusicBinding, MusicModel>() {
             }
 
             PlayerManager.getInstance().loadAlbum(aioAlbum)
-            PlayerManager.getInstance().playAudio()
+            if (!PlayerManager.getInstance().isPlaying) {
+                PlayerManager.getInstance().playAudio()
+            }
         }.start()
 
 
@@ -216,7 +222,12 @@ class MusicFragment : BaseFragment<FragmentMusicBinding, MusicModel>() {
 
     override fun initViewObservable() {
         super.initViewObservable()
-        viewModel.itemClickEvent.observe(this) { text -> ToastUtils.showShort("position：$text") }
+        // 请求第一页数据
+        if (viewModel.items.size > 0) {
+            viewModel.items[0].onRefreshCommand.execute()
+        }
+
+        viewModel.itemClickEvent.observe(this) { entity -> ToastUtils.showShort("position：$entity") }
     }
 
 
@@ -230,6 +241,8 @@ class MusicFragment : BaseFragment<FragmentMusicBinding, MusicModel>() {
 
             binding.currentProgress.text = PlayerManager.getInstance().getTrackTime(currentPosition)
             binding.musicDuration.text = PlayerManager.getInstance().getTrackTime(duration)
+
+            initVolumeBar()
         }
     }
 }

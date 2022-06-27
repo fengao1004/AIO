@@ -29,8 +29,6 @@ public class AIORecyclerViewItemViewModel extends ItemViewModel<AIOViewPagerItem
     public BindingCommand itemClick = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
-            String content = "<image src=\"http://39.103.226.17/psy/default/01焦虑测验GAD-7.jpg\" style=\"width: 100%\"/><image src=\"http://39.103.226.17/psy/default/01焦虑测验GAD-7.jpg\" style=\"width: 100%\"/><image src=\"http://39.103.226.17/psy/default/01焦虑测验GAD-7.jpg\" style=\"width: 100%\"/>";
-            entity.get().setContent(content);
             viewModel.onItemClick(entity.get());
         }
     });

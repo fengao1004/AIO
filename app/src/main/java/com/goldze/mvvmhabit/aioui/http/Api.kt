@@ -55,7 +55,7 @@ interface Api {
     fun getMeditationPageList(@Body bean: CommentRequestBean): Observable<CommonListResponseBean<MeditationRecord>>
 
     @POST("/client/api/film/getPageList")
-    fun getFilmPageList(@Body bean: CommentRequestBean): Observable<CommonListResponseBean<VideoRecord>>
+    fun getFilmPageList(@Body bean: CommentRequestBean): Observable<CommonListResponseBean<FilmRecord>>
 
     @POST("/client/api/equipment/activation")
     fun activation(@Body bean: CommentRequestBean): Observable<ActivationResponseBean>

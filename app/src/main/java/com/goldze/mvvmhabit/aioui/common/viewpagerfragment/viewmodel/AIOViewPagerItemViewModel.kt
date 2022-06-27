@@ -5,7 +5,6 @@ import android.app.Application
 import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableList
 import com.goldze.mvvmhabit.BR
-import com.goldze.mvvmhabit.aioui.Util
 import com.goldze.mvvmhabit.aioui.bean.CommentRequestBean
 import com.goldze.mvvmhabit.aioui.bean.list.BaseRecord
 import com.goldze.mvvmhabit.aioui.bean.list.CommonListResponseBean
@@ -18,7 +17,6 @@ import me.goldze.mvvmhabit.bus.event.SingleLiveEvent
 import me.goldze.mvvmhabit.http.ResponseThrowable
 import me.goldze.mvvmhabit.utils.RxUtils
 import me.goldze.mvvmhabit.utils.ToastUtils
-import me.goldze.mvvmhabit.utils.Utils
 import me.tatarka.bindingcollectionadapter2.ItemBinding
 
 /**
@@ -62,9 +60,14 @@ class AIOViewPagerItemViewModel(
         loadMoreData()
     })
 
+    var nextPage = 1
+
     @SuppressLint("CheckResult")
     private fun refreshData() {
-        model.getCommonListData(CommentRequestBean(CommentRequestBean.getEmpty(), CommentRequestBean.getHeader()))
+        val requestBody = CommentRequestBean.getEmpty()
+        requestBody.pageNum = 1
+
+        model.getCommonListData(CommentRequestBean(requestBody, CommentRequestBean.getHeader()))
             .compose(RxUtils.schedulersTransformer()) //线程调度
             .doOnSubscribe(this) //请求与ViewModel周期同步
             .doOnSubscribe {}
@@ -88,6 +91,7 @@ class AIOViewPagerItemViewModel(
                             val itemViewModel = AIORecyclerViewItemViewModel(this@AIOViewPagerItemViewModel, record)
                             //双向绑定动态添加Item
                             observableList.clear()
+                            nextPage = 2
                             observableList.add(itemViewModel)
                         }
                         //刷新完成收回
@@ -114,7 +118,10 @@ class AIOViewPagerItemViewModel(
 
     @SuppressLint("CheckResult")
     private fun loadMoreData() {
-        model.getCommonListData(CommentRequestBean(CommentRequestBean.getEmpty(), CommentRequestBean.getHeader()))
+        val requestBody = CommentRequestBean.getEmpty()
+        requestBody.pageNum = nextPage
+
+        model.getCommonListData(CommentRequestBean(requestBody, CommentRequestBean.getHeader()))
             .compose(RxUtils.schedulersTransformer()) //线程调度
             .doOnSubscribe(this) //请求与ViewModel周期同步
             .doOnSubscribe {}
@@ -136,6 +143,7 @@ class AIOViewPagerItemViewModel(
                         for (record in records) {
                             val itemViewModel = AIORecyclerViewItemViewModel(this@AIOViewPagerItemViewModel, record)
                             //双向绑定动态添加Item
+                            nextPage++
                             observableList.add(itemViewModel)
                         }
                         //刷新完成收回

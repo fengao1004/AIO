@@ -34,10 +34,10 @@
                 app:sl_cornerRadius="4dp">
 
                 <ImageView
+                    android:id="@+id/coverImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@{viewModel.musicIcon}"
-                    binding:url="@{viewModel.entity.img}" />
+                    android:src="@{viewModel.musicIcon}" />
             </com.goldze.mvvmhabit.ui.corner.ShadowFrameLayout>
 
             <FrameLayout
@@ -47,6 +47,7 @@
                 android:layout_weight="1">
 
                 <TextView
+                    android:id="@+id/title"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
                     android:layout_gravity="top|start"
@@ -56,6 +57,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/desc"
                     android:layout_width="wrap_content"
                     android:layout_height="14dp"
                     android:layout_gravity="bottom|start"
@@ -69,6 +71,7 @@
                 android:layout_height="100dp">
 
                 <ImageView
+                    android:id="@+id/control_image"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_gravity="center_horizontal|bottom"
