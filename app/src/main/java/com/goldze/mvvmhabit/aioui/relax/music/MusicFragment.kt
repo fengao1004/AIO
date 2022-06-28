@@ -15,6 +15,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat.getSystemService
 import com.goldze.mvvmhabit.BR
 import com.goldze.mvvmhabit.R
+import com.goldze.mvvmhabit.aioui.bean.list.MusicRecord
 import com.goldze.mvvmhabit.aioui.common.viewpagerfragment.listener.AIOViewPagerOnTabSelectedListener
 import com.goldze.mvvmhabit.aioui.http.impl.MusicRepository
 import com.goldze.mvvmhabit.aioui.relax.music.adapter.MusicRecyclerViewBindingAdapter
@@ -26,6 +27,7 @@ import com.goldze.mvvmhabit.aioui.relax.music.play.notification.PlayerService.NO
 import com.goldze.mvvmhabit.aioui.relax.music.viewmodel.MusicModel
 import com.goldze.mvvmhabit.aioui.relax.music.viewmodel.MusicViewPagerItemViewModel
 import com.goldze.mvvmhabit.databinding.FragmentMusicBinding
+import com.goldze.mvvmhabit.utils.ImageUtil
 import com.google.android.material.tabs.TabLayout
 import com.kunminx.player.helper.MediaPlayerHelper
 import me.goldze.mvvmhabit.base.BaseFragment
@@ -35,8 +37,9 @@ import me.goldze.mvvmhabit.utils.ToastUtils
 class MusicFragment : BaseFragment<FragmentMusicBinding, MusicModel>() {
 
     val TAG = "MusicFragment"
-
     private lateinit var mAudioManager: AudioManager
+    val sPlayerManager = PlayerManager.getInstance()
+    var mActiveTabPosition = -1
     private var keepTrue = true
 
     override fun initContentView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): Int {
@@ -50,7 +53,7 @@ class MusicFragment : BaseFragment<FragmentMusicBinding, MusicModel>() {
     override fun onDestroy() {
         super.onDestroy()
         keepTrue = false
-//        sendBroadcast(PlayerService.NOTIFY_CLOSE)
+        sendBroadcast(PlayerService.NOTIFY_CLOSE)
     }
 
     override fun initData() {
@@ -75,54 +78,6 @@ class MusicFragment : BaseFragment<FragmentMusicBinding, MusicModel>() {
         // viewpager tl 关联
         binding.viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(binding.tabs))
         binding.tabs.addOnTabSelectedListener(AIOViewPagerOnTabSelectedListener(binding.viewPager))
-
-        //模拟几个ViewPager页面
-        for (i in 1..2) {
-            val viewpagerItemViewModel = MusicViewPagerItemViewModel(
-                viewModel,
-                activity!!.application,
-                MusicRepository()
-            )
-            viewModel.items.add(viewpagerItemViewModel)
-
-
-            val tab = binding.tabs.newTab()
-            val view = layoutInflater.inflate(R.layout.item_tablayout_topic, null)
-            val tv = view.findViewById<TextView>(R.id.tvLabel)
-            tv.text = "Tab标题"
-            tab.customView = view
-            binding.tabs.addTab(tab)
-        }
-
-
-        Thread {
-            val source = "http://cdn.xlxs.top/Piano%20Pianissimo%20-%20I%20Said%20I%27m%20Falling%20For%20You.mp3"
-            val source2 =
-                "http://cdn.xlxs.top/Rude%20Boy%2CAlif%20Fakod%20-%20Late%20Night%20Melancholy%20%28Sape%27%20Cover%29.mp3"
-            val source3 =
-                "http://cdn.xlxs.top/ilem%2C%E6%B4%9B%E5%A4%A9%E4%BE%9D%2C%E8%A8%80%E5%92%8C%20-%20%E8%BE%BE%E6%8B%89%E5%B4%A9%E5%90%A7.mp3"
-            val aioMusic = AIOAlbum.AIOMusic().apply {
-                url = source
-            }
-            val aioMusic2 = AIOAlbum.AIOMusic().apply {
-                url = source2
-            }
-            val aioMusic3 = AIOAlbum.AIOMusic().apply {
-                url = source3
-            }
-
-            val musicList = arrayListOf(aioMusic, aioMusic2, aioMusic3)
-            val aioAlbum = AIOAlbum().apply {
-                musics = musicList
-            }
-
-            PlayerManager.getInstance().loadAlbum(aioAlbum)
-            if (!PlayerManager.getInstance().isPlaying) {
-                PlayerManager.getInstance().playAudio()
-            }
-        }.start()
-
-
     }
 
     private fun updateSeekBar() {
@@ -136,6 +91,8 @@ class MusicFragment : BaseFragment<FragmentMusicBinding, MusicModel>() {
                 } catch (e: InterruptedException) {
                     e.printStackTrace()
                 }
+                if (!sPlayerManager.isPlaying) continue
+
                 //获取总时长
                 val duration = MediaPlayerHelper.getInstance().mediaPlayer.duration;
                 val currentPosition: Int = MediaPlayerHelper.getInstance().mediaPlayer.currentPosition
@@ -146,33 +103,65 @@ class MusicFragment : BaseFragment<FragmentMusicBinding, MusicModel>() {
                 bundle.putInt("duration", duration)
                 bundle.putInt("currentPosition", currentPosition)
                 message.data = bundle
-                handler.sendMessage(message)
+                mUpdateSeekBarHandler.sendMessage(message)
             }
         }.start()
     }
 
     private fun initPlayControl() {
         binding.playerBack.setOnClickListener {
-            sendBroadcast(PlayerService.NOTIFY_PREVIOUS)
-            binding.playerPlayIcon.setImageResource(R.drawable.player_pause)
+            val musics = sPlayerManager.album?.musics
+            if (musics != null && musics.isNotEmpty()) {
+                sendBroadcast(PlayerService.NOTIFY_PREVIOUS)
+                binding.playerPlayIcon.setImageResource(R.drawable.player_pause)
 
+                var currentIndex = sPlayerManager.albumIndex
+                val nextIndex = if (--currentIndex <= 0) sPlayerManager.albumMusics.size - 1 else currentIndex
+                syncControlUi(sPlayerManager.albumMusics[nextIndex].record)
+                syncAllRecyclerView(nextIndex, mActiveTabPosition)
+            } else {
+                ToastUtils.showShort("播放列表没有音乐")
+            }
         }
         binding.playerForward.setOnClickListener {
-            sendBroadcast(PlayerService.NOTIFY_NEXT)
-            binding.playerPlayIcon.setImageResource(R.drawable.player_pause)
+            val musics = sPlayerManager.album?.musics
+            if (musics != null && musics.isNotEmpty()) {
+                sendBroadcast(PlayerService.NOTIFY_NEXT)
+                binding.playerPlayIcon.setImageResource(R.drawable.player_pause)
+
+                var currentIndex = sPlayerManager.albumIndex
+                val nextIndex = if (++currentIndex >= sPlayerManager.albumMusics.size) 0 else currentIndex
+                syncControlUi(sPlayerManager.albumMusics[nextIndex].record)
+                syncAllRecyclerView(nextIndex, mActiveTabPosition)
+            } else {
+                ToastUtils.showShort("播放列表没有音乐")
+            }
 
         }
 
         binding.playerPlayIcon.setOnClickListener {
             if (it is ImageView) {
-                if (PlayerManager.getInstance().isPlaying) {
-                    sendBroadcast(NOTIFY_PAUSE)
-                    it.setImageResource(R.drawable.player_start)
-                } else if (PlayerManager.getInstance().isPaused) {
-                    sendBroadcast(PlayerService.NOTIFY_PLAY)
-                    it.setImageResource(R.drawable.player_pause)
-                }
+                dealWithPauseOrPlay(it)
             }
+        }
+    }
+
+    private fun dealWithPauseOrPlay(imageView: ImageView) {
+        val musics = sPlayerManager.album?.musics
+        if (musics == null || musics.isEmpty()) {
+            ToastUtils.showShort("播放列表没有音乐")
+            return
+        }
+
+        if (sPlayerManager.isPlaying) {
+            sendBroadcast(NOTIFY_PAUSE)
+            imageView.setImageResource(R.drawable.player_start)
+            syncAllRecyclerView(0, -1)
+        } else {
+            sendBroadcast(PlayerService.NOTIFY_PLAY)
+            imageView.setImageResource(R.drawable.player_pause)
+            val currentIndex = sPlayerManager.albumIndex
+            syncAllRecyclerView(currentIndex, mActiveTabPosition)
         }
     }
 
@@ -208,39 +197,149 @@ class MusicFragment : BaseFragment<FragmentMusicBinding, MusicModel>() {
     private fun initPlayBar() {
         binding.seekPlay.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                binding.currentProgress.text = PlayerManager.getInstance().getTrackTime(progress)
+                binding.currentProgress.text = sPlayerManager.getTrackTime(progress)
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
             }
 
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                PlayerManager.getInstance().setSeek(seekBar!!.progress)
+                sPlayerManager.setSeek(seekBar!!.progress)
             }
         })
     }
 
     override fun initViewObservable() {
         super.initViewObservable()
-        // 请求第一页数据
-        if (viewModel.items.size > 0) {
-            viewModel.items[0].onRefreshCommand.execute()
+        viewModel.itemClickEvent.observe(this) { entity ->
+            if (entity is MusicRecord) {
+                // 是否为暂停
+                if (viewModel.currentTabPosition == mActiveTabPosition
+                    && entity.itemPosition == sPlayerManager.albumIndex
+                ) {
+                    dealWithPauseOrPlay(binding.playerPlayIcon)
+                    return@observe
+                }
+
+
+                // 更新播放列表
+                val musicList = viewModel.items[viewModel.currentTabPosition].observableList.map {
+                    val musicRecord = it.entity.get() as MusicRecord
+                    AIOAlbum.AIOMusic().apply {
+                        coverImg = musicRecord.faceImage ?: ""
+                        title = musicRecord.name ?: ""
+                        desc = musicRecord.musicDescribe ?: ""
+                        url = musicRecord.resourcesUrl ?: ""
+                        record = musicRecord
+                    }
+                }
+                val aioAlbum = AIOAlbum().apply {
+                    musics = musicList
+                }
+                sPlayerManager.loadAlbum(aioAlbum)
+                val itemPosition = entity.itemPosition
+                if (itemPosition >= sPlayerManager.albumMusics.size) {
+                    return@observe
+                }
+                sPlayerManager.loadAlbum(aioAlbum, itemPosition)
+
+                syncControlUi(entity)
+                syncAllRecyclerView(itemPosition)
+            }
         }
 
-        viewModel.itemClickEvent.observe(this) { entity -> ToastUtils.showShort("position：$entity") }
+        viewModel.tabLoadComplete.observe(this) {
+            for (itemDatum in viewModel.tabItemData) {
+                val tab = binding.tabs.newTab()
+                val view = layoutInflater.inflate(R.layout.item_tablayout_topic, null)
+                val tv = view.findViewById<TextView>(R.id.tvLabel)
+                tv.text = itemDatum.name
+                tab.customView = view
+                binding.tabs.addTab(tab)
+
+                val viewpagerItemViewModel = MusicViewPagerItemViewModel(
+                    viewModel,
+                    activity!!.application,
+                    MusicRepository(),
+                )
+                viewpagerItemViewModel.tabBean = itemDatum
+                viewModel.items.add(viewpagerItemViewModel)
+            }
+
+            // 请求第一页数据
+            if (viewModel.items.size > 0) {
+                viewModel.items[0].onRefreshCommand.execute()
+            }
+        }
+
+        viewModel.loadTabsData()
     }
 
+    private fun syncControlUi(entity: MusicRecord?) {
+        if (entity == null) {
+            return
+        }
+        // 控制部分 UI 更新
+        binding.title.text = entity.name ?: ""
+        binding.desc.text = entity.brief ?: ""
+        ImageUtil.display(
+            entity.faceImage,
+            binding.musicMainIcon,
+            0
+        )
+        binding.playerPlayIcon.setImageResource(R.drawable.player_pause)
+    }
 
-    var handler = object : Handler(Looper.getMainLooper()) {
+    private fun syncAllRecyclerView(itemPosition: Int, activeTabPosition: Int = binding.viewPager.currentItem) {
+        // 同步所有 tab 下的 RV
+        val viewPagerBindingAdapter = binding.viewPager.adapter as MusicViewPagerBindingAdapter
+        for (entry in viewPagerBindingAdapter.mAdapterMap) {
+            syncOtherRvAdapter(entry.value)
+        }
+
+        // 同步当前 tab 下的 RV
+        val currentRvAdapter = viewPagerBindingAdapter.mAdapterMap[activeTabPosition] ?: return
+        mActiveTabPosition = activeTabPosition
+        syncCurrentRvAdapter(currentRvAdapter, itemPosition)
+    }
+
+    // 同步当前 ViewPager Rv 项的状态
+    private fun syncCurrentRvAdapter(
+        currentRvAdapter: MusicRecyclerViewBindingAdapter?,
+        itemPosition: Int
+    ) {
+        if (currentRvAdapter == null) {
+            return
+        }
+        for (i in 0 until currentRvAdapter.itemCount) {
+            currentRvAdapter.mBindingMap[i]?.controlImage?.setImageResource(R.drawable.player_start)
+        }
+        currentRvAdapter.mBindingMap[itemPosition]?.controlImage?.setImageResource(R.drawable.player_pause)
+    }
+
+    // 同步当前 ViewPager Rv 项的状态
+    private fun syncOtherRvAdapter(rvAdapter: MusicRecyclerViewBindingAdapter?) {
+        if (rvAdapter == null) {
+            return
+        }
+        for (i in 0 until rvAdapter.itemCount) {
+            rvAdapter.mBindingMap[i]?.controlImage?.setImageResource(R.drawable.player_start)
+        }
+    }
+
+    private var mUpdateSeekBarHandler = object : Handler(Looper.getMainLooper()) {
         override fun handleMessage(msg: Message) {
+            if (!sPlayerManager.isPlaying) {
+                return
+            }
             val data = msg.data
             val duration = data.getInt("duration")
             val currentPosition = data.getInt("currentPosition")
             binding.seekPlay.max = duration
             binding.seekPlay.progress = currentPosition
 
-            binding.currentProgress.text = PlayerManager.getInstance().getTrackTime(currentPosition)
-            binding.musicDuration.text = PlayerManager.getInstance().getTrackTime(duration)
+            binding.currentProgress.text = sPlayerManager.getTrackTime(currentPosition)
+            binding.musicDuration.text = sPlayerManager.getTrackTime(duration)
 
             initVolumeBar()
         }

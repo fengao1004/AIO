@@ -177,6 +177,6 @@ class AIOViewPagerItemViewModel(
     }
 
     fun onItemClick(entity: BaseRecord) {
-        parentViewModel?.itemClickEvent?.value = entity
+        parentViewModel.itemClickEvent.value = entity
     }
 }

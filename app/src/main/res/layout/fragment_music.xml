@@ -43,20 +43,14 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <com.goldze.mvvmhabit.ui.corner.ShadowFrameLayout
+
+                <com.goldze.mvvmhabit.aioui.relax.music.BitmapShaderCircularView
+                    android:id="@+id/music_main_icon"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginStart="14dp"
                     android:layout_marginEnd="6dp"
-                    app:sl_cornerRadius="80dp">
-
-                    <ImageView
-                        android:id="@+id/music_icon"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/player_music_icon" />
-
-                </com.goldze.mvvmhabit.ui.corner.ShadowFrameLayout>
+                    android:src="@drawable/player_music_icon_2" />
 
 
                 <FrameLayout
@@ -66,6 +60,7 @@
                     android:layout_weight="1">
 
                     <TextView
+                        android:id="@+id/title"
                         android:layout_width="wrap_content"
                         android:layout_height="20dp"
                         android:layout_gravity="top|start"
@@ -75,6 +70,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/desc"
                         android:layout_width="wrap_content"
                         android:layout_height="14dp"
                         android:layout_gravity="bottom|start"
@@ -108,7 +104,7 @@
                             android:layout_width="35dp"
                             android:layout_height="35dp"
                             android:layout_gravity="center_horizontal|center_vertical"
-                            android:src="@drawable/player_pause" />
+                            android:src="@drawable/player_start" />
 
                         <ImageView
                             android:id="@+id/player_forward"

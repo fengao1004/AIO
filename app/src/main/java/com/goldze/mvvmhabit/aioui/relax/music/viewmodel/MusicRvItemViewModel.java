@@ -9,6 +9,7 @@ import androidx.databinding.ObservableField;
 
 import com.goldze.mvvmhabit.R;
 import com.goldze.mvvmhabit.aioui.bean.list.BaseRecord;
+import com.goldze.mvvmhabit.aioui.bean.list.MusicRecord;
 import com.goldze.mvvmhabit.ui.network.detail.DetailFragment;
 
 import me.goldze.mvvmhabit.base.ItemViewModel;
@@ -30,7 +31,7 @@ public class MusicRvItemViewModel extends ItemViewModel<MusicViewPagerItemViewMo
         this.entity.set(entity);
         //ImageView的占位图片，可以解决RecyclerView中图片错误问题
         musicIcon = ContextCompat.getDrawable(viewModel.getApplication(), R.drawable.player_music_icon_2);
-        playIcon = ContextCompat.getDrawable(viewModel.getApplication(), R.drawable.player_pause);
+        playIcon = ContextCompat.getDrawable(viewModel.getApplication(), R.drawable.player_start);
     }
 
     /**
@@ -46,7 +47,11 @@ public class MusicRvItemViewModel extends ItemViewModel<MusicViewPagerItemViewMo
     public BindingCommand itemClick = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
-            viewModel.onItemClick(entity.get());
+            BaseRecord record = entity.get();
+            if (record instanceof MusicRecord) {
+                ((MusicRecord) record).setItemPosition(getPosition());
+            }
+            viewModel.onItemClick(record);
         }
     });
 

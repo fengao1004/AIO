@@ -7,6 +7,7 @@ import com.goldze.mvvmhabit.aioui.relax.music.viewmodel.MusicRvItemViewModel
 import com.goldze.mvvmhabit.databinding.ItemRvMusicBinding
 import com.goldze.mvvmhabit.utils.ImageUtil
 import me.tatarka.bindingcollectionadapter2.BindingRecyclerViewAdapter
+import java.util.HashMap
 
 class MusicRecyclerViewBindingAdapter : BindingRecyclerViewAdapter<MusicRvItemViewModel>() {
 
@@ -21,6 +22,7 @@ class MusicRecyclerViewBindingAdapter : BindingRecyclerViewAdapter<MusicRvItemVi
 
         val record = item?.entity?.get()
         if (binding is ItemRvMusicBinding && record is MusicRecord) {
+            mBindingMap[position] = binding
             if (!TextUtils.isEmpty(record.faceImage)) {
                 ImageUtil.display(
                     record.faceImage,
@@ -32,4 +34,6 @@ class MusicRecyclerViewBindingAdapter : BindingRecyclerViewAdapter<MusicRvItemVi
             binding.desc.text = record.musicDescribe
         }
     }
+
+    var mBindingMap: HashMap<Int, ItemRvMusicBinding> = HashMap()
 }

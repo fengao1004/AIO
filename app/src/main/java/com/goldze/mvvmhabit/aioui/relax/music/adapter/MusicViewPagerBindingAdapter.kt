@@ -5,6 +5,7 @@ import androidx.databinding.ViewDataBinding
 import com.goldze.mvvmhabit.aioui.relax.music.viewmodel.MusicViewPagerItemViewModel
 import com.goldze.mvvmhabit.databinding.ItemViewpagerMusicBinding
 import me.tatarka.bindingcollectionadapter2.BindingViewPagerAdapter
+import java.util.HashMap
 
 class MusicViewPagerBindingAdapter() :
     BindingViewPagerAdapter<MusicViewPagerItemViewModel>() {
@@ -20,7 +21,9 @@ class MusicViewPagerBindingAdapter() :
         //这里可以强转成 MusicViewPagerItemViewModel 对应的 ViewDataBinding
         val mBinding = binding as ItemViewpagerMusicBinding
 
-        mBinding.adapter = MusicRecyclerViewBindingAdapter()
+        val recyclerViewBindingAdapter = MusicRecyclerViewBindingAdapter()
+        mAdapterMap[position] = recyclerViewBindingAdapter
+        mBinding.adapter = recyclerViewBindingAdapter
 
         // 销毁又重建时，binding 虽然更新了，但 viewModel 还是旧的，所以要移除之前的 observer，多个不起作用
         mBinding.viewModel!!.uiChangeObservable.finishRefreshing.removeObservers(mBinding.lifecycleOwner!!)
@@ -40,5 +43,5 @@ class MusicViewPagerBindingAdapter() :
     override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
         super.destroyItem(container, position, `object`)
     }
-
+    var mAdapterMap: HashMap<Int, MusicRecyclerViewBindingAdapter> = HashMap()
 }

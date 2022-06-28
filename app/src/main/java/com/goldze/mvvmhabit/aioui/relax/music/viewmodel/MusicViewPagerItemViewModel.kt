@@ -7,6 +7,7 @@ import androidx.databinding.ObservableList
 import com.goldze.mvvmhabit.BR
 import com.goldze.mvvmhabit.R
 import com.goldze.mvvmhabit.aioui.bean.CommentRequestBean
+import com.goldze.mvvmhabit.aioui.bean.TypeResponseBeanData
 import com.goldze.mvvmhabit.aioui.bean.list.BaseRecord
 import com.goldze.mvvmhabit.aioui.bean.list.CommonListResponseBean
 import com.goldze.mvvmhabit.aioui.common.viewpagerfragment.viewmodel.AIORecyclerViewItemViewModel
@@ -28,9 +29,11 @@ import me.tatarka.bindingcollectionadapter2.ItemBinding
 class MusicViewPagerItemViewModel(viewModel: MusicModel, application: Application, repository: MusicRepository) :
     BaseViewModel<MusicRepository>(application, repository) {
 
-    var parentViewModel: MusicModel? = viewModel
 
-    var deleteItemLiveData = SingleLiveEvent<MusicRvItemViewModel>()
+    // 若有对应 tabBean 数据，要设置 tabBean
+    var tabBean: TypeResponseBeanData? = null
+
+    var parentViewModel: MusicModel? = viewModel
 
     //封装一个界面发生改变的观察者
     var uiChangeObservable = UIChangeObservable()
@@ -52,7 +55,7 @@ class MusicViewPagerItemViewModel(viewModel: MusicModel, application: Applicatio
 
     //下拉刷新
     var onRefreshCommand: BindingCommand<*> = BindingCommand<Any?>(BindingAction {
-        loadMoreData()
+        refreshData()
     })
 
     //上拉加载
@@ -60,15 +63,18 @@ class MusicViewPagerItemViewModel(viewModel: MusicModel, application: Applicatio
         loadMoreData()
     })
 
+    var nextPage = 1
+
     @SuppressLint("CheckResult")
-    private fun loadMoreData() {
-        if (observableList.size > 50) {
-            ToastUtils.showLong("兄dei，你太无聊啦~崩是不可能的~")
-            uiChangeObservable.finishLoadmore.call()
-            return
+    private fun refreshData() {
+        val requestBody = CommentRequestBean.getEmpty()
+        requestBody.pageNum = 1
+        if (tabBean != null) {
+            requestBody.id = tabBean?.id?.toLong() ?: 0
         }
+
         //模拟网络上拉加载更多
-        model.getCommonListData((CommentRequestBean(CommentRequestBean.getEmpty(), CommentRequestBean.getHeader())))
+        model.getCommonListData(CommentRequestBean(requestBody, CommentRequestBean.getHeader()))
             .compose(RxUtils.schedulersTransformer()) //线程调度
             .doOnSubscribe(this) //请求与ViewModel周期同步
             .doOnSubscribe {}
@@ -91,6 +97,8 @@ class MusicViewPagerItemViewModel(viewModel: MusicModel, application: Applicatio
                         for (record in records) {
                             val itemViewModel = MusicRvItemViewModel(this@MusicViewPagerItemViewModel, record)
                             //双向绑定动态添加Item
+                            observableList.clear()
+                            nextPage = 2
                             observableList.add(itemViewModel)
                         }
                         //刷新完成收回
@@ -115,14 +123,61 @@ class MusicViewPagerItemViewModel(viewModel: MusicModel, application: Applicatio
                 })
     }
 
-    /**
-     * 删除条目
-     *
-     * @param netWorkItemViewModel
-     */
-    fun deleteItem(netWorkItemViewModel: MusicRvItemViewModel?) {
-        //点击确定，在 observableList 绑定中删除，界面立即刷新
-        observableList.remove(netWorkItemViewModel)
+    @SuppressLint("CheckResult")
+    private fun loadMoreData() {
+        val requestBody = CommentRequestBean.getEmpty()
+        requestBody.pageNum = nextPage
+        if (tabBean != null) {
+            requestBody.id = tabBean?.id?.toLong() ?: 0
+        }
+
+        //模拟网络上拉加载更多
+        model.getCommonListData(CommentRequestBean(requestBody, CommentRequestBean.getHeader()))
+            .compose(RxUtils.schedulersTransformer()) //线程调度
+            .doOnSubscribe(this) //请求与ViewModel周期同步
+            .doOnSubscribe {}
+            .map {
+                it as CommonListResponseBean<BaseRecord>
+            }
+            .subscribe(
+                object : DisposableObserver<CommonListResponseBean<BaseRecord>>() {
+                    override fun onNext(responseBean: CommonListResponseBean<BaseRecord>) {
+                        // 校验数据
+                        if (responseBean.code != "200") {
+                            ToastUtils.showShort("请求失败： ${responseBean.code}")
+                            return
+                        }
+                        val records = responseBean.data.records ?: return
+                        if (records.isNullOrEmpty()) {
+                            ToastUtils.showShort("没有更多数据")
+                            return
+                        }
+                        for (record in records) {
+                            val itemViewModel = MusicRvItemViewModel(this@MusicViewPagerItemViewModel, record)
+                            //双向绑定动态添加Item
+                            nextPage++
+                            observableList.add(itemViewModel)
+                        }
+                        //刷新完成收回
+                        uiChangeObservable.finishLoadmore.call()
+                        uiChangeObservable.finishRefreshing.call()
+                    }
+
+                    override fun onError(throwable: Throwable) {
+                        if (throwable is ResponseThrowable) {
+                            ToastUtils.showShort((throwable as ResponseThrowable).message)
+                        }
+                        //刷新完成收回
+                        uiChangeObservable.finishLoadmore.call()
+                        uiChangeObservable.finishRefreshing.call()
+                    }
+
+                    override fun onComplete() {
+                        //刷新完成收回
+                        uiChangeObservable.finishLoadmore.call()
+                        uiChangeObservable.finishRefreshing.call()
+                    }
+                })
     }
 
     /**

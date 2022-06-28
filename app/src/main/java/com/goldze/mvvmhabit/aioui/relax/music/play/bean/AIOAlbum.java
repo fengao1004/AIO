@@ -16,6 +16,7 @@
 
 package com.goldze.mvvmhabit.aioui.relax.music.play.bean;
 
+import com.goldze.mvvmhabit.aioui.bean.list.MusicRecord;
 import com.kunminx.player.bean.base.BaseAlbumItem;
 import com.kunminx.player.bean.base.BaseArtistItem;
 import com.kunminx.player.bean.base.BaseMusicItem;
@@ -39,8 +40,28 @@ public class AIOAlbum extends BaseAlbumItem<AIOAlbum.AIOMusic, AIOAlbum.AIOArtis
 
         private String songMid;
 
+        private String desc;
+
+        private MusicRecord record;
+
         public String getSongMid() {
             return songMid;
+        }
+
+        public String getDesc() {
+            return desc;
+        }
+
+        public void setDesc(String desc) {
+            this.desc = desc;
+        }
+
+        public MusicRecord getRecord() {
+            return record;
+        }
+
+        public void setRecord(MusicRecord record) {
+            this.record = record;
         }
     }
 
