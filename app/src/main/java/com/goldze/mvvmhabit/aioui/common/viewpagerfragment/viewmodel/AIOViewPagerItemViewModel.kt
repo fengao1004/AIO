@@ -6,6 +6,7 @@ import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableList
 import com.goldze.mvvmhabit.BR
 import com.goldze.mvvmhabit.aioui.bean.CommentRequestBean
+import com.goldze.mvvmhabit.aioui.bean.TypeResponseBeanData
 import com.goldze.mvvmhabit.aioui.bean.list.BaseRecord
 import com.goldze.mvvmhabit.aioui.bean.list.CommonListResponseBean
 import com.goldze.mvvmhabit.aioui.http.ListRepository
@@ -23,14 +24,15 @@ import me.tatarka.bindingcollectionadapter2.ItemBinding
  * 一个该 viewModel 对应一个 viewpager 页面(item)
  */
 class AIOViewPagerItemViewModel(
-    viewModel: AIOViewPagerFragmentModel,
+    val parentViewModel: AIOViewPagerFragmentModel,
     application: Application,
     repository: ListRepository,
     itemViewResId: Int
 ) :
     BaseViewModel<ListRepository>(application, repository) {
 
-    var parentViewModel: AIOViewPagerFragmentModel? = viewModel
+    // 若有对应 tabBean 数据，要设置 tabBean
+    var tabBean: TypeResponseBeanData? = null
 
     //封装一个界面发生改变的观察者
     var uiChangeObservable = UIChangeObservable()
@@ -66,6 +68,9 @@ class AIOViewPagerItemViewModel(
     private fun refreshData() {
         val requestBody = CommentRequestBean.getEmpty()
         requestBody.pageNum = 1
+        if (tabBean != null) {
+            requestBody.id = tabBean?.id?.toLong() ?: 0
+        }
 
         model.getCommonListData(CommentRequestBean(requestBody, CommentRequestBean.getHeader()))
             .compose(RxUtils.schedulersTransformer()) //线程调度
@@ -120,6 +125,9 @@ class AIOViewPagerItemViewModel(
     private fun loadMoreData() {
         val requestBody = CommentRequestBean.getEmpty()
         requestBody.pageNum = nextPage
+        if (tabBean != null) {
+            requestBody.id = tabBean?.id?.toLong() ?: 0
+        }
 
         model.getCommonListData(CommentRequestBean(requestBody, CommentRequestBean.getHeader()))
             .compose(RxUtils.schedulersTransformer()) //线程调度

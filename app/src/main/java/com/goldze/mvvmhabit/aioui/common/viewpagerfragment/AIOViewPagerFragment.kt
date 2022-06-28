@@ -69,6 +69,7 @@ abstract class AIOViewPagerFragment : BaseFragment<FragmentViewpagerAioBinding, 
                     getViewPagerRepository(),
                     getRvItemLayoutResId()
                 )
+                viewpagerItemViewModel.tabBean = itemDatum
                 viewModel.items.add(viewpagerItemViewModel)
             }
 

@@ -1,6 +1,7 @@
 package com.goldze.mvvmhabit.aioui.relax.film
 
 import android.content.Intent
+import android.text.TextUtils
 import com.goldze.mvvmhabit.R
 import com.goldze.mvvmhabit.aioui.bean.list.FilmRecord
 import com.goldze.mvvmhabit.aioui.common.viewpagerfragment.AIOViewPagerFragment
@@ -31,9 +32,11 @@ class FilmFragment : AIOViewPagerFragment() {
     override fun initViewObservable() {
         viewModel.itemClickEvent.observe(this) { entity ->
             if (entity is FilmRecord) {
+                val url = """
+                    http://cdn.xlxs.top/%5B%E9%AB%98%E6%B8%85%201080P%5D%20%E3%80%90%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90%E3%80%91%E6%97%A0%E5%AD%97%E5%B9%95PV%E5%90%88%E9%9B%86%E3%80%901080P%E3%80%91_P2_%E6%98%A0%E7%94%BB%E3%80%8E%E5%A4%A9%E6%B0%97%E3%81%AE%E5%AD%90%E3%80%8F%E4%BA%88%E5%A0%B1%202.mp4
+                """.trimIndent()
                 val videoBean = VideoBean(
-                    entity.resourcesUrl
-                        ?: "http://cdn.xlxs.top/%E7%94%B7%E4%B8%BB%E4%BE%A7%E9%9D%A2%E5%9D%90%E5%9C%A8%E6%B5%B7%E8%BE%B9%EF%BC%8C%E5%A5%B3%E4%B8%BB%E8%83%8C%E9%9D%A2%E5%9D%90%E5%9C%A8%E6%B5%B7%E8%BE%B9.mp4",
+                    (if (!TextUtils.isEmpty(entity.resourcesUrl)) entity.resourcesUrl else url) ?: url,
                     entity.name ?: "",
                     entity.name ?: "",
                     entity.filmDescribe ?: "",
