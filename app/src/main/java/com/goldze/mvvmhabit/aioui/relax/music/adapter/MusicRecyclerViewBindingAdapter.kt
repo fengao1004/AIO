@@ -31,7 +31,7 @@ class MusicRecyclerViewBindingAdapter : BindingRecyclerViewAdapter<MusicRvItemVi
                 )
             }
             binding.title.text = record.name
-            binding.desc.text = record.musicDescribe
+            binding.desc.text = "点击量：${record.clickCount}"
         }
     }
 

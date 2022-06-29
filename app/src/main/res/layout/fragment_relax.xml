@@ -22,18 +22,18 @@
         <LinearLayout
             android:id="@+id/music_relax"
             android:layout_width="match_parent"
-            android:layout_height="83dp"
-            android:layout_marginHorizontal="13dp"
-            android:layout_marginTop="13dp"
+            android:layout_height="250px"
+            android:layout_marginHorizontal="39px"
+            android:layout_marginTop="39px"
             android:background="@color/white"
             android:orientation="horizontal">
 
             <com.goldze.mvvmhabit.ui.corner.ShadowFrameLayout
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginHorizontal="13dp"
-                android:layout_marginVertical="22dp"
-                app:sl_cornerRadius="8dp">
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:layout_marginHorizontal="39px"
+                android:layout_marginVertical="65px"
+                app:sl_cornerRadius="24px">
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -43,9 +43,9 @@
 
             <FrameLayout
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_marginHorizontal="13dp"
-                android:layout_marginVertical="22dp">
+                android:layout_height="120px"
+                android:layout_marginHorizontal="39px"
+                android:layout_marginVertical="65px">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -53,7 +53,7 @@
                     android:layout_gravity="top|start"
                     android:text="音乐放松"
                     android:textColor="@color/text_color_title"
-                    android:textSize="15sp"
+                    android:textSize="45px"
                     android:textStyle="bold" />
 
                 <TextView
@@ -62,25 +62,25 @@
                     android:layout_gravity="bottom|start"
                     android:text="聆听自然，享受此刻的静谧"
                     android:textColor="@color/text_color_subtitle"
-                    android:textSize="12sp" />
+                    android:textSize="36px" />
             </FrameLayout>
         </LinearLayout>
         <!--第二个-->
         <LinearLayout
             android:id="@+id/meditation"
             android:layout_width="match_parent"
-            android:layout_height="83dp"
-            android:layout_marginHorizontal="13dp"
-            android:layout_marginTop="13dp"
+            android:layout_height="250px"
+            android:layout_marginHorizontal="39px"
+            android:layout_marginTop="39px"
             android:background="@color/white"
             android:orientation="horizontal">
 
             <com.goldze.mvvmhabit.ui.corner.ShadowFrameLayout
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginHorizontal="13dp"
-                android:layout_marginVertical="22dp"
-                app:sl_cornerRadius="8dp">
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:layout_marginHorizontal="39px"
+                android:layout_marginVertical="65px"
+                app:sl_cornerRadius="24px">
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -90,9 +90,9 @@
 
             <FrameLayout
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_marginHorizontal="13dp"
-                android:layout_marginVertical="22dp">
+                android:layout_height="120px"
+                android:layout_marginHorizontal="39px"
+                android:layout_marginVertical="65px">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -100,7 +100,7 @@
                     android:layout_gravity="top|start"
                     android:text="冥想训练"
                     android:textColor="@color/text_color_title"
-                    android:textSize="15sp"
+                    android:textSize="45px"
                     android:textStyle="bold" />
 
                 <TextView
@@ -109,25 +109,25 @@
                     android:layout_gravity="bottom|start"
                     android:text="坚持训练，收获惊喜"
                     android:textColor="@color/text_color_subtitle"
-                    android:textSize="12sp" />
+                    android:textSize="36px" />
             </FrameLayout>
         </LinearLayout>
         <!--第二个-->
         <LinearLayout
             android:id="@+id/mind_video"
             android:layout_width="match_parent"
-            android:layout_height="83dp"
-            android:layout_marginHorizontal="13dp"
-            android:layout_marginTop="13dp"
+            android:layout_height="250px"
+            android:layout_marginHorizontal="39px"
+            android:layout_marginTop="39px"
             android:background="@color/white"
             android:orientation="horizontal">
 
             <com.goldze.mvvmhabit.ui.corner.ShadowFrameLayout
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginHorizontal="13dp"
-                android:layout_marginVertical="22dp"
-                app:sl_cornerRadius="8dp">
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:layout_marginHorizontal="39px"
+                android:layout_marginVertical="65px"
+                app:sl_cornerRadius="24px">
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -137,9 +137,9 @@
 
             <FrameLayout
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_marginHorizontal="13dp"
-                android:layout_marginVertical="22dp">
+                android:layout_height="120px"
+                android:layout_marginHorizontal="39px"
+                android:layout_marginVertical="65px">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -147,7 +147,7 @@
                     android:layout_gravity="top|start"
                     android:text="心理短片"
                     android:textColor="@color/text_color_title"
-                    android:textSize="15sp"
+                    android:textSize="45px"
                     android:textStyle="bold" />
 
                 <TextView
@@ -156,25 +156,25 @@
                     android:layout_gravity="bottom|start"
                     android:text="跟随指引，选择自己"
                     android:textColor="@color/text_color_subtitle"
-                    android:textSize="12sp" />
+                    android:textSize="36px" />
             </FrameLayout>
         </LinearLayout>
         <!--第三个-->
         <LinearLayout
             android:id="@+id/mind_gallery"
             android:layout_width="match_parent"
-            android:layout_height="83dp"
-            android:layout_marginHorizontal="13dp"
-            android:layout_marginTop="13dp"
+            android:layout_height="250px"
+            android:layout_marginHorizontal="39px"
+            android:layout_marginTop="39px"
             android:background="@color/white"
             android:orientation="horizontal">
 
             <com.goldze.mvvmhabit.ui.corner.ShadowFrameLayout
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginHorizontal="13dp"
-                android:layout_marginVertical="22dp"
-                app:sl_cornerRadius="8dp">
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:layout_marginHorizontal="39px"
+                android:layout_marginVertical="65px"
+                app:sl_cornerRadius="24px">
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -184,9 +184,9 @@
 
             <FrameLayout
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_marginHorizontal="13dp"
-                android:layout_marginVertical="22dp">
+                android:layout_height="120px"
+                android:layout_marginHorizontal="39px"
+                android:layout_marginVertical="65px">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -194,7 +194,7 @@
                     android:layout_gravity="top|start"
                     android:text="心理图库"
                     android:textColor="@color/text_color_title"
-                    android:textSize="15sp"
+                    android:textSize="45px"
                     android:textStyle="bold" />
 
                 <TextView
@@ -203,7 +203,7 @@
                     android:layout_gravity="bottom|start"
                     android:text="专业视角，深度思考"
                     android:textColor="@color/text_color_subtitle"
-                    android:textSize="12sp" />
+                    android:textSize="36px" />
             </FrameLayout>
         </LinearLayout>
 

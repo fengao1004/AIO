@@ -15,18 +15,19 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:binding="http://schemas.android.com/apk/res-auto"
         android:layout_width="wrap_content"
-        android:layout_height="155dp"
+        android:layout_height="465px"
+        android:layout_marginTop="40px"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:paddingHorizontal="13dp"
+        android:paddingHorizontal="39px"
         binding:onClickCommand="@{viewModel.itemClick}"
         binding:onLongClickCommand="@{viewModel.itemLongClick}">
 
 
         <com.goldze.mvvmhabit.ui.corner.ShadowFrameLayout
-            android:layout_width="150dp"
-            android:layout_height="120dp"
-            app:sl_cornerRadius="8dp">
+            android:layout_width="450px"
+            android:layout_height="360px"
+            app:sl_cornerRadius="24px">
 
             <ImageView
                 android:id="@+id/cover"
@@ -40,13 +41,13 @@
         <TextView
             android:id="@+id/title"
             android:layout_width="match_parent"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:layout_height="20dp"
+            android:layout_marginTop="15px"
+            android:layout_marginBottom="15px"
+            android:layout_height="60px"
             android:layout_gravity="top|start"
             android:text="抑郁症的人都怎么了？"
             android:textColor="@color/text_color_title"
-            android:textSize="14sp"
+            android:textSize="42px"
             android:textStyle="bold" />
 
     </LinearLayout>

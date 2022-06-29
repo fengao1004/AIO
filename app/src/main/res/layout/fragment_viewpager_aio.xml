@@ -28,7 +28,7 @@
         <com.goldze.mvvmhabit.ui.base.widget.BaseRootView
             android:id="@+id/br_root_view"
             android:layout_width="match_parent"
-            android:layout_height="98dp" />
+            android:layout_height="300px" />
 
         <!--tabLayout 和 view pager 组合-->
         <LinearLayout
@@ -41,11 +41,12 @@
                 android:id="@+id/tabs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="14dp"
+                android:paddingTop="40px"
+                android:paddingHorizontal="42px"
                 app:tabBackground="@android:color/transparent"
                 app:tabIndicatorHeight="0dp"
                 app:tabMode="scrollable"
-                app:tabPaddingEnd="4dp"
+                app:tabPaddingEnd="12px"
                 app:tabPaddingStart="0dp"
                 app:tabRippleColor="@android:color/transparent"
                 binding:tabGravity="fill"

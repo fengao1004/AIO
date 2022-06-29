@@ -53,7 +53,9 @@ class MusicFragment : BaseFragment<FragmentMusicBinding, MusicModel>() {
     override fun onDestroy() {
         super.onDestroy()
         keepTrue = false
-        sendBroadcast(PlayerService.NOTIFY_CLOSE)
+        if (sPlayerManager.isPlaying) {
+            sendBroadcast(PlayerService.NOTIFY_CLOSE)
+        }
     }
 
     override fun initData() {

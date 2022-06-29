@@ -29,7 +29,7 @@
         <com.goldze.mvvmhabit.ui.base.widget.BaseRootView
             android:id="@+id/br_root_view"
             android:layout_width="match_parent"
-            android:layout_height="98dp" />
+            android:layout_height="300px" />
 
         <!--音乐播放器-->
         <LinearLayout
@@ -39,103 +39,103 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="300px"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
 
                 <com.goldze.mvvmhabit.aioui.relax.music.BitmapShaderCircularView
                     android:id="@+id/music_main_icon"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_marginStart="14dp"
-                    android:layout_marginEnd="6dp"
+                    android:layout_width="240px"
+                    android:layout_height="240px"
+                    android:layout_marginStart="42px"
+                    android:layout_marginEnd="18px"
                     android:src="@drawable/player_music_icon_2" />
 
 
                 <FrameLayout
                     android:layout_width="0dp"
-                    android:layout_height="44dp"
-                    android:layout_marginHorizontal="6dp"
+                    android:layout_height="412px"
+                    android:layout_marginHorizontal="18px"
                     android:layout_weight="1">
 
                     <TextView
                         android:id="@+id/title"
                         android:layout_width="wrap_content"
-                        android:layout_height="20dp"
+                        android:layout_height="60px"
                         android:layout_gravity="top|start"
                         android:text="心理图库"
                         android:textColor="@color/text_color_title"
-                        android:textSize="15sp"
+                        android:textSize="45px"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/desc"
                         android:layout_width="wrap_content"
-                        android:layout_height="14dp"
+                        android:layout_height="42px"
                         android:layout_gravity="bottom|start"
                         android:text="专业视角，深度思考"
                         android:textColor="@color/text_color_subtitle"
-                        android:textSize="12sp" />
+                        android:textSize="36px" />
                 </FrameLayout>
 
                 <LinearLayout
-                    android:layout_width="155dp"
-                    android:layout_height="100dp"
+                    android:layout_width="480px"
+                    android:layout_height="300px"
                     android:orientation="vertical">
 
                     <FrameLayout
                         android:layout_width="match_parent"
-                        android:layout_height="35dp"
-                        android:layout_marginTop="27dp"
-                        android:layout_marginEnd="20dp"
-                        android:layout_marginBottom="15dp">
+                        android:layout_height="105px"
+                        android:layout_marginTop="81px"
+                        android:layout_marginEnd="60px"
+                        android:layout_marginBottom="45px">
 
                         <ImageView
                             android:id="@+id/player_back"
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
+                            android:layout_width="75px"
+                            android:layout_height="75px"
                             android:layout_gravity="start|center_vertical"
-                            android:layout_marginStart="4dp"
+                            android:layout_marginStart="12px"
                             android:src="@drawable/player_back" />
 
                         <ImageView
                             android:id="@+id/playerPlayIcon"
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
+                            android:layout_width="105px"
+                            android:layout_height="105px"
                             android:layout_gravity="center_horizontal|center_vertical"
                             android:src="@drawable/player_start" />
 
                         <ImageView
                             android:id="@+id/player_forward"
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
+                            android:layout_width="75px"
+                            android:layout_height="75px"
                             android:layout_gravity="end|center_vertical"
-                            android:layout_marginEnd="4dp"
+                            android:layout_marginEnd="12px"
                             android:src="@drawable/player_forward" />
 
                     </FrameLayout>
 
                     <FrameLayout
                         android:layout_width="match_parent"
-                        android:layout_height="20dp"
-                        android:layout_marginTop="3dp"
-                        android:layout_marginBottom="20dp">
+                        android:layout_height="60px"
+                        android:layout_marginTop="9px"
+                        android:layout_marginBottom="60px">
 
                         <ImageView
-                            android:layout_width="15dp"
-                            android:layout_height="15dp"
+                            android:layout_width="45px"
+                            android:layout_height="45px"
                             android:layout_gravity="start|center_vertical"
-                            android:layout_marginStart="10dp"
+                            android:layout_marginStart="30px"
                             android:src="@drawable/gonggao" />
 
                         <SeekBar
                             android:id="@+id/volume_bar"
-                            android:layout_width="120dp"
-                            android:layout_height="20dp"
+                            android:layout_width="360px"
+                            android:layout_height="60px"
                             android:layout_gravity="end|center_vertical"
-                            android:layout_marginStart="6dp"
-                            android:layout_marginEnd="15dp"
+                            android:layout_marginStart="18px"
+                            android:layout_marginEnd="45px"
                             android:max="100" />
 
                     </FrameLayout>
@@ -154,26 +154,26 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
-                    android:layout_marginStart="14dp"
+                    android:layout_marginStart="42px"
                     android:text="0:00"
                     android:textColor="@color/text_color_subtitle"
-                    android:textSize="10sp" />
+                    android:textSize="30px" />
 
                 <TextView
                     android:id="@+id/music_duration"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:layout_marginEnd="14dp"
+                    android:layout_marginEnd="42px"
                     android:text="4:13"
                     android:textColor="@color/text_color_subtitle"
-                    android:textSize="10sp" />
+                    android:textSize="30px" />
             </FrameLayout>
 
             <SeekBar
                 android:id="@+id/seek_play"
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
+                android:layout_height="60px"
                 android:max="100" />
         </LinearLayout>
 
@@ -188,11 +188,11 @@
                 android:id="@+id/tabs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="14dp"
+                android:paddingHorizontal="42px"
                 app:tabBackground="@android:color/transparent"
                 app:tabIndicatorHeight="0dp"
                 app:tabMode="scrollable"
-                app:tabPaddingEnd="4dp"
+                app:tabPaddingEnd="12px"
                 app:tabPaddingStart="0dp"
                 app:tabRippleColor="@android:color/transparent"
                 binding:tabGravity="fill"
