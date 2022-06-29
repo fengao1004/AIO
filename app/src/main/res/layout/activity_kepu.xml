@@ -7,6 +7,10 @@
 
     <data>
 
+        <import type="me.goldze.mvvmhabit.binding.viewadapter.recyclerview.LayoutManagers" />
+
+        <import type="me.goldze.mvvmhabit.binding.viewadapter.recyclerview.LineManagers" />
+
         <variable
             name="viewModel"
             type="com.goldze.mvvmhabit.aioui.kepu.KepuViewModel" />
@@ -20,5 +24,25 @@
             android:id="@+id/br_root_view"
             android:layout_width="match_parent"
             android:layout_height="98dp" />
+
+        <com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
+            android:id="@+id/twinklingRefreshLayout"
+            android:layout_width="match_parent"
+            android:layout_marginTop="98dp"
+            android:layout_height="match_parent"
+            binding:onLoadMoreCommand="@{viewModel.onLoadMoreCommand}"
+            binding:onRefreshCommand="@{viewModel.onRefreshCommand}"
+            binding:tr_head_height="80dp"
+            binding:tr_wave_height="80dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                binding:itemBinding="@{viewModel.itemBinding}"
+                binding:items="@{viewModel.observableList}"
+                binding:layoutManager="@{LayoutManagers.linear()}"
+                binding:lineManager="@{LineManagers.horizontal()}"/>
+
+        </com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout>
     </FrameLayout>
 </layout>

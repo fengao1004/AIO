@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools">
+
+
+    <data>
+
+        <import type="com.goldze.mvvmhabit.aioui.kepu.KepuRvItemViewModel" />
+
+        <variable
+            name="viewModel"
+            type="KepuRvItemViewModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:binding="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        binding:onClickCommand="@{viewModel.clickLeft}">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="180dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="2"
+            binding:url="@{viewModel.bean.faceImage}" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="180dp"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="3"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.bean.name}"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="简介"
+                android:textColor="@color/text_gray"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:maxLength="3"
+                android:text="@{viewModel.bean.brief}"
+                android:textColor="@color/text_gray"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+    </LinearLayout>
+</layout>

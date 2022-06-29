@@ -8,7 +8,6 @@ import me.goldze.mvvmhabit.base.BaseActivity
 
 class KepuActivity : BaseActivity<ActivityKepuBinding,KepuViewModel>() {
 
-
     override fun initContentView(savedInstanceState: Bundle?): Int {
         return R.layout.activity_kepu
     }
@@ -19,6 +18,11 @@ class KepuActivity : BaseActivity<ActivityKepuBinding,KepuViewModel>() {
 
     override fun initData() {
         super.initData()
-        binding.brRootView.setPageTitle("科普专区")
+        binding.brRootView.setPageTitle("常见问题科普专题")
+        viewModel.loadEndLD.observe(this) {
+            binding.twinklingRefreshLayout.finishLoadmore()
+            binding.twinklingRefreshLayout.finishRefreshing()
+        }
+        binding.twinklingRefreshLayout.startRefresh()
     }
 }

@@ -7,6 +7,8 @@
 
     <data>
 
+        <import type="com.goldze.mvvmhabit.R" />
+
         <variable
             name="viewModel"
             type="com.goldze.mvvmhabit.aioui.main.MainViewModel" />
@@ -37,17 +39,21 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                binding:onClickCommand="@{viewModel.showIntroduce}"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                binding:onClickCommand="@{viewModel.showIntroduce}">
 
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:src="@drawable/introduce" />
+                    android:src="@drawable/introduce"
+                    binding:checkRes="@{R.drawable.jieshao_blue}"
+                    binding:garyRes="@{R.drawable.introduce}"
+                    binding:realState="@{viewModel.showState}"
+                    binding:stateType="@{0}" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -55,21 +61,27 @@
                     android:layout_marginTop="8dp"
                     android:gravity="center"
                     android:text="机构介绍"
-                    android:textColor="@color/textGray" />
+                    android:textColor="@color/textGray"
+                    binding:realState="@{viewModel.showState}"
+                    binding:stateType="@{0}" />
             </LinearLayout>
 
             <LinearLayout
-                binding:onClickCommand="@{viewModel.showMain}"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                binding:onClickCommand="@{viewModel.showMain}">
 
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:src="@drawable/home" />
+                    android:src="@drawable/home"
+                    binding:checkRes="@{R.drawable.home}"
+                    binding:garyRes="@{R.drawable.home_gary}"
+                    binding:realState="@{viewModel.showState}"
+                    binding:stateType="@{1}" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -77,21 +89,27 @@
                     android:layout_marginTop="8dp"
                     android:gravity="center"
                     android:text="首页"
-                    android:textColor="@color/app_blue" />
+                    android:textColor="@color/app_blue"
+                    binding:realState="@{viewModel.showState}"
+                    binding:stateType="@{1}" />
             </LinearLayout>
 
             <LinearLayout
-                binding:onClickCommand="@{viewModel.showSupport}"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                binding:onClickCommand="@{viewModel.showSupport}">
 
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:src="@drawable/support" />
+                    android:src="@drawable/support"
+                    binding:checkRes="@{R.drawable.support_blue}"
+                    binding:garyRes="@{R.drawable.support}"
+                    binding:realState="@{viewModel.showState}"
+                    binding:stateType="@{2}" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -99,7 +117,9 @@
                     android:layout_marginTop="8dp"
                     android:gravity="center"
                     android:text="技术支持"
-                    android:textColor="@color/textGray" />
+                    android:textColor="@color/textGray"
+                    binding:realState="@{viewModel.showState}"
+                    binding:stateType="@{2}" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

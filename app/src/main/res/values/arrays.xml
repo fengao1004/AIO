@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="items" >
+        <item>线下面对面咨询</item>
+        <item>电话咨询</item>
+        <item>视频咨询</item>
+        <item>微信语音咨询</item>
+    </string-array>
+
+    <string-array name="qs_type" >
+        <item>情绪压力</item>
+        <item>婚姻情感</item>
+        <item>家庭关系</item>
+        <item>职场关系</item>
+        <item>个人成长</item>
+        <item>人际关系</item>
+        <item>亲子关系</item>
+        <item>性心理</item>
+        <item>青少年</item>
+    </string-array>
+</resources>

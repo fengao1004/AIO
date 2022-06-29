@@ -74,15 +74,15 @@ class TestModel(application: Application) : BaseViewModel<HttpRepository>(applic
     }
 
     fun loadData() {
-        model.api.getScaDetails(ScaDetailsRequestBean(scaCode = "XinLiFuYuanLiCeYan"))
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                detailLiveData.postValue(it)
-            }, {
-                it.printStackTrace()
-                Log.i("fengao_xiaomi", "loadData: ${it.message}")
-            })
+//        model.api.getScaDetails(ScaDetailsRequestBean(scaCode = "XinLiFuYuanLiCeYan"))
+//            .subscribeOn(Schedulers.io())
+//            .observeOn(AndroidSchedulers.mainThread())
+//            .subscribe({
+//                detailLiveData.postValue(it)
+//            }, {
+//                it.printStackTrace()
+//                Log.i("fengao_xiaomi", "loadData: ${it.message}")
+//            })
     }
 
 }

@@ -2,6 +2,7 @@ package com.goldze.mvvmhabit.app;
 
 import com.goldze.mvvmhabit.BuildConfig;
 import com.goldze.mvvmhabit.R;
+import com.goldze.mvvmhabit.aioui.main.MainActivity;
 import com.goldze.mvvmhabit.aioui.relax.music.play.PlayerManager;
 import com.goldze.mvvmhabit.ui.login.LoginActivity;
 import com.kunminx.player.DefaultPlayerManager;
@@ -11,6 +12,7 @@ import com.squareup.leakcanary.LeakCanary;
 
 import me.goldze.mvvmhabit.base.BaseApplication;
 import me.goldze.mvvmhabit.crash.CaocConfig;
+import me.goldze.mvvmhabit.crash.CustomActivityOnCrash;
 import me.goldze.mvvmhabit.utils.KLog;
 
 /**
@@ -42,7 +44,7 @@ public class AppApplication extends BaseApplication {
                 .trackActivities(true) //是否跟踪Activity
                 .minTimeBetweenCrashesMs(2000) //崩溃的间隔时间(毫秒)
                 .errorDrawable(R.mipmap.ic_launcher) //错误图标
-                .restartActivity(LoginActivity.class) //重新启动后的activity
+                .restartActivity(MainActivity.class) //重新启动后的activity
 //                .errorActivity(YourCustomErrorActivity.class) //崩溃后的错误activity
 //                .eventListener(new YourCustomEventListener()) //崩溃后的错误监听
                 .apply();

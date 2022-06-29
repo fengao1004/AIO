@@ -4,12 +4,16 @@ import com.goldze.mvvmhabit.aioui.bean.CommentRequestBean
 import com.goldze.mvvmhabit.aioui.bean.TypeResponseBean
 import com.goldze.mvvmhabit.aioui.bean.list.*
 import com.goldze.mvvmhabit.aioui.clazz.bean.ClazzListResponseBean
+import com.goldze.mvvmhabit.aioui.kepu.KepuBean
+import com.goldze.mvvmhabit.aioui.kepu.content.KepuItemBean
 import com.goldze.mvvmhabit.aioui.knows.KnowsBean
 import com.goldze.mvvmhabit.aioui.main.bean.*
 import com.goldze.mvvmhabit.aioui.test.bean.AnserReponseData
 import com.goldze.mvvmhabit.aioui.test.bean.AnserRequestData
 import com.goldze.mvvmhabit.aioui.test.bean.ScaDetailsRequestBean
 import com.goldze.mvvmhabit.aioui.test.bean.ScaDetailsResponseBean
+import com.goldze.mvvmhabit.aioui.zixun.input.InputRequestBean
+import com.goldze.mvvmhabit.aioui.zixun.phone.PhoneListBean
 import io.reactivex.Observable
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -63,7 +67,23 @@ interface Api {
     @POST("/client/api/info/getPageList")
     fun getKnowsList(@Body bean: CommentRequestBean): Observable<KnowsBean>
 
+    @POST("/client/api/theme/getPageList")
+    fun getKePuList(@Body bean: CommentRequestBean): Observable<KepuBean>
+
     @POST("/client/api/equipment/detail")
     fun getEquipmentDetail(@Body bean: CommentRequestBean): Observable<ShebeiXQBean>
+
+    @POST("/client/api/themeItem/getPageList")
+    fun getThemeItemList(@Body bean: CommentRequestBean): Observable<KepuItemBean>
+
+    @POST("/client/api/hotline/getPageList")
+    fun getPhoneList(@Body bean: CommentRequestBean): Observable<PhoneListBean>
+
+
+    @POST("/client/api/appointment/create")
+    fun commitInput(@Body bean: InputRequestBean): Observable<PhoneListBean>
+
+    @POST("/client/api/sca/getPageList")
+    fun getTestList(@Body bean: CommentRequestBean): Observable<CommonListResponseBean<TestRecord>>
 
 }

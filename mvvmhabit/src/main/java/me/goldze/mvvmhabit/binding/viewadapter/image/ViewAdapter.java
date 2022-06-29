@@ -22,5 +22,14 @@ public final class ViewAdapter {
                     .into(imageView);
         }
     }
+
+    @BindingAdapter(value = {"garyRes", "checkRes", "stateType", "realState"}, requireAll = false)
+    public static void updateState(ImageView imageView, int garyRes, int checkRes, int stateType, int realState) {
+        if (stateType == realState) {
+            imageView.setImageResource(checkRes);
+        } else {
+            imageView.setImageResource(garyRes);
+        }
+    }
 }
 

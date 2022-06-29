@@ -1,5 +1,6 @@
 package com.goldze.mvvmhabit.aioui.main.fragment
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -73,6 +74,16 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainFgViewModel>() {
                 .apply(RequestOptions().placeholder(R.drawable.loading))
                 .into(binding.ivSmallLog)
             binding.tvTitle.text = Util.shebeiXq?.name ?: ""
+            try {
+                binding.rlRoot.setBackgroundColor(
+                    Color.parseColor(
+                        Util.shebeiXq?.backColour ?: "#ffffff"
+                    )
+                )
+            } catch (e: Exception) {
+                binding.rlRoot.setBackgroundColor(Color.parseColor("#ffffff"))
+            }
+
         }
     }
 }

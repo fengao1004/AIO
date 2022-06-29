@@ -1,5 +1,6 @@
 package me.goldze.mvvmhabit.binding.viewadapter.textview;
 
+import android.graphics.Color;
 import android.widget.TextView;
 
 import androidx.databinding.BindingAdapter;
@@ -56,6 +57,16 @@ public class ViewAdapter {
     @BindingAdapter(value = {"intText"}, requireAll = false)
     public static void testItemIsCheck(TextView view, final int text) {
         view.setText(text + "");
+    }
+
+
+    @BindingAdapter(value = {"stateType", "realState"}, requireAll = false)
+    public static void updateState(TextView view, int stateType, final int realState) {
+        if (stateType == realState) {
+            view.setTextColor(view.getContext().getResources().getColor(R.color.app_blue));
+        } else {
+            view.setTextColor(Color.parseColor("#BCBCBC"));
+        }
     }
 
 }

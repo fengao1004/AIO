@@ -24,8 +24,10 @@ class TestDecActivity : BaseActivity<ActivityTestDecBinding, TestDecModel>() {
     override fun initData() {
         super.initData()
         binding.brRootView.setPageTitle("专业评测")
-        var detail: ScaDetailsResponseBean =
-            intent.getSerializableExtra("bean") as ScaDetailsResponseBean
-        viewModel.detail = detail
+//        viewModel.detail = detail
+
+        var code = intent.getStringExtra("code")
+        var name =  intent.getStringExtra("name")
+        viewModel.loadData(code,name)
     }
 }

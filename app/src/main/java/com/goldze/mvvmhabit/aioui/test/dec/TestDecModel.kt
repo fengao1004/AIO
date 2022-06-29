@@ -1,12 +1,17 @@
 package com.goldze.mvvmhabit.aioui.test.dec
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Intent
+import android.util.Log
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableInt
 import com.goldze.mvvmhabit.aioui.http.HttpRepository
+import com.goldze.mvvmhabit.aioui.test.bean.ScaDetailsRequestBean
 import com.goldze.mvvmhabit.aioui.test.bean.ScaDetailsResponseBean
 import com.goldze.mvvmhabit.aioui.test.content.TestContentActivity
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import me.goldze.mvvmhabit.base.BaseViewModel
 import me.goldze.mvvmhabit.binding.command.BindingAction
 import me.goldze.mvvmhabit.binding.command.BindingCommand
@@ -18,6 +23,28 @@ import me.goldze.mvvmhabit.binding.command.BindingCommand
  * Time: 4:56 下午
  */
 class TestDecModel(application: Application) : BaseViewModel<HttpRepository>(application) {
+    var detail: ScaDetailsResponseBean? = null
+
+    //    var detail: ScaDetailsResponseBean? = null
+    init {
+        model = HttpRepository()
+    }
+
+    @SuppressLint("CheckResult")
+    fun loadData(code: String?, name: String?) {
+        model.api.getScaDetails(ScaDetailsRequestBean(scaCode = code!!))
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                if (it.success) {
+                    detail = it
+                }
+            }, {
+                it.printStackTrace()
+                Log.i("fengao_xiaomi", "loadData: ${it.message}")
+            })
+    }
+
     var showSexChoose = ObservableBoolean(false)
     var sex = ObservableInt(0) // 0 男 1 女
     var showMarryChoose = ObservableBoolean(false)
@@ -73,5 +100,4 @@ class TestDecModel(application: Application) : BaseViewModel<HttpRepository>(app
         activity.finish()
         activity.startActivity(intent)
     })
-    var detail: ScaDetailsResponseBean? = null
 }

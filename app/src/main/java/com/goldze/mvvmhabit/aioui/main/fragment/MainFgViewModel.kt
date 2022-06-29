@@ -21,6 +21,8 @@ import com.goldze.mvvmhabit.aioui.gonggao.GonggaoActivity
 import com.goldze.mvvmhabit.aioui.main.bean.*
 import com.goldze.mvvmhabit.aioui.video.VideoActivity
 import com.goldze.mvvmhabit.aioui.zixun.ZixunActivity
+import com.goldze.mvvmhabit.aioui.zixun.input.InputActivity
+import com.goldze.mvvmhabit.aioui.zixun.phone.PhoneRVModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import me.goldze.mvvmhabit.base.BaseViewModel
@@ -69,8 +71,26 @@ class MainFgViewModel(application: Application) : BaseViewModel<HttpRepository>(
         startActivity(KepuActivity::class.java)
     })
 
+    @SuppressLint("CheckResult")
     var gotoZixun: BindingCommand<String> = BindingCommand(BindingAction {
-        startActivity(ZixunActivity::class.java)
+        model.api.getPhoneList(
+            CommentRequestBean(
+                CommentRequestBean.DEFAULT,
+                CommentRequestBean.getHeader()
+            )
+        )
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                if (it.success && !it.data.records.isNullOrEmpty()) {
+                    startActivity(ZixunActivity::class.java)
+                } else {
+                    startActivity(InputActivity::class.java)
+                }
+            }, {
+                startActivity(InputActivity::class.java)
+            })
+
     })
 
     var gotoGonggao: BindingCommand<String> = BindingCommand(BindingAction {

@@ -2,6 +2,7 @@ package com.goldze.mvvmhabit.aioui.main
 
 import android.app.Application
 import android.util.Log
+import androidx.databinding.ObservableInt
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.goldze.mvvmhabit.aioui.Util
@@ -19,12 +20,13 @@ import me.goldze.mvvmhabit.utils.ToastUtils
  */
 class MainViewModel(application: Application) : BaseViewModel<HttpRepository>(application) {
     var fgLiveData: MutableLiveData<Int> = MutableLiveData()
-
+    var showState = ObservableInt(1)
     var showSupport: BindingCommand<String> = BindingCommand(BindingAction {
         if (Util.shebeiXq == null) {
             ToastUtils.showShort("设备初始化中，请稍后再试")
         } else {
             fgLiveData.postValue(2)
+            showState.set(2)
         }
     })
 
@@ -33,10 +35,13 @@ class MainViewModel(application: Application) : BaseViewModel<HttpRepository>(ap
             ToastUtils.showShort("设备初始化中，请稍后再试")
         } else {
             fgLiveData.postValue(0)
+            showState.set(0)
         }
     })
+
     var showMain: BindingCommand<String> = BindingCommand(BindingAction {
         fgLiveData.postValue(1)
+        showState.set(1)
     })
 
 }
