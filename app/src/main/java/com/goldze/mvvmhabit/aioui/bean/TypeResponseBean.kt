@@ -8,14 +8,14 @@ package com.goldze.mvvmhabit.aioui.bean
  */
 data class TypeResponseBean(
     val code: String,
-    val `data`: List<TypeResponseBeanData>,
+    val `data`: MutableList<TypeResponseBeanData>,
     val message: String,
     val success: Boolean
 )
 
 data class TypeResponseBeanData(
     val createTime: String,
-    val id: String,
+    val id: String?,
     val isDel: Int,
     val moduleId: Int,
     val name: String,

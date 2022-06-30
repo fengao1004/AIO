@@ -63,7 +63,7 @@ class ClazzViewPagerItemViewModel(application: Application, var bean: TypeRespon
     @SuppressLint("CheckResult")
     fun requestNetWork() {
         var empty = CommentRequestBean.getEmpty()
-        empty.id = this.bean.id.toLong()
+        empty.id = this.bean.id
         empty.pageNum = page++
         var bean = CommentRequestBean(
             empty, CommentRequestBean.getHeader()

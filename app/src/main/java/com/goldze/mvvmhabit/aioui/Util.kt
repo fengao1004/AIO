@@ -113,6 +113,7 @@ object Util {
                             intent.putExtra("sex", "")
                             intent.putExtra("type", "normal")
                             intent.putExtra("bean", it)
+                            intent.putExtra("name", name)
                             activity.startActivity(intent)
                         } else {
                             ToastUtils.showShort("跳转失败 ${it.message}")
@@ -123,7 +124,7 @@ object Util {
             }
             "info" -> {
                 var empty = CommentRequestBean.getEmpty()
-                empty.id = id.toLong()
+                empty.id = id
                 var header = CommentRequestBean.getHeader()
                 model.api.getKnowsDetail(CommentRequestBean(empty, header))
                     .subscribeOn(Schedulers.io())
@@ -152,7 +153,7 @@ object Util {
             }
             "meditation" -> {
                 var empty = CommentRequestBean.getEmpty()
-                empty.id = id.toLong()
+                empty.id = id
                 var header = CommentRequestBean.getHeader()
                 model.api.getMeditationDetail(CommentRequestBean(empty, header))
                     .subscribeOn(Schedulers.io())
@@ -180,7 +181,7 @@ object Util {
             }
             "cartoon" -> {
                 var empty = CommentRequestBean.getEmpty()
-                empty.id = id.toLong()
+                empty.id = id
                 var header = CommentRequestBean.getHeader()
                 model.api.getCartoonDetail(CommentRequestBean(empty, header))
                     .subscribeOn(Schedulers.io())
@@ -204,7 +205,7 @@ object Util {
             }
             "film" -> {
                 var empty = CommentRequestBean.getEmpty()
-                empty.id = id.toLong()
+                empty.id = id
                 var header = CommentRequestBean.getHeader()
                 model.api.getFilmDetail(CommentRequestBean(empty, header))
                     .subscribeOn(Schedulers.io())
@@ -231,7 +232,7 @@ object Util {
             }
             "interest" -> {
                 var empty = CommentRequestBean.getEmpty()
-                empty.id = id.toLong()
+                empty.id = id
                 var header = CommentRequestBean.getHeader()
                 model.api.getFunnyDetails(CommentRequestBean(empty, header))
                     .subscribeOn(Schedulers.io())
@@ -243,6 +244,7 @@ object Util {
                             intent.putExtra("sex", "")
                             intent.putExtra("type", "funny")
                             intent.putExtra("bean", it)
+                            intent.putExtra("name", name)
                             activity.startActivity(intent)
                         } else {
                             ToastUtils.showShort("跳转失败 ${it.message}")

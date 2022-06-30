@@ -70,7 +70,7 @@ class MusicViewPagerItemViewModel(viewModel: MusicModel, application: Applicatio
         val requestBody = CommentRequestBean.getEmpty()
         requestBody.pageNum = 1
         if (tabBean != null) {
-            requestBody.id = tabBean?.id?.toLong() ?: 0
+            requestBody.id = tabBean?.id
         }
 
         //模拟网络上拉加载更多
@@ -128,7 +128,7 @@ class MusicViewPagerItemViewModel(viewModel: MusicModel, application: Applicatio
         val requestBody = CommentRequestBean.getEmpty()
         requestBody.pageNum = nextPage
         if (tabBean != null) {
-            requestBody.id = tabBean?.id?.toLong() ?: 0
+            requestBody.id = tabBean?.id
         }
 
         //模拟网络上拉加载更多

@@ -60,7 +60,7 @@ class TestDecModel(application: Application) : BaseViewModel<HttpRepository>(app
                 })
         } else if (type == "funny") {
             var empty = CommentRequestBean.getEmpty()
-            empty.id = code!!.toLong()
+            empty.id = code!!
             var requestBean = CommentRequestBean(empty, CommentRequestBean.getHeader())
             model.api.getFunnyDetails(requestBean)
                 .subscribeOn(Schedulers.io())

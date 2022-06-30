@@ -38,6 +38,7 @@ class TestContentModel(application: Application) : BaseViewModel<HttpRepository>
     lateinit var marry: String
     lateinit var sex: String
     var index = ObservableInt(0)
+    var name = ""
     var isNormal = ObservableBoolean(true)
     var progress = ObservableInt(0)
     var endIndex: String = ""
@@ -265,11 +266,67 @@ class TestContentModel(application: Application) : BaseViewModel<HttpRepository>
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     if (it.success) {
-                        var url =
-                            HttpRepository.BASE_H5_URL + "depressive?scaRecId=${it.data.scaRecId}"
+                        var pinjieUrl = when {
+                            name.contains("焦虑自评") -> {
+                                "/anxiety?scaRecId="
+                            }
+                            name.contains("抑郁症状") -> {
+                                "/depressive?scaRecId="
+                            }
+                            name.contains("睡眠状况") -> {
+                                "/sleep?scaRecId="
+                            }
+                            name.contains("艾森克人格") -> {
+                                "/aiSenKe?scaRecId="
+                            }
+                            name.contains("大五人格") -> {
+                                "/fiveRG?scaRecId="
+                            }
+                            name.contains("领悟社会") -> {
+                                "/comprehend?scaRecId="
+                            }
+                            name.contains("心理复原力") -> {
+                                "/resilience?scaRecId="
+                            }
+                            name.contains("工作倦怠量") -> {
+                                "/workJD?scaRecId="
+                            }
+                            name.contains("心理健康") -> {
+                                "/psychological?scaRecId="
+                            }
+                            name.contains("应对方式") -> {
+                                "/yingduifs?scaRecId="
+                            }
+                            name.contains("情绪稳定性") -> {
+                                "/qingxuwd?scaRecId="
+                            }
+                            name.contains("工作投入") -> {
+                                "/workTR?scaRecId="
+                            }
+                            name.contains("中小学心理健康") -> {
+                                "/zxxxl?scaRecId="
+                            }
+                            name.contains("学业成就") -> {
+                                "/xycj?scaRecId="
+                            }
+                            name.contains("中小学心理适应") -> {
+                                "/zxxsy?scaRecId="
+                            }
+                            name.contains("家庭沟通") -> {
+                                "/familyGT?scaRecId="
+                            }
+                            name.contains("同学关系") -> {
+                                "/tongxuegx?scaRecId="
+                            }
+                            else -> {
+                                "/anxiety?scaRecId="
+                            }
+                        }
+                        var url = HttpRepository.BASE_H5_URL + pinjieUrl + it.data.scaRecId
                         var intent = Intent(activity, WebViewFromUrlActivity::class.java)
                         intent.putExtra("title", "报告")
                         intent.putExtra("url", url)
+                        Log.i("fengao_xiaomi", "commit: $url")
                         activity.startActivity(intent)
                         activity.finish()
                     } else {

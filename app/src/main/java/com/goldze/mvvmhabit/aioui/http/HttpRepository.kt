@@ -11,8 +11,8 @@ import me.goldze.mvvmhabit.base.BaseModel
  */
 open class HttpRepository: BaseModel() {
     companion object{
-        const val BASE_H5_URL = "http://11.sit.client.yixinxd.com/psyClientWeb/#/" //测试环境
-//        const val BASE_H5_URL = "http://11.sit.client.yixinxd.com/psyClientWeb/#/" // 正式环境
+        const val BASE_H5_URL = "http://11.sit.client.yixinxd.com/psyClientWeb/#" //测试环境
+//        const val BASE_H5_URL = "http://11.sit.client.yixinxd.com/psyClientWeb/#" // 正式环境
     }
     var api = RetrofitClient.getInstance().create(Api::class.java)
 }

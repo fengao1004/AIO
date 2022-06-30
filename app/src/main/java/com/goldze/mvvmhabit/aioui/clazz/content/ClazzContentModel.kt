@@ -40,7 +40,7 @@ class ClazzContentModel(application: Application) : BaseViewModel<HttpRepository
     @SuppressLint("CheckResult")
     fun loadData(id: String) {
         var empty = CommentRequestBean.getEmpty()
-        empty.id = id.toLong()
+        empty.id = id
         var header = CommentRequestBean.getHeader()
         model.api.getClazzDetail(CommentRequestBean(empty, header))
             .subscribeOn(Schedulers.io())

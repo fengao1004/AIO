@@ -57,6 +57,20 @@ class AIOViewPagerFragmentModel(application: Application) : BaseViewModel<HttpRe
     @SuppressLint("CheckResult")
     fun loadTabsData(moduleCode: String) {
         model.api.queryType(moduleCode)
+            .map {
+                it.data.add(
+                    0, TypeResponseBeanData(
+                        "",
+                        "null",
+                        0,
+                        0,
+                        "全部",
+                        1,
+                        ""
+                    )
+                )
+                it
+            }
             .compose(RxUtils.schedulersTransformer()) //线程调度
             .doOnSubscribe(this) //请求与ViewModel周期同步
             .doOnSubscribe {}

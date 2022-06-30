@@ -15,6 +15,7 @@ class TestContentActivity : BaseActivity<ActivityTestContentBinding, TestContent
     lateinit var detail2: FunnyTestBean
     lateinit var marry: String
     lateinit var type: String
+    lateinit var name: String
     lateinit var sex: String
 
     override fun initContentView(savedInstanceState: Bundle?): Int {
@@ -28,6 +29,7 @@ class TestContentActivity : BaseActivity<ActivityTestContentBinding, TestContent
     override fun initData() {
         super.initData()
         type = intent.getStringExtra("type")
+        name = intent.getStringExtra("name")
 
         if (type == "normal") {
             detail = intent.getSerializableExtra("bean") as ScaDetailsResponseBean
@@ -45,6 +47,7 @@ class TestContentActivity : BaseActivity<ActivityTestContentBinding, TestContent
         }
         viewModel.type = type
         viewModel.marry = marry
+        viewModel.name = name
         viewModel.sex = sex
         Log.i("fengao_xiaomi", "marry: $marry ")
         Log.i("fengao_xiaomi", "sex: $sex")

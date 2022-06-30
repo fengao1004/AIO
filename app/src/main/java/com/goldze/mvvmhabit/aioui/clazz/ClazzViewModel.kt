@@ -8,6 +8,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import com.goldze.mvvmhabit.BR
 import com.goldze.mvvmhabit.R
+import com.goldze.mvvmhabit.aioui.bean.TypeResponseBeanData
 import com.goldze.mvvmhabit.aioui.clazz.vm.ClazzViewPagerItemViewModel
 import com.goldze.mvvmhabit.aioui.http.HttpRepository
 import com.google.android.material.tabs.TabLayout
@@ -57,6 +58,20 @@ class ClazzViewModel(application: Application) : BaseViewModel<HttpRepository>(a
     @SuppressLint("CheckResult")
     fun loadData() {
         model.api.queryType("course")
+            .map {
+                it.data.add(
+                    0, TypeResponseBeanData(
+                        "",
+                        "null",
+                        0,
+                        0,
+                        "全部",
+                        1,
+                        ""
+                    )
+                )
+                it
+            }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({

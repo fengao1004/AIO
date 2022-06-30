@@ -42,7 +42,8 @@ class MusicModel(application: Application) : BaseViewModel<MusicRepository>(appl
     var items: ObservableList<MusicViewPagerItemViewModel> = ObservableArrayList()
 
     //给ViewPager添加ItemBinding
-    var itemBinding = ItemBinding.of<MusicViewPagerItemViewModel>(BR.viewModel, R.layout.item_viewpager_music)
+    var itemBinding =
+        ItemBinding.of<MusicViewPagerItemViewModel>(BR.viewModel, R.layout.item_viewpager_music)
 
     //给ViewPager添加PageTitle
     val pageTitles: PageTitles<MusicViewPagerItemViewModel> = PageTitles { position, item -> "" }
@@ -66,6 +67,20 @@ class MusicModel(application: Application) : BaseViewModel<MusicRepository>(appl
     @SuppressLint("CheckResult")
     fun loadTabsData() {
         model.api.queryType("music")
+            .map {
+                it.data.add(
+                    0, TypeResponseBeanData(
+                        "",
+                        "null",
+                        0,
+                        0,
+                        "全部",
+                        1,
+                        ""
+                    )
+                )
+                it
+            }
             .compose(RxUtils.schedulersTransformer()) //线程调度
             .doOnSubscribe(this) //请求与ViewModel周期同步
             .doOnSubscribe {}
