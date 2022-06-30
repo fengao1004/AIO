@@ -34,7 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/mind_gallery_pic" />
+                android:src="@drawable/lib_mind_gallery_pic" />
         </com.goldze.mvvmhabit.ui.corner.ShadowFrameLayout>
 
 

@@ -24,6 +24,11 @@ class SupportFragment : BaseFragment<FragmentSupportBinding, SupportFgViewModel>
         return R.layout.fragment_support
     }
 
+    override fun initData() {
+        super.initData()
+        binding.brRoot.setPageTitle("技术支持")
+    }
+
     override fun initVariableId(): Int {
         return BR.viewModel
     }

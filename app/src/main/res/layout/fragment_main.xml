@@ -19,30 +19,33 @@
         android:background="@color/white">
 
         <ImageView
+            android:layout_marginTop="14px"
             android:id="@+id/iv_small_log"
-            android:layout_width="49dp"
-            android:layout_height="49dp"
+            android:layout_width="120px"
+            android:layout_height="60px"
             android:layout_marginLeft="10dp"
             android:src="@drawable/small_logo" />
 
         <TextView
+            android:layout_marginTop="14px"
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_marginLeft="10dp"
+            android:layout_height="60px"
+            android:layout_marginLeft="@dimen/content_padding"
             android:layout_toRightOf="@id/iv_small_log"
             android:gravity="center"
             android:text="心理自助服务一体机"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="48px"
             android:textStyle="bold" />
 
 
         <com.stx.xhb.androidx.XBanner
             android:id="@+id/xbanner"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginTop="50dp"
+            android:layout_width="1054px"
+            android:layout_height="454px"
+            android:layout_marginTop="88px"
+            android:gravity="center_horizontal"
             app:AutoPlayTime="3000"
             app:isShowIndicatorOnlyOne="true"
             app:isShowNumberIndicator="true"
@@ -55,19 +58,19 @@
         <LinearLayout
             android:id="@+id/ll_gonggao"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="100px"
             android:layout_below="@id/xbanner"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="18dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="@dimen/content_padding"
+            android:layout_marginTop="13px"
+            android:layout_marginRight="@dimen/content_padding"
             android:background="#f1f5fe"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             binding:onClickCommand="@{viewModel.gotoGonggao}">
 
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="30px"
+                android:layout_height="30px"
                 android:layout_marginLeft="8dp"
                 android:src="@drawable/gonggao" />
 
@@ -77,17 +80,16 @@
                 android:layout_marginLeft="10dp"
                 android:text="@{String.valueOf(viewModel.gonggao.value)}"
                 android:textColor="#3359e8"
-                android:textSize="16sp" />
+                android:textSize="40px" />
         </LinearLayout>
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="1000px"
+            android:layout_height="290px"
             android:layout_above="@id/rl_button"
             android:layout_below="@id/ll_gonggao"
-            android:layout_marginLeft="10dp"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
-            android:layout_marginRight="10dp"
             android:layout_marginBottom="20dp"
             android:src="@drawable/scan"
             binding:onClickCommand="@{viewModel.gotoScan}" />
@@ -95,35 +97,34 @@
         <RelativeLayout
             android:id="@+id/rl_button"
             android:layout_width="match_parent"
-            android:layout_height="170dp"
+            android:layout_height="310px"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="180dp"
+            android:layout_marginBottom="420px"
             android:gravity="center"
             android:orientation="horizontal"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp">
+            android:paddingLeft="@dimen/content_padding"
+            android:paddingRight="@dimen/content_padding">
 
             <ImageView
                 android:id="@+id/iv_foucs"
-                android:layout_width="170dp"
-                android:layout_height="170dp"
-                android:padding="10dp"
+                android:layout_width="310px"
+                android:layout_height="310px"
                 android:src="@drawable/hearttest"
                 binding:onClickCommand="@{viewModel.gotoTest}" />
 
             <ImageView
-                android:layout_width="170dp"
-                android:layout_height="170dp"
+                android:layout_width="310px"
+                android:layout_height="310px"
                 android:layout_centerHorizontal="true"
-                android:padding="10dp"
+                android:layout_marginLeft="35px"
                 android:src="@drawable/heartclass"
                 binding:onClickCommand="@{viewModel.gotoClass}" />
 
             <ImageView
-                android:layout_width="170dp"
-                android:layout_height="170dp"
+                android:layout_width="310px"
+                android:layout_height="310px"
                 android:layout_alignParentEnd="true"
-                android:padding="10dp"
+                android:layout_marginLeft="35px"
                 android:src="@drawable/heartkonws"
                 binding:onClickCommand="@{viewModel.gotoKnows}" />
 
@@ -132,34 +133,33 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="170dp"
+            android:layout_height="310px"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="75px"
             android:gravity="center"
             android:orientation="horizontal"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp">
+            android:paddingLeft="@dimen/content_padding"
+            android:paddingRight="@dimen/content_padding">
 
             <ImageView
-                android:layout_width="170dp"
-                android:layout_height="170dp"
-                android:padding="10dp"
+                android:layout_width="310px"
+                android:layout_height="310px"
                 android:src="@drawable/relax"
                 binding:onClickCommand="@{viewModel.gotoRelax}" />
 
             <ImageView
-                android:layout_width="170dp"
-                android:layout_height="170dp"
+                android:layout_width="310px"
+                android:layout_height="310px"
                 android:layout_centerHorizontal="true"
-                android:padding="10dp"
+                android:layout_marginLeft="35px"
                 android:src="@drawable/kepu"
                 binding:onClickCommand="@{viewModel.gotoKepu}" />
 
             <ImageView
-                android:layout_width="170dp"
-                android:layout_height="170dp"
+                android:layout_width="310px"
+                android:layout_height="310px"
                 android:layout_alignParentEnd="true"
-                android:padding="10dp"
+                android:layout_marginLeft="35px"
                 android:src="@drawable/zixun"
                 binding:onClickCommand="@{viewModel.gotoZixun}" />
 

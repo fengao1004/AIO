@@ -10,6 +10,7 @@ import com.goldze.mvvmhabit.BR
 import com.goldze.mvvmhabit.R
 import com.goldze.mvvmhabit.aioui.bean.CommentRequestBean
 import com.goldze.mvvmhabit.aioui.http.HttpRepository
+import com.google.gson.Gson
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import me.goldze.mvvmhabit.base.BaseViewModel
@@ -62,6 +63,7 @@ class KnowsModel(application: Application) : BaseViewModel<HttpRepository>(appli
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 loadEndLD.postValue("")
+                Log.i("fengao_xiaomi", "requestNetWork: ${Gson().toJson(it)}")
                 if (it.success) {
                     if (page == 1) {
                         observableList.clear()

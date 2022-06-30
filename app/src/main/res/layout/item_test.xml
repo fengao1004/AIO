@@ -14,14 +14,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="10dp"
+        android:paddingLeft="@dimen/content_padding"
+        android:paddingRight="@dimen/content_padding"
+        android:layout_marginTop="60px"
         binding:onClickCommand="@{viewModel.itemClick}">
 
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginLeft="6dp"
+            android:layout_height="160px"
             android:background="@drawable/blue_button_buttom_stroke"
             android:gravity="center_vertical"
             android:paddingLeft="20dp"

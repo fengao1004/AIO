@@ -25,7 +25,7 @@
         <com.goldze.mvvmhabit.ui.base.widget.SampleControlVideo
             android:id="@+id/scv_video"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="720px"
             android:layout_marginTop="@dimen/titleBar_height" />
 
         <TextView
@@ -33,20 +33,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="308dp"
+            android:layout_marginTop="1060px"
             android:text="大海"
             android:textColor="@color/text_black"
-            android:textSize="16sp" />
+            android:textSize="48px" />
 
         <TextView
             android:id="@+id/tv_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="335dp"
+            android:layout_marginTop="1148px"
             android:text="点击量xxx"
             android:textColor="@color/text_gray"
-            android:textSize="12sp" />
+            android:textSize="36px" />
 
         <TextView
             android:id="@+id/tv_look"
@@ -64,21 +64,21 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="360dp"
+            android:layout_marginTop="1225px"
             android:background="@color/background_gray_2" />
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="365dp"
-            android:padding="10dp">
+            android:layout_marginTop="1250px"
+            android:padding="@dimen/content_padding">
 
             <TextView
                 android:id="@+id/tv_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/text_black"
-                android:textSize="16sp" />
+                android:textSize="38px" />
         </ScrollView>
 
 

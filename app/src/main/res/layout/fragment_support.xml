@@ -14,8 +14,18 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/spurrot_back">
+        android:layout_height="match_parent">
 
+        <com.goldze.mvvmhabit.ui.base.widget.BaseRootView
+            android:id="@+id/br_root"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/titleBar_height" />
+
+        <ImageView
+            android:clickable="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/titleBar_height"
+            android:background="@drawable/spurrot_back" />
     </FrameLayout>
 </layout>

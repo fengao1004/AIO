@@ -27,14 +27,14 @@
         <LinearLayout
             binding:onClickCommand="@{viewModel.clickPhone}"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="250px"
             android:layout_margin="15dp"
             android:background="#ffffff"
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="65dp"
-                android:layout_height="65dp"
+                android:layout_width="150px"
+                android:layout_height="150px"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="15dp"
                 android:src="@drawable/phone" />
@@ -48,19 +48,19 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="45px"
                     android:text="电话咨询"
                     android:textColor="@color/text_black"
-                    android:textSize="18sp"
+                    android:textSize="48px"
                     android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="36px"
                     android:text="一键拨打，专业咨询助力协助预约"
                     android:textColor="@color/text_gray"
-                    android:textSize="14sp" />
+                    android:textSize="36px" />
 
             </LinearLayout>
         </LinearLayout>
@@ -68,14 +68,14 @@
         <LinearLayout
             binding:onClickCommand="@{viewModel.clickInput}"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="250px"
             android:layout_margin="15dp"
             android:background="#ffffff"
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="65dp"
-                android:layout_height="65dp"
+                android:layout_width="150px"
+                android:layout_height="150px"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="15dp"
                 android:src="@drawable/input_icon" />
@@ -89,19 +89,19 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="45px"
                     android:text="在线预约"
                     android:textColor="@color/text_black"
-                    android:textSize="18sp"
+                    android:textSize="48px"
                     android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="36px"
                     android:text="在线提交，等待咨询师主动回电"
                     android:textColor="@color/text_gray"
-                    android:textSize="14sp" />
+                    android:textSize="36px" />
 
             </LinearLayout>
         </LinearLayout>

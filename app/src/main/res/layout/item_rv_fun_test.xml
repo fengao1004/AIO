@@ -20,7 +20,7 @@
         android:layout_marginBottom="20dp"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
-        android:paddingHorizontal="13dp"
+        android:paddingHorizontal="42px"
         binding:onClickCommand="@{viewModel.itemClick}"
         binding:onLongClickCommand="@{viewModel.itemLongClick}">
 

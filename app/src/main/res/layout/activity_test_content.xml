@@ -96,7 +96,7 @@
                 android:layout_marginTop="10dp"
                 android:text="@{String.valueOf(viewModel.testTitle.value)}"
                 android:textColor="@color/text_black"
-                android:textSize="18sp"
+                android:textSize="54px"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -111,7 +111,7 @@
 
         <TextView
             style="@style/blue_button"
-            android:layout_gravity="bottom"
+            android:layout_gravity="bottom|center_horizontal"
             android:layout_marginBottom="50dp"
             android:text="提交"
             binding:isVisible="@{viewModel.showCommit}"
@@ -119,7 +119,7 @@
 
         <TextView
             style="@style/blue_button"
-            android:layout_gravity="bottom"
+            android:layout_gravity="bottom|center_horizontal"
             android:layout_marginBottom="50dp"
             android:text="下一题目"
             binding:isVisible="@{viewModel.showNext}"

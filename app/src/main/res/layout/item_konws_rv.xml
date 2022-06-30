@@ -17,13 +17,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
+        android:paddingLeft="@dimen/content_padding"
+        android:paddingRight="@dimen/content_padding">
 
         <ImageView
             android:id="@+id/iv_left"
             android:layout_width="480px"
-            android:layout_height="450px"
+            android:layout_height="360px"
             android:layout_marginTop="10dp"
             binding:onClickCommand="@{viewModel.clickLeft}"
             binding:url="@{viewModel.left.faceImage}"
@@ -44,7 +44,7 @@
                 android:singleLine="true"
                 android:text="@{viewModel.left.name}"
                 android:textColor="@color/text_black"
-                android:textSize="14sp" />
+                android:textSize="36px" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -58,34 +58,35 @@
                     android:src="@drawable/eye" />
 
                 <TextView
-                    android:layout_marginLeft="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="20dp"
+                    android:layout_marginLeft="10dp"
                     android:gravity="center_vertical"
-                    android:text="@{viewModel.leftNum}" />
+                    android:text="@{viewModel.leftNum}"
+                    android:textSize="32px" />
             </LinearLayout>
 
         </LinearLayout>
 
         <ImageView
-            binding:onClickCommand="@{viewModel.clickRight}"
             android:id="@+id/iv_right"
             android:layout_width="480px"
-            android:layout_height="450px"
+            android:layout_height="360px"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="10dp"
             binding:isVisible="@{viewModel.right != null}"
+            binding:onClickCommand="@{viewModel.clickRight}"
             binding:url="@{viewModel.left.faceImage}"
             tools:ignore="PxUsage" />
 
         <LinearLayout
-            binding:onClickCommand="@{viewModel.clickRight}"
             android:layout_width="480px"
             android:layout_height="wrap_content"
             android:layout_below="@id/iv_right"
             android:layout_alignParentEnd="true"
             android:orientation="vertical"
-            binding:isVisible="@{viewModel.right != null}">
+            binding:isVisible="@{viewModel.right != null}"
+            binding:onClickCommand="@{viewModel.clickRight}">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -95,7 +96,7 @@
                 android:singleLine="true"
                 android:text="@{viewModel.left.name}"
                 android:textColor="@color/text_black"
-                android:textSize="14sp" />
+                android:textSize="36px" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -109,11 +110,12 @@
                     android:src="@drawable/eye" />
 
                 <TextView
-                    android:layout_marginLeft="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="20dp"
+                    android:layout_marginLeft="10dp"
                     android:gravity="center_vertical"
-                    android:text="@{viewModel.leftNum}" />
+                    android:text="@{viewModel.leftNum}"
+                    android:textSize="32px" />
             </LinearLayout>
 
         </LinearLayout>
