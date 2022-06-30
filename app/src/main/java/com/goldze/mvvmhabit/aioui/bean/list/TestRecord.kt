@@ -7,4 +7,5 @@ class TestRecord : BaseRecord() {
     var quesCount: Int? = 0
     var answeredCount: Int? = 0
     var faceImage: String? = ""
+    var interestDescribe: String? = ""
 }

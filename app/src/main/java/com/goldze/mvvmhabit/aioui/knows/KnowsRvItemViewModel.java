@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 
 
 import com.goldze.mvvmhabit.aioui.kepu.content.KepuContentActivity;
+import com.goldze.mvvmhabit.aioui.knows.content.KnowsContentActivity;
 
 import me.goldze.mvvmhabit.base.ItemViewModel;
 import me.goldze.mvvmhabit.binding.command.BindingAction;
@@ -44,7 +45,7 @@ public class KnowsRvItemViewModel extends ItemViewModel<KnowsModel> {
         public void call() {
             if (left != null) {
                 Log.i("fengao_xiaomi", "call: " + (viewModel.activity == null));
-                Intent intent = new Intent(viewModel.activity, KepuContentActivity.class);
+                Intent intent = new Intent(viewModel.activity, KnowsContentActivity.class);
                 intent.putExtra("bean", left);
                 viewModel.activity.startActivity(intent);
             }
@@ -55,7 +56,7 @@ public class KnowsRvItemViewModel extends ItemViewModel<KnowsModel> {
         @Override
         public void call() {
             if (right != null) {
-                Intent intent = new Intent(viewModel.activity, KepuContentActivity.class);
+                Intent intent = new Intent(viewModel.activity, KnowsContentActivity.class);
                 intent.putExtra("bean", right);
                 viewModel.activity.startActivity(intent);
             }

@@ -1,6 +1,8 @@
 package com.goldze.mvvmhabit.aioui.kepu.content
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -14,11 +16,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.goldze.mvvmhabit.BR
 import com.goldze.mvvmhabit.R
+import com.goldze.mvvmhabit.aioui.Util
+import com.goldze.mvvmhabit.aioui.clazz.ClazzActivity
 import com.goldze.mvvmhabit.aioui.kepu.KepuBeanRecord
 import com.goldze.mvvmhabit.aioui.kepu.content.KepuContentModel
+import com.goldze.mvvmhabit.aioui.knows.KnowsActivity
+import com.goldze.mvvmhabit.aioui.relax.film.FilmFragment
+import com.goldze.mvvmhabit.aioui.relax.gallery.GalleryFragment
+import com.goldze.mvvmhabit.aioui.relax.meditation.MeditationFragment
+import com.goldze.mvvmhabit.aioui.relax.music.MusicFragment
+import com.goldze.mvvmhabit.aioui.test.TestActivity
 import com.goldze.mvvmhabit.databinding.ActivityKepuContentBinding
 import com.goldze.mvvmhabit.databinding.ActivityKnowsContentBinding
 import me.goldze.mvvmhabit.base.BaseActivity
+import me.goldze.mvvmhabit.base.ContainerActivity
 
 class KepuContentActivity : BaseActivity<ActivityKepuContentBinding, KepuContentModel>() {
 
@@ -34,8 +45,8 @@ class KepuContentActivity : BaseActivity<ActivityKepuContentBinding, KepuContent
 
     override fun initData() {
         super.initData()
-        binding.brRootView.setPageTitle("情绪扫描")
         bean = intent.getSerializableExtra("bean") as KepuBeanRecord
+        binding.brRootView.setPageTitle(bean?.name ?: "")
 //        list = bean?.
         viewModel.setKnowBean(bean!!)
         viewModel.loadData()
@@ -78,7 +89,6 @@ class KepuContentActivity : BaseActivity<ActivityKepuContentBinding, KepuContent
             tv_jieshao.text = record.brief
             record.contentList.forEach {
                 addSonItem(it)
-
             }
         }
 
@@ -88,14 +98,45 @@ class KepuContentActivity : BaseActivity<ActivityKepuContentBinding, KepuContent
                 .inflate(R.layout.item_kepu_content_item, itemView as LinearLayout, false)
             view.findViewById<TextView>(R.id.tv_content).text = content.resourcesName
             view.setOnClickListener {
-                Log.i("fengao_xiaomi", "addSonItem: ")
+                Util.jump(
+                    content.sysModuleCode,
+                    content.resourcesId,
+                    context as Activity,
+                    content.resourcesName
+                )
             }
-            view.findViewById<ImageView>(R.id.iv_icon).setImageResource(R.drawable.word_icon)
             var line = ImageView(context)
             line.setBackgroundColor(context.resources.getColor(R.color.background_gray_2))
             var param = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 1)
-            (itemView as LinearLayout).addView(view, )
-            (itemView as LinearLayout).addView(line,  param)
+            (itemView as LinearLayout).addView(view)
+            (itemView as LinearLayout).addView(line, param)
+            when (content.sysModuleCode) {
+                "scale" -> {
+                    view.findViewById<ImageView>(R.id.iv_icon).setImageResource(R.drawable.word_icon)
+                }
+                "info" -> {
+                    view.findViewById<ImageView>(R.id.iv_icon).setImageResource(R.drawable.word_icon)
+                }
+                "music" -> {
+                    view.findViewById<ImageView>(R.id.iv_icon).setImageResource(R.drawable.music_icon)
+                }
+                "course" -> {
+                    view.findViewById<ImageView>(R.id.iv_icon).setImageResource(R.drawable.video_icon)
+                }
+                "meditation" -> {
+                    view.findViewById<ImageView>(R.id.iv_icon).setImageResource(R.drawable.video_icon)
+                }
+                "cartoon" -> {
+                    view.findViewById<ImageView>(R.id.iv_icon).setImageResource(R.drawable.word_icon)
+                }
+                "film" -> {
+                    view.findViewById<ImageView>(R.id.iv_icon).setImageResource(R.drawable.video_icon)
+                }
+                "interest" -> {
+                    view.findViewById<ImageView>(R.id.iv_icon).setImageResource(R.drawable.word_icon)
+                }
+            }
+
         }
     }
 }

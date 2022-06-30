@@ -29,7 +29,7 @@
         <com.goldze.mvvmhabit.ui.base.widget.BaseRootView
             android:id="@+id/br_root_view"
             android:layout_width="match_parent"
-            android:layout_height="300px" />
+            android:layout_height="@dimen/titleBar_height" />
 
         <!--音乐播放器-->
         <LinearLayout

@@ -18,6 +18,7 @@ package com.goldze.mvvmhabit.aioui.relax.music.play;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
@@ -134,7 +135,14 @@ public class PlayerManager implements IPlayController<AIOAlbum, AIOAlbum.AIOMusi
 
     @Override
     public void clear() {
-        mController.clear();
+        if (mController != null) {
+            try {
+                mController.clear();
+            } catch (Exception e) {
+                e.printStackTrace(System.err);
+                Log.e("PlayManager", "clear error: " + e.getMessage());
+            }
+        }
     }
 
     @Override

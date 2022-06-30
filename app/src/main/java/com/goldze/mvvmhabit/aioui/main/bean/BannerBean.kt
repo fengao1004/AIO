@@ -23,7 +23,7 @@ data class BannerBeanData(
     val name: String,
     val resourcesId: String,
     val status: Int,
-    val sysModuleCode: Any,
+    val sysModuleCode: String,
     val sysModuleId: Int,
     val systemCode: String,
     val updateTime: String

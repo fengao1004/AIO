@@ -23,7 +23,7 @@
         <com.goldze.mvvmhabit.ui.base.widget.BaseRootView
             android:id="@+id/br_root_view"
             android:layout_width="match_parent"
-            android:layout_height="98dp" />
+            android:layout_height="@dimen/titleBar_height" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"

@@ -22,7 +22,7 @@
             android:id="@+id/br_root_view"
             android:layout_width="match_parent"
             android:layout_marginBottom="20dp"
-            android:layout_height="98dp" />
+            android:layout_height="@dimen/titleBar_height" />
 
         <LinearLayout
             binding:onClickCommand="@{viewModel.clickPhone}"

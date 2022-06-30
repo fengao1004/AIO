@@ -1,6 +1,7 @@
 package me.goldze.mvvmhabit.binding.viewadapter.image;
 
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -29,6 +30,15 @@ public final class ViewAdapter {
             imageView.setImageResource(checkRes);
         } else {
             imageView.setImageResource(garyRes);
+        }
+    }
+
+    @BindingAdapter(value = {"clazzContentType", "clazzContentValue"}, requireAll = false)
+    public static void updateClazzImageState(ImageView imageView, int clazzContentType, int clazzContentValue) {
+        if (clazzContentType == clazzContentValue) {
+            imageView.setVisibility(View.VISIBLE);
+        } else {
+            imageView.setVisibility(View.INVISIBLE);
         }
     }
 }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import com.goldze.mvvmhabit.BR
 import com.goldze.mvvmhabit.R
+import com.goldze.mvvmhabit.aioui.test.bean.FunnyTestBean
 import com.goldze.mvvmhabit.aioui.test.bean.ScaDetailsResponseBean
 import com.goldze.mvvmhabit.databinding.ActivityTestContentBinding
 import me.goldze.mvvmhabit.base.BaseActivity
@@ -11,7 +12,9 @@ import me.goldze.mvvmhabit.base.BaseActivity
 class TestContentActivity : BaseActivity<ActivityTestContentBinding, TestContentModel>() {
 
     lateinit var detail: ScaDetailsResponseBean
+    lateinit var detail2: FunnyTestBean
     lateinit var marry: String
+    lateinit var type: String
     lateinit var sex: String
 
     override fun initContentView(savedInstanceState: Bundle?): Int {
@@ -24,15 +27,27 @@ class TestContentActivity : BaseActivity<ActivityTestContentBinding, TestContent
 
     override fun initData() {
         super.initData()
-        detail = intent.getSerializableExtra("bean") as ScaDetailsResponseBean
+        type = intent.getStringExtra("type")
+
+        if (type == "normal") {
+            detail = intent.getSerializableExtra("bean") as ScaDetailsResponseBean
+            binding.brRootView.setPageTitle(detail.data.scaVo.name)
+        } else {
+            detail2 = intent.getSerializableExtra("bean") as FunnyTestBean
+            binding.brRootView.setPageTitle(detail2.data.name)
+        }
         marry = intent.getStringExtra("marry")
         sex = intent.getStringExtra("sex")
-        viewModel.detail = detail
+        if (type == "normal") {
+            viewModel.detail = detail
+        } else {
+            viewModel.detail2 = detail2
+        }
+        viewModel.type = type
         viewModel.marry = marry
         viewModel.sex = sex
         Log.i("fengao_xiaomi", "marry: $marry ")
         Log.i("fengao_xiaomi", "sex: $sex")
-        binding.brRootView.setPageTitle(detail.data.scaVo.name)
         viewModel.init()
     }
 }

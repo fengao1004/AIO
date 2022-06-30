@@ -48,7 +48,8 @@ class MainFgViewModel(application: Application) : BaseViewModel<HttpRepository>(
     var bannerLiveData: MutableLiveData<List<BannerBeanData>> = MutableLiveData()
     var sbLiveData: MutableLiveData<String> = MutableLiveData()
     var gotoScan: BindingCommand<String> = BindingCommand(BindingAction {
-        startActivity(VideoActivity::class.java)
+//        startActivity(VideoActivity::class.java)
+        ToastUtils.showShort("功能暂未实现")
     })
 
     var gotoTest: BindingCommand<String> = BindingCommand(BindingAction {

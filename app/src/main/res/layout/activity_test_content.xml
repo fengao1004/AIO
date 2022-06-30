@@ -21,85 +21,92 @@
         <com.goldze.mvvmhabit.ui.base.widget.BaseRootView
             android:id="@+id/br_root_view"
             android:layout_width="match_parent"
-            android:layout_height="98dp" />
+            android:layout_height="@dimen/titleBar_height" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="98dp"
-            android:padding="10dp">
-
-            <TextView
-                android:id="@+id/tv_now"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:textColor="@color/app_blue"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                binding:intText="@{viewModel.index+1}" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_toRightOf="@id/tv_now"
-                android:text="@{viewModel.endIndex}"
-                android:textColor="@color/text_gray"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/tv_last"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:text="上一题"
-                binding:onClickCommand="@{viewModel.lastClick}"
-                android:textColor="@color/app_blue_lite"
-                android:textSize="14sp" />
-
-            <ImageView
-                android:layout_width="28dp"
-                android:layout_height="15dp"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="2dp"
-                android:layout_toLeftOf="@id/tv_last"
-                android:src="@drawable/last"
-                binding:onClickCommand="@{viewModel.lastClick}" />
-
-        </RelativeLayout>
-
-        <ProgressBar
-            android:id="@+id/pb"
-            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="6dp"
-            android:layout_marginTop="148dp"
-            android:max="100"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:progress="@{viewModel.progress}"
-            android:progressDrawable="@drawable/progress_bar_background" />
-
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="180dp"
-            android:text="@{String.valueOf(viewModel.testTitle.value)}"
-            android:textColor="@color/text_black"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <androidx.recyclerview.widget.RecyclerView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="220dp"
-            binding:itemBinding="@{viewModel.itemBinding}"
-            binding:items="@{viewModel.observableList}"
-            binding:layoutManager="@{LayoutManagers.linear()}" />
+            android:layout_marginTop="@dimen/titleBar_height"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:padding="10dp"
+                binding:isVisible="@{viewModel.isNormal}">
+
+                <TextView
+                    android:id="@+id/tv_now"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:textColor="@color/app_blue"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    binding:intText="@{viewModel.index+1}" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toRightOf="@id/tv_now"
+                    android:text="@{viewModel.endIndex}"
+                    android:textColor="@color/text_gray"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_last"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:text="上一题"
+                    android:textColor="@color/app_blue_lite"
+                    android:textSize="14sp"
+                    binding:onClickCommand="@{viewModel.lastClick}" />
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="2dp"
+                    android:layout_toLeftOf="@id/tv_last"
+                    android:src="@drawable/last"
+                    binding:onClickCommand="@{viewModel.lastClick}" />
+
+            </RelativeLayout>
+
+            <ProgressBar
+                android:id="@+id/pb"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:max="100"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:progress="@{viewModel.progress}"
+                android:progressDrawable="@drawable/progress_bar_background"
+                binding:isVisible="@{viewModel.isNormal}" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@{String.valueOf(viewModel.testTitle.value)}"
+                android:textColor="@color/text_black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                binding:itemBinding="@{viewModel.itemBinding}"
+                binding:items="@{viewModel.observableList}"
+                binding:layoutManager="@{LayoutManagers.linear()}" />
+        </LinearLayout>
 
 
         <TextView

@@ -13,6 +13,7 @@
     <color name="app_blue">#3154f5</color>
     <color name="app_blue_lite">#4585fe</color>
     <color name="orange">#FFA500</color>
+    <color name="content_black">#666666</color>
 
     <array name="in_colors_light">
         <item>#4B03A9F4</item>

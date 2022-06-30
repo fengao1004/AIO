@@ -37,6 +37,7 @@ class TestAFragment : AIOViewPagerFragment() {
                 var intent = Intent(activity, TestDecActivity::class.java)
                 intent.putExtra("code", entity.code)
                 intent.putExtra("name", entity.name)
+                intent.putExtra("type", "normal")
                 startActivity(intent)
             }
         }

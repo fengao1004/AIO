@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:binding="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".aioui.main.MainActivity">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.goldze.mvvmhabit.aioui.clazz.content.ClazzContentModel" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.goldze.mvvmhabit.ui.base.widget.BaseRootView
+            android:id="@+id/br_root_view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/titleBar_height" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/titleBar_height"
+            android:orientation="vertical">
+
+            <com.goldze.mvvmhabit.ui.base.widget.SampleControlVideo
+                android:id="@+id/scv_video"
+                android:layout_width="match_parent"
+                android:layout_height="720px" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/content_padding"
+                android:layout_marginTop="40px"
+                android:text="@{viewModel.bean.name}"
+                android:textSize="@dimen/content_name_size" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/content_padding"
+                android:layout_marginTop="40px"
+                android:text="@{viewModel.bean.brief}"
+                android:textSize="@dimen/brief_size"
+                tools:ignore="PxUsage" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="40px"
+                android:background="@color/background_gray_2" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="157px"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    binding:onClickCommand="@{viewModel.clickMulu}"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="目录"
+                        android:textSize="50px"
+                        binding:clazzContentType="@{0}"
+                        binding:clazzContentValue="@{viewModel.selectType}" />
+
+                    <ImageView
+                        android:layout_width="48px"
+                        android:layout_height="8px"
+                        android:layout_marginTop="26px"
+                        android:background="@drawable/blue_button_buttom"
+                        binding:clazzContentType="@{0}"
+                        binding:clazzContentValue="@{viewModel.selectType}" />
+                </LinearLayout>
+
+                <LinearLayout
+                    binding:onClickCommand="@{viewModel.clickJieshao}"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="介绍"
+                        android:textSize="50px"
+                        binding:clazzContentType="@{1}"
+                        binding:clazzContentValue="@{viewModel.selectType}" />
+
+                    <ImageView
+                        android:layout_width="48px"
+                        android:layout_height="8px"
+                        android:layout_marginTop="26px"
+                        android:background="@drawable/blue_button_buttom"
+                        binding:clazzContentType="@{1}"
+                        binding:clazzContentValue="@{viewModel.selectType}" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                binding:isVisible="@{viewModel.selectType == 0}">
+
+                <LinearLayout
+                    android:id="@+id/ll_item_root"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                </LinearLayout>
+            </ScrollView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/content_black"
+                android:textSize="@dimen/content_size"
+                binding:isVisible="@{viewModel.selectType == 1}" />
+        </LinearLayout>
+
+
+    </FrameLayout>
+</layout>

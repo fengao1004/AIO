@@ -28,6 +28,7 @@ class TestDecActivity : BaseActivity<ActivityTestDecBinding, TestDecModel>() {
 
         var code = intent.getStringExtra("code")
         var name =  intent.getStringExtra("name")
-        viewModel.loadData(code,name)
+        var type =  intent.getStringExtra("type")
+        viewModel.loadData(code,name,type)
     }
 }

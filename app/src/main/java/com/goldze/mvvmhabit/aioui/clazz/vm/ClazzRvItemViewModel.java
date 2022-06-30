@@ -52,9 +52,9 @@ public class ClazzRvItemViewModel extends ItemViewModel<ClazzViewPagerItemViewMo
         @Override
         public void call() {
             if (left != null) {
-                Log.i("fengao_xiaomi", "call: " + (viewModel.activity == null));
                 Intent intent = new Intent(viewModel.activity, ClazzContentActivity.class);
-                intent.putExtra("bean", left);
+                intent.putExtra("id", left.getId());
+                intent.putExtra("name", left.getName());
                 viewModel.activity.startActivity(intent);
             }
         }
@@ -64,10 +64,9 @@ public class ClazzRvItemViewModel extends ItemViewModel<ClazzViewPagerItemViewMo
         @Override
         public void call() {
             if (right != null) {
-
-//                VideoBean bean = new VideoBean(right.)
                 Intent intent = new Intent(viewModel.activity, ClazzContentActivity.class);
-                intent.putExtra("bean", right);
+                intent.putExtra("id", right.getId());
+                intent.putExtra("name", right.getName());
                 viewModel.activity.startActivity(intent);
             }
         }

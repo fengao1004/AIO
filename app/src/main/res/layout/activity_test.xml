@@ -21,7 +21,7 @@
         <com.goldze.mvvmhabit.ui.base.widget.BaseRootView
             android:id="@+id/br_root_view"
             android:layout_width="match_parent"
-            android:layout_height="98dp" />
+            android:layout_height="@dimen/titleBar_height" />
 
         <LinearLayout
             android:id="@+id/ll_tab_root"
@@ -93,7 +93,7 @@
         <!--        <androidx.recyclerview.widget.RecyclerView-->
         <!--            android:layout_width="match_parent"-->
         <!--            android:layout_height="match_parent"-->
-        <!--            android:layout_marginTop="98dp"-->
+        <!--            android:layout_marginTop="@dimen/titleBar_height"-->
         <!--            binding:itemBinding="@{viewModel.itemBinding}"-->
         <!--            binding:items="@{viewModel.observableList}"-->
         <!--            binding:layoutManager="@{LayoutManagers.linear()}" />-->
@@ -101,6 +101,6 @@
             android:id="@+id/fl_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="98dp" />
+            android:layout_marginTop="@dimen/titleBar_height" />
     </FrameLayout>
 </layout>

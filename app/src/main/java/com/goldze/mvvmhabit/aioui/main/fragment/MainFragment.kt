@@ -45,7 +45,7 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainFgViewModel>() {
         viewModel.bannerLiveData.observe(this) {
             var list = arrayListOf<BaseBannerInfo>()
             it.forEach {
-                var info = UrlBannerInfo(it.faceUrl, it.name)
+                var info = UrlBannerInfo(it.faceUrl, it.name, it.sysModuleCode?:"")
                 list.add(info)
             }
             binding.xbanner.setBannerData(list) //setData（）方法已过时，推荐使用setBannerData（）方法，具体参照demo使用
@@ -57,6 +57,14 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainFgViewModel>() {
                 .load((model as UrlBannerInfo).url)
                 .apply(RequestOptions().placeholder(R.drawable.loading))
                 .into((view as ImageView))
+        }
+        binding.xbanner.setOnItemClickListener { banner, model, view, position ->
+            if ((model as UrlBannerInfo).code.isNullOrEmpty()) {
+                ToastUtils.showShort("没有跳转目标")
+                return@setOnItemClickListener
+            } else {
+                Util.jump((model as UrlBannerInfo).code, "", activity!!, "")
+            }
         }
 
         binding.tvEnter.setOnClickListener {
@@ -88,7 +96,7 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainFgViewModel>() {
     }
 }
 
-class UrlBannerInfo(var url: String, var name: String) : BaseBannerInfo {
+class UrlBannerInfo(var url: String, var name: String, var code: String) : BaseBannerInfo {
     override fun getXBannerUrl(): String {
         return url
     }

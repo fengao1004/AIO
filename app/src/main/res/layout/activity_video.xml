@@ -19,14 +19,14 @@
         <com.goldze.mvvmhabit.ui.base.widget.BaseRootView
             android:id="@+id/br_root_view"
             android:layout_width="match_parent"
-            android:layout_height="98dp" />
+            android:layout_height="@dimen/titleBar_height" />
 
 
         <com.goldze.mvvmhabit.ui.base.widget.SampleControlVideo
             android:id="@+id/scv_video"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_marginTop="98dp" />
+            android:layout_marginTop="@dimen/titleBar_height" />
 
         <TextView
             android:id="@+id/tv_title"

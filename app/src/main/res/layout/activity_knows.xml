@@ -23,12 +23,12 @@
         <com.goldze.mvvmhabit.ui.base.widget.BaseRootView
             android:id="@+id/br_root_view"
             android:layout_width="match_parent"
-            android:layout_height="98dp" />
+            android:layout_height="@dimen/titleBar_height" />
 
         <com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
             android:id="@+id/twinklingRefreshLayout"
             android:layout_width="match_parent"
-            android:layout_marginTop="98dp"
+            android:layout_marginTop="@dimen/titleBar_height"
             android:layout_height="match_parent"
             binding:onLoadMoreCommand="@{viewModel.onLoadMoreCommand}"
             binding:onRefreshCommand="@{viewModel.onRefreshCommand}"

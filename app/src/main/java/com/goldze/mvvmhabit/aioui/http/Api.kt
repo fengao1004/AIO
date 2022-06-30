@@ -4,14 +4,13 @@ import com.goldze.mvvmhabit.aioui.bean.CommentRequestBean
 import com.goldze.mvvmhabit.aioui.bean.TypeResponseBean
 import com.goldze.mvvmhabit.aioui.bean.list.*
 import com.goldze.mvvmhabit.aioui.clazz.bean.ClazzListResponseBean
+import com.goldze.mvvmhabit.aioui.clazz.bean.ClazzResponseBean
 import com.goldze.mvvmhabit.aioui.kepu.KepuBean
 import com.goldze.mvvmhabit.aioui.kepu.content.KepuItemBean
 import com.goldze.mvvmhabit.aioui.knows.KnowsBean
+import com.goldze.mvvmhabit.aioui.knows.KnowsDetailBean
 import com.goldze.mvvmhabit.aioui.main.bean.*
-import com.goldze.mvvmhabit.aioui.test.bean.AnserReponseData
-import com.goldze.mvvmhabit.aioui.test.bean.AnserRequestData
-import com.goldze.mvvmhabit.aioui.test.bean.ScaDetailsRequestBean
-import com.goldze.mvvmhabit.aioui.test.bean.ScaDetailsResponseBean
+import com.goldze.mvvmhabit.aioui.test.bean.*
 import com.goldze.mvvmhabit.aioui.zixun.input.InputRequestBean
 import com.goldze.mvvmhabit.aioui.zixun.phone.PhoneListBean
 import io.reactivex.Observable
@@ -31,6 +30,9 @@ interface Api {
     fun getScaDetails(@Body bean: ScaDetailsRequestBean): Observable<ScaDetailsResponseBean>
 
 
+    @POST("/client/api/interest/detail")
+    fun getFunnyDetails(@Body bean: CommentRequestBean): Observable<FunnyTestBean>
+
     @POST("/client/scaRec/notLogin/calc")
     fun commit(@Body bean: AnserRequestData): Observable<AnserReponseData>
 
@@ -49,23 +51,44 @@ interface Api {
     @POST("/client/api/course/getPageList")
     fun getClazzList(@Body bean: CommentRequestBean): Observable<ClazzListResponseBean>
 
+
+    /**
+     * 获取课程列表
+     */
+    @POST("/client/api/course/detail")
+    fun getClazzDetail(@Body bean: CommentRequestBean): Observable<ClazzResponseBean>
+
+
     @POST("/client/api/music/getPageList")
     fun getMusicPageList(@Body bean: CommentRequestBean): Observable<CommonListResponseBean<MusicRecord>>
 
     @POST("/client/api/cartoon/getPageList")
     fun getCartoonPageList(@Body bean: CommentRequestBean): Observable<CommonListResponseBean<CartoonRecord>>
 
+    @POST("/client/api/cartoon/detail")
+    fun getCartoonDetail(@Body bean: CommentRequestBean): Observable<CartoonDetailBean>
+
     @POST("/client/api/meditation/getPageList")
     fun getMeditationPageList(@Body bean: CommentRequestBean): Observable<CommonListResponseBean<MeditationRecord>>
 
+    @POST("/client/api/meditation/detail")
+    fun getMeditationDetail(@Body bean: CommentRequestBean): Observable<MeditationDetail>
+
+
     @POST("/client/api/film/getPageList")
     fun getFilmPageList(@Body bean: CommentRequestBean): Observable<CommonListResponseBean<FilmRecord>>
+
+    @POST("/client/api/film/detail")
+    fun getFilmDetail(@Body bean: CommentRequestBean): Observable<FilmDetail>
 
     @POST("/client/api/equipment/activation")
     fun activation(@Body bean: CommentRequestBean): Observable<ActivationResponseBean>
 
     @POST("/client/api/info/getPageList")
     fun getKnowsList(@Body bean: CommentRequestBean): Observable<KnowsBean>
+
+    @POST("/client/api/info/detail")
+    fun getKnowsDetail(@Body bean: CommentRequestBean): Observable<KnowsDetailBean>
 
     @POST("/client/api/theme/getPageList")
     fun getKePuList(@Body bean: CommentRequestBean): Observable<KepuBean>
@@ -85,5 +108,8 @@ interface Api {
 
     @POST("/client/api/sca/getPageList")
     fun getTestList(@Body bean: CommentRequestBean): Observable<CommonListResponseBean<TestRecord>>
+
+    @POST("/client/api/interest/getPageList")
+    fun getFunTestList(@Body bean: CommentRequestBean): Observable<CommonListResponseBean<TestRecord>>
 
 }

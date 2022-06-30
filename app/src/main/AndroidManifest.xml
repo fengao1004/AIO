@@ -51,6 +51,8 @@
         <activity android:name=".aioui.zixun.phone.PhoneListActivity" />
         <activity android:name=".aioui.scan.ScanActivity" />
         <activity android:name=".aioui.test.TestActivity" />
+        <activity android:name=".aioui.test.result.FunnyResultActivity" />
+        <activity android:name=".aioui.knows.content.KnowsContentActivity" />
         <activity android:name=".aioui.kepu.content.KepuContentActivity" />
         <activity android:name=".aioui.zixun.ZixunActivity" />
         <activity android:name=".aioui.relax.music.MusicActivity" />

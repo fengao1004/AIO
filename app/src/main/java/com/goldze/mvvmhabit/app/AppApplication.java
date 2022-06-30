@@ -4,15 +4,9 @@ import com.goldze.mvvmhabit.BuildConfig;
 import com.goldze.mvvmhabit.R;
 import com.goldze.mvvmhabit.aioui.main.MainActivity;
 import com.goldze.mvvmhabit.aioui.relax.music.play.PlayerManager;
-import com.goldze.mvvmhabit.ui.login.LoginActivity;
-import com.kunminx.player.DefaultPlayerManager;
-import com.kunminx.player.contract.ICacheProxy;
-import com.kunminx.player.contract.IServiceNotifier;
-import com.squareup.leakcanary.LeakCanary;
 
 import me.goldze.mvvmhabit.base.BaseApplication;
 import me.goldze.mvvmhabit.crash.CaocConfig;
-import me.goldze.mvvmhabit.crash.CustomActivityOnCrash;
 import me.goldze.mvvmhabit.utils.KLog;
 
 /**
@@ -28,9 +22,9 @@ public class AppApplication extends BaseApplication {
         //初始化全局异常崩溃
         initCrash();
         //内存泄漏检测
-        if (!LeakCanary.isInAnalyzerProcess(this)) {
-            LeakCanary.install(this);
-        }
+//        if (!LeakCanary.isInAnalyzerProcess(this)) {
+//            LeakCanary.install(this);
+//        }
 
         PlayerManager.getInstance().init(this);
     }

@@ -14,6 +14,7 @@ import io.reactivex.schedulers.Schedulers
 import me.goldze.mvvmhabit.base.BaseViewModel
 import me.goldze.mvvmhabit.binding.command.BindingAction
 import me.goldze.mvvmhabit.binding.command.BindingCommand
+import me.goldze.mvvmhabit.utils.ToastUtils
 
 /**
  * Created by Android Studio.
@@ -36,7 +37,16 @@ class InputModel(application: Application) : BaseViewModel<HttpRepository>(appli
         model.api.commitInput(bean)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({}, {})
+            .subscribe({
+                if (it.success) {
+                    ToastUtils.showShort("预约成功")
+                    activity.finish()
+                } else {
+                    ToastUtils.showShort("预约失败，请稍微再试 ${it.message}")
+                }
+            }, {
+                ToastUtils.showShort("预约失败，请稍微再试 ${it.message}")
+            })
     }
 
     lateinit var password: String

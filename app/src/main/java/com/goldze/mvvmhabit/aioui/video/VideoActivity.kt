@@ -7,6 +7,7 @@ import com.goldze.mvvmhabit.BR
 import com.goldze.mvvmhabit.R
 import com.goldze.mvvmhabit.aioui.video.bean.VideoBean
 import com.goldze.mvvmhabit.databinding.ActivityVideoBinding
+import com.shuyu.gsyvideoplayer.GSYVideoManager
 import com.shuyu.gsyvideoplayer.builder.GSYVideoOptionBuilder
 import me.goldze.mvvmhabit.base.BaseActivity
 
@@ -56,5 +57,10 @@ class VideoActivity : BaseActivity<ActivityVideoBinding, VideoModel>() {
             .setOnClickListener(View.OnClickListener { //第一个true是否需要隐藏actionbar，第二个true是否需要隐藏statusbar
                 binding.scvVideo.startWindowFullscreen(this@VideoActivity, true, true)
             })
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        GSYVideoManager.releaseAllVideos()
     }
 }
