@@ -68,7 +68,7 @@ class MusicViewPagerItemViewModel(viewModel: MusicModel, application: Applicatio
     @SuppressLint("CheckResult")
     private fun refreshData() {
         val requestBody = CommentRequestBean.getEmpty()
-        requestBody.pageNum = 1
+        requestBody.pageNum = 0
         if (tabBean != null) {
             requestBody.id = tabBean?.id
         }
@@ -94,13 +94,13 @@ class MusicViewPagerItemViewModel(viewModel: MusicModel, application: Applicatio
                             ToastUtils.showShort("没有更多数据")
                             return
                         }
+                        observableList.clear()
                         for (record in records) {
                             val itemViewModel = MusicRvItemViewModel(this@MusicViewPagerItemViewModel, record)
                             //双向绑定动态添加Item
-                            observableList.clear()
-                            nextPage = 2
                             observableList.add(itemViewModel)
                         }
+                        nextPage = 1
                         //刷新完成收回
                         uiChangeObservable.finishLoadmore.call()
                         uiChangeObservable.finishRefreshing.call()
