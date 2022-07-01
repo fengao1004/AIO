@@ -28,12 +28,12 @@
             android:paddingLeft="20dp"
             android:text="@{viewModel.entity.title}"
             android:textColor="@color/app_blue_lite"
-            android:textSize="18sp"
+            android:textSize="48px"
             binding:testItemIsCheck="@{viewModel.entity.isCheck()}" />
 
         <ImageView
-            android:layout_width="22dp"
-            android:layout_height="22dp"
+            android:layout_width="60px"
+            android:layout_height="60px"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="20dp"

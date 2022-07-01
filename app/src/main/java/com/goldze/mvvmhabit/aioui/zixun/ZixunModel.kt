@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.goldze.mvvmhabit.aioui.http.HttpRepository
+import com.goldze.mvvmhabit.aioui.zixun.input.InputActivity
 import com.goldze.mvvmhabit.aioui.zixun.phone.PhoneListActivity
 import me.goldze.mvvmhabit.base.BaseViewModel
 import me.goldze.mvvmhabit.binding.command.BindingAction
@@ -22,6 +23,6 @@ class ZixunModel(application: Application) : BaseViewModel<HttpRepository>(appli
         activity.startActivity(Intent(activity, PhoneListActivity::class.java))
     })
     var clickInput = BindingCommand<String>(BindingAction {
-
+        activity.startActivity(Intent(activity, InputActivity::class.java))
     })
 }

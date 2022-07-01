@@ -53,14 +53,14 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="32px"
+                    android:layout_height="32px"
                     android:src="@drawable/eye" />
 
                 <TextView
                     android:layout_marginLeft="10dp"
                     android:layout_width="match_parent"
-                    android:layout_height="20dp"
+                    android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:textSize="32px"
                     android:text="@{viewModel.leftNum}" />

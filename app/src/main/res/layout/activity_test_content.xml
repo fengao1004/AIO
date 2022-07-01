@@ -31,7 +31,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="140px"
                 android:padding="10dp"
                 binding:isVisible="@{viewModel.isNormal}">
 
@@ -41,7 +41,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:textColor="@color/app_blue"
-                    android:textSize="18sp"
+                    android:textSize="54px"
                     android:textStyle="bold"
                     binding:intText="@{viewModel.index+1}" />
 
@@ -52,7 +52,7 @@
                     android:layout_toRightOf="@id/tv_now"
                     android:text="@{viewModel.endIndex}"
                     android:textColor="@color/text_gray"
-                    android:textSize="14sp" />
+                    android:textSize="40px" />
 
                 <TextView
                     android:id="@+id/tv_last"
@@ -62,12 +62,13 @@
                     android:layout_alignParentBottom="true"
                     android:text="上一题"
                     android:textColor="@color/app_blue_lite"
-                    android:textSize="14sp"
+                    android:textSize="40px"
                     binding:onClickCommand="@{viewModel.lastClick}" />
 
                 <ImageView
-                    android:layout_width="28dp"
-                    android:layout_height="15dp"
+                    android:layout_width="56px"
+                    android:layout_marginRight="10px"
+                    android:layout_height="40px"
                     android:layout_alignParentBottom="true"
                     android:layout_marginBottom="2dp"
                     android:layout_toLeftOf="@id/tv_last"

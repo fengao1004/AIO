@@ -3,11 +3,11 @@
     android:id="@+id/tvLabel"
     android:gravity="center"
     android:background="@drawable/shape_stroke_label_no_select"
-    android:paddingVertical="12px"
-    android:paddingHorizontal="66px"
-    android:text="标签标签"
+    android:text="标签标签标签标签标签标签"
     android:textSize="45px"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:maxLines="1"
+    android:layout_width="0px"
+    android:layout_weight="1"
+    android:layout_height="80px">
 
 </TextView>

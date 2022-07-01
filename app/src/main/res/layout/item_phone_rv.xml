@@ -14,7 +14,7 @@
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="140dp"
+        android:layout_height="348px"
         android:layout_margin="15dp"
         android:background="@drawable/shape_stroke_gary"
         android:gravity="center_vertical"
@@ -31,7 +31,7 @@
             android:singleLine="true"
             android:text="@{viewModel.bean.name}"
             android:textColor="@color/text_black"
-            android:textSize="20sp"
+            android:textSize="48px"
             android:textStyle="bold" />
 
         <LinearLayout
@@ -43,8 +43,8 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="40px"
+                android:layout_height="40px"
                 android:src="@drawable/shizhong" />
 
             <TextView
@@ -53,7 +53,7 @@
                 android:layout_marginLeft="5dp"
                 android:text="工作时间："
                 android:textColor="@color/text_gray"
-                android:textSize="16sp" />
+                android:textSize="40px" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -61,7 +61,7 @@
                 android:layout_marginLeft="10dp"
                 android:text="@{viewModel.bean.workTime}"
                 android:textColor="@color/text_black"
-                android:textSize="16sp" />
+                android:textSize="40px" />
         </LinearLayout>
 
         <LinearLayout
@@ -73,8 +73,8 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="40px"
+                android:layout_height="40px"
                 android:src="@drawable/phone_small_icon" />
 
             <TextView
@@ -83,7 +83,7 @@
                 android:layout_marginLeft="5dp"
                 android:text="联系电话："
                 android:textColor="@color/text_gray"
-                android:textSize="16sp" />
+                android:textSize="40px" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -91,14 +91,15 @@
                 android:layout_marginLeft="10dp"
                 android:text="@{viewModel.bean.tel}"
                 android:textColor="@color/text_black"
-                android:textSize="16sp" />
+                android:textSize="40px" />
         </LinearLayout>
 
         <TextView
             binding:onClickCommand="@{viewModel.takePhone}"
             style="@style/blue_button"
-            android:layout_width="95dp"
-            android:layout_height="35dp"
+            android:layout_width="280px"
+            android:textSize="40px"
+            android:layout_height="80px"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_marginRight="16dp"

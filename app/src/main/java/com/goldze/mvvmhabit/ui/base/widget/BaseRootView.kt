@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.goldze.mvvmhabit.R
 import com.goldze.mvvmhabit.aioui.Util
+import com.goldze.mvvmhabit.aioui.main.MainActivity
 
 /**
  * Created by Android Studio.
@@ -36,12 +37,18 @@ class BaseRootView(context: Context, attrs: AttributeSet?) : FrameLayout(context
         logo = baseView.findViewById<ImageView>(R.id.iv_logo)
         backIv = baseView.findViewById<ImageView>(R.id.iv_back)
         backIv.setOnClickListener {
-            if (getContext() is Activity) {
+            if (getContext() is Activity && getContext() !is MainActivity) {
                 (getContext() as Activity).finish()
             }
         }
         setAppTitle(Util.shebeiXq?.name ?: "")
         setLogo(Util.shebeiXq?.logo ?: "")
+
+        if (getContext() !is MainActivity) {
+            backIv.visibility = View.VISIBLE
+        }else{
+            backIv.visibility = View.INVISIBLE
+        }
     }
 
 

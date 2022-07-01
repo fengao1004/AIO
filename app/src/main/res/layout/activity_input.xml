@@ -68,7 +68,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center_vertical"
-                            android:text="@{String.valueOf(viewModel.zxfs.value)}" />
+                            android:text="@{String.valueOf(viewModel.zxfs.value)}"
+                            android:textSize="36px" />
 
                         <ImageView
                             android:layout_width="30px"
@@ -117,8 +118,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center_vertical"
-
-                            android:text="@{String.valueOf(viewModel.wtlx.value)}" />
+                            android:text="@{String.valueOf(viewModel.wtlx.value)}"
+                            android:textSize="36px" />
 
                         <ImageView
                             android:layout_width="10dp"
@@ -169,7 +170,7 @@
                             android:gravity="center_vertical"
                             android:hint="请输入"
                             android:textColor="@color/text_black"
-                            android:textSize="14sp" />
+                            android:textSize="36px" />
                     </RelativeLayout>
                 </RelativeLayout>
 
@@ -209,6 +210,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center_vertical"
+                            android:textSize="36px"
                             android:text="@{String.valueOf(viewModel.yyrq.value)}" />
 
                         <ImageView
@@ -257,7 +259,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center_vertical"
-                            android:text="@{String.valueOf(viewModel.yysj.value)}" />
+                            android:text="@{String.valueOf(viewModel.yysj.value)}"
+                            android:textSize="36px" />
 
                         <ImageView
                             android:layout_width="10dp"
@@ -309,7 +312,7 @@
                             android:gravity="center_vertical"
                             android:hint="请输入"
                             android:textColor="@color/text_black"
-                            android:textSize="14sp" />
+                            android:textSize="36px" />
                     </RelativeLayout>
                 </RelativeLayout>
 

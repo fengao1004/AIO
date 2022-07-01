@@ -187,7 +187,7 @@
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabs"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="140px"
                 android:paddingHorizontal="42px"
                 app:tabBackground="@android:color/transparent"
                 app:tabIndicatorHeight="0dp"
@@ -203,6 +203,7 @@
 
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/viewPager"
+                android:layout_marginTop="40px"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 binding:adapter="@{adapter}"

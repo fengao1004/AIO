@@ -43,7 +43,7 @@
         <com.stx.xhb.androidx.XBanner
             android:id="@+id/xbanner"
             android:layout_width="1054px"
-            android:layout_height="454px"
+            android:layout_height="444px"
             android:layout_marginTop="88px"
             android:gravity="center_horizontal"
             app:AutoPlayTime="3000"
@@ -85,7 +85,7 @@
 
         <ImageView
             android:layout_width="1000px"
-            android:layout_height="290px"
+            android:layout_height="280px"
             android:layout_above="@id/rl_button"
             android:layout_below="@id/ll_gonggao"
             android:layout_centerHorizontal="true"
@@ -99,7 +99,7 @@
             android:layout_width="match_parent"
             android:layout_height="310px"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="420px"
+            android:layout_marginBottom="390px"
             android:gravity="center"
             android:orientation="horizontal"
             android:paddingLeft="@dimen/content_padding"
@@ -135,7 +135,7 @@
             android:layout_width="match_parent"
             android:layout_height="310px"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="75px"
+            android:layout_marginBottom="40px"
             android:gravity="center"
             android:orientation="horizontal"
             android:paddingLeft="@dimen/content_padding"
@@ -170,6 +170,7 @@
             android:layout_height="match_parent"
             android:background="#aa333333"
             android:clickable="true"
+            android:visibility="invisible"
             binding:isVisible="@{viewModel.showEditCode}" />
 
         <LinearLayout
@@ -178,6 +179,7 @@
             android:layout_centerInParent="true"
             android:background="@drawable/input_code_heard"
             android:orientation="vertical"
+            android:visibility="invisible"
             binding:isVisible="@{viewModel.showEditCode}">
 
             <TextView

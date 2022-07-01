@@ -11,8 +11,8 @@
         android:layout_height="150px">
         <ImageView
             android:id="@+id/iv_logo"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="60px"
+            android:layout_height="60px"
             android:layout_centerVertical="true"
             android:layout_marginRight="18dp"
             android:layout_toLeftOf="@id/tv_app_title"
@@ -20,7 +20,7 @@
         <TextView
             android:id="@+id/tv_app_title"
             android:layout_width="wrap_content"
-            android:layout_height="49dp"
+            android:layout_height="match_parent"
             android:gravity="center"
             android:layout_centerHorizontal="true"
             android:text="111"
@@ -36,13 +36,14 @@
             android:id="@+id/iv_back"
             android:layout_width="48px"
             android:layout_height="48px"
-            android:layout_marginLeft="15dp"
+            android:translationZ="100px"
+            android:layout_marginLeft="40px"
             android:layout_centerVertical="true"
             android:src="@drawable/back" />
         <TextView
             android:id="@+id/tv_page_title"
             android:layout_width="wrap_content"
-            android:layout_height="49dp"
+            android:layout_height="match_parent"
             android:gravity="center"
             android:layout_centerHorizontal="true"
             android:text="111"

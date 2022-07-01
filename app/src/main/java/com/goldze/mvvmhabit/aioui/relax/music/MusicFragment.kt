@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.SeekBar
 import android.widget.TextView
 import androidx.core.content.ContextCompat.getSystemService
@@ -256,6 +257,7 @@ class MusicFragment : BaseFragment<FragmentMusicBinding, MusicModel>() {
                 val view = layoutInflater.inflate(R.layout.item_tablayout_topic, null)
                 val tv = view.findViewById<TextView>(R.id.tvLabel)
                 tv.text = itemDatum.name
+                view.layoutParams = LinearLayout.LayoutParams(itemDatum.name.length * 48 + 100, 80)
                 tab.customView = view
                 binding.tabs.addTab(tab)
 

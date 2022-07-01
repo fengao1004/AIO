@@ -39,7 +39,7 @@
                 android:layout_marginTop="40px"
                 android:text="@{String.valueOf(viewModel.name.value)}"
                 android:textColor="@color/text_black"
-                android:textSize="16sp"
+                android:textSize="50px"
                 android:textStyle="bold" />
 
             <TextView
@@ -50,7 +50,7 @@
                 android:layout_marginRight="@dimen/content_padding"
                 android:text="@{String.valueOf(viewModel.brief.value)}"
                 android:textColor="@color/text_gray"
-                android:textSize="12sp" />
+                android:textSize="40px" />
         </LinearLayout>
 
 
@@ -80,12 +80,12 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:gravity="center"
                 android:text="请选择您的性别"
                 android:textColor="@color/text_black"
-                android:textSize="16sp"
+                android:textSize="50px"
                 android:textStyle="bold" />
 
             <ImageView
@@ -94,27 +94,29 @@
                 android:background="@color/text_gray" />
 
             <TextView
-                android:layout_width="150dp"
-                android:layout_height="40dp"
+                android:layout_width="480px"
+                android:layout_height="120px"
                 android:layout_gravity="center"
                 android:layout_marginTop="35dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/white_button_blue_stroke"
                 android:gravity="center"
                 android:text="男"
+                android:textSize="48px"
                 binding:onClickCommand="@{viewModel.sexClickA}"
                 binding:sexState="@{viewModel.sex}"
                 binding:sexValue="@{0}" />
 
             <TextView
-                android:layout_width="150dp"
-                android:layout_height="40dp"
+                android:layout_width="480px"
+                android:layout_height="120px"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="35dp"
                 android:background="@drawable/gray_button_buttom"
                 android:gravity="center"
                 android:text="女"
+                android:textSize="48px"
                 binding:onClickCommand="@{viewModel.sexClickB}"
                 binding:sexState="@{viewModel.sex}"
                 binding:sexValue="@{1}" />
@@ -140,12 +142,12 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="120px"
                 android:layout_marginTop="8dp"
                 android:gravity="center"
                 android:text="请选择您的婚姻状况"
                 android:textColor="@color/text_black"
-                android:textSize="16sp"
+                android:textSize="50px"
                 android:textStyle="bold" />
 
             <ImageView
@@ -154,53 +156,57 @@
                 android:background="@color/text_gray" />
 
             <TextView
-                android:layout_width="150dp"
-                android:layout_height="40dp"
+                android:layout_width="480px"
+                android:layout_height="120px"
                 android:layout_gravity="center"
                 android:layout_marginTop="35dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/white_button_blue_stroke"
                 android:gravity="center"
                 android:text="未婚"
+                android:textSize="48px"
                 binding:marryState="@{viewModel.marry}"
                 binding:marryValue="@{0}"
                 binding:onClickCommand="@{viewModel.marryClickA}" />
 
             <TextView
-                android:layout_width="150dp"
-                android:layout_height="40dp"
+                android:layout_width="480px"
+                android:layout_height="120px"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/gray_button_buttom"
                 android:gravity="center"
                 android:text="已婚"
+                android:textSize="48px"
                 binding:marryState="@{viewModel.marry}"
                 binding:marryValue="@{1}"
                 binding:onClickCommand="@{viewModel.marryClickB}" />
 
             <TextView
-                android:layout_width="150dp"
-                android:layout_height="40dp"
+                android:layout_width="480px"
+                android:layout_height="120px"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/gray_button_buttom"
                 android:gravity="center"
                 android:text="离婚"
+                android:textSize="48px"
                 binding:marryState="@{viewModel.marry}"
                 binding:marryValue="@{2}"
                 binding:onClickCommand="@{viewModel.marryClickC}" />
 
             <TextView
-                android:layout_width="150dp"
-                android:layout_height="40dp"
+                android:layout_width="480px"
+                android:layout_height="120px"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="35dp"
                 android:background="@drawable/gray_button_buttom"
                 android:gravity="center"
                 android:text="丧偶"
+                android:textSize="48px"
                 binding:marryState="@{viewModel.marry}"
                 binding:marryValue="@{3}"
                 binding:onClickCommand="@{viewModel.marryClickD}" />
