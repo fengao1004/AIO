@@ -37,6 +37,7 @@
                     android:id="@+id/coverImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/relax_train" />
             </com.goldze.mvvmhabit.ui.corner.ShadowFrameLayout>
 
@@ -79,9 +80,9 @@
                     android:background="@drawable/shape_stroke_label_select"
                     android:paddingHorizontal="60px"
                     android:paddingVertical="12px"
-                    android:textSize="39px"
                     android:text="开始训练"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textSize="39px" />
             </FrameLayout>
         </LinearLayout>
 

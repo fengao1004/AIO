@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/tvLabel"
-    android:gravity="center"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="10px"
     android:background="@drawable/shape_stroke_label_no_select"
-    android:text="标签标签标签标签标签标签"
-    android:textSize="45px"
+    android:gravity="center"
     android:maxLines="1"
-    android:layout_width="0px"
-    android:layout_weight="1"
-    android:layout_height="80px">
+    android:paddingHorizontal="48px"
+    android:paddingVertical="12px"
+    android:text="标签标签"
+    android:textSize="40px">
 
 </TextView>

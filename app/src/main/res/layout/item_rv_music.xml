@@ -36,8 +36,9 @@
                 <ImageView
                     android:id="@+id/coverImage"
                     android:layout_width="match_parent"
-                    android:src="@drawable/player_music_icon_2"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/player_music_icon_2" />
             </com.goldze.mvvmhabit.ui.corner.ShadowFrameLayout>
 
             <FrameLayout
