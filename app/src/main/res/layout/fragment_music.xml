@@ -204,7 +204,7 @@
 
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/viewPager"
-                android:layout_marginTop="40px"
+                android:layout_marginTop="20px"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 binding:adapter="@{adapter}"

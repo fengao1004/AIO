@@ -16,7 +16,7 @@
         xmlns:binding="http://schemas.android.com/apk/res-auto"
         android:layout_width="wrap_content"
         android:layout_height="465px"
-        android:layout_marginTop="40px"
+        android:layout_marginTop="10px"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:paddingHorizontal="39px"
