@@ -64,7 +64,6 @@ class MusicFragment : BaseFragment<FragmentMusicBinding, MusicModel>() {
 
         mAudioManager = getSystemService(context!!, AudioManager::class.java)!!
 
-        binding.brRootView.setAppTitle("心理自助服务一体机")
         binding.brRootView.setPageTitle("音乐放松")
         binding.brRootView.backIv.setOnClickListener {
             activity?.finish()

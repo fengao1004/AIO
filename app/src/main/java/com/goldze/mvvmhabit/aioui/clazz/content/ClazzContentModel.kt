@@ -5,7 +5,6 @@ import android.app.Application
 import androidx.databinding.ObservableInt
 import androidx.lifecycle.MutableLiveData
 import com.goldze.mvvmhabit.aioui.bean.CommentRequestBean
-import com.goldze.mvvmhabit.aioui.clazz.bean.ClazzListResponseBeanData
 import com.goldze.mvvmhabit.aioui.clazz.bean.ClazzResponseBeanData
 import com.goldze.mvvmhabit.aioui.http.HttpRepository
 import io.reactivex.android.schedulers.AndroidSchedulers

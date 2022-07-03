@@ -7,11 +7,6 @@
 
     <data>
 
-        <import type="com.goldze.mvvmhabit.aioui.clazz.adapter.ClazzViewPagerBindingAdapter" />
-
-        <variable
-            name="adapter"
-            type="ClazzViewPagerBindingAdapter" />
 
         <variable
             name="viewModel"
@@ -27,36 +22,11 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/titleBar_height" />
 
-        <LinearLayout
+        <FrameLayout
+            android:id="@+id/fm_root"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/titleBar_height"
-            android:orientation="vertical">
-
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tabs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="42px"
-                app:tabBackground="@android:color/transparent"
-                app:tabMode="scrollable"
-                app:tabPaddingEnd="12px"
-                app:tabPaddingStart="0dp"
-                binding:tabGravity="fill"
-                binding:tabIndicatorColor="@color/colorPrimary"
-                binding:tabSelectedTextColor="@color/colorPrimary"
-                binding:tabTextColor="@android:color/black" />
-
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/viewPager"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                binding:adapter="@{adapter}"
-                binding:itemBinding="@{viewModel.itemBinding}"
-                binding:items="@{viewModel.items}"
-                binding:onPageSelectedCommand="@{viewModel.onPageSelectedCommand}"
-                binding:pageTitles="@{viewModel.pageTitles}" />
-        </LinearLayout>
+            android:layout_marginTop="@dimen/titleBar_height" />
 
     </FrameLayout>
 </layout>

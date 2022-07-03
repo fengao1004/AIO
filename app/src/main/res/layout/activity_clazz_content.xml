@@ -65,8 +65,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    binding:onClickCommand="@{viewModel.clickMulu}"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    binding:onClickCommand="@{viewModel.clickMulu}">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -86,12 +86,12 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    binding:onClickCommand="@{viewModel.clickJieshao}"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    binding:onClickCommand="@{viewModel.clickJieshao}">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -125,12 +125,12 @@
                 </LinearLayout>
             </ScrollView>
 
-            <TextView
+            <WebView
+                android:id="@+id/web_content"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textColor="@color/content_black"
-                android:textSize="@dimen/content_size"
-                binding:isVisible="@{viewModel.selectType == 1}" />
+                binding:isVisible="@{viewModel.selectType == 1}"
+                binding:render="@{viewModel.bean.courseDescribe}" />
         </LinearLayout>
 
 

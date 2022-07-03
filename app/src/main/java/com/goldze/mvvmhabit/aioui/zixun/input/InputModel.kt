@@ -27,6 +27,11 @@ class InputModel(application: Application) : BaseViewModel<HttpRepository>(appli
         model = HttpRepository()
     }
 
+
+    var cancelLogin = BindingCommand<String>(BindingAction {
+        activity.finish()
+    })
+
     @SuppressLint("CheckResult")
     fun commit(zxfs: String, wtlx: String, yyrq: String, yysj: String, jtwt: String, yydd: String) {
         var bean = InputRequestBean(
@@ -52,12 +57,10 @@ class InputModel(application: Application) : BaseViewModel<HttpRepository>(appli
     lateinit var password: String
     lateinit var username: String
     var showLogin = ObservableBoolean(true)
-
     var zxfs: TextObserver = TextObserver("请选择")
     var wtlx: TextObserver = TextObserver("请选择")
     var jtwt: TextObserver = TextObserver("请选择")
     var yyrq: TextObserver = TextObserver("请选择")
     var yysj: TextObserver = TextObserver("请选择")
     var yydd: TextObserver = TextObserver("请选择")
-
 }

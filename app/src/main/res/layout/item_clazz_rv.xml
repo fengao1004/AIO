@@ -4,45 +4,52 @@
 
     <data>
 
-        <import type="com.goldze.mvvmhabit.aioui.clazz.vm.ClazzRvItemViewModel" />
+        <import type="com.goldze.mvvmhabit.aioui.common.viewpagerfragment.viewmodel.AIORecyclerViewItemViewModel" />
 
         <variable
             name="viewModel"
-            type="ClazzRvItemViewModel" />
+            type="AIORecyclerViewItemViewModel" />
     </data>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:binding="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:paddingLeft="@dimen/content_padding"
-        android:paddingRight="@dimen/content_padding">
+        android:paddingRight="@dimen/content_padding"
+        binding:onClickCommand="@{viewModel.itemClick}"
+        binding:onLongClickCommand="@{viewModel.itemLongClick}">
 
-        <ImageView
-            android:id="@+id/iv_left"
-            android:layout_width="480px"
+
+        <com.goldze.mvvmhabit.ui.corner.ShadowFrameLayout
+            android:id="@+id/sfl"
+            android:layout_width="450px"
             android:layout_height="360px"
-            android:layout_marginTop="10dp"
-            binding:onClickCommand="@{viewModel.clickLeft}"
-            binding:url="@{viewModel.left.faceImage}"
-            tools:ignore="PxUsage" />
+            app:sl_cornerRadius="24px">
+
+            <ImageView
+                android:id="@+id/iv_left"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/lib_mind_gallery_pic" />
+        </com.goldze.mvvmhabit.ui.corner.ShadowFrameLayout>
 
         <LinearLayout
-            android:layout_width="480px"
+            android:layout_width="450px"
             android:layout_height="wrap_content"
-            android:layout_below="@id/iv_left"
-            android:orientation="vertical"
-            binding:onClickCommand="@{viewModel.clickLeft}">
+            android:layout_below="@id/sfl"
+            android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:ellipsize="end"
                 android:singleLine="true"
-                android:text="@{viewModel.left.name}"
                 android:textColor="@color/text_black"
                 android:textSize="36px" />
 
@@ -58,64 +65,12 @@
                     android:src="@drawable/eye" />
 
                 <TextView
-                    android:layout_marginLeft="10dp"
+                    android:id="@+id/tv_num"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:textSize="32px"
-                    android:text="@{viewModel.leftNum}" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <ImageView
-            binding:onClickCommand="@{viewModel.clickRight}"
-            android:id="@+id/iv_right"
-            android:layout_width="480px"
-            android:layout_height="360px"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="10dp"
-            binding:isVisible="@{viewModel.right != null}"
-            binding:url="@{viewModel.left.faceImage}"
-            tools:ignore="PxUsage" />
-
-        <LinearLayout
-            binding:onClickCommand="@{viewModel.clickRight}"
-            android:layout_width="480px"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/iv_right"
-            android:layout_alignParentEnd="true"
-            android:orientation="vertical"
-            binding:isVisible="@{viewModel.right != null}">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:ellipsize="end"
-                android:singleLine="true"
-                android:text="@{viewModel.left.name}"
-                android:textColor="@color/text_black"
-                android:textSize="36px" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/eye" />
-
-                <TextView
                     android:layout_marginLeft="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:textSize="32px"
                     android:gravity="center_vertical"
-                    android:text="@{viewModel.leftNum}" />
+                    android:textSize="32px" />
             </LinearLayout>
 
         </LinearLayout>

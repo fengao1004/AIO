@@ -3,7 +3,7 @@ package com.goldze.mvvmhabit.aioui.http
 import com.goldze.mvvmhabit.aioui.bean.CommentRequestBean
 import com.goldze.mvvmhabit.aioui.bean.TypeResponseBean
 import com.goldze.mvvmhabit.aioui.bean.list.*
-import com.goldze.mvvmhabit.aioui.clazz.bean.ClazzListResponseBean
+import com.goldze.mvvmhabit.aioui.clazz.bean.ClazzListResponseBeanRecord
 import com.goldze.mvvmhabit.aioui.clazz.bean.ClazzResponseBean
 import com.goldze.mvvmhabit.aioui.kepu.KepuBean
 import com.goldze.mvvmhabit.aioui.kepu.content.KepuItemBean
@@ -49,7 +49,7 @@ interface Api {
      * 获取课程列表
      */
     @POST("/client/api/course/getPageList")
-    fun getClazzList(@Body bean: CommentRequestBean): Observable<ClazzListResponseBean>
+    fun getClazzList(@Body bean: CommentRequestBean): Observable<CommonListResponseBean<ClazzListResponseBeanRecord>>
 
 
     /**

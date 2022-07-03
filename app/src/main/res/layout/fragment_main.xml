@@ -22,7 +22,7 @@
             android:layout_marginTop="14px"
             android:id="@+id/iv_small_log"
             android:layout_width="120px"
-            android:layout_height="60px"
+            android:layout_height="80px"
             android:layout_marginLeft="10dp"
             android:src="@drawable/small_logo" />
 
@@ -30,21 +30,21 @@
             android:layout_marginTop="14px"
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
-            android:layout_height="60px"
+            android:layout_height="80px"
             android:layout_marginLeft="@dimen/content_padding"
             android:layout_toRightOf="@id/iv_small_log"
             android:gravity="center"
             android:text="心理自助服务一体机"
             android:textColor="@color/black"
-            android:textSize="48px"
+            android:textSize="58px"
             android:textStyle="bold" />
 
 
         <com.stx.xhb.androidx.XBanner
             android:id="@+id/xbanner"
             android:layout_width="1054px"
-            android:layout_height="444px"
-            android:layout_marginTop="88px"
+            android:layout_height="414px"
+            android:layout_marginTop="108px"
             android:gravity="center_horizontal"
             app:AutoPlayTime="3000"
             app:isShowIndicatorOnlyOne="true"

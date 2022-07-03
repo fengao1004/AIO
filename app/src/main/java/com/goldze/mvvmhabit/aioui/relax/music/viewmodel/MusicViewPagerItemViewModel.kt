@@ -63,12 +63,12 @@ class MusicViewPagerItemViewModel(viewModel: MusicModel, application: Applicatio
         loadMoreData()
     })
 
-    var nextPage = 1
+    var nextPage = 2
 
     @SuppressLint("CheckResult")
     private fun refreshData() {
         val requestBody = CommentRequestBean.getEmpty()
-        requestBody.pageNum = 0
+        requestBody.pageNum = 1
         if (tabBean != null) {
             requestBody.id = tabBean?.id
         }
@@ -100,7 +100,7 @@ class MusicViewPagerItemViewModel(viewModel: MusicModel, application: Applicatio
                             //双向绑定动态添加Item
                             observableList.add(itemViewModel)
                         }
-                        nextPage = 1
+                        nextPage = 2
                         //刷新完成收回
                         uiChangeObservable.finishLoadmore.call()
                         uiChangeObservable.finishRefreshing.call()

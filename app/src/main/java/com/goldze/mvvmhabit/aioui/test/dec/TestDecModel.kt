@@ -89,7 +89,20 @@ class TestDecModel(application: Application) : BaseViewModel<HttpRepository>(app
         "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.jj20.com%2Fup%2Fallimg%2F1113%2F0F420110430%2F200F4110430-6-1200.jpg&refer=http%3A%2F%2Fimg.jj20.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1658728824&t=3c80f1fe4665ce36ff2063dc4b985308"
     var startTest = BindingCommand<String>(BindingAction {
         if (type == "normal") {
-            showSexChoose.set(true)
+            if (detail?.data?.scaVo?.code?.contains("AiSenKeRenGeWenJuanBaoGao") == true) {
+                showSexChoose.set(true)
+            } else if (detail?.data?.scaVo?.code?.contains("ShengHuoShiJianWenJuan") == true) {
+                showMarryChoose.set(true)
+            } else {
+                var intent = Intent(application, TestContentActivity::class.java)
+                intent.putExtra("marry", "")
+                intent.putExtra("bean", detail)
+                intent.putExtra("sex", "")
+                intent.putExtra("type", type)
+                intent.putExtra("name", name.value)
+                activity.finish()
+                activity.startActivity(intent)
+            }
         } else {
             var intent = Intent(application, TestContentActivity::class.java)
             intent.putExtra("type", type)
@@ -122,9 +135,29 @@ class TestDecModel(application: Application) : BaseViewModel<HttpRepository>(app
         sex.set(1)
     })
     var sexClick = BindingCommand<String>(BindingAction {
-        showSexChoose.set(false)
-        showMarryChoose.set(true)
+        var intent = Intent(application, TestContentActivity::class.java)
+        intent.putExtra(
+            "marry", when (marry.get()) {
+                0 -> "未婚"
+                1 -> "已婚"
+                2 -> "离婚"
+                3 -> "丧偶"
+                else -> "未婚"
+            }
+        )
+        intent.putExtra("bean", detail)
+        intent.putExtra("sex", when (sex.get()) {
+            0 -> "男"
+            1 -> "女"
+            else -> "男"
+        }
+        )
+        intent.putExtra("type", type)
+        intent.putExtra("name", name.value)
+        activity.finish()
+        activity.startActivity(intent)
     })
+
     var marryClick = BindingCommand<String>(BindingAction {
         var intent = Intent(application, TestContentActivity::class.java)
         intent.putExtra(
@@ -137,13 +170,7 @@ class TestDecModel(application: Application) : BaseViewModel<HttpRepository>(app
             }
         )
         intent.putExtra("bean", detail)
-        intent.putExtra(
-            "sex", when (sex.get()) {
-                0 -> "男"
-                1 -> "女"
-                else -> "男"
-            }
-        )
+        intent.putExtra("sex", "")
         intent.putExtra("type", type)
         intent.putExtra("name", name.value)
         activity.finish()

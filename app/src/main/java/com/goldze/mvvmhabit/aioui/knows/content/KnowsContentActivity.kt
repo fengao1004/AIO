@@ -21,8 +21,15 @@ class KnowsContentActivity : BaseActivity<ActivityKnowsContentBinding, KnowsCont
 
     override fun initData() {
         super.initData()
-        binding.brRootView.setPageTitle("情绪扫描")
         bean = intent.getSerializableExtra("bean") as KnowsBeanRecord
+        binding.brRootView.setPageTitle(bean?.name ?: "")
         viewModel.setKnowBean(bean!!)
+        binding.webContent.loadDataWithBaseURL(
+            null,
+            bean?.infoDescribe ?: "",
+            "text/html",
+            "utf-8",
+            null
+        )
     }
 }

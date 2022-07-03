@@ -6,10 +6,8 @@ import android.view.View
 import android.widget.TextView
 import com.goldze.mvvmhabit.BR
 import com.goldze.mvvmhabit.R
-import com.goldze.mvvmhabit.aioui.clazz.bean.ClazzListResponseBeanData
 import com.goldze.mvvmhabit.aioui.clazz.bean.ClazzResponseBeanData
 import com.goldze.mvvmhabit.databinding.ActivityClazzContentBinding
-import com.goldze.mvvmhabit.databinding.ActivityScanBinding
 import com.shuyu.gsyvideoplayer.GSYVideoManager
 import me.goldze.mvvmhabit.base.BaseActivity
 
@@ -33,6 +31,13 @@ class ClazzContentActivity : BaseActivity<ActivityClazzContentBinding, ClazzCont
         viewModel.loadData(id ?: "")
         viewModel.beanLiveData.observe(this) {
             bean = it
+            binding.webContent.loadDataWithBaseURL(
+                null,
+                bean.courseDescribe,
+                "text/html",
+                "utf-8",
+                null
+            )
             bean.itemList.forEachIndexed { index, it ->
                 var view: TextView = LayoutInflater.from(this)
                     .inflate(R.layout.clazz_item_text, binding.llItemRoot, false) as TextView

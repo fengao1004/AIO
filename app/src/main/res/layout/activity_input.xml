@@ -210,8 +210,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center_vertical"
-                            android:textSize="36px"
-                            android:text="@{String.valueOf(viewModel.yyrq.value)}" />
+                            android:text="@{String.valueOf(viewModel.yyrq.value)}"
+                            android:textSize="36px" />
 
                         <ImageView
                             android:layout_width="10dp"
@@ -338,110 +338,124 @@
             android:visibility="gone"
             binding:isVisible="@{viewModel.showLogin}" />
 
-        <LinearLayout
+        <RelativeLayout
+            android:clipChildren="false"
             android:layout_width="680px"
             android:layout_height="568px"
             android:layout_gravity="center"
-            android:background="@drawable/shape_helf_r"
-            android:orientation="vertical"
-            android:visibility="gone"
+            android:visibility="visible"
             binding:isVisible="@{viewModel.showLogin}">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80px"
-                android:background="@drawable/shape_helf_r_blue"
-                android:gravity="center"
-                android:text="身份验证"
-                android:textColor="@color/white"
-                android:textSize="48px" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40px"
-                android:gravity="center"
-                android:text="请输入心理平台账号"
-                android:textColor="@color/text_black"
-                android:textSize="38px" />
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="40px">
+                android:layout_height="match_parent"
+                android:background="@drawable/shape_helf_r"
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tv_code_a"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="80px"
-                    android:gravity="center_vertical"
-                    android:text="账号:"
-                    android:textColor="@color/text_black"
-                    android:textSize="38px"
-                    android:textStyle="normal" />
-
-                <ImageView
-                    android:layout_width="420px"
-                    android:layout_height="80px"
-                    android:layout_marginLeft="10dp"
-                    android:layout_toRightOf="@id/tv_code_a"
-                    android:background="@drawable/shape_stroke_gary" />
-
-                <EditText
-                    android:id="@+id/et_code_a"
-                    android:layout_width="420px"
-                    android:layout_height="80px"
-                    android:layout_marginLeft="10dp"
-                    android:layout_toRightOf="@id/tv_code_a"
-                    android:background="@null"
-                    android:textSize="38px" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="40px">
+                    android:background="@drawable/shape_helf_r_blue"
+                    android:gravity="center"
+                    android:text="身份验证"
+                    android:textColor="@color/white"
+                    android:textSize="48px" />
 
                 <TextView
-                    android:id="@+id/tv_code"
-                    android:layout_width="wrap_content"
-                    android:layout_height="80px"
-                    android:gravity="center_vertical"
-                    android:text="密码:"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40px"
+                    android:gravity="center"
+                    android:text="请输入心理平台账号"
                     android:textColor="@color/text_black"
-                    android:textSize="38px"
-                    android:textStyle="normal" />
-
-                <ImageView
-                    android:layout_width="420px"
-                    android:layout_height="80px"
-                    android:layout_marginLeft="10dp"
-                    android:layout_toRightOf="@id/tv_code"
-                    android:background="@drawable/shape_stroke_gary" />
-
-                <EditText
-                    android:id="@+id/et_code"
-                    android:layout_width="420px"
-                    android:layout_height="80px"
-                    android:layout_marginLeft="10dp"
-                    android:layout_toRightOf="@id/tv_code"
-                    android:background="@null"
                     android:textSize="38px" />
-            </RelativeLayout>
 
-            <TextView
-                android:id="@+id/tv_commit"
-                style="@style/blue_button"
-                android:layout_width="300px"
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="40px">
+
+                    <TextView
+                        android:id="@+id/tv_code_a"
+                        android:layout_width="wrap_content"
+                        android:layout_height="80px"
+                        android:gravity="center_vertical"
+                        android:text="账号:"
+                        android:textColor="@color/text_black"
+                        android:textSize="38px"
+                        android:textStyle="normal" />
+
+                    <ImageView
+                        android:layout_width="420px"
+                        android:layout_height="80px"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@id/tv_code_a"
+                        android:background="@drawable/shape_stroke_gary" />
+
+                    <EditText
+                        android:id="@+id/et_code_a"
+                        android:layout_width="420px"
+                        android:layout_height="80px"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@id/tv_code_a"
+                        android:background="@null"
+                        android:textSize="38px" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="40px">
+
+                    <TextView
+                        android:id="@+id/tv_code"
+                        android:layout_width="wrap_content"
+                        android:layout_height="80px"
+                        android:gravity="center_vertical"
+                        android:text="密码:"
+                        android:textColor="@color/text_black"
+                        android:textSize="38px"
+                        android:textStyle="normal" />
+
+                    <ImageView
+                        android:layout_width="420px"
+                        android:layout_height="80px"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@id/tv_code"
+                        android:background="@drawable/shape_stroke_gary" />
+
+                    <EditText
+                        android:id="@+id/et_code"
+                        android:layout_width="420px"
+                        android:layout_height="80px"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@id/tv_code"
+                        android:background="@null"
+                        android:textSize="38px" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tv_commit"
+                    style="@style/blue_button"
+                    android:layout_width="300px"
+                    android:layout_height="80px"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="51px"
+                    android:gravity="center"
+                    android:text="提交"
+                    android:textSize="36px" />
+            </LinearLayout>
+            <ImageView
+                android:layout_width="80px"
                 android:layout_height="80px"
-                android:layout_gravity="center"
-                android:layout_marginTop="51px"
-                android:gravity="center"
-                android:text="提交"
-                android:textSize="36px" />
-        </LinearLayout>
+                android:src="@drawable/cancel"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="40px"
+                binding:onClickCommand="@{viewModel.cancelLogin}"
+                />
+        </RelativeLayout>
     </FrameLayout>
 </layout>

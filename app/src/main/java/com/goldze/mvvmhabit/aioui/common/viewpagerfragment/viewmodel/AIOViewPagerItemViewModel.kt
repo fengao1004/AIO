@@ -2,6 +2,7 @@ package com.goldze.mvvmhabit.aioui.common.viewpagerfragment.viewmodel
 
 import android.annotation.SuppressLint
 import android.app.Application
+import android.util.Log
 import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableList
 import com.goldze.mvvmhabit.BR
@@ -62,16 +63,16 @@ class AIOViewPagerItemViewModel(
         loadMoreData()
     })
 
-    var nextPage = 1
+    var nextPage = 2
 
     @SuppressLint("CheckResult")
     private fun refreshData() {
         val requestBody = CommentRequestBean.getEmpty()
-        requestBody.pageNum = 0
+        requestBody.pageNum = 1
         if (tabBean != null) {
             requestBody.id = tabBean?.id
         }
-
+        Log.i("fengao_xiaomi", "refreshData 1 :${requestBody.pageNum} ")
         model.getCommonListData(CommentRequestBean(requestBody, CommentRequestBean.getHeader()))
             .compose(RxUtils.schedulersTransformer()) //线程调度
             .doOnSubscribe(this) //请求与ViewModel周期同步
@@ -97,7 +98,7 @@ class AIOViewPagerItemViewModel(
                             //双向绑定动态添加Item
                             observableList.add(itemViewModel)
                         }
-                        nextPage = 1
+                        nextPage = 2
                         //刷新完成收回
                         uiChangeObservable.finishLoadmore.call()
                         uiChangeObservable.finishRefreshing.call()
@@ -127,7 +128,7 @@ class AIOViewPagerItemViewModel(
         if (tabBean != null) {
             requestBody.id = tabBean?.id
         }
-
+        Log.i("fengao_xiaomi", "loadMoreData 1 :${requestBody.pageNum} ")
         model.getCommonListData(CommentRequestBean(requestBody, CommentRequestBean.getHeader()))
             .compose(RxUtils.schedulersTransformer()) //线程调度
             .doOnSubscribe(this) //请求与ViewModel周期同步
