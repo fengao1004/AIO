@@ -267,10 +267,10 @@ class TestContentModel(application: Application) : BaseViewModel<HttpRepository>
                 .subscribe({
                     if (it.success) {
                         var pinjieUrl = when {
-                            name.contains("焦虑自评") -> {
+                            name.contains("焦虑") -> {
                                 "/anxiety?scaRecId="
                             }
-                            name.contains("抑郁症状") -> {
+                            name.contains("抑郁") -> {
                                 "/depressive?scaRecId="
                             }
                             name.contains("睡眠状况") -> {
@@ -282,7 +282,7 @@ class TestContentModel(application: Application) : BaseViewModel<HttpRepository>
                             name.contains("大五人格") -> {
                                 "/fiveRG?scaRecId="
                             }
-                            name.contains("领悟社会") -> {
+                            name.contains("社会支持") -> {
                                 "/comprehend?scaRecId="
                             }
                             name.contains("心理复原力") -> {

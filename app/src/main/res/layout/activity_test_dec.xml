@@ -30,6 +30,7 @@
                 android:id="@+id/iv_img"
                 android:layout_width="match_parent"
                 android:layout_height="460px"
+                android:scaleType="centerCrop"
                 binding:url="@{String.valueOf(viewModel.imgUrl.value)}" />
 
             <TextView

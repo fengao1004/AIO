@@ -26,7 +26,7 @@ class TestActivity : BaseActivity<ActivityTestBinding, TestModel>() {
 
     override fun initData() {
         super.initData()
-        binding.brRootView.setPageTitle("专业评测")
+        binding.brRootView.setPageTitle("专业测评")
         binding.brRootView.hidePageTitle()
         viewModel.isSpecialty.observe(this, {
             showFg(it)

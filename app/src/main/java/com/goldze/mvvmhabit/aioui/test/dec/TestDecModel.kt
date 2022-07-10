@@ -146,11 +146,12 @@ class TestDecModel(application: Application) : BaseViewModel<HttpRepository>(app
             }
         )
         intent.putExtra("bean", detail)
-        intent.putExtra("sex", when (sex.get()) {
-            0 -> "男"
-            1 -> "女"
-            else -> "男"
-        }
+        intent.putExtra(
+            "sex", when (sex.get()) {
+                0 -> "男"
+                1 -> "女"
+                else -> "男"
+            }
         )
         intent.putExtra("type", type)
         intent.putExtra("name", name.value)
