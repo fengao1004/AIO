@@ -5,7 +5,7 @@ open class BaseRecord {
     var clickCount: Int? = null
     var createTime: String? = null
     var deptId: Int? = null
-    var id: Int = 0
+    var id: Long = 0
     var isDel: Int = 0
     var name: String? = null
     var status: Int? = null

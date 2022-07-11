@@ -33,6 +33,7 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
+                    android:scaleType="centerCrop"
                     android:layout_width="match_parent"
                     android:layout_height="400px"
                     binding:url="@{viewModel.bean.homeImage}" />
@@ -46,7 +47,7 @@
                     android:ellipsize="end"
                     android:singleLine="true"
                     android:text="@{viewModel.bean.name}"
-                    android:textColor="@color/text_black"
+                    android:textColor="@color/white"
                     android:textSize="48px"
                     android:textStyle="bold"
                     tools:text="asdada" />
@@ -58,7 +59,7 @@
                     android:layout_marginLeft="@dimen/content_padding"
                     android:layout_marginTop="40px"
                     android:text="@{viewModel.bean.brief}"
-                    android:textColor="@color/text_black"
+                    android:textColor="@color/white"
                     android:textSize="36px"
                     tools:text="asdada" />
 

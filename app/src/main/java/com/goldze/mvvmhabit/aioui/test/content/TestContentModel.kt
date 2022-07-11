@@ -266,6 +266,11 @@ class TestContentModel(application: Application) : BaseViewModel<HttpRepository>
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     if (it.success) {
+                        if (name.contains("采集工具")){
+                            ToastUtils.showShort("答题成功")
+                            activity?.finish()
+                            return@subscribe
+                        }
                         var pinjieUrl = when {
                             name.contains("焦虑") -> {
                                 "/anxiety?scaRecId="
@@ -303,13 +308,13 @@ class TestContentModel(application: Application) : BaseViewModel<HttpRepository>
                             name.contains("工作投入") -> {
                                 "/workTR?scaRecId="
                             }
-                            name.contains("中小学心理健康") -> {
+                            name.contains("中小学生心理健康") -> {
                                 "/zxxxl?scaRecId="
                             }
                             name.contains("学业成就") -> {
                                 "/xycj?scaRecId="
                             }
-                            name.contains("中小学心理适应") -> {
+                            name.contains("中小学生适应能力") -> {
                                 "/zxxsy?scaRecId="
                             }
                             name.contains("家庭沟通") -> {
@@ -338,11 +343,13 @@ class TestContentModel(application: Application) : BaseViewModel<HttpRepository>
                 })
         } else {
             var result = ""
+            var title = ""
             detail2.data.quesList.forEach {
                 var num = 0
                 it.optList.forEach {
                     if (it.isCheck.get()) {
                         result = it.result
+                        title = it.title
                     } else {
                         num++
                     }
@@ -354,6 +361,7 @@ class TestContentModel(application: Application) : BaseViewModel<HttpRepository>
             }
             var intent = Intent(activity, FunnyResultActivity::class.java)
             intent.putExtra("name", detail2.data.name)
+            intent.putExtra("title", title)
             intent.putExtra("result", result)
             activity.startActivity(intent)
         }

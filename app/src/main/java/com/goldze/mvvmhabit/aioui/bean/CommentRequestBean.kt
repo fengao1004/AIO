@@ -13,10 +13,10 @@ data class CommentRequestBean(
     var requestHeader: RequestHeader
 ) {
     companion object {
-        var DEFAULT = RequestBody(0, "0", 0, 100, "", 1, "null", "",0)
-        
+        var DEFAULT = RequestBody(0, "0", 0, 100, "", 1, "null", "", 0, "")
+
         fun getEmpty(): RequestBody {
-            return RequestBody(0, "0", 0, 100, "", 1, "null", "",0)
+            return RequestBody(0, "0", 0, 100, "", 1, "null", "", 0, "")
         }
 
         fun getHeader(): RequestHeader {
@@ -35,6 +35,7 @@ data class RequestBody(
     var sysModuleTypeId: String,
     var systemPrefix: String,
     var themeId: Int,
+    var typeId: String,
 )
 
 data class RequestHeader(

@@ -2,6 +2,7 @@ package com.goldze.mvvmhabit.aioui.relax.music.viewmodel
 
 import android.annotation.SuppressLint
 import android.app.Application
+import android.util.Log
 import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableList
 import com.goldze.mvvmhabit.BR
@@ -10,6 +11,7 @@ import com.goldze.mvvmhabit.aioui.bean.CommentRequestBean
 import com.goldze.mvvmhabit.aioui.bean.TypeResponseBeanData
 import com.goldze.mvvmhabit.aioui.bean.list.BaseRecord
 import com.goldze.mvvmhabit.aioui.bean.list.CommonListResponseBean
+import com.goldze.mvvmhabit.aioui.bean.list.MusicRecord
 import com.goldze.mvvmhabit.aioui.common.viewpagerfragment.viewmodel.AIORecyclerViewItemViewModel
 import com.goldze.mvvmhabit.aioui.common.viewpagerfragment.viewmodel.AIOViewPagerFragmentModel
 import com.goldze.mvvmhabit.aioui.http.impl.MusicRepository
@@ -26,7 +28,11 @@ import me.goldze.mvvmhabit.utils.RxUtils
 import me.goldze.mvvmhabit.utils.ToastUtils
 import me.tatarka.bindingcollectionadapter2.ItemBinding
 
-class MusicViewPagerItemViewModel(viewModel: MusicModel, application: Application, repository: MusicRepository) :
+class MusicViewPagerItemViewModel(
+    viewModel: MusicModel,
+    application: Application,
+    repository: MusicRepository
+) :
     BaseViewModel<MusicRepository>(application, repository) {
 
 
@@ -69,9 +75,13 @@ class MusicViewPagerItemViewModel(viewModel: MusicModel, application: Applicatio
     private fun refreshData() {
         val requestBody = CommentRequestBean.getEmpty()
         requestBody.pageNum = 1
+        var id = ""
         if (tabBean != null) {
             requestBody.id = tabBean?.id
+            requestBody.typeId = tabBean?.id ?: ""
+            id = requestBody.id ?: "null"
         }
+
 
         //模拟网络上拉加载更多
         model.getCommonListData(CommentRequestBean(requestBody, CommentRequestBean.getHeader()))
@@ -96,17 +106,25 @@ class MusicViewPagerItemViewModel(viewModel: MusicModel, application: Applicatio
                         }
                         observableList.clear()
                         for (record in records) {
-                            val itemViewModel = MusicRvItemViewModel(this@MusicViewPagerItemViewModel, record)
+                            val itemViewModel =
+                                MusicRvItemViewModel(this@MusicViewPagerItemViewModel, record)
                             //双向绑定动态添加Item
                             observableList.add(itemViewModel)
                         }
+                        Log.i("fengao_xiaomi", "onNext: ${observableList.size}")
                         nextPage = 2
                         //刷新完成收回
                         uiChangeObservable.finishLoadmore.call()
                         uiChangeObservable.finishRefreshing.call()
+                        if (id == "null" && records.isNotEmpty()) {
+                            (records[0] as MusicRecord).itemPosition = 0
+                            parentViewModel?.itemClickEvent?.value = records[0]
+                        }
                     }
 
                     override fun onError(throwable: Throwable) {
+                        throwable.printStackTrace()
+                        Log.i("fengao_xiaomi", "onError: ${throwable.message}")
                         if (throwable is ResponseThrowable) {
                             ToastUtils.showShort((throwable as ResponseThrowable).message)
                         }
@@ -129,6 +147,7 @@ class MusicViewPagerItemViewModel(viewModel: MusicModel, application: Applicatio
         requestBody.pageNum = nextPage
         if (tabBean != null) {
             requestBody.id = tabBean?.id
+            requestBody.typeId = tabBean?.id ?: ""
         }
 
         //模拟网络上拉加载更多
@@ -153,11 +172,13 @@ class MusicViewPagerItemViewModel(viewModel: MusicModel, application: Applicatio
                             return
                         }
                         for (record in records) {
-                            val itemViewModel = MusicRvItemViewModel(this@MusicViewPagerItemViewModel, record)
+                            val itemViewModel =
+                                MusicRvItemViewModel(this@MusicViewPagerItemViewModel, record)
                             //双向绑定动态添加Item
-                            nextPage++
                             observableList.add(itemViewModel)
                         }
+                        Log.i("fengao_xiaomi", "onNext: ${observableList.size}")
+                        nextPage++
                         //刷新完成收回
                         uiChangeObservable.finishLoadmore.call()
                         uiChangeObservable.finishRefreshing.call()

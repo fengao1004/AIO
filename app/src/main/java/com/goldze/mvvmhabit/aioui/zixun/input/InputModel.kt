@@ -47,10 +47,10 @@ class InputModel(application: Application) : BaseViewModel<HttpRepository>(appli
                     ToastUtils.showShort("预约成功")
                     activity.finish()
                 } else {
-                    ToastUtils.showShort("预约失败，请稍微再试 ${it.message}")
+                    ToastUtils.showShort("预约失败，请稍后再试 ${it.message}")
                 }
             }, {
-                ToastUtils.showShort("预约失败，请稍微再试 ${it.message}")
+                ToastUtils.showShort("预约失败，请稍后再试 ${it.message}")
             })
     }
 

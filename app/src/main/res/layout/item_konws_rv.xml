@@ -25,6 +25,7 @@
             android:layout_width="480px"
             android:layout_height="360px"
             android:layout_marginTop="10dp"
+            android:scaleType="centerCrop"
             binding:onClickCommand="@{viewModel.clickLeft}"
             binding:url="@{viewModel.left.faceImage}"
             tools:ignore="PxUsage" />
@@ -74,6 +75,7 @@
             android:layout_height="360px"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="10dp"
+            android:scaleType="centerCrop"
             binding:isVisible="@{viewModel.right != null}"
             binding:onClickCommand="@{viewModel.clickRight}"
             binding:url="@{viewModel.left.faceImage}"

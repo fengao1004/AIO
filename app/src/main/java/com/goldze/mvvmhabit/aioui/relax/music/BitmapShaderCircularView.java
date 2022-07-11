@@ -27,14 +27,17 @@ public class BitmapShaderCircularView extends ImageView {
 
     public BitmapShaderCircularView(Context context) {
         super(context);
+        setScaleType(ScaleType.CENTER_CROP);
     }
 
     public BitmapShaderCircularView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        setScaleType(ScaleType.CENTER_CROP);
     }
 
     public BitmapShaderCircularView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        setScaleType(ScaleType.CENTER_CROP);
     }
 
     @Override

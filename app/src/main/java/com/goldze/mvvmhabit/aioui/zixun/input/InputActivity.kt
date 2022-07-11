@@ -72,17 +72,21 @@ class InputActivity : BaseActivity<ActivityInputBinding, InputModel>() {
             val picker = DatePicker(this)
             var wheelLayout: DateWheelLayout = picker.wheelLayout;
             wheelLayout.setDateLabel("年", "月", "日");
+            wheelLayout.setTextSize(40.0f)
             wheelLayout.setResetWhenLinkage(false)
             picker.setOnDatePickedListener { a, b, c ->
                 viewModel.yyrq.value = "$a-$b-$c"
             }
             picker.cancelView.text = "取消"
+            picker.cancelView.textSize = 45.0f
             picker.okView.text = "确定"
+            picker.okView.textSize = 45.0f
             picker.show()
         }
         binding.tvYysj.setOnClickListener {
             val picker = TimePicker(this)
             var wheelLayout = picker.wheelLayout;
+            wheelLayout.setTextSize(40.0f)
             wheelLayout.setTimeMode(TimeMode.HOUR_24_NO_SECOND)
             wheelLayout.setTimeLabel("点", "分", "秒");
             picker.setOnTimeMeridiemPickedListener { hour, minute, second, isAnteMeridiem ->
@@ -94,7 +98,9 @@ class InputActivity : BaseActivity<ActivityInputBinding, InputModel>() {
                 viewModel.yysj.value = "$hour:$ms"
             }
             picker.cancelView.text = "取消"
+            picker.cancelView.textSize = 45.0f
             picker.okView.text = "确定"
+            picker.okView.textSize = 45.0f
             picker.show()
         }
 

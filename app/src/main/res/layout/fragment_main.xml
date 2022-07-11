@@ -21,7 +21,7 @@
         <ImageView
             android:layout_marginTop="14px"
             android:id="@+id/iv_small_log"
-            android:layout_width="120px"
+            android:layout_width="wrap_content"
             android:layout_height="80px"
             android:layout_marginLeft="10dp"
             android:src="@drawable/small_logo" />
@@ -69,8 +69,8 @@
             binding:onClickCommand="@{viewModel.gotoGonggao}">
 
             <ImageView
-                android:layout_width="30px"
-                android:layout_height="30px"
+                android:layout_width="45px"
+                android:layout_height="45px"
                 android:layout_marginLeft="8dp"
                 android:src="@drawable/gonggao" />
 

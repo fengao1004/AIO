@@ -11,7 +11,7 @@
         android:layout_height="150px">
         <ImageView
             android:id="@+id/iv_logo"
-            android:layout_width="60px"
+            android:layout_width="wrap_content"
             android:layout_height="60px"
             android:layout_centerVertical="true"
             android:layout_marginRight="18dp"

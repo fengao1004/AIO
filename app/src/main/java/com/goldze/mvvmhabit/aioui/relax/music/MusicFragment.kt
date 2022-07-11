@@ -214,6 +214,7 @@ class MusicFragment : BaseFragment<FragmentMusicBinding, MusicModel>() {
     override fun initViewObservable() {
         super.initViewObservable()
         viewModel.itemClickEvent.observe(this) { entity ->
+            Log.i("fengao_xiaomi", "initViewObservable: ${entity.toString()}")
             if (entity is MusicRecord) {
                 // 是否为暂停
                 if (viewModel.currentTabPosition == mActiveTabPosition

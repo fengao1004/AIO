@@ -48,36 +48,39 @@
                     android:id="@+id/music_main_icon"
                     android:layout_width="240px"
                     android:layout_height="240px"
-                    android:layout_marginStart="42px"
+                    android:layout_marginStart="40px"
                     android:layout_marginEnd="18px"
-                    android:src="@drawable/player_music_icon_2" />
+                    android:layout_marginTop="40px"
+                    android:src="@drawable/bg_album_default" />
 
 
-                <FrameLayout
+                <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="412px"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
                     android:layout_marginHorizontal="18px"
                     android:layout_weight="1">
 
                     <TextView
                         android:id="@+id/title"
                         android:layout_width="wrap_content"
-                        android:layout_height="60px"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="top|start"
-                        android:text="心理图库"
+                        android:text=""
                         android:textColor="@color/text_color_title"
                         android:textSize="45px"
                         android:textStyle="bold" />
 
                     <TextView
+                        android:layout_marginTop="40px"
                         android:id="@+id/desc"
                         android:layout_width="wrap_content"
                         android:layout_height="42px"
                         android:layout_gravity="bottom|start"
-                        android:text="专业视角，深度思考"
+                        android:text=""
                         android:textColor="@color/text_color_subtitle"
                         android:textSize="36px" />
-                </FrameLayout>
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="480px"
@@ -86,30 +89,30 @@
 
                     <FrameLayout
                         android:layout_width="match_parent"
-                        android:layout_height="105px"
-                        android:layout_marginTop="81px"
-                        android:layout_marginEnd="60px"
+                        android:layout_height="120px"
+                        android:layout_marginTop="70px"
+                        android:layout_marginEnd="38px"
                         android:layout_marginBottom="45px">
 
                         <ImageView
                             android:id="@+id/player_back"
-                            android:layout_width="75px"
-                            android:layout_height="75px"
+                            android:layout_width="120px"
+                            android:layout_height="120px"
                             android:layout_gravity="start|center_vertical"
                             android:layout_marginStart="12px"
                             android:src="@drawable/player_back" />
 
                         <ImageView
                             android:id="@+id/playerPlayIcon"
-                            android:layout_width="105px"
-                            android:layout_height="105px"
+                            android:layout_width="120px"
+                            android:layout_height="120px"
                             android:layout_gravity="center_horizontal|center_vertical"
                             android:src="@drawable/player_start" />
 
                         <ImageView
                             android:id="@+id/player_forward"
-                            android:layout_width="75px"
-                            android:layout_height="75px"
+                            android:layout_width="120px"
+                            android:layout_height="120px"
                             android:layout_gravity="end|center_vertical"
                             android:layout_marginEnd="12px"
                             android:src="@drawable/player_forward" />
@@ -120,7 +123,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="60px"
                         android:layout_marginTop="9px"
-                        android:layout_marginBottom="60px">
+                        >
 
                         <ImageView
                             android:layout_width="45px"

@@ -21,7 +21,9 @@ class FunnyResultActivity : BaseActivity<ActivityResultBinding, FunnyResultModel
     override fun initData() {
         super.initData()
         var name = intent.getStringExtra("name")
-        viewModel.result.value ="我的结果："+ intent.getStringExtra("result")
+        viewModel.title.value = "我的结果：" + intent.getStringExtra("title")
+
+        viewModel.result.value = intent.getStringExtra("result")
         binding.brRootView.setPageTitle(name)
     }
 }

@@ -21,23 +21,39 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/titleBar_height" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_marginTop="@dimen/titleBar_height"
-            android:paddingTop="40px"
-            android:text="@{String.valueOf(viewModel.result.value)}"
-            android:textColor="@color/app_blue"
-            android:textSize="48px"
-            android:textStyle="bold" />
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/content_padding">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="40px"
+                android:text="@{String.valueOf(viewModel.title.value)}"
+                android:textColor="@color/app_blue"
+                android:textSize="48px"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="60px"
+                android:text="@{String.valueOf(viewModel.result.value)}"
+                android:textColor="@color/text_black"
+                android:textSize="40px" />
+
+        </LinearLayout>
+
 
         <TextView
+            style="@style/blue_button"
             android:layout_gravity="center_horizontal|bottom"
             android:layout_marginBottom="148px"
-            style="@style/blue_button"
-            binding:onClickCommand="@{viewModel.again}"
-            android:text="再测试一次"/>
+            android:text="再测试一次"
+            binding:onClickCommand="@{viewModel.again}" />
 
     </FrameLayout>
 </layout>

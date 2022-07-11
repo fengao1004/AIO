@@ -17,6 +17,8 @@ import me.goldze.mvvmhabit.binding.command.BindingCommand
  * Time: 4:56 下午
  */
 class FunnyResultModel(application: Application) : BaseViewModel<HttpRepository>(application) {
+    var title: TextObserver = TextObserver("")
+
     var result: TextObserver = TextObserver("")
 
     var again = BindingCommand<String>(BindingAction {

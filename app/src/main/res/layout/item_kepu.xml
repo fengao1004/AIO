@@ -5,8 +5,8 @@
     android:layout_marginTop="20dp"
     android:background="@drawable/white_button_buttom"
     android:orientation="vertical"
-    android:paddingLeft="19px"
-    android:paddingRight="19px">
+    android:paddingLeft="40px"
+    android:paddingRight="40px">
 
     <TextView
         android:id="@+id/tv_title"
