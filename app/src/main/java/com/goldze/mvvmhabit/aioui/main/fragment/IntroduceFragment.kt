@@ -34,6 +34,6 @@ class IntroduceFragment : BaseFragment<FragmentIntroduceBinding, IntroduceFgView
         binding.baseRoot.setPageTitle("机构介绍")
         binding.baseRoot.setAppTitle(Util.shebeiXq?.name ?: "")
         binding.baseRoot.setLogo(Util.shebeiXq?.logo ?: "")
-        binding.webView.loadData(Util.shebeiXq?.deptIntroduce, "text/html", "utf-8")
+        binding.webView.loadDataWithBaseURL(null,Util.shebeiXq?.deptIntroduce, "text/html", "utf-8",null)
     }
 }

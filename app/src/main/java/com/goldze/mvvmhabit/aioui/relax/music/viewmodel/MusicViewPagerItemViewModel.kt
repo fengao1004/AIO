@@ -77,8 +77,8 @@ class MusicViewPagerItemViewModel(
         requestBody.pageNum = 1
         var id = ""
         if (tabBean != null) {
-            requestBody.id = tabBean?.id
             requestBody.typeId = tabBean?.id ?: ""
+            requestBody.sysModuleTypeId = tabBean?.id ?: ""
             id = requestBody.id ?: "null"
         }
 
@@ -101,7 +101,7 @@ class MusicViewPagerItemViewModel(
                         }
                         val records = responseBean.data.records ?: return
                         if (records.isNullOrEmpty()) {
-                            ToastUtils.showShort("没有更多数据")
+                            ToastUtils.showShort("暂无数据")
                             return
                         }
                         observableList.clear()
@@ -146,8 +146,8 @@ class MusicViewPagerItemViewModel(
         val requestBody = CommentRequestBean.getEmpty()
         requestBody.pageNum = nextPage
         if (tabBean != null) {
-            requestBody.id = tabBean?.id
             requestBody.typeId = tabBean?.id ?: ""
+            requestBody.sysModuleTypeId = tabBean?.id ?: ""
         }
 
         //模拟网络上拉加载更多

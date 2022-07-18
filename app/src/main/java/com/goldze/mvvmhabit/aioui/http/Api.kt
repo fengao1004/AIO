@@ -5,6 +5,7 @@ import com.goldze.mvvmhabit.aioui.bean.TypeResponseBean
 import com.goldze.mvvmhabit.aioui.bean.list.*
 import com.goldze.mvvmhabit.aioui.clazz.bean.ClazzListResponseBeanRecord
 import com.goldze.mvvmhabit.aioui.clazz.bean.ClazzResponseBean
+import com.goldze.mvvmhabit.aioui.gonggao.content.GonggaoContentBean
 import com.goldze.mvvmhabit.aioui.kepu.KepuBean
 import com.goldze.mvvmhabit.aioui.kepu.content.KepuItemBean
 import com.goldze.mvvmhabit.aioui.knows.KnowsBean
@@ -111,5 +112,11 @@ interface Api {
 
     @POST("/client/api/interest/getPageList")
     fun getFunTestList(@Body bean: CommentRequestBean): Observable<CommonListResponseBean<TestRecord>>
+
+    @POST("/client/api/announcement/detail")
+    fun getGonggaoContent(@Body bean: CommentRequestBean): Observable<GonggaoContentBean>
+
+
+
 
 }

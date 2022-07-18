@@ -17,7 +17,8 @@
         android:background="@color/white"
         android:gravity="center_vertical"
         android:paddingLeft="@dimen/content_padding"
-        android:paddingRight="@dimen/content_padding">
+        android:paddingRight="@dimen/content_padding"
+        binding:onClickCommand="@{viewModel.click}">
 
         <ImageView
             android:layout_width="80px"

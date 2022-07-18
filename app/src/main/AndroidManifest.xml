@@ -57,6 +57,7 @@
         <activity android:name=".aioui.zixun.ZixunActivity" />
         <activity android:name=".aioui.relax.music.MusicActivity" />
         <activity android:name=".aioui.video.VideoActivity" />
+        <activity android:name=".aioui.gonggao.content.GongGaoContentActivity" />
 
         <receiver
             android:name=".aioui.relax.music.play.notification.PlayerReceiver"

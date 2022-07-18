@@ -7,20 +7,76 @@ plugins {
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
+class AppVersion {
+    private static final int primaryVersion = 1 //0-99，手动修改
+    private static final int secondaryVersion = 0 //0-99，手动修改
+
+    static {
+        //check version
+        if (secondaryVersion > 99 || primaryVersion < 0) {
+            throw new RuntimeException("primary version error:" + primaryVersion)
+        }
+        if (secondaryVersion > 99 || secondaryVersion < 0) {
+            throw new RuntimeException("secondary version error:" + secondaryVersion)
+        }
+    }
+
+    static int getVersionCode() {
+        return primaryVersion * 1000000 +
+                secondaryVersion * 10000 +
+                calcRevisionCount()
+    }
+
+    static String getVersionName() {
+        return primaryVersion + "." + secondaryVersion + "." + calcRevisionCount() +
+                "-" + calcRevisionTag() +
+                "-" + new java.text.SimpleDateFormat("MMddHHmm").format(new Date())
+    }
+
+    static int calcRevisionCount() {
+        return 'git rev-list HEAD --count'.execute().text.trim().toInteger() % 10000
+    }
+
+    static String calcRevisionTag() {
+        return 'git rev-parse --short HEAD'.execute().text.trim()
+    }
+}
+
+
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
     defaultConfig {
         applicationId rootProject.ext.android.applicationId
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
-        versionCode rootProject.ext.android.versionCode
-        versionName rootProject.ext.android.versionName
+        versionCode AppVersion.getVersionCode()
+        versionName AppVersion.getVersionName()
     }
-
+    signingConfigs {
+        debug {
+            File strFile = new File("../publica.jks")
+            storeFile file(strFile)
+            keyAlias "demo"
+            keyPassword "123456"
+            storePassword "123456"
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+        release {
+            File strFile = new File("../publica.jks")
+            storeFile file(strFile)
+            keyAlias "demo"
+            keyPassword "123456"
+            storePassword "123456"
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
         debug {
             minifyEnabled false
@@ -33,6 +89,13 @@ android {
     }
     dataBinding {
         enabled true
+    }
+    applicationVariants.all {
+        if (it.buildType.name == "release") {
+            it.outputs.each {
+                it.outputFileName = "${rootProject.name}-${AppVersion.versionName}.apk"
+            }
+        }
     }
 }
 

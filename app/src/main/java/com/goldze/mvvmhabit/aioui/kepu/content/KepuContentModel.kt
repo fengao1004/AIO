@@ -42,7 +42,7 @@ class KepuContentModel(application: Application) : BaseViewModel<HttpRepository>
             return
         }
         var body = CommentRequestBean.getEmpty()
-        body.themeId = bean?.id?.toInt()!!
+        body.themeId = bean?.id?.toLong()!!
         var requestBean = CommentRequestBean(body, CommentRequestBean.getHeader())
         model.api.getThemeItemList(requestBean)
             .subscribeOn(Schedulers.io())

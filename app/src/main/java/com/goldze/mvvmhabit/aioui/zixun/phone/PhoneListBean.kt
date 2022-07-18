@@ -25,7 +25,7 @@ data class PhoneListBeanData(
 data class PhoneListBeanRecord(
     val createTime: String,
     val deptId: Int,
-    val id: Int,
+    val id: Long,
     val isDel: Int,
     val name: String,
     val status: Int,

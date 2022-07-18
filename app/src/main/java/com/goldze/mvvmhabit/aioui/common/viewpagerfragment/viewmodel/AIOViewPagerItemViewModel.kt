@@ -70,8 +70,8 @@ class AIOViewPagerItemViewModel(
         val requestBody = CommentRequestBean.getEmpty()
         requestBody.pageNum = 1
         if (tabBean != null) {
-            requestBody.id = tabBean?.id
             requestBody.typeId = tabBean?.id?:""
+            requestBody.sysModuleTypeId = tabBean?.id ?: ""
         }
         Log.i("fengao_xiaomi", "refreshData 1 :${requestBody.pageNum} ")
         model.getCommonListData(CommentRequestBean(requestBody, CommentRequestBean.getHeader()))
@@ -90,7 +90,7 @@ class AIOViewPagerItemViewModel(
                         }
                         val records = responseBean.data.records ?: return
                         if (records.isNullOrEmpty()) {
-                            ToastUtils.showShort("没有更多数据")
+                            ToastUtils.showShort("暂无数据")
                             return
                         }
                         observableList.clear()
@@ -127,8 +127,8 @@ class AIOViewPagerItemViewModel(
         val requestBody = CommentRequestBean.getEmpty()
         requestBody.pageNum = nextPage
         if (tabBean != null) {
-            requestBody.id = tabBean?.id
             requestBody.typeId = tabBean?.id?:""
+            requestBody.sysModuleTypeId = tabBean?.id ?: ""
         }
         Log.i("fengao_xiaomi", "loadMoreData 1 :${requestBody.pageNum} ")
         model.getCommonListData(CommentRequestBean(requestBody, CommentRequestBean.getHeader()))

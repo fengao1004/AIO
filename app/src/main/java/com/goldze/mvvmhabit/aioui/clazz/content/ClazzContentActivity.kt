@@ -25,7 +25,7 @@ class ClazzContentActivity : BaseActivity<ActivityClazzContentBinding, ClazzCont
     override fun initData() {
         super.initData()
         var tvList = arrayListOf<TextView>()
-        var id = intent.getIntExtra("id", 0).toString()
+        var id = intent.getLongExtra("id", 0).toString()
         var name = intent.getStringExtra("name")
         binding.brRootView.setPageTitle(name)
         viewModel.loadData(id ?: "")
