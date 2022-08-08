@@ -15,16 +15,16 @@ class KnowsActivity : BaseActivity<ActivityKnowsBinding, KnowsModel>() {
     }
 
     override fun initVariableId(): Int {
-        return BR.viewModel
+        return 0
     }
 
     override fun initData() {
         super.initData()
-        binding.brRootView.setPageTitle("心理知识")
-        viewModel.loadEndLD.observe(this) {
-            binding.twinklingRefreshLayout.finishLoadmore()
-            binding.twinklingRefreshLayout.finishRefreshing()
-        }
-        binding.twinklingRefreshLayout.startRefresh()
+//        binding.brRootView.setPageTitle("心理知识")
+//        viewModel.loadEndLD.observe(this) {
+//            binding.twinklingRefreshLayout.finishLoadmore()
+//            binding.twinklingRefreshLayout.finishRefreshing()
+//        }
+//        binding.twinklingRefreshLayout.startRefresh()
     }
 }

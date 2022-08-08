@@ -52,48 +52,48 @@ class KnowsModel(application: Application) : BaseViewModel<HttpRepository>(appli
 
     @SuppressLint("CheckResult")
     fun requestNetWork() {
-        var empty = CommentRequestBean.getEmpty()
-        empty.pageNum = page++
-        Log.i("fengao_xiaomi", "requestNetWork:${empty.pageNum} ")
-        var bean = CommentRequestBean(
-            empty, CommentRequestBean.getHeader()
-        )
-        model.api.getKnowsList(bean)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                loadEndLD.postValue("")
-                Log.i("fengao_xiaomi", "requestNetWork: ${Gson().toJson(it)}")
-                if (it.success) {
-                    if (page == 2) {
-                        observableList.clear()
-                    }
-                    var vm: KnowsRvItemViewModel? = if (observableList.isEmpty()) {
-                        null
-                    } else {
-                        if (observableList[observableList.size - 1].right == null) {
-                            observableList[observableList.size - 1]
-                        } else {
-                            null
-                        }
-                    }
-                    it.data.records.forEach {
-                        if (vm == null) {
-                            vm = KnowsRvItemViewModel(this)
-                            observableList.add(vm)
-                            vm?.left = it
-                        } else {
-                            vm?.right = it
-                            vm = null
-                        }
-                    }
-                } else {
-                    ToastUtils.showShort("加载错误")
-                }
-
-            }, {
-                loadEndLD.postValue("")
-                ToastUtils.showShort("加载错误")
-            })
+//        var empty = CommentRequestBean.getEmpty()
+//        empty.pageNum = page++
+//        Log.i("fengao_xiaomi", "requestNetWork:${empty.pageNum} ")
+//        var bean = CommentRequestBean(
+//            empty, CommentRequestBean.getHeader()
+//        )
+//        model.api.getKnowsList(bean)
+//            .subscribeOn(Schedulers.io())
+//            .observeOn(AndroidSchedulers.mainThread())
+//            .subscribe({
+//                loadEndLD.postValue("")
+//                Log.i("fengao_xiaomi", "requestNetWork: ${Gson().toJson(it)}")
+//                if (it.success) {
+//                    if (page == 2) {
+//                        observableList.clear()
+//                    }
+//                    var vm: KnowsRvItemViewModel? = if (observableList.isEmpty()) {
+//                        null
+//                    } else {
+//                        if (observableList[observableList.size - 1].right == null) {
+//                            observableList[observableList.size - 1]
+//                        } else {
+//                            null
+//                        }
+//                    }
+//                    it.data.records.forEach {
+//                        if (vm == null) {
+//                            vm = KnowsRvItemViewModel(this)
+//                            observableList.add(vm)
+//                            vm?.left = it
+//                        } else {
+//                            vm?.right = it
+//                            vm = null
+//                        }
+//                    }
+//                } else {
+//                    ToastUtils.showShort("加载错误")
+//                }
+//
+//            }, {
+//                loadEndLD.postValue("")
+//                ToastUtils.showShort("加载错误")
+//            })
     }
 }

@@ -1,19 +1,19 @@
 package com.goldze.mvvmhabit.aioui.zixun.input
 
 import android.os.Bundle
+import android.text.InputFilter
 import com.afollestad.materialdialogs.MaterialDialog
 import com.github.gzuliyujiang.wheelpicker.DatePicker
 import com.github.gzuliyujiang.wheelpicker.TimePicker
-import com.github.gzuliyujiang.wheelpicker.annotation.DateMode
 import com.github.gzuliyujiang.wheelpicker.annotation.TimeMode
-import com.github.gzuliyujiang.wheelpicker.contract.OnDatePickedListener
-import com.github.gzuliyujiang.wheelpicker.contract.TimeFormatter
 import com.github.gzuliyujiang.wheelpicker.widget.DateWheelLayout
 import com.goldze.mvvmhabit.BR
 import com.goldze.mvvmhabit.R
 import com.goldze.mvvmhabit.databinding.ActivityInputBinding
 import me.goldze.mvvmhabit.base.BaseActivity
 import me.goldze.mvvmhabit.utils.ToastUtils
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 
 
 class InputActivity : BaseActivity<ActivityInputBinding, InputModel>() {
@@ -27,9 +27,16 @@ class InputActivity : BaseActivity<ActivityInputBinding, InputModel>() {
         return BR.viewModel
     }
 
+    var typeFilter = InputFilter { source, start, end, dest, dstart, dend ->
+        val p: Pattern = Pattern.compile("[^a-zA-Z0-9]")
+        val m: Matcher = p.matcher(source.toString())
+        if (!m.matches()) "" else null
+    }
     override fun initData() {
         super.initData()
         binding.brRootView.setPageTitle("在线预约")
+//        binding.etCode.filters = arrayOf(typeFilter)
+//        binding.etCodeA.filters = arrayOf(typeFilter)
         binding.tvCommit.setOnClickListener {
             var password = binding.etCode.text.toString()
             var username = binding.etCodeA.text.toString()

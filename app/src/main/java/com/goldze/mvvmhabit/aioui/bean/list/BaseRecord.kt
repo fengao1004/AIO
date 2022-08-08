@@ -1,6 +1,8 @@
 package com.goldze.mvvmhabit.aioui.bean.list
 
-open class BaseRecord {
+import java.io.Serializable
+
+open class BaseRecord : Serializable {
     var brief: String? = null
     var clickCount: Int? = null
     var createTime: String? = null

@@ -43,7 +43,7 @@
         <activity android:name=".aioui.clazz.content.ClazzContentActivity" />
         <activity android:name=".aioui.kepu.KepuActivity" />
         <activity android:name=".aioui.gonggao.GonggaoActivity" />
-        <activity android:name=".aioui.knows.KnowsActivity" />
+        <activity android:name=".aioui.knows.Knows2Activity" />
         <activity android:name=".aioui.webview.WebViewFromUrlActivity" />
         <activity android:name=".aioui.zixun.input.InputActivity" />
         <activity android:name=".aioui.notice.NoticeActivity" />

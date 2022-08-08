@@ -48,7 +48,7 @@
             android:gravity="center_horizontal"
             app:AutoPlayTime="3000"
             app:isShowIndicatorOnlyOne="true"
-            app:isShowNumberIndicator="true"
+            app:isShowNumberIndicator="false"
             app:pageChangeDuration="800"
             app:pointsContainerBackground="#44aaaaaa"
             app:pointsPosition="RIGHT"

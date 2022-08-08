@@ -401,6 +401,8 @@
                         android:layout_marginLeft="10dp"
                         android:layout_toRightOf="@id/tv_code_a"
                         android:background="@null"
+                        android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                        android:inputType="textEmailAddress"
                         android:textSize="38px" />
 
                 </RelativeLayout>
@@ -435,6 +437,8 @@
                         android:layout_marginLeft="10dp"
                         android:layout_toRightOf="@id/tv_code"
                         android:background="@null"
+                        android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                        android:inputType="textEmailAddress"
                         android:textSize="38px" />
                 </RelativeLayout>
 

@@ -10,6 +10,7 @@ import com.goldze.mvvmhabit.aioui.kepu.KepuBean
 import com.goldze.mvvmhabit.aioui.kepu.content.KepuItemBean
 import com.goldze.mvvmhabit.aioui.knows.KnowsBean
 import com.goldze.mvvmhabit.aioui.knows.KnowsDetailBean
+import com.goldze.mvvmhabit.aioui.knows.KnowsRecord
 import com.goldze.mvvmhabit.aioui.main.bean.*
 import com.goldze.mvvmhabit.aioui.test.bean.*
 import com.goldze.mvvmhabit.aioui.zixun.input.InputRequestBean
@@ -83,7 +84,7 @@ interface Api {
     fun activation(@Body bean: CommentRequestBean): Observable<ActivationResponseBean>
 
     @POST("/client/api/info/getPageList")
-    fun getKnowsList(@Body bean: CommentRequestBean): Observable<KnowsBean>
+    fun getKnowsList(@Body bean: CommentRequestBean): Observable<CommonListResponseBean<KnowsRecord>>
 
     @POST("/client/api/info/detail")
     fun getKnowsDetail(@Body bean: CommentRequestBean): Observable<KnowsDetailBean>

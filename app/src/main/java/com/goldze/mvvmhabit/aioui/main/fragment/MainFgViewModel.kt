@@ -3,26 +3,25 @@ package com.goldze.mvvmhabit.aioui.main.fragment
 import android.annotation.SuppressLint
 import android.app.Application
 import android.provider.Settings
-import android.util.Log
 import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.MutableLiveData
 import com.goldze.mvvmhabit.aioui.Util
 import com.goldze.mvvmhabit.aioui.bean.CommentRequestBean
 import com.goldze.mvvmhabit.aioui.bean.RequestHeader
+import com.goldze.mvvmhabit.aioui.bean.TextObserver
 import com.goldze.mvvmhabit.aioui.clazz.ClazzActivity
+import com.goldze.mvvmhabit.aioui.gonggao.GonggaoActivity
 import com.goldze.mvvmhabit.aioui.http.HttpRepository
 import com.goldze.mvvmhabit.aioui.kepu.KepuActivity
-import com.goldze.mvvmhabit.aioui.knows.KnowsActivity
-import com.goldze.mvvmhabit.aioui.notice.NoticeActivity
+import com.goldze.mvvmhabit.aioui.knows.Knows2Activity
+import com.goldze.mvvmhabit.aioui.main.bean.BannerBeanData
+import com.goldze.mvvmhabit.aioui.main.bean.GetAnnounListRequestBean
+import com.goldze.mvvmhabit.aioui.main.bean.GetAnnounListRequestBeanRequestBody
+import com.goldze.mvvmhabit.aioui.main.bean.GetAnnounListRequestBeanRequestHeader
 import com.goldze.mvvmhabit.aioui.relax.RelaxActivity
 import com.goldze.mvvmhabit.aioui.test.TestActivity
-import com.goldze.mvvmhabit.aioui.bean.TextObserver
-import com.goldze.mvvmhabit.aioui.gonggao.GonggaoActivity
-import com.goldze.mvvmhabit.aioui.main.bean.*
-import com.goldze.mvvmhabit.aioui.video.VideoActivity
 import com.goldze.mvvmhabit.aioui.zixun.ZixunActivity
 import com.goldze.mvvmhabit.aioui.zixun.input.InputActivity
-import com.goldze.mvvmhabit.aioui.zixun.phone.PhoneRVModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import me.goldze.mvvmhabit.base.BaseViewModel
@@ -61,7 +60,7 @@ class MainFgViewModel(application: Application) : BaseViewModel<HttpRepository>(
     })
 
     var gotoKnows: BindingCommand<String> = BindingCommand(BindingAction {
-        startActivity(KnowsActivity::class.java)
+        startActivity(Knows2Activity::class.java)
     })
 
     var gotoRelax: BindingCommand<String> = BindingCommand(BindingAction {
