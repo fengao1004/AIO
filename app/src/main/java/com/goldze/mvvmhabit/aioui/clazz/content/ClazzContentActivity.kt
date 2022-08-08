@@ -31,6 +31,7 @@ class ClazzContentActivity : BaseActivity<ActivityClazzContentBinding, ClazzCont
         viewModel.loadData(id ?: "")
         viewModel.beanLiveData.observe(this) {
             bean = it
+            binding.webContent.setInitialScale(250)
             binding.webContent.loadDataWithBaseURL(
                 null,
                 bean.courseDescribe,

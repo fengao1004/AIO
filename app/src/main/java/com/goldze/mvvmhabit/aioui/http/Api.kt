@@ -15,10 +15,7 @@ import com.goldze.mvvmhabit.aioui.test.bean.*
 import com.goldze.mvvmhabit.aioui.zixun.input.InputRequestBean
 import com.goldze.mvvmhabit.aioui.zixun.phone.PhoneListBean
 import io.reactivex.Observable
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 /**
  * Created by Android Studio.
@@ -116,6 +113,12 @@ interface Api {
     @POST("/client/api/announcement/detail")
     fun getGonggaoContent(@Body bean: CommentRequestBean): Observable<GonggaoContentBean>
 
+    @POST("/client/scaRec/notLogin/getScaBasics")
+    @FormUrlEncoded
+    fun getScaBasics(@Field("scaCode") scaCode: String): Observable<BasicDetailsResponseBean>
+
+    @POST("/client/scaRec/notLogin/saveScaBasic")
+    fun commitBasic(@Body bean: List<BasicAnserBean>): Observable<AnserReponseData>
 
 
 

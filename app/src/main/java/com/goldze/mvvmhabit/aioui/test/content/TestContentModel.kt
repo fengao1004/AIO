@@ -266,68 +266,99 @@ class TestContentModel(application: Application) : BaseViewModel<HttpRepository>
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     if (it.success) {
-                        if (name.contains("采集工具")){
+                        if (name.contains("采集工具")) {
                             ToastUtils.showShort("答题成功")
                             activity?.finish()
                             return@subscribe
                         }
-                        var pinjieUrl = when {
-                            name.contains("焦虑") -> {
-                                "/anxiety?scaRecId="
+
+                        var scaCode = detail.data.scaVo.code
+                        var scaRecId = it.data.scaRecId
+                        var url = ""
+                        when (scaCode) {
+                            "JiaoLvCeYan_GAD-7-GuangFanXingJi" -> {
+                                url = "/anxiety?scaRecId=${scaRecId}"
                             }
-                            name.contains("抑郁") -> {
-                                "/depressive?scaRecId="
+                            "YiYuZhengZhuangShaiChaCeYan" -> {
+                                url = "/depressive?scaRecId=${scaRecId}"
                             }
-                            name.contains("睡眠状况") -> {
-                                "/sleep?scaRecId="
+                            "ShuiMianZiCeAISLiangBiaoBaoGao" -> {
+                                url = "/sleep?scaRecId=${scaRecId}"
                             }
-                            name.contains("艾森克人格") -> {
-                                "/aiSenKe?scaRecId="
+                            "AiSenKeRenGeWenJuanBaoGao" -> {
+                                url = "/aiSenKe?scaRecId=${scaRecId}"
                             }
-                            name.contains("大五人格") -> {
-                                "/fiveRG?scaRecId="
+                            "DaWuRenGeWenJuan" -> {
+                                url = "/fiveRG?scaRecId=${scaRecId}"
                             }
-                            name.contains("社会支持") -> {
-                                "/comprehend?scaRecId="
+                            "LingWuSheHuiZhiChiLiangBiao" -> {
+                                url = "/comprehend?scaRecId=${scaRecId}"
                             }
-                            name.contains("心理复原力") -> {
-                                "/resilience?scaRecId="
+                            "XinLiFuYuanLiCeYan" -> {
+                                url = "/resilience?scaRecId=${scaRecId}"
                             }
-                            name.contains("工作倦怠量") -> {
-                                "/workJD?scaRecId="
+                            "GongZuoJuanDaiLiangBiao" -> {
+                                url = "/workJD?scaRecId=${scaRecId}"
                             }
-                            name.contains("心理健康") -> {
-                                "/psychological?scaRecId="
+                            "XinLiJianKangCeYan" -> {
+                                url = "/psychological?scaRecId=${scaRecId}"
                             }
-                            name.contains("应对方式") -> {
-                                "/yingduifs?scaRecId="
+                            "YingDuiFangShiLiangBiao" -> {
+                                url = "/yingduifs?scaRecId=${scaRecId}"
                             }
-                            name.contains("情绪稳定性") -> {
-                                "/qingxuwd?scaRecId="
+                            "QingXuWenDingXingWenJuan-EPQ" -> {
+                                url = "/qingxuwd?scaRecId=${scaRecId}"
                             }
-                            name.contains("工作投入") -> {
-                                "/workTR?scaRecId="
+                            "GongZuoTouRu" -> {
+                                url = "/workTR?scaRecId=${scaRecId}"
                             }
-                            name.contains("中小学生心理健康") -> {
-                                "/zxxxl?scaRecId="
+                            "ZhongXiaoXueShengXinLiJianKang" -> {
+                                url = "/zxxxl?scaRecId=${scaRecId}"
                             }
-                            name.contains("学业成就") -> {
-                                "/xycj?scaRecId="
+                            "XueYeChengJiuZeRen" -> {
+                                url = "/xycj?scaRecId=${scaRecId}"
                             }
-                            name.contains("中小学生适应能力") -> {
-                                "/zxxsy?scaRecId="
+                            "ZhongXiaoXueShengShiYingNengLi" -> {
+                                url = "/zxxsy?scaRecId=${scaRecId}"
                             }
-                            name.contains("家庭沟通") -> {
-                                "/familyGT?scaRecId="
+                            "JiaTingGouTongZiNvBan" -> {
+                                url = "/familyGT?scaRecId=${scaRecId}"
                             }
-                            name.contains("同学关系") -> {
-                                "/tongxuegx?scaRecId="
+                            "TongXueGuanXiChuGaoZhong" -> {
+                                url = "/tongxuegx?scaRecId=${scaRecId}"
                             }
-                            else -> {
-                                "/anxiety?scaRecId="
+                            "YiYuZiPingLiangBiao" -> {
+                                url = "/yysas?scaRecId=${scaRecId}"
+                            }
+                            "JiaoLvZiPingLiangBiao" -> {
+                                url = "/jlsas?scaRecId=${scaRecId}"
+                            }
+                            "XinLiJianKangHeXinZhiShiZhiXiaoLv" -> {
+                                url = "/xljkhx?scaRecId=${scaRecId}"
+                            }
+                            "JiYiZhangAiZiPingLiangBiao" -> {
+                                url = "/jiyiza?scaRecId=${scaRecId}"
+                            }
+                            "AiDingBaoYiYuCeYan" -> {
+                                url = "/adbyy?scaRecId=${scaRecId}"
+                            }
+                            "ChengJiuDongJiCeYan" -> {
+                                url = "/cjdj?scaRecId=${scaRecId}"
+                            }
+                            "GongZuoKongZhiYuanLiangBiao" -> {
+                                url = "/gzkzy?scaRecId=${scaRecId}"
+                            }
+                            "QinZiRongQiaXingWenJuan" -> {
+                                url = "/qzrqia?scaRecId=${scaRecId}"
+                            }
+                            "OIsonHunYinZhiLiangWenJuan" -> {
+                                url = "/olson?scaRecId=${scaRecId}"
+                            }
+                            "MBTIXingGeCeYan" -> {
+                                url = "/mbti?scaRecId=${scaRecId}"
                             }
                         }
-                        var url = HttpRepository.BASE_H5_URL + pinjieUrl + it.data.scaRecId
+                        url = HttpRepository.BASE_H5_URL + url
                         var intent = Intent(activity, WebViewFromUrlActivity::class.java)
                         intent.putExtra("title", "报告")
                         intent.putExtra("url", url)

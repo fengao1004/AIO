@@ -35,6 +35,5 @@ class TestARvBindingAdapter : AIORvBindingAdapter() {
             binding.clickCount.text = "点击量:" + record.clickCount.toString()
             binding.testCount.text = "题目数量:" + record.quesCount.toString()
         }
-
     }
 }

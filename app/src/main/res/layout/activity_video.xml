@@ -73,12 +73,11 @@
             android:layout_marginTop="1250px"
             android:padding="@dimen/content_padding">
 
-            <TextView
-                android:id="@+id/tv_content"
+            <WebView
+                android:id="@+id/webview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/text_black"
-                android:textSize="38px" />
+                 />
         </ScrollView>
 
 

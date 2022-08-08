@@ -3,6 +3,7 @@ package com.goldze.mvvmhabit.aioui
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
+import android.util.Log
 import com.goldze.mvvmhabit.aioui.bean.CommentRequestBean
 import com.goldze.mvvmhabit.aioui.clazz.ClazzActivity
 import com.goldze.mvvmhabit.aioui.clazz.content.ClazzContentActivity
@@ -17,10 +18,13 @@ import com.goldze.mvvmhabit.aioui.relax.meditation.MeditationFragment
 import com.goldze.mvvmhabit.aioui.relax.music.MusicFragment
 import com.goldze.mvvmhabit.aioui.test.TestActivity
 import com.goldze.mvvmhabit.aioui.test.bean.ScaDetailsRequestBean
+import com.goldze.mvvmhabit.aioui.test.basecontent.TestBaseContentActivity
+import com.goldze.mvvmhabit.aioui.test.bean.BasicDetailsResponseBeanData
 import com.goldze.mvvmhabit.aioui.test.content.TestContentActivity
 import com.goldze.mvvmhabit.aioui.video.VideoActivity
 import com.goldze.mvvmhabit.aioui.video.bean.VideoBean
 import com.goldze.mvvmhabit.aioui.webview.WebViewActivity
+import com.google.gson.Gson
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import me.goldze.mvvmhabit.base.ContainerActivity
@@ -51,7 +55,7 @@ object Util {
     趣味测评 interest
      */
     @SuppressLint("CheckResult")
-    fun jump(code: String, id: String, activity: Activity, name: String) {
+    fun jump(code: String, id: String, activity: Activity, name: String, resCode: String = "") {
         if (id.isNullOrEmpty()) {
             when (code) {
                 "scale" -> {
@@ -103,24 +107,62 @@ object Util {
         }
         when (code) {
             "scale" -> {
-                model.api.getScaDetails(ScaDetailsRequestBean(scaCode = id))
+                var jumpBasic = false
+                var onceId = ""
+                var basicBean: BasicDetailsResponseBeanData? = null
+                model.api.getScaBasics(resCode)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({
-                        if (it.success) {
-                            var intent = Intent(activity, TestContentActivity::class.java)
-                            intent.putExtra("marry", "")
-                            intent.putExtra("sex", "")
-                            intent.putExtra("type", "normal")
-                            intent.putExtra("bean", it)
-                            intent.putExtra("name", name)
-                            activity.startActivity(intent)
-                        } else {
-                            ToastUtils.showShort("跳转失败 ${it.message}")
+                        if (it.success && it.data.quesList.isNotEmpty()) {
+                            jumpBasic = true
+                            basicBean = it.data
+                            onceId = it.data.onceId
                         }
+                        model.api.getScaDetails(
+                            ScaDetailsRequestBean(
+                                scaCode = resCode!!,
+                                onceId = onceId
+                            )
+                        ).subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe({
+                                if (it.success) {
+                                    if (jumpBasic) {
+                                        var intent =
+                                            Intent(activity, TestBaseContentActivity::class.java)
+                                        intent.putExtra("marry", "")
+                                        intent.putExtra("bean", it)
+                                        intent.putExtra("basebean", basicBean)
+                                        intent.putExtra("sex", "")
+                                        intent.putExtra("type", "normal")
+                                        intent.putExtra("name", name)
+                                        intent.putExtra("scaRecId", resCode)
+                                        activity.finish()
+                                        activity.startActivity(intent)
+                                    } else {
+                                        var intent =
+                                            Intent(activity, TestContentActivity::class.java)
+                                        intent.putExtra("marry", "")
+                                        intent.putExtra("sex", "")
+                                        intent.putExtra("type", "normal")
+                                        intent.putExtra("bean", it)
+                                        intent.putExtra("name", name)
+                                        intent.putExtra("scaRecId", resCode)
+                                        activity.startActivity(intent)
+                                    }
+                                }
+                            }, {
+                                it.printStackTrace()
+                                Log.i("fengao_xiaomi", "loadData: ${it.message}")
+                            })
                     }, {
-                        ToastUtils.showShort("跳转失败 ${it.message}")
+                        it.printStackTrace()
+                        Log.i("fengao_xiaomi", "loadData: ${it.message}")
+                        ToastUtils.showShort("获取基础题型错误 ${it.message}")
                     })
+
+
             }
             "info" -> {
                 var empty = CommentRequestBean.getEmpty()
@@ -143,11 +185,16 @@ object Util {
                     })
             }
             "music" -> {
-                activity.startActivity(Intent(activity, RelaxActivity::class.java))
+                val intent = Intent(activity, ContainerActivity::class.java)
+                intent.putExtra(
+                    ContainerActivity.FRAGMENT,
+                    MusicFragment::class.java.canonicalName
+                )
+                activity.startActivity(intent)
             }
             "course" -> {
                 val intent = Intent(activity, ClazzContentActivity::class.java)
-                intent.putExtra("id", id.toInt())
+                intent.putExtra("id", id.toLong())
                 intent.putExtra("name", name)
                 activity.startActivity(intent)
             }

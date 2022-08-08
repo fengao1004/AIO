@@ -78,7 +78,7 @@
             android:scaleType="centerCrop"
             binding:isVisible="@{viewModel.right != null}"
             binding:onClickCommand="@{viewModel.clickRight}"
-            binding:url="@{viewModel.left.faceImage}"
+            binding:url="@{viewModel.right.faceImage}"
             tools:ignore="PxUsage" />
 
         <LinearLayout
@@ -96,7 +96,7 @@
                 android:layout_marginTop="5dp"
                 android:ellipsize="end"
                 android:singleLine="true"
-                android:text="@{viewModel.left.name}"
+                android:text="@{viewModel.right.name}"
                 android:textColor="@color/text_black"
                 android:textSize="36px" />
 
@@ -107,16 +107,16 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="32px"
+                    android:layout_height="32px"
                     android:src="@drawable/eye" />
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="20dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:gravity="center_vertical"
-                    android:text="@{viewModel.leftNum}"
+                    android:text="@{viewModel.rightNum}"
                     android:textSize="32px" />
             </LinearLayout>
 

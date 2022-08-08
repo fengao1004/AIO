@@ -7,11 +7,6 @@ package com.goldze.mvvmhabit.aioui.test.bean
  * Time: 12:41 下午
  */
 data class ScaDetailsRequestBean(
-    val param: Param = Param(),
-    val scaCode: String
-)
-
-data class Param(
-    val marry: String = "",
-    val sex: String = ""
+    val scaCode: String,
+    val onceId:String = ""
 )

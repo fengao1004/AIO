@@ -30,9 +30,7 @@ class MeditationRvBindingAdapter : AIORvBindingAdapter() {
                 )
             }
             binding.title.text = record.name
-            binding.desc.text = record.meditationDescribe
-
+            binding.desc.text = record.brief
         }
-
     }
 }

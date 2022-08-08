@@ -24,6 +24,7 @@ class KnowsContentActivity : BaseActivity<ActivityKnowsContentBinding, KnowsCont
         bean = intent.getSerializableExtra("bean") as KnowsBeanRecord
         binding.brRootView.setPageTitle(bean?.name ?: "")
         viewModel.setKnowBean(bean!!)
+        binding.webContent.setInitialScale(250)
         binding.webContent.loadDataWithBaseURL(
             null,
             bean?.infoDescribe ?: "",

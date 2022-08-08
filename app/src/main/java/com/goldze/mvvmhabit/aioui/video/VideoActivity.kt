@@ -1,7 +1,10 @@
 package com.goldze.mvvmhabit.aioui.video
 
 import android.os.Bundle
+import android.util.DisplayMetrics
+import android.util.Log
 import android.view.View
+import android.webkit.WebSettings.ZoomDensity
 import android.widget.ImageView
 import com.goldze.mvvmhabit.BR
 import com.goldze.mvvmhabit.R
@@ -10,6 +13,7 @@ import com.goldze.mvvmhabit.databinding.ActivityVideoBinding
 import com.shuyu.gsyvideoplayer.GSYVideoManager
 import com.shuyu.gsyvideoplayer.builder.GSYVideoOptionBuilder
 import me.goldze.mvvmhabit.base.BaseActivity
+
 
 class VideoActivity : BaseActivity<ActivityVideoBinding, VideoModel>() {
     private val url = "http://9890.vod.myqcloud.com/9890_4e292f9a3dd011e6b4078980237cc3d3.f20.mp4"
@@ -45,7 +49,9 @@ class VideoActivity : BaseActivity<ActivityVideoBinding, VideoModel>() {
         videoBean = intent.getSerializableExtra("videoBean") as VideoBean
         binding.tvTitle.text = videoBean?.videoName
         binding.tvNum.text = videoBean?.number
-        binding.tvContent.text = videoBean?.content
+        binding.webview.setInitialScale(250)
+        binding.webview.loadDataWithBaseURL(null,
+            videoBean?.content, "text/html", "utf-8",null)
         binding.brRootView.setPageTitle(videoBean!!.title)
         binding.scvVideo.setUp(videoBean?.url, false, "")
         binding.scvVideo.setLockLand(false)

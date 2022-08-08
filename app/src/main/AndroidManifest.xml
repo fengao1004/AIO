@@ -35,6 +35,7 @@
         </activity>
         <activity android:name=".ui.login.LoginActivity"></activity>
         <activity android:name=".ui.main.DemoActivity" />
+        <activity android:name=".aioui.test.basecontent.TestBaseContentActivity" />
         <activity android:name=".aioui.test.content.TestContentActivity" />
         <activity android:name=".ui.tab_bar.activity.TabBarActivity"></activity>
         <activity android:name=".ui.viewpager.activity.ViewPagerActivity" />

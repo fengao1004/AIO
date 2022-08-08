@@ -33,7 +33,7 @@ class TestBRvBindingAdapter : AIORvBindingAdapter() {
             binding.tvTitle.text = record.name
             binding.tvContent.text = record.brief
             binding.clickCount.text = "点击量:" + record.clickCount.toString()
-            binding.testCount.text = "题目数量:" + record.quesCount.toString()
+            binding.testCount.text = "题目数量:" + 1
         }
 
     }

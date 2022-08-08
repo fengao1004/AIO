@@ -46,5 +46,6 @@ data class KepuItemBeanContent(
     val sysModuleId: Int,
     val themeId: String,
     val themeItemId: String,
-    val updateTime: Any
+    val updateTime: Any,
+    val code:String
 )

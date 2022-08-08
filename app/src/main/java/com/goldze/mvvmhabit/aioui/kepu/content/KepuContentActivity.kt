@@ -102,7 +102,8 @@ class KepuContentActivity : BaseActivity<ActivityKepuContentBinding, KepuContent
                     content.sysModuleCode,
                     content.resourcesId,
                     context as Activity,
-                    content.resourcesName
+                    content.resourcesName,
+                    content.code
                 )
             }
             var line = ImageView(context)

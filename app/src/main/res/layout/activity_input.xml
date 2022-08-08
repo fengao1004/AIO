@@ -44,7 +44,7 @@
                         android:layout_height="wrap_content"
                         android:text="咨询方式"
                         android:textColor="@color/text_black"
-                        android:textSize="48px" />
+                        android:textSize="54px" />
 
                     <ImageView
                         android:layout_width="10dp"
@@ -69,7 +69,7 @@
                             android:layout_height="match_parent"
                             android:gravity="center_vertical"
                             android:text="@{String.valueOf(viewModel.zxfs.value)}"
-                            android:textSize="36px" />
+                            android:textSize="44px" />
 
                         <ImageView
                             android:layout_width="30px"
@@ -95,7 +95,7 @@
                         android:layout_height="wrap_content"
                         android:text="问题类型"
                         android:textColor="@color/text_black"
-                        android:textSize="48px" />
+                        android:textSize="54px" />
 
                     <ImageView
                         android:layout_width="10dp"
@@ -119,7 +119,7 @@
                             android:layout_height="match_parent"
                             android:gravity="center_vertical"
                             android:text="@{String.valueOf(viewModel.wtlx.value)}"
-                            android:textSize="36px" />
+                            android:textSize="44px" />
 
                         <ImageView
                             android:layout_width="10dp"
@@ -143,7 +143,7 @@
                         android:layout_height="wrap_content"
                         android:text="具体问题"
                         android:textColor="@color/text_black"
-                        android:textSize="48px" />
+                        android:textSize="54px" />
 
 
                     <TextView
@@ -152,7 +152,7 @@
                         android:layout_alignParentEnd="true"
                         android:text="请先选择问题类型"
                         android:textColor="@color/text_gray"
-                        android:textSize="36px" />
+                        android:textSize="44px" />
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -170,7 +170,7 @@
                             android:gravity="center_vertical"
                             android:hint="请输入"
                             android:textColor="@color/text_black"
-                            android:textSize="36px" />
+                            android:textSize="44px" />
                     </RelativeLayout>
                 </RelativeLayout>
 
@@ -187,7 +187,7 @@
                         android:layout_height="wrap_content"
                         android:text="预约日期"
                         android:textColor="@color/text_black"
-                        android:textSize="48px" />
+                        android:textSize="54px" />
 
                     <ImageView
                         android:layout_width="10dp"
@@ -211,7 +211,7 @@
                             android:layout_height="match_parent"
                             android:gravity="center_vertical"
                             android:text="@{String.valueOf(viewModel.yyrq.value)}"
-                            android:textSize="36px" />
+                            android:textSize="44px" />
 
                         <ImageView
                             android:layout_width="10dp"
@@ -235,7 +235,7 @@
                         android:layout_height="wrap_content"
                         android:text="预约时间段"
                         android:textColor="@color/text_black"
-                        android:textSize="48px" />
+                        android:textSize="54px" />
 
                     <ImageView
                         android:layout_width="10dp"
@@ -260,7 +260,7 @@
                             android:layout_height="match_parent"
                             android:gravity="center_vertical"
                             android:text="@{String.valueOf(viewModel.yysj.value)}"
-                            android:textSize="36px" />
+                            android:textSize="44px" />
 
                         <ImageView
                             android:layout_width="10dp"
@@ -284,7 +284,7 @@
                         android:layout_height="wrap_content"
                         android:text="预约地点"
                         android:textColor="@color/text_black"
-                        android:textSize="48px" />
+                        android:textSize="54px" />
 
 
                     <TextView
@@ -293,7 +293,7 @@
                         android:layout_alignParentEnd="true"
                         android:text="请先选择问题类型"
                         android:textColor="@color/text_gray"
-                        android:textSize="36px" />
+                        android:textSize="44px" />
 
 
                     <RelativeLayout
@@ -312,7 +312,7 @@
                             android:gravity="center_vertical"
                             android:hint="请输入"
                             android:textColor="@color/text_black"
-                            android:textSize="36px" />
+                            android:textSize="44px" />
                     </RelativeLayout>
                 </RelativeLayout>
 
@@ -447,7 +447,7 @@
                     android:layout_marginTop="51px"
                     android:gravity="center"
                     android:text="提交"
-                    android:textSize="36px" />
+                    android:textSize="44px" />
             </LinearLayout>
 
             <ImageView

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+
+        <variable
+            name="viewModel"
+            type="com.goldze.mvvmhabit.aioui.test.basecontent.TestBaseContentItemModel" />
+    </data>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:binding="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/content_padding"
+        android:paddingRight="@dimen/content_padding"
+        android:layout_marginTop="60px"
+        binding:onClickCommand="@{viewModel.itemClick}">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="160px"
+            android:background="@drawable/blue_button_buttom_stroke"
+            android:gravity="center_vertical"
+            android:paddingLeft="40px"
+            android:paddingEnd="90px"
+            android:text="@{viewModel.entity.title}"
+            android:textColor="@color/app_blue_lite"
+            android:textSize="48px"
+            binding:testItemIsCheck="@{viewModel.entity.isCheck()}" />
+
+        <ImageView
+            android:layout_width="60px"
+            android:layout_height="60px"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/enter"
+            binding:isVisible="@{viewModel.entity.isCheck()}" />
+
+    </RelativeLayout>
+</layout>

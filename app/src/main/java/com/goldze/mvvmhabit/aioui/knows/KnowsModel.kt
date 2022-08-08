@@ -27,7 +27,7 @@ import me.tatarka.bindingcollectionadapter2.ItemBinding
  */
 class KnowsModel(application: Application) : BaseViewModel<HttpRepository>(application) {
     var loadEndLD:MutableLiveData<String> = MutableLiveData()
-    var page = 0
+    var page = 1
 
     //给RecyclerView添加ObservableList
     var observableList: ObservableList<KnowsRvItemViewModel> = ObservableArrayList()
@@ -37,7 +37,7 @@ class KnowsModel(application: Application) : BaseViewModel<HttpRepository>(appli
 
     //下拉刷新
     var onRefreshCommand: BindingCommand<*> = BindingCommand<Any?>(BindingAction {
-        page = 0
+        page = 1
         requestNetWork()
     })
 
@@ -65,7 +65,7 @@ class KnowsModel(application: Application) : BaseViewModel<HttpRepository>(appli
                 loadEndLD.postValue("")
                 Log.i("fengao_xiaomi", "requestNetWork: ${Gson().toJson(it)}")
                 if (it.success) {
-                    if (page == 1) {
+                    if (page == 2) {
                         observableList.clear()
                     }
                     var vm: KnowsRvItemViewModel? = if (observableList.isEmpty()) {

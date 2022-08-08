@@ -23,6 +23,7 @@ class GongGaoContentActivity : BaseActivity<ActivityGonggaoContentBinding, GongG
         var id = intent.getStringExtra("id")
         binding.brRootView.setPageTitle("系统公告")
         viewModel.html.observe(this) {
+            binding.web.setInitialScale(250)
             binding.web.loadDataWithBaseURL(
                 null,
                 it,
