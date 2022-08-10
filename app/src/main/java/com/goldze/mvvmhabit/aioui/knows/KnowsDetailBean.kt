@@ -8,7 +8,7 @@ package com.goldze.mvvmhabit.aioui.knows
  */
 data class KnowsDetailBean(
     val code: String,
-    val data: KnowsBeanRecord,
+    val data: KnowsRecord,
     val message: String,
     val success: Boolean
 )

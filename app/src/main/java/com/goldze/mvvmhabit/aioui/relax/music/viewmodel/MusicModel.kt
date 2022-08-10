@@ -29,6 +29,7 @@ import java.util.ArrayList
  * Time: 4:56 下午
  */
 class MusicModel(application: Application) : BaseViewModel<MusicRepository>(application) {
+    var playId = ""
 
     init {
         model = MusicRepository()

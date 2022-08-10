@@ -462,5 +462,275 @@
                 android:src="@drawable/cancel"
                 binding:onClickCommand="@{viewModel.cancelLogin}" />
         </RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#66666666"
+            binding:isVisible="@{viewModel.showZixunDialog||viewModel.showQusDialog}" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="150px"
+            android:layout_marginEnd="150px"
+            android:background="@drawable/white_button_buttom"
+            android:orientation="vertical"
+            binding:isVisible="@{viewModel.showZixunDialog}">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="120px"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="请选择咨询方式"
+                android:textColor="@color/text_black"
+                android:textSize="50px"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/text_gray" />
+
+            <TextView
+                android:layout_width="480px"
+                android:layout_height="100px"
+                android:layout_gravity="center"
+                android:layout_marginTop="30px"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/white_button_blue_stroke"
+                android:gravity="center"
+                android:text="线下面对面咨询"
+                android:textSize="40px"
+                binding:marryState="@{viewModel.zixunType}"
+                binding:marryValue="@{0}"
+                binding:onClickCommand="@{viewModel.zixunClickA}" />
+
+            <TextView
+                android:layout_width="480px"
+                android:layout_height="100px"
+                android:layout_gravity="center"
+                android:layout_marginTop="30px"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/gray_button_buttom"
+                android:gravity="center"
+                android:text="电话咨询"
+                android:textSize="40px"
+                binding:marryState="@{viewModel.zixunType}"
+                binding:marryValue="@{1}"
+                binding:onClickCommand="@{viewModel.zixunClickB}" />
+
+            <TextView
+                android:layout_width="480px"
+                android:layout_height="100px"
+                android:layout_gravity="center"
+                android:layout_marginTop="30px"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/gray_button_buttom"
+                android:gravity="center"
+                android:text="视频咨询"
+                android:textSize="40px"
+                binding:marryState="@{viewModel.zixunType}"
+                binding:marryValue="@{2}"
+                binding:onClickCommand="@{viewModel.zixunClickC}" />
+
+            <TextView
+                android:layout_width="480px"
+                android:layout_height="100px"
+                android:layout_gravity="center"
+                android:layout_marginTop="30px"
+                android:layout_marginBottom="35dp"
+                android:background="@drawable/gray_button_buttom"
+                android:gravity="center"
+                android:text="微信语音咨询"
+                android:textSize="40px"
+                binding:marryState="@{viewModel.zixunType}"
+                binding:marryValue="@{3}"
+                binding:onClickCommand="@{viewModel.zixunClickD}" />
+
+            <TextView
+                android:layout_width="480px"
+                android:layout_height="110px"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="20dp"
+                android:height="90px"
+                android:background="@drawable/blue_button_buttom"
+                android:gravity="center"
+                android:text="确定"
+                android:textColor="@color/white"
+                android:textSize="40px"
+                binding:onClickCommand="@{viewModel.zixunClick}" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="150px"
+            android:layout_marginEnd="150px"
+            android:background="@drawable/white_button_buttom"
+            android:orientation="vertical"
+            binding:isVisible="@{viewModel.showQusDialog}">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="120px"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="请选择问题类型"
+                android:textColor="@color/text_black"
+                android:textSize="50px"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/text_gray" />
+
+            <TextView
+                android:layout_width="480px"
+                android:layout_height="100px"
+                android:layout_gravity="center"
+                android:layout_marginTop="30px"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/white_button_blue_stroke"
+                android:gravity="center"
+                android:text="情绪压力"
+                android:textSize="40px"
+                binding:marryState="@{viewModel.wtlxType}"
+                binding:marryValue="@{0}"
+                binding:onClickCommand="@{viewModel.wtlxClickA}" />
+
+            <TextView
+                android:layout_width="480px"
+                android:layout_height="100px"
+                android:layout_gravity="center"
+                android:layout_marginTop="30px"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/gray_button_buttom"
+                android:gravity="center"
+                android:text="婚姻情感"
+                android:textSize="40px"
+                binding:marryState="@{viewModel.wtlxType}"
+                binding:marryValue="@{1}"
+                binding:onClickCommand="@{viewModel.wtlxClickB}" />
+
+            <TextView
+                android:layout_width="480px"
+                android:layout_height="100px"
+                android:layout_gravity="center"
+                android:layout_marginTop="30px"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/gray_button_buttom"
+                android:gravity="center"
+                android:text="家庭关系"
+                android:textSize="40px"
+                binding:marryState="@{viewModel.wtlxType}"
+                binding:marryValue="@{2}"
+                binding:onClickCommand="@{viewModel.wtlxClickC}" />
+
+            <TextView
+                android:layout_width="480px"
+                android:layout_height="100px"
+                android:layout_gravity="center"
+                android:layout_marginTop="30px"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/gray_button_buttom"
+                android:gravity="center"
+                android:text="职场关系"
+                android:textSize="40px"
+                binding:marryState="@{viewModel.wtlxType}"
+                binding:marryValue="@{3}"
+                binding:onClickCommand="@{viewModel.wtlxClickD}" />
+
+            <TextView
+                android:layout_width="480px"
+                android:layout_height="100px"
+                android:layout_gravity="center"
+                android:layout_marginTop="30px"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/gray_button_buttom"
+                android:gravity="center"
+                android:text="个人成长"
+                android:textSize="40px"
+                binding:marryState="@{viewModel.wtlxType}"
+                binding:marryValue="@{4}"
+                binding:onClickCommand="@{viewModel.wtlxClickE}" />
+
+            <TextView
+                android:layout_width="480px"
+                android:layout_height="100px"
+                android:layout_gravity="center"
+                android:layout_marginTop="30px"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/gray_button_buttom"
+                android:gravity="center"
+                android:text="人际关系"
+                android:textSize="40px"
+                binding:marryState="@{viewModel.wtlxType}"
+                binding:marryValue="@{5}"
+                binding:onClickCommand="@{viewModel.wtlxClickF}" />
+
+            <TextView
+                android:layout_width="480px"
+                android:layout_height="100px"
+                android:layout_gravity="center"
+                android:layout_marginTop="30px"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/gray_button_buttom"
+                android:gravity="center"
+                android:text="亲子关系"
+                android:textSize="40px"
+                binding:marryState="@{viewModel.wtlxType}"
+                binding:marryValue="@{6}"
+                binding:onClickCommand="@{viewModel.wtlxClickG}" />
+
+            <TextView
+                android:layout_width="480px"
+                android:layout_height="100px"
+                android:layout_gravity="center"
+                android:layout_marginTop="30px"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/gray_button_buttom"
+                android:gravity="center"
+                android:text="青少年"
+                android:textSize="40px"
+                binding:marryState="@{viewModel.wtlxType}"
+                binding:marryValue="@{7}"
+                binding:onClickCommand="@{viewModel.wtlxClickH}" />
+
+            <TextView
+                android:layout_width="480px"
+                android:layout_height="100px"
+                android:layout_gravity="center"
+                android:layout_marginTop="30px"
+                android:layout_marginBottom="35dp"
+                android:background="@drawable/gray_button_buttom"
+                android:gravity="center"
+                android:text="性心理"
+                android:textSize="40px"
+                binding:marryState="@{viewModel.wtlxType}"
+                binding:marryValue="@{8}"
+                binding:onClickCommand="@{viewModel.wtlxClickI}" />
+
+
+            <TextView
+                android:layout_width="480px"
+                android:layout_height="110px"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="20dp"
+                android:height="90px"
+                android:background="@drawable/blue_button_buttom"
+                android:gravity="center"
+                android:text="确定"
+                android:textColor="@color/white"
+                android:textSize="40px"
+                binding:onClickCommand="@{viewModel.wtlxClick}" />
+
+        </LinearLayout>
     </FrameLayout>
 </layout>

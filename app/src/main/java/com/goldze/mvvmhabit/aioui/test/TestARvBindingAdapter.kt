@@ -3,6 +3,7 @@ package com.goldze.mvvmhabit.aioui.test
 import android.annotation.SuppressLint
 import android.text.TextUtils
 import androidx.databinding.ViewDataBinding
+import com.goldze.mvvmhabit.aioui.Util.delHTMLTag
 import com.goldze.mvvmhabit.aioui.bean.list.TestRecord
 import com.goldze.mvvmhabit.aioui.common.viewpagerfragment.adapter.AIORvBindingAdapter
 import com.goldze.mvvmhabit.aioui.common.viewpagerfragment.viewmodel.AIORecyclerViewItemViewModel
@@ -31,7 +32,7 @@ class TestARvBindingAdapter : AIORvBindingAdapter() {
                 )
             }
             binding.tvTitle.text = record.name
-            binding.tvContent.text = record.brief
+            binding.tvContent.text = record.brief?.delHTMLTag()
             binding.clickCount.text = "点击量:" + record.clickCount.toString()
             binding.testCount.text = "题目数量:" + record.quesCount.toString()
         }

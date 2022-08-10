@@ -50,7 +50,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="40px"
-                android:maxLength="3"
+                android:maxLines="3"
                 android:text="@{viewModel.bean.brief}"
                 android:textColor="@color/text_gray"
                 android:textSize="36px" />

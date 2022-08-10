@@ -2,6 +2,11 @@ package com.goldze.mvvmhabit.aioui.zixun.input
 
 import android.os.Bundle
 import android.text.InputFilter
+import android.util.Log
+import android.util.TypedValue
+import android.view.View
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.MaterialDialog
 import com.github.gzuliyujiang.wheelpicker.DatePicker
 import com.github.gzuliyujiang.wheelpicker.TimePicker
@@ -32,6 +37,7 @@ class InputActivity : BaseActivity<ActivityInputBinding, InputModel>() {
         val m: Matcher = p.matcher(source.toString())
         if (!m.matches()) "" else null
     }
+
     override fun initData() {
         super.initData()
         binding.brRootView.setPageTitle("在线预约")
@@ -50,36 +56,22 @@ class InputActivity : BaseActivity<ActivityInputBinding, InputModel>() {
         }
 
         binding.tvZxfs.setOnClickListener {
-            MaterialDialog.Builder(this)
-                .title("咨询方式")
-                .positiveText("确认")
-                .items(R.array.items)
-                .itemsCallbackSingleChoice(
-                    -1
-                ) { dialog, itemView, which, text ->
-                    viewModel.zxfs.value = text.toString()
-                    true
-                }
-                .show();
+            viewModel.showZixunDialog.set(true)
         }
+
+
         binding.tvWtlx.setOnClickListener {
-            MaterialDialog.Builder(this)
-                .title("问题类型")
-                .positiveText("确认")
-                .items(R.array.qs_type)
-                .itemsCallbackSingleChoice(
-                    -1
-                ) { dialog, itemView, which, text ->
-                    viewModel.wtlx.value = text.toString()
-                    true
-                }
-                .show();
+            viewModel.showQusDialog.set(true)
         }
         binding.tvYyrq.setOnClickListener {
             val picker = DatePicker(this)
             var wheelLayout: DateWheelLayout = picker.wheelLayout;
             wheelLayout.setDateLabel("年", "月", "日");
-            wheelLayout.setTextSize(40.0f)
+            wheelLayout.setTextSize(45.0f)
+            wheelLayout.yearLabelView.textSize = 38.0f
+            wheelLayout.monthLabelView.textSize = 38.0f
+            wheelLayout.dayLabelView.textSize = 38.0f
+            wheelLayout.setSelectedTextSize(38.0f)
             wheelLayout.setResetWhenLinkage(false)
             picker.setOnDatePickedListener { a, b, c ->
                 viewModel.yyrq.value = "$a-$b-$c"
@@ -93,9 +85,13 @@ class InputActivity : BaseActivity<ActivityInputBinding, InputModel>() {
         binding.tvYysj.setOnClickListener {
             val picker = TimePicker(this)
             var wheelLayout = picker.wheelLayout;
-            wheelLayout.setTextSize(40.0f)
             wheelLayout.setTimeMode(TimeMode.HOUR_24_NO_SECOND)
             wheelLayout.setTimeLabel("点", "分", "秒");
+            wheelLayout.setTextSize(45.0f)
+            wheelLayout.hourLabelView.textSize = 38.0f
+            wheelLayout.minuteLabelView.textSize = 38.0f
+            wheelLayout.secondLabelView.textSize = 38.0f
+            wheelLayout.setSelectedTextSize(38.0f)
             picker.setOnTimeMeridiemPickedListener { hour, minute, second, isAnteMeridiem ->
                 var ms = if (minute < 10) {
                     "0$minute"
@@ -118,10 +114,10 @@ class InputActivity : BaseActivity<ActivityInputBinding, InputModel>() {
             var yysj = viewModel.yysj.value
             var jtwt = binding.etJtwt.text.toString()
             var yydd = binding.etYydd.text.toString()
-            if (zxfs.isNullOrEmpty() ||
-                wtlx.isNullOrEmpty() ||
-                yyrq.isNullOrEmpty() ||
-                yysj.isNullOrEmpty()
+            if ((zxfs.isNullOrEmpty() || zxfs == "请选择") ||
+                (wtlx.isNullOrEmpty() || wtlx == "请选择") ||
+                (yyrq.isNullOrEmpty() || yyrq == "请选择") ||
+                (yysj.isNullOrEmpty() || yysj == "请选择")
             ) {
                 ToastUtils.showShort("请补全必填内容再提交")
                 return@setOnClickListener

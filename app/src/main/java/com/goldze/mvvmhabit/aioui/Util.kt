@@ -3,6 +3,7 @@ package com.goldze.mvvmhabit.aioui
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
+import android.os.Bundle
 import android.util.Log
 import com.goldze.mvvmhabit.aioui.bean.CommentRequestBean
 import com.goldze.mvvmhabit.aioui.clazz.ClazzActivity
@@ -11,24 +12,24 @@ import com.goldze.mvvmhabit.aioui.http.HttpRepository
 import com.goldze.mvvmhabit.aioui.knows.KnowsActivity
 import com.goldze.mvvmhabit.aioui.knows.content.KnowsContentActivity
 import com.goldze.mvvmhabit.aioui.main.bean.ShebeiXQBeanDataX
-import com.goldze.mvvmhabit.aioui.relax.RelaxActivity
 import com.goldze.mvvmhabit.aioui.relax.film.FilmFragment
 import com.goldze.mvvmhabit.aioui.relax.gallery.GalleryFragment
 import com.goldze.mvvmhabit.aioui.relax.meditation.MeditationFragment
 import com.goldze.mvvmhabit.aioui.relax.music.MusicFragment
 import com.goldze.mvvmhabit.aioui.test.TestActivity
-import com.goldze.mvvmhabit.aioui.test.bean.ScaDetailsRequestBean
 import com.goldze.mvvmhabit.aioui.test.basecontent.TestBaseContentActivity
 import com.goldze.mvvmhabit.aioui.test.bean.BasicDetailsResponseBeanData
+import com.goldze.mvvmhabit.aioui.test.bean.ScaDetailsRequestBean
 import com.goldze.mvvmhabit.aioui.test.content.TestContentActivity
 import com.goldze.mvvmhabit.aioui.video.VideoActivity
 import com.goldze.mvvmhabit.aioui.video.bean.VideoBean
 import com.goldze.mvvmhabit.aioui.webview.WebViewActivity
-import com.google.gson.Gson
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import me.goldze.mvvmhabit.base.ContainerActivity
 import me.goldze.mvvmhabit.utils.ToastUtils
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 
 /**
  * Created by Android Studio.
@@ -190,6 +191,10 @@ object Util {
                     ContainerActivity.FRAGMENT,
                     MusicFragment::class.java.canonicalName
                 )
+                var bundle = Bundle()
+                bundle.putString("musicId", id)
+                Log.i("fengao_xiaomi", "jump: id $id")
+                intent.putExtra("bundle", bundle)
                 activity.startActivity(intent)
             }
             "course" -> {
@@ -305,4 +310,30 @@ object Util {
             }
         }
     }
+
+    fun String.delHTMLTag(): String? {
+        //定义script的正则表达式
+        var htmlStr = this
+        val regExScript = "<script[^>]*?>[\\s\\S]*?</script>"
+        //定义style的正则表达式
+        val regExStyle = "<style[^>]*?>[\\s\\S]*?</style>"
+        //定义HTML标签的正则表达式
+        val regExHtml = "<[^>]+>"
+        val pScript: Pattern = Pattern.compile(regExScript, Pattern.CASE_INSENSITIVE)
+        val mScript: Matcher = pScript.matcher(htmlStr)
+        //过滤script标签
+        htmlStr = mScript.replaceAll("")
+        val pStyle: Pattern = Pattern.compile(regExStyle, Pattern.CASE_INSENSITIVE)
+        val mStyle: Matcher = pStyle.matcher(htmlStr)
+        //过滤style标签
+        htmlStr = mStyle.replaceAll("")
+        val pHtml: Pattern = Pattern.compile(regExHtml, Pattern.CASE_INSENSITIVE)
+        val mHtml: Matcher = pHtml.matcher(htmlStr)
+        //过滤html标签
+        htmlStr = mHtml.replaceAll("")
+
+        //返回文本字符串
+        return htmlStr.trim { it <= ' ' }
+    }
+
 }

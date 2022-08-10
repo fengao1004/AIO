@@ -79,7 +79,7 @@ class MusicViewPagerItemViewModel(
         if (tabBean != null) {
             requestBody.typeId = tabBean?.id ?: ""
             requestBody.sysModuleTypeId = tabBean?.id ?: ""
-            id = requestBody.id ?: "null"
+            id = tabBean?.id ?: "null"
         }
 
 
@@ -116,10 +116,24 @@ class MusicViewPagerItemViewModel(
                         //刷新完成收回
                         uiChangeObservable.finishLoadmore.call()
                         uiChangeObservable.finishRefreshing.call()
-                        if (id == "null" && records.isNotEmpty()) {
-                            (records[0] as MusicRecord).itemPosition = 0
-                            parentViewModel?.itemClickEvent?.value = records[0]
+                        Log.i("fengao_xiaomi", "onNext: $id")
+                        Log.i("fengao_xiaomi", "onNext: ${parentViewModel?.playId}")
+                        if (id == "null" && parentViewModel?.playId?.isNotEmpty() == true) {
+                            records.forEachIndexed { index, baseRecord ->
+                                Log.i("fengao_xiaomi", "onNext: ${baseRecord.id}")
+                                if (baseRecord.id.toString() == parentViewModel!!.playId) {
+                                    (records[index] as MusicRecord).itemPosition = index
+                                    parentViewModel?.itemClickEvent?.value = records[index]
+                                    parentViewModel?.playId = ""
+                                    return@forEachIndexed
+                                }
+                            }
                         }
+//                        if (id == "null" && parentViewModel?.playId?.isNotEmpty() == true) {
+//                            (records[0] as MusicRecord).itemPosition = 0
+//                            parentViewModel?.itemClickEvent?.value = records[0]
+//                        }
+
                     }
 
                     override fun onError(throwable: Throwable) {

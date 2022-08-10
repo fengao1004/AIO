@@ -6,6 +6,7 @@ import android.content.Intent
 import android.util.Log
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableInt
+import com.goldze.mvvmhabit.aioui.Util.delHTMLTag
 import com.goldze.mvvmhabit.aioui.bean.CommentRequestBean
 import com.goldze.mvvmhabit.aioui.bean.TextObserver
 import com.goldze.mvvmhabit.aioui.http.HttpRepository
@@ -73,7 +74,12 @@ class TestDecModel(application: Application) : BaseViewModel<HttpRepository>(app
                             if (it.success) {
                                 Log.i("fengao_xiaomi", "loadData: " + Gson().toJson(it))
                                 detail = it
-                                brief.value = detail!!.data.scaVo.brief
+                                var str = detail!!.data.scaVo.brief.delHTMLTag()
+                                str = str?.replace("\r\n", "")
+                                str = str?.replace("\n", "")
+                                str = str?.replace(" ", "")
+                                str = str?.replace(" ", "")
+                                brief.value = str
                                 this.name.value = detail!!.data.scaVo.name
                                 imgUrl.value = detail!!.data.scaVo.faceImage
                             }

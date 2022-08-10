@@ -27,7 +27,7 @@ import me.tatarka.bindingcollectionadapter2.ItemBinding
  */
 class KepuViewModel(application: Application) : BaseViewModel<HttpRepository>(application) {
     var loadEndLD: MutableLiveData<String> = MutableLiveData()
-    var page = 0
+    var page = 1
 
     //给RecyclerView添加ObservableList
     var observableList: ObservableList<KepuRvItemViewModel> = ObservableArrayList()
@@ -64,7 +64,7 @@ class KepuViewModel(application: Application) : BaseViewModel<HttpRepository>(ap
             .subscribe({
                 loadEndLD.postValue("")
                 if (it.success) {
-                    if (page == 1) {
+                    if (page == 2) {
                         observableList.clear()
                     }
                     it.data.records.forEach {

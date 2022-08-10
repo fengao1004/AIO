@@ -53,7 +53,7 @@
                     android:layout_height="60px"
                     android:layout_gravity="top|start"
                     android:maxLines="1"
-                    android:text="腹部呼吸法"
+                    android:text="腹部呼吸法腹部呼吸法"
                     android:textColor="@color/text_color_title"
                     android:textSize="45px"
                     android:textStyle="bold" />
@@ -67,23 +67,20 @@
                     android:text="专业视角，深度思考"
                     android:textColor="@color/text_color_subtitle"
                     android:textSize="36px" />
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="330px"
-                android:layout_height="300px">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|center_horizontal"
+                    android:layout_gravity="bottom|end"
                     android:background="@drawable/shape_stroke_label_select"
                     android:paddingHorizontal="60px"
                     android:paddingVertical="12px"
                     android:text="开始训练"
                     android:textColor="@color/white"
                     android:textSize="39px" />
+
             </FrameLayout>
+
         </LinearLayout>
 
         <View

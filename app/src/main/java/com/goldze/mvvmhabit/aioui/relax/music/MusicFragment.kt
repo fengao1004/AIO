@@ -43,7 +43,11 @@ class MusicFragment : BaseFragment<FragmentMusicBinding, MusicModel>() {
     var mActiveTabPosition = -1
     private var keepTrue = true
 
-    override fun initContentView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): Int {
+    override fun initContentView(
+        inflater: LayoutInflater?,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): Int {
         return R.layout.fragment_music
     }
 
@@ -68,7 +72,9 @@ class MusicFragment : BaseFragment<FragmentMusicBinding, MusicModel>() {
         binding.brRootView.backIv.setOnClickListener {
             activity?.finish()
         }
-
+        var playId = arguments?.getString("musicId")
+        viewModel.playId = playId ?: ""
+        Log.i("fengao_xiaomi", "initData: ${viewModel.playId}")
         initVolumeBar()
         initPlayBar()
         updateSeekBar()
@@ -97,7 +103,8 @@ class MusicFragment : BaseFragment<FragmentMusicBinding, MusicModel>() {
 
                 //获取总时长
                 val duration = MediaPlayerHelper.getInstance().mediaPlayer.duration;
-                val currentPosition: Int = MediaPlayerHelper.getInstance().mediaPlayer.currentPosition
+                val currentPosition: Int =
+                    MediaPlayerHelper.getInstance().mediaPlayer.currentPosition
 
                 //发送数据给activity
                 val message = Message.obtain()
@@ -118,7 +125,8 @@ class MusicFragment : BaseFragment<FragmentMusicBinding, MusicModel>() {
                 binding.playerPlayIcon.setImageResource(R.drawable.player_pause)
 
                 var currentIndex = sPlayerManager.albumIndex
-                val nextIndex = if (--currentIndex <= 0) sPlayerManager.albumMusics.size - 1 else currentIndex
+                val nextIndex =
+                    if (--currentIndex <= 0) sPlayerManager.albumMusics.size - 1 else currentIndex
                 syncControlUi(sPlayerManager.albumMusics[nextIndex].record)
                 syncAllRecyclerView(nextIndex, mActiveTabPosition)
             } else {
@@ -132,7 +140,8 @@ class MusicFragment : BaseFragment<FragmentMusicBinding, MusicModel>() {
                 binding.playerPlayIcon.setImageResource(R.drawable.player_pause)
 
                 var currentIndex = sPlayerManager.albumIndex
-                val nextIndex = if (++currentIndex >= sPlayerManager.albumMusics.size) 0 else currentIndex
+                val nextIndex =
+                    if (++currentIndex >= sPlayerManager.albumMusics.size) 0 else currentIndex
                 syncControlUi(sPlayerManager.albumMusics[nextIndex].record)
                 syncAllRecyclerView(nextIndex, mActiveTabPosition)
             } else {
@@ -293,7 +302,10 @@ class MusicFragment : BaseFragment<FragmentMusicBinding, MusicModel>() {
         binding.playerPlayIcon.setImageResource(R.drawable.player_pause)
     }
 
-    private fun syncAllRecyclerView(itemPosition: Int, activeTabPosition: Int = binding.viewPager.currentItem) {
+    private fun syncAllRecyclerView(
+        itemPosition: Int,
+        activeTabPosition: Int = binding.viewPager.currentItem
+    ) {
         // 同步所有 tab 下的 RV
         val viewPagerBindingAdapter = binding.viewPager.adapter as MusicViewPagerBindingAdapter
         for (entry in viewPagerBindingAdapter.mAdapterMap) {
