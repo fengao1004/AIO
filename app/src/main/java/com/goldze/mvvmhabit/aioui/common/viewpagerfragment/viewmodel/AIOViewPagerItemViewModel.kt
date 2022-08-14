@@ -95,7 +95,7 @@ class AIOViewPagerItemViewModel(
                         }
                         observableList.clear()
                         for (record in records) {
-                            val itemViewModel = AIORecyclerViewItemViewModel(this@AIOViewPagerItemViewModel, record)
+                            val itemViewModel = AIORecyclerViewItemViewModel(this@AIOViewPagerItemViewModel, record,tabBean?.name)
                             //双向绑定动态添加Item
                             observableList.add(itemViewModel)
                         }
@@ -151,7 +151,7 @@ class AIOViewPagerItemViewModel(
                             return
                         }
                         for (record in records) {
-                            val itemViewModel = AIORecyclerViewItemViewModel(this@AIOViewPagerItemViewModel, record)
+                            val itemViewModel = AIORecyclerViewItemViewModel(this@AIOViewPagerItemViewModel, record,tabBean?.name)
                             //双向绑定动态添加Item
                             observableList.add(itemViewModel)
                         }
@@ -178,7 +178,8 @@ class AIOViewPagerItemViewModel(
                 })
     }
 
-    fun onItemClick(entity: BaseRecord) {
+    fun onItemClick(entity: BaseRecord,tabName :String) {
+        entity.tabName = tabName
         parentViewModel.itemClickEvent.value = entity
     }
 }

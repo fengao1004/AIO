@@ -9,6 +9,7 @@ import com.goldze.mvvmhabit.aioui.bean.CommentRequestBean
 import com.goldze.mvvmhabit.aioui.clazz.ClazzActivity
 import com.goldze.mvvmhabit.aioui.clazz.content.ClazzContentActivity
 import com.goldze.mvvmhabit.aioui.http.HttpRepository
+import com.goldze.mvvmhabit.aioui.knows.Knows2Activity
 import com.goldze.mvvmhabit.aioui.knows.KnowsActivity
 import com.goldze.mvvmhabit.aioui.knows.content.KnowsContentActivity
 import com.goldze.mvvmhabit.aioui.main.bean.ShebeiXQBeanDataX
@@ -63,7 +64,7 @@ object Util {
                     activity.startActivity(Intent(activity, TestActivity::class.java))
                 }
                 "info" -> {
-                    activity.startActivity(Intent(activity, KnowsActivity::class.java))
+                    activity.startActivity(Intent(activity, Knows2Activity::class.java))
                 }
                 "music" -> {
                     val intent = Intent(activity, ContainerActivity::class.java)

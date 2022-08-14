@@ -91,7 +91,7 @@
         android:id="@+id/bottom_progressbar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
-        android:layout_height="1.5dp"
+        android:layout_height="5px"
         android:layout_alignParentBottom="true"
         android:max="100"
         android:progressDrawable="@drawable/video_progress" />
@@ -106,16 +106,16 @@
 
     <moe.codeest.enviews.ENDownloadView
         android:id="@+id/loading"
-        android:layout_width="28dp"
-        android:layout_height="28dp"
+        android:layout_width="80px"
+        android:layout_height="80px"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:visibility="invisible" />
 
     <moe.codeest.enviews.ENPlayView
         android:id="@+id/start"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="80px"
+        android:layout_height="80px"
         android:layout_centerInParent="true"
         android:layout_gravity="center_vertical" />
 

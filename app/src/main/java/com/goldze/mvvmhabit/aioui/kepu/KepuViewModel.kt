@@ -37,7 +37,7 @@ class KepuViewModel(application: Application) : BaseViewModel<HttpRepository>(ap
 
     //下拉刷新
     var onRefreshCommand: BindingCommand<*> = BindingCommand<Any?>(BindingAction {
-        page = 0
+        page = 1
         requestNetWork()
     })
 
@@ -67,8 +67,12 @@ class KepuViewModel(application: Application) : BaseViewModel<HttpRepository>(ap
                     if (page == 2) {
                         observableList.clear()
                     }
+                    if (it.data.records.isEmpty()) {
+                        ToastUtils.showShort("没有更多数据")
+                        return@subscribe
+                    }
                     it.data.records.forEach {
-                        observableList.add(KepuRvItemViewModel(this,it))
+                        observableList.add(KepuRvItemViewModel(this, it))
                     }
                 } else {
                     ToastUtils.showShort("加载错误")

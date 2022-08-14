@@ -23,7 +23,7 @@ class KnowsContentActivity : BaseActivity<ActivityKnowsContentBinding, KnowsCont
     override fun initData() {
         super.initData()
         bean = intent.getSerializableExtra("bean") as KnowsRecord
-        binding.brRootView.setPageTitle(bean?.name ?: "")
+        binding.brRootView.setPageTitle(bean?.tabName ?: "")
         viewModel.setKnowBean(bean!!)
         binding.webContent.setInitialScale(250)
         binding.webContent.loadDataWithBaseURL(

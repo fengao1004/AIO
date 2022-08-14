@@ -21,8 +21,7 @@ class Knows2RvBindingAdapter : AIORvBindingAdapter() {
     ) {
         super.onBindBinding(binding, variableId, layoutRes, position, item)
         var record = item?.entity?.get()
-
-        if (binding is ItemKonwsRvBinding && record is KnowsRecord){
+        if (binding is ItemKonwsRvBinding && record is KnowsRecord) {
             if (!TextUtils.isEmpty(record.faceImage)) {
                 ImageUtil.display(
                     record.faceImage,
@@ -31,7 +30,7 @@ class Knows2RvBindingAdapter : AIORvBindingAdapter() {
                 )
             }
             binding.tvName.text = record.name
-            binding.tvNum.text = "点击量："+record.clickCount
+            binding.tvNum.text = "点击量：" + record.clickCount
         }
     }
 }

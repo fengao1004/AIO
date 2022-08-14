@@ -16,11 +16,12 @@ import me.goldze.mvvmhabit.binding.command.BindingCommand;
 public class AIORecyclerViewItemViewModel extends ItemViewModel<AIOViewPagerItemViewModel> {
 
     public ObservableField<BaseRecord> entity = new ObservableField<>();
+    public String tabName = "";
 
-
-    public AIORecyclerViewItemViewModel(@NonNull AIOViewPagerItemViewModel viewModel, BaseRecord entity) {
+    public AIORecyclerViewItemViewModel(@NonNull AIOViewPagerItemViewModel viewModel, BaseRecord entity, String tabName) {
         super(viewModel);
         this.entity.set(entity);
+        this.tabName = tabName;
         // 绑定数据
     }
 
@@ -29,7 +30,7 @@ public class AIORecyclerViewItemViewModel extends ItemViewModel<AIOViewPagerItem
     public BindingCommand itemClick = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
-            viewModel.onItemClick(entity.get());
+            viewModel.onItemClick(entity.get(), tabName);
         }
     });
 
