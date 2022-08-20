@@ -2,6 +2,8 @@ package com.goldze.mvvmhabit.aioui.test
 
 import android.annotation.SuppressLint
 import android.text.TextUtils
+import androidx.databinding.Observable
+import androidx.databinding.ObservableInt
 import androidx.databinding.ViewDataBinding
 import com.goldze.mvvmhabit.aioui.bean.list.TestRecord
 import com.goldze.mvvmhabit.aioui.common.viewpagerfragment.adapter.AIORvBindingAdapter
@@ -32,7 +34,10 @@ class TestBRvBindingAdapter : AIORvBindingAdapter() {
             }
             binding.tvTitle.text = record.name
             binding.tvContent.text = record.brief
-            binding.clickCount.text = "点击量:" + record.clickCount.toString()
+            binding.clickCount.text = "点击量："+record.clickCount
+            record.clickCountOb = {
+                binding.clickCount.text = "点击量：" + record.clickCount
+            }
             binding.testCount.text = "题目数量:" + 1
         }
 

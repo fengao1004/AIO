@@ -3,6 +3,7 @@ package com.goldze.mvvmhabit.aioui.main.fragment
 import android.annotation.SuppressLint
 import android.app.Application
 import android.provider.Settings
+import android.util.Log
 import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.MutableLiveData
 import com.goldze.mvvmhabit.aioui.Util
@@ -29,6 +30,7 @@ import me.goldze.mvvmhabit.binding.command.BindingAction
 import me.goldze.mvvmhabit.binding.command.BindingCommand
 import me.goldze.mvvmhabit.utils.SPUtils
 import me.goldze.mvvmhabit.utils.ToastUtils
+import java.util.jar.Attributes
 
 /**
  * Created by Android Studio.
@@ -107,6 +109,7 @@ class MainFgViewModel(application: Application) : BaseViewModel<HttpRepository>(
     }
 
     var gonggao = TextObserver("暂无公告")
+    var gonggaoLiveData = MutableLiveData<List<String>>()
 
     var hasGonggao = false
 
@@ -140,8 +143,10 @@ class MainFgViewModel(application: Application) : BaseViewModel<HttpRepository>(
             uniqueCode =
                 Settings.System.getString(activity.contentResolver, Settings.Secure.ANDROID_ID)
             SPUtils.getInstance().put("uniqueCode", uniqueCode)
-            Util.uniqueCode = uniqueCode
         }
+        Util.uniqueCode = uniqueCode
+        Util.serialNumber = serialNumber
+        Log.i("fengao_xiaomi", "loadId: $uniqueCode")
         return if (serialNumber.isNullOrEmpty()) {
             showEditCode.set(true)
             false
@@ -166,6 +171,11 @@ class MainFgViewModel(application: Application) : BaseViewModel<HttpRepository>(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 if (it.success && it.data.records.isNotEmpty()) {
+                    var list = arrayListOf<String>()
+                    it.data.records.forEach {
+                        list.add(it.name)
+                    }
+                    gonggaoLiveData.postValue(list)
                     gonggao.value = it.data.records[0].name
                     hasGonggao = true
                 } else {

@@ -35,6 +35,8 @@ class ClazzFragment : AIOViewPagerFragment() {
         super.initViewObservable()
         viewModel.itemClickEvent.observe(this) { entity ->
             if (entity is ClazzListResponseBeanRecord) {
+                entity.clickCount = (entity.clickCount?:0)+1
+                entity.clickCountOb(entity.clickCount)
                 val intent = Intent(viewModel.activity, ClazzContentActivity::class.java)
                 intent.putExtra("id", entity.id)
                 intent.putExtra("name", entity.name)

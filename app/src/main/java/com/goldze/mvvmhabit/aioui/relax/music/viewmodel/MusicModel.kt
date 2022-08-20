@@ -6,12 +6,15 @@ import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableList
 import com.goldze.mvvmhabit.BR
 import com.goldze.mvvmhabit.R
-import com.goldze.mvvmhabit.aioui.bean.TypeResponseBean
-import com.goldze.mvvmhabit.aioui.bean.TypeResponseBeanData
+import com.goldze.mvvmhabit.aioui.Util
+import com.goldze.mvvmhabit.aioui.bean.*
 import com.goldze.mvvmhabit.aioui.bean.list.BaseRecord
+import com.goldze.mvvmhabit.aioui.bean.list.MusicRecord
 import com.goldze.mvvmhabit.aioui.http.HttpRepository
 import com.goldze.mvvmhabit.aioui.http.impl.MusicRepository
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableObserver
+import io.reactivex.schedulers.Schedulers
 import me.goldze.mvvmhabit.base.BaseViewModel
 import me.goldze.mvvmhabit.binding.command.BindingCommand
 import me.goldze.mvvmhabit.bus.event.SingleLiveEvent
@@ -113,6 +116,31 @@ class MusicModel(application: Application) : BaseViewModel<MusicRepository>(appl
                     override fun onComplete() {
                     }
                 })
+    }
+
+    @SuppressLint("CheckResult")
+    fun updateClick(entity: MusicRecord) {
+        entity.clickCount = (entity.clickCount ?: 0) + 1
+        entity.clickCountOb(entity.clickCount)
+        var body = MusicDetailRequestBody()
+        body.deptId = entity.deptId ?: 0
+        body.id = entity.id
+        body.isDel = entity.isDel
+        body.status = entity.status ?: 0
+        var request =
+            MusicDetailRequest(
+                body,
+                MusicDetailRequestHeader(Util.serialNumber, Util.uniqueCode)
+            )
+
+        model.api.getMusicDetail(request)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+
+            }, {
+
+            })
     }
 
 }

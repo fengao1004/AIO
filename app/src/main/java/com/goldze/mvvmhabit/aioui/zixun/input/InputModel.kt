@@ -152,11 +152,45 @@ class InputModel(application: Application) : BaseViewModel<HttpRepository>(appli
         jtwt: String,
         yydd: String
     ) {
+        var array1 = yyrq.split("-")
+        var array2 = yysj.split(":")
+        var rq = ""
+        var sj = ""
+        var str0 = if (array1[0].length == 1) {
+            "0${array1[0]}"
+        } else {
+            array1[0]
+        }
+        var str1 = if (array1[1].length == 1) {
+            "0${array1[1]}"
+        } else {
+            array1[1]
+        }
+        var str2 = if (array1[2].length == 1) {
+            "0${array1[2]}"
+        } else {
+            array1[2]
+        }
+
+        var stra = if (array2[0].length == 1) {
+            "0${array2[0]}"
+        } else {
+            array2[0]
+        }
+
+        var strb = if (array2[1].length == 1) {
+            "0${array2[1]}"
+        } else {
+            array2[1]
+        }
+
+        rq = "$str0-$str1-$str2"
+        sj = "$stra:$strb"
         var bean = InputRequestBean(
             RequestBody(
                 yydd,
-                yyrq,
-                yysj,
+                rq,
+                sj,
                 zxfs.value,
                 jtwt,
                 0,

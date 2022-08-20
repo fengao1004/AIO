@@ -6,13 +6,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.goldze.mvvmhabit.BR
 import com.goldze.mvvmhabit.R
-import com.goldze.mvvmhabit.aioui.common.viewpagerfragment.adapter.AIORvBindingAdapter
-import com.goldze.mvvmhabit.aioui.common.viewpagerfragment.adapter.AIOViewPagerBindingAdapter
 import com.goldze.mvvmhabit.aioui.common.viewpagerfragment.listener.AIOViewPagerOnTabSelectedListener
 import com.goldze.mvvmhabit.aioui.common.viewpagerfragment.viewmodel.AIOViewPagerFragmentModel
 import com.goldze.mvvmhabit.aioui.common.viewpagerfragment.viewmodel.AIOViewPagerItemViewModel
 import com.goldze.mvvmhabit.aioui.http.ListRepository
-import com.goldze.mvvmhabit.aioui.http.impl.MeditationRepository
 import com.goldze.mvvmhabit.databinding.FragmentViewpagerAioBinding
 import com.google.android.material.tabs.TabLayout
 import me.goldze.mvvmhabit.base.BaseFragment
@@ -39,8 +36,6 @@ abstract class AIOViewPagerFragment : BaseFragment<FragmentViewpagerAioBinding, 
 
     override fun initData() {
         super.initData()
-
-        binding.brRootView.setAppTitle("心理自助服务一体机")
         binding.brRootView.setPageTitle("AIO 页面")
         binding.brRootView.backIv.setOnClickListener {
             activity?.finish()

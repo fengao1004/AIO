@@ -254,7 +254,7 @@ class MusicFragment : BaseFragment<FragmentMusicBinding, MusicModel>() {
                     return@observe
                 }
                 sPlayerManager.loadAlbum(aioAlbum, itemPosition)
-
+                viewModel.updateClick(entity)
                 syncControlUi(entity)
                 syncAllRecyclerView(itemPosition)
             }

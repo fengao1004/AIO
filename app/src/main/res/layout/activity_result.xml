@@ -26,7 +26,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/titleBar_height"
             android:orientation="vertical"
-            android:paddingHorizontal="@dimen/content_padding">
+            android:paddingHorizontal="60px">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -38,6 +38,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:lineSpacingExtra="10px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="60px"

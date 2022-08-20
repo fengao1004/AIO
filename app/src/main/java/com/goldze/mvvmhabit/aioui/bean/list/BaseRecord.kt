@@ -1,10 +1,14 @@
 package com.goldze.mvvmhabit.aioui.bean.list
 
+import androidx.databinding.ObservableInt
+import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 open class BaseRecord : Serializable {
     var brief: String? = null
     var clickCount: Int? = null
+    @Transient
+    var clickCountOb: (count: Int?) -> Unit = { }
     var createTime: String? = null
     var deptId: Int? = null
     var id: Long = 0

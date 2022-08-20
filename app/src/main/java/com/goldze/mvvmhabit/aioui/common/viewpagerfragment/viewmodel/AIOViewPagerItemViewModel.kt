@@ -178,8 +178,8 @@ class AIOViewPagerItemViewModel(
                 })
     }
 
-    fun onItemClick(entity: BaseRecord,tabName :String) {
-        entity.tabName = tabName
+    fun onItemClick(entity: BaseRecord,tabName :String?) {
+        entity.tabName = tabName?:""
         parentViewModel.itemClickEvent.value = entity
     }
 }

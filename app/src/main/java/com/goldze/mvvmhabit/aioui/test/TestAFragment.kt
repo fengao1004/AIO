@@ -34,6 +34,8 @@ class TestAFragment : AIOViewPagerFragment() {
         super.initViewObservable()
         viewModel.itemClickEvent.observe(this) { entity ->
             if (entity is TestRecord) {
+                entity.clickCount = (entity.clickCount?:0)+1
+                entity.clickCountOb(entity.clickCount)
                 var intent = Intent(activity, TestDecActivity::class.java)
                 intent.putExtra("code", entity.code)
                 intent.putExtra("name", entity.name)

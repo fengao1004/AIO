@@ -1,6 +1,8 @@
 package com.goldze.mvvmhabit.aioui.relax.music.adapter
 
 import android.text.TextUtils
+import androidx.databinding.Observable
+import androidx.databinding.ObservableInt
 import androidx.databinding.ViewDataBinding
 import com.goldze.mvvmhabit.aioui.bean.list.MusicRecord
 import com.goldze.mvvmhabit.aioui.relax.music.viewmodel.MusicRvItemViewModel
@@ -31,7 +33,10 @@ class MusicRecyclerViewBindingAdapter : BindingRecyclerViewAdapter<MusicRvItemVi
                 )
             }
             binding.title.text = record.name
-            binding.desc.text = "点击量：${record.clickCount}"
+            binding.desc.text = "点击量："+record.clickCount
+            record.clickCountOb = {
+                binding.desc.text = "点击量：" + record.clickCount
+            }
         }
     }
 

@@ -37,7 +37,13 @@
                     android:layout_marginTop="40px"
                     android:paddingLeft="@dimen/content_padding"
                     android:paddingRight="@dimen/content_padding">
-
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:text="请选择咨询方式"
+                        android:textColor="@color/text_gray"
+                        android:textSize="44px" />
                     <TextView
                         android:id="@+id/tv_type"
                         android:layout_width="wrap_content"
@@ -127,7 +133,17 @@
                             android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
                             android:src="@drawable/pull" />
+
+
                     </RelativeLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:text="请选择问题类型"
+                        android:textColor="@color/text_gray"
+                        android:textSize="44px" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -147,6 +163,7 @@
 
 
                     <TextView
+                        android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
@@ -287,13 +304,7 @@
                         android:textSize="54px" />
 
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:text="请先选择问题类型"
-                        android:textColor="@color/text_gray"
-                        android:textSize="44px" />
+
 
 
                     <RelativeLayout

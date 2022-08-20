@@ -23,12 +23,16 @@ class TestDecActivity : BaseActivity<ActivityTestDecBinding, TestDecModel>() {
 
     override fun initData() {
         super.initData()
-        binding.brRootView.setPageTitle("专业测评")
 //        viewModel.detail = detail
 
         var code = intent.getStringExtra("code")
         var name =  intent.getStringExtra("name")
         var type =  intent.getStringExtra("type")
+        if(type == "normal"){
+            binding.brRootView.setPageTitle("专业测评")
+        }else{
+            binding.brRootView.setPageTitle("趣味测评")
+        }
         viewModel.loadData(code,name,type)
     }
 }

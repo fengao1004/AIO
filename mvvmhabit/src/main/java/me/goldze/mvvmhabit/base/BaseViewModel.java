@@ -24,7 +24,7 @@ import me.goldze.mvvmhabit.bus.event.SingleLiveEvent;
  * Created by goldze on 2017/6/15.
  */
 public class BaseViewModel<M extends BaseModel> extends AndroidViewModel implements IBaseViewModel, Consumer<Disposable> {
-    protected M model;
+    public M model;
     private UIChangeLiveData uc;
     public Activity activity;
     //弱引用持有

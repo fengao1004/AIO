@@ -10,7 +10,6 @@ import com.goldze.mvvmhabit.aioui.clazz.ClazzActivity
 import com.goldze.mvvmhabit.aioui.clazz.content.ClazzContentActivity
 import com.goldze.mvvmhabit.aioui.http.HttpRepository
 import com.goldze.mvvmhabit.aioui.knows.Knows2Activity
-import com.goldze.mvvmhabit.aioui.knows.KnowsActivity
 import com.goldze.mvvmhabit.aioui.knows.content.KnowsContentActivity
 import com.goldze.mvvmhabit.aioui.main.bean.ShebeiXQBeanDataX
 import com.goldze.mvvmhabit.aioui.relax.film.FilmFragment
@@ -39,8 +38,8 @@ import java.util.regex.Pattern
  * Time: 11:59 下午
  */
 object Util {
-    var serialNumber = "123456"
-    var uniqueCode = "b11fbef79a625aac"
+    var serialNumber = ""
+    var uniqueCode = ""
     var shebeiXq: ShebeiXQBeanDataX? = null
     val model by lazy {
         HttpRepository()
@@ -57,9 +56,9 @@ object Util {
     趣味测评 interest
      */
     @SuppressLint("CheckResult")
-    fun jump(code: String, id: String, activity: Activity, name: String, resCode: String = "") {
-        if (id.isNullOrEmpty()) {
-            when (code) {
+    fun jump(sysModuleCode: String, resourcesId: String, activity: Activity, resourcesName: String, code: String = "") {
+        if (resourcesId.isNullOrEmpty()) {
+            when (sysModuleCode) {
                 "scale" -> {
                     activity.startActivity(Intent(activity, TestActivity::class.java))
                 }
@@ -107,12 +106,12 @@ object Util {
             }
             return
         }
-        when (code) {
+        when (sysModuleCode) {
             "scale" -> {
                 var jumpBasic = false
                 var onceId = ""
                 var basicBean: BasicDetailsResponseBeanData? = null
-                model.api.getScaBasics(resCode)
+                model.api.getScaBasics(code)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({
@@ -123,7 +122,7 @@ object Util {
                         }
                         model.api.getScaDetails(
                             ScaDetailsRequestBean(
-                                scaCode = resCode!!,
+                                scaCode = code!!,
                                 onceId = onceId
                             )
                         ).subscribeOn(Schedulers.io())
@@ -138,8 +137,8 @@ object Util {
                                         intent.putExtra("basebean", basicBean)
                                         intent.putExtra("sex", "")
                                         intent.putExtra("type", "normal")
-                                        intent.putExtra("name", name)
-                                        intent.putExtra("scaRecId", resCode)
+                                        intent.putExtra("name", resourcesName)
+                                        intent.putExtra("scaRecId", code)
                                         activity.finish()
                                         activity.startActivity(intent)
                                     } else {
@@ -149,8 +148,8 @@ object Util {
                                         intent.putExtra("sex", "")
                                         intent.putExtra("type", "normal")
                                         intent.putExtra("bean", it)
-                                        intent.putExtra("name", name)
-                                        intent.putExtra("scaRecId", resCode)
+                                        intent.putExtra("name", resourcesName)
+                                        intent.putExtra("scaRecId", code)
                                         activity.startActivity(intent)
                                     }
                                 }
@@ -168,7 +167,7 @@ object Util {
             }
             "info" -> {
                 var empty = CommentRequestBean.getEmpty()
-                empty.id = id
+                empty.id = resourcesId
                 var header = CommentRequestBean.getHeader()
                 model.api.getKnowsDetail(CommentRequestBean(empty, header))
                     .subscribeOn(Schedulers.io())
@@ -193,20 +192,20 @@ object Util {
                     MusicFragment::class.java.canonicalName
                 )
                 var bundle = Bundle()
-                bundle.putString("musicId", id)
-                Log.i("fengao_xiaomi", "jump: id $id")
+                bundle.putString("musicId", resourcesId)
+                Log.i("fengao_xiaomi", "jump: id $resourcesId")
                 intent.putExtra("bundle", bundle)
                 activity.startActivity(intent)
             }
             "course" -> {
                 val intent = Intent(activity, ClazzContentActivity::class.java)
-                intent.putExtra("id", id.toLong())
-                intent.putExtra("name", name)
+                intent.putExtra("id", resourcesId.toLong())
+                intent.putExtra("name", resourcesName)
                 activity.startActivity(intent)
             }
             "meditation" -> {
                 var empty = CommentRequestBean.getEmpty()
-                empty.id = id
+                empty.id = resourcesId
                 var header = CommentRequestBean.getHeader()
                 model.api.getMeditationDetail(CommentRequestBean(empty, header))
                     .subscribeOn(Schedulers.io())
@@ -234,7 +233,7 @@ object Util {
             }
             "cartoon" -> {
                 var empty = CommentRequestBean.getEmpty()
-                empty.id = id
+                empty.id = resourcesId
                 var header = CommentRequestBean.getHeader()
                 model.api.getCartoonDetail(CommentRequestBean(empty, header))
                     .subscribeOn(Schedulers.io())
@@ -258,7 +257,7 @@ object Util {
             }
             "film" -> {
                 var empty = CommentRequestBean.getEmpty()
-                empty.id = id
+                empty.id = resourcesId
                 var header = CommentRequestBean.getHeader()
                 model.api.getFilmDetail(CommentRequestBean(empty, header))
                     .subscribeOn(Schedulers.io())
@@ -285,7 +284,7 @@ object Util {
             }
             "interest" -> {
                 var empty = CommentRequestBean.getEmpty()
-                empty.id = id
+                empty.id = resourcesId
                 var header = CommentRequestBean.getHeader()
                 model.api.getFunnyDetails(CommentRequestBean(empty, header))
                     .subscribeOn(Schedulers.io())
@@ -297,7 +296,7 @@ object Util {
                             intent.putExtra("sex", "")
                             intent.putExtra("type", "funny")
                             intent.putExtra("bean", it)
-                            intent.putExtra("name", name)
+                            intent.putExtra("name", resourcesName)
                             activity.startActivity(intent)
                         } else {
                             ToastUtils.showShort("跳转失败 ${it.message}")

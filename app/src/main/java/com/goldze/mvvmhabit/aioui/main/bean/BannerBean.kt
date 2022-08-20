@@ -18,6 +18,7 @@ data class BannerBeanData(
     val deptId: String,
     val faceUrl: String,
     val id: String,
+    val code: String?,
     val isDel: Int,
     val linkUrl: String,
     val name: String,

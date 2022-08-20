@@ -1,6 +1,7 @@
 package com.goldze.mvvmhabit.aioui.http
 
 import com.goldze.mvvmhabit.aioui.bean.CommentRequestBean
+import com.goldze.mvvmhabit.aioui.bean.MusicDetailRequest
 import com.goldze.mvvmhabit.aioui.bean.TypeResponseBean
 import com.goldze.mvvmhabit.aioui.bean.list.*
 import com.goldze.mvvmhabit.aioui.clazz.bean.ClazzListResponseBeanRecord
@@ -8,7 +9,6 @@ import com.goldze.mvvmhabit.aioui.clazz.bean.ClazzResponseBean
 import com.goldze.mvvmhabit.aioui.gonggao.content.GonggaoContentBean
 import com.goldze.mvvmhabit.aioui.kepu.KepuBean
 import com.goldze.mvvmhabit.aioui.kepu.content.KepuItemBean
-import com.goldze.mvvmhabit.aioui.knows.KnowsBean
 import com.goldze.mvvmhabit.aioui.knows.KnowsDetailBean
 import com.goldze.mvvmhabit.aioui.knows.KnowsRecord
 import com.goldze.mvvmhabit.aioui.main.bean.*
@@ -73,6 +73,8 @@ interface Api {
     @POST("/client/api/meditation/detail")
     fun getMeditationDetail(@Body bean: CommentRequestBean): Observable<MeditationDetail>
 
+    @POST("/client/api/music/detail")
+    fun getMusicDetail(@Body bean: MusicDetailRequest): Observable<String>
 
     @POST("/client/api/film/getPageList")
     fun getFilmPageList(@Body bean: CommentRequestBean): Observable<CommonListResponseBean<FilmRecord>>
@@ -120,7 +122,6 @@ interface Api {
 
     @POST("/client/scaRec/notLogin/saveScaBasic")
     fun commitBasic(@Body bean: List<BasicAnserBean>): Observable<AnserReponseData>
-
 
 
 }

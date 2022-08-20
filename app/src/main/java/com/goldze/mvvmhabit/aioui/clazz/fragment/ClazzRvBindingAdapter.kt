@@ -2,6 +2,8 @@ package com.goldze.mvvmhabit.aioui.clazz.fragment
 
 import android.annotation.SuppressLint
 import android.text.TextUtils
+import androidx.databinding.Observable
+import androidx.databinding.ObservableInt
 import androidx.databinding.ViewDataBinding
 import com.goldze.mvvmhabit.aioui.bean.list.TestRecord
 import com.goldze.mvvmhabit.aioui.clazz.bean.ClazzListResponseBeanRecord
@@ -24,7 +26,7 @@ class ClazzRvBindingAdapter : AIORvBindingAdapter() {
         super.onBindBinding(binding, variableId, layoutRes, position, item)
         var record = item?.entity?.get()
 
-        if (binding is ItemClazzRvBinding && record is ClazzListResponseBeanRecord){
+        if (binding is ItemClazzRvBinding && record is ClazzListResponseBeanRecord) {
             binding.ivLeft
             if (!TextUtils.isEmpty(record.faceImage)) {
                 ImageUtil.display(
@@ -35,6 +37,9 @@ class ClazzRvBindingAdapter : AIORvBindingAdapter() {
             }
             binding.tvName.text = record.name
             binding.tvNum.text = "点击量："+record.clickCount
+            record.clickCountOb = {
+                binding.tvNum.text = "点击量：" + record.clickCount
+            }
         }
     }
 }

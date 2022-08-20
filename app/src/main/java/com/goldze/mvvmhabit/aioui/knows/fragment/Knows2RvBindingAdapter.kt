@@ -2,6 +2,8 @@ package com.goldze.mvvmhabit.aioui.knows.fragment
 
 import android.annotation.SuppressLint
 import android.text.TextUtils
+import androidx.databinding.Observable
+import androidx.databinding.ObservableInt
 import androidx.databinding.ViewDataBinding
 import com.goldze.mvvmhabit.aioui.common.viewpagerfragment.adapter.AIORvBindingAdapter
 import com.goldze.mvvmhabit.aioui.common.viewpagerfragment.viewmodel.AIORecyclerViewItemViewModel
@@ -30,7 +32,10 @@ class Knows2RvBindingAdapter : AIORvBindingAdapter() {
                 )
             }
             binding.tvName.text = record.name
-            binding.tvNum.text = "点击量：" + record.clickCount
+            binding.tvNum.text = "点击量："+record.clickCount
+            record.clickCountOb = {
+                binding.tvNum.text = "点击量：" + record.clickCount
+            }
         }
     }
 }

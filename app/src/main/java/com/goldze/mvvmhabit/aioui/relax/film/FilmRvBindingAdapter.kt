@@ -1,6 +1,8 @@
 package com.goldze.mvvmhabit.aioui.relax.film
 
 import android.text.TextUtils
+import androidx.databinding.Observable
+import androidx.databinding.ObservableInt
 import androidx.databinding.ViewDataBinding
 import com.goldze.mvvmhabit.aioui.bean.list.FilmRecord
 import com.goldze.mvvmhabit.aioui.common.viewpagerfragment.adapter.AIORvBindingAdapter
@@ -29,8 +31,10 @@ class FilmRvBindingAdapter : AIORvBindingAdapter() {
                 )
             }
             binding.title.text = record.name
-            binding.clickCount.text = record.clickCount.toString()
-
+            binding.clickCount.text = "点击量："+record.clickCount
+            record.clickCountOb = {
+                binding.clickCount.text = "点击量：" + record.clickCount
+            }
         }
 
     }
