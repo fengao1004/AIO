@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/content_padding"
                 android:layout_marginTop="40px"
-                android:text="@{viewModel.bean.name}"
+                android:text="@{String.valueOf(viewModel.name.value)}"
                 android:textSize="@dimen/content_name_size" />
 
             <TextView
@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/content_padding"
                 android:layout_marginTop="40px"
-                android:text="@{viewModel.bean.brief}"
+                android:text="@{String.valueOf(viewModel.brief.value)}"
                 android:textSize="@dimen/brief_size"
                 tools:ignore="PxUsage" />
 

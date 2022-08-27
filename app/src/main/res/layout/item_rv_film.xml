@@ -52,13 +52,7 @@
                 android:layout_marginBottom="9px"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="点击量:"
-                    android:textColor="@color/white"
-                    android:textSize="30px"
-                    android:textStyle="bold" />
+
 
                 <TextView
                     android:id="@+id/clickCount"

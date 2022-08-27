@@ -5,6 +5,7 @@ import android.app.Application
 import androidx.databinding.ObservableInt
 import androidx.lifecycle.MutableLiveData
 import com.goldze.mvvmhabit.aioui.bean.CommentRequestBean
+import com.goldze.mvvmhabit.aioui.bean.TextObserver
 import com.goldze.mvvmhabit.aioui.clazz.bean.ClazzResponseBeanData
 import com.goldze.mvvmhabit.aioui.http.HttpRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -22,6 +23,8 @@ import me.goldze.mvvmhabit.utils.ToastUtils
  */
 class ClazzContentModel(application: Application) : BaseViewModel<HttpRepository>(application) {
     var bean: ClazzResponseBeanData? = null
+    var name = TextObserver("标题")
+    var brief = TextObserver("简介")
     var selectType = ObservableInt(0)
     var beanLiveData: MutableLiveData<ClazzResponseBeanData> = MutableLiveData()
 
@@ -47,6 +50,8 @@ class ClazzContentModel(application: Application) : BaseViewModel<HttpRepository
             .subscribe({
                 if (it.success) {
                     bean = it.data
+                    name.value = bean?.name?:""
+                    brief.value = bean?.brief?:""
                     beanLiveData.postValue(it.data)
                 } else {
                     ToastUtils.showShort("加载课程详情失败 ${it.message}")
