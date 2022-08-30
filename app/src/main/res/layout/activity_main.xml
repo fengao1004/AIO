@@ -15,27 +15,24 @@
     </data>
 
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
+        android:background="@color/black"
         android:orientation="vertical">
 
         <FrameLayout
             android:id="@+id/frameLayout"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_height="match_parent" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#F0F0F0" />
+
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="180px"
-            android:background="@color/white"
+            android:layout_height="188px"
+            android:layout_gravity="bottom"
+            android:background="#2e000000"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -49,20 +46,20 @@
                 <ImageView
                     android:layout_width="64px"
                     android:layout_height="64px"
-                    android:src="@drawable/introduce"
-                    binding:checkRes="@{R.drawable.jieshao_blue}"
-                    binding:garyRes="@{R.drawable.introduce}"
+                    android:src="@drawable/gary_js"
+                    binding:checkRes="@{R.drawable.light_js}"
+                    binding:garyRes="@{R.drawable.gary_js}"
                     binding:realState="@{viewModel.showState}"
                     binding:stateType="@{0}" />
 
                 <TextView
-                    android:textSize="32px"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:gravity="center"
                     android:text="机构介绍"
-                    android:textColor="@color/textGray"
+                    android:textColor="#F7F7F7"
+                    android:textSize="32px"
                     binding:realState="@{viewModel.showState}"
                     binding:stateType="@{0}" />
             </LinearLayout>
@@ -78,20 +75,20 @@
                 <ImageView
                     android:layout_width="64px"
                     android:layout_height="64px"
-                    android:src="@drawable/home"
-                    binding:checkRes="@{R.drawable.home}"
-                    binding:garyRes="@{R.drawable.home_gary}"
+                    android:src="@drawable/light_main"
+                    binding:checkRes="@{R.drawable.light_main}"
+                    binding:garyRes="@{R.drawable.gary_main}"
                     binding:realState="@{viewModel.showState}"
                     binding:stateType="@{1}" />
 
                 <TextView
-                    android:textSize="32px"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:gravity="center"
                     android:text="首页"
-                    android:textColor="@color/app_blue"
+                    android:textColor="@color/white"
+                    android:textSize="32px"
                     binding:realState="@{viewModel.showState}"
                     binding:stateType="@{1}" />
             </LinearLayout>
@@ -107,9 +104,9 @@
                 <ImageView
                     android:layout_width="64px"
                     android:layout_height="64px"
-                    android:src="@drawable/support"
-                    binding:checkRes="@{R.drawable.support_blue}"
-                    binding:garyRes="@{R.drawable.support}"
+                    android:src="@drawable/gary_zc"
+                    binding:checkRes="@{R.drawable.light_zc}"
+                    binding:garyRes="@{R.drawable.gary_zc}"
                     binding:realState="@{viewModel.showState}"
                     binding:stateType="@{2}" />
 
@@ -119,11 +116,11 @@
                     android:layout_marginTop="8dp"
                     android:gravity="center"
                     android:text="技术支持"
+                    android:textColor="#F7F7F7"
                     android:textSize="32px"
-                    android:textColor="@color/textGray"
                     binding:realState="@{viewModel.showState}"
                     binding:stateType="@{2}" />
             </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+    </FrameLayout>
 </layout>

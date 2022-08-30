@@ -82,7 +82,7 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainFgViewModel>() {
             binding.tvGonggao.visibility = View.GONE
             binding.adTextview.visibility = View.VISIBLE
             binding.adTextview.init(it) { textView, index ->
-                textView.setTextColor(Color.parseColor("#3359e8"))
+                textView.setTextColor(Color.parseColor("#ffffff"))
                 textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, 40.0f)
                 textView.setOnClickListener {
                     startActivity(GonggaoActivity::class.java)

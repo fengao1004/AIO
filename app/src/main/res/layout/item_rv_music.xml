@@ -15,8 +15,8 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:binding="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="390px"
-        android:gravity="center_vertical"
+        android:layout_height="406px"
+        android:gravity="top"
         android:orientation="vertical"
         binding:onClickCommand="@{viewModel.itemClick}"
         binding:onLongClickCommand="@{viewModel.itemLongClick}">
@@ -24,8 +24,8 @@
         <LinearLayout
             android:paddingHorizontal="39px"
             android:layout_width="match_parent"
-            android:layout_height="375px"
-            android:gravity="center_vertical"
+            android:layout_height="345px"
+            android:gravity="top"
             android:orientation="horizontal">
 
             <com.goldze.mvvmhabit.ui.corner.ShadowFrameLayout
@@ -82,7 +82,8 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="2px"
+            android:layout_height="16px"
+            android:layout_marginBottom="20px"
             android:background="@color/gray_line" />
     </LinearLayout>
 </layout>

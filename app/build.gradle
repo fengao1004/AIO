@@ -121,6 +121,7 @@ dependencies {
     // 音乐播放
     implementation 'com.kunminx.player:player:3.7.0'
     implementation 'de.greenrobot:eventbus:3.0.0-beta1'
+    implementation 'com.github.warkiz.widget:indicatorseekbar:2.1.2'
     // web view 加载提速
     implementation 'com.tencent.sonic:sdk:3.1.0'
     implementation 'com.github.gzu-liyujiang.AndroidPicker:CalendarPicker:4.1.7'

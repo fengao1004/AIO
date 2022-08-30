@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:binding="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:ignore="MissingDefaultResource">
+<layout xmlns:tools="http://schemas.android.com/tools">
 
 
     <data>
@@ -15,60 +11,73 @@
             type="AIORecyclerViewItemViewModel" />
     </data>
 
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:binding="http://schemas.android.com/apk/res-auto"
+        android:layout_width="540px"
+        android:layout_height="540px"
         android:background="@color/white"
-        android:paddingLeft="@dimen/content_padding"
-        android:paddingRight="@dimen/content_padding"
-        binding:onClickCommand="@{viewModel.itemClick}">
+        binding:onClickCommand="@{viewModel.itemClick}"
+        binding:onLongClickCommand="@{viewModel.itemLongClick}">
 
-        <ImageView
-            android:id="@+id/iv_image"
+        <com.goldze.mvvmhabit.ui.corner.ShadowFrameLayout
+            android:id="@+id/sfl"
             android:layout_width="480px"
-            android:layout_height="360px"
-            android:layout_marginTop="10dp"
-            android:scaleType="centerCrop"
-            tools:ignore="PxUsage" />
+            android:layout_height="500px"
+            android:layout_centerHorizontal="true"
+            android:translationZ="5px"
+            app:sl_cornerRadius="24px">
 
-        <LinearLayout
-            android:layout_width="480px"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/iv_image"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tv_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:ellipsize="end"
-                android:singleLine="true"
-                android:textColor="@color/text_black"
-                android:textSize="36px" />
+            <ImageView
+                android:id="@+id/iv_image"
+                android:layout_width="match_parent"
+                android:layout_height="360px"
+                android:scaleType="centerCrop"
+                android:src="@drawable/lib_mind_gallery_pic" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="32px"
-                    android:layout_height="32px"
-                    android:src="@drawable/eye" />
+                android:layout_width="match_parent"
+                android:layout_height="140px"
+                android:layout_gravity="bottom"
+                android:background="#ffffff"
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tv_num"
+                    android:id="@+id/tv_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:gravity="center_vertical"
-                    android:textSize="32px" />
+                    android:layout_marginTop="20px"
+                    android:ellipsize="end"
+                    android:gravity="center_horizontal"
+                    android:paddingHorizontal="40px"
+                    android:singleLine="true"
+                    android:textColor="@color/text_black"
+                    android:textSize="36px" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="20px"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="32px"
+                        android:layout_height="32px"
+                        android:src="@drawable/eye" />
+
+                    <TextView
+                        android:id="@+id/tv_num"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="center_vertical"
+                        android:textSize="32px" />
+                </LinearLayout>
+
             </LinearLayout>
 
-        </LinearLayout>
+        </com.goldze.mvvmhabit.ui.corner.ShadowFrameLayout>
     </RelativeLayout>
 </layout>

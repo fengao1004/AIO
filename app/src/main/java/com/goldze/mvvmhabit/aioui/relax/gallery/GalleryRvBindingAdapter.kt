@@ -32,7 +32,10 @@ class GalleryRvBindingAdapter : AIORvBindingAdapter() {
                 )
             }
             binding.title.text = record.name
-
+            binding.tvNum.text = "点击量：" + record.clickCount
+            record.clickCountOb = {
+                binding.tvNum.text = "点击量：" + record.clickCount
+            }
         }
 
     }

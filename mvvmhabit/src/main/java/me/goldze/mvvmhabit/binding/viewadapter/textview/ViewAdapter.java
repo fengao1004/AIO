@@ -66,9 +66,9 @@ public class ViewAdapter {
     @BindingAdapter(value = {"stateType", "realState"}, requireAll = false)
     public static void updateState(TextView view, int stateType, final int realState) {
         if (stateType == realState) {
-            view.setTextColor(view.getContext().getResources().getColor(R.color.app_blue));
+            view.setTextColor(view.getContext().getResources().getColor(R.color.white));
         } else {
-            view.setTextColor(Color.parseColor("#BCBCBC"));
+            view.setTextColor(Color.parseColor("#F7F7F7"));
         }
     }
 

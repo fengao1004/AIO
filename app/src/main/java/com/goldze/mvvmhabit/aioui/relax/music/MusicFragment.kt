@@ -8,6 +8,7 @@ import android.os.Looper
 import android.os.Message
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -293,7 +294,13 @@ class MusicFragment : BaseFragment<FragmentMusicBinding, MusicModel>() {
         }
         // 控制部分 UI 更新
         binding.title.text = entity.name ?: ""
-        binding.desc.text = entity.brief ?: ""
+        if (entity.brief.isNullOrEmpty()) {
+            binding.desc.visibility = View.GONE
+            binding.desc.text = ""
+        } else {
+            binding.desc.visibility = View.VISIBLE
+            binding.desc.text = entity.brief
+        }
         ImageUtil.display(
             entity.faceImage,
             binding.musicMainIcon,

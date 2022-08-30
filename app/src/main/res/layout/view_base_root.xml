@@ -3,15 +3,16 @@
     android:id="@+id/ll_base_root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/app_blue"
+    android:background="@drawable/bg_base_root_view"
     android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:paddingTop="20px"
         android:layout_height="150px">
         <ImageView
             android:id="@+id/iv_logo"
-            android:layout_width="wrap_content"
+            android:layout_width="60px"
             android:layout_height="60px"
             android:layout_centerVertical="true"
             android:layout_marginRight="18dp"

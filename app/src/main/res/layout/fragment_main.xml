@@ -19,72 +19,83 @@
         android:background="@color/white">
 
         <LinearLayout
-            android:layout_centerHorizontal="true"
+            android:id="@+id/ll_top"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="14px"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40px"
+            android:layout_marginBottom="40px"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/iv_small_log"
-                android:layout_width="wrap_content"
-                android:layout_height="80px"
-                android:src="@drawable/small_logo" />
+                android:layout_width="60px"
+                android:layout_height="60px"
+                android:src="@drawable/mini_logo" />
 
             <TextView
                 android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
-                android:layout_height="80px"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20px"
                 android:gravity="center"
                 android:text="心理自助服务一体机"
-                android:textColor="@color/black"
-                android:textSize="58px"
-                android:textStyle="bold" />
+                android:textColor="@color/white"
+                android:textSize="48px"
+                android:textStyle="normal" />
 
         </LinearLayout>
 
+        <com.goldze.mvvmhabit.ui.corner.ShadowFrameLayout
+            android:id="@+id/sfl"
+            android:layout_width="1000px"
+            android:layout_height="400px"
+            android:layout_below="@id/ll_top"
+            android:layout_marginHorizontal="40px"
+            android:layout_marginRight="10dp"
+            app:sl_cornerRadius="10px">
 
-        <com.stx.xhb.androidx.XBanner
-            android:id="@+id/xbanner"
-            android:layout_width="1080px"
-            android:layout_height="414px"
-            android:layout_marginTop="108px"
-            android:gravity="center_horizontal"
-            app:AutoPlayTime="3000"
-            app:isShowIndicatorOnlyOne="true"
-            app:isShowNumberIndicator="false"
-            app:pageChangeDuration="800"
-            app:pointsContainerBackground="#00000000"
-            app:pointsPosition="CENTER"
-            app:tipTextSize="12sp" />
+            <com.stx.xhb.androidx.XBanner
+                android:id="@+id/xbanner"
+                android:layout_width="1000px"
+                android:layout_height="400px"
+                android:gravity="center_horizontal"
+                app:AutoPlayTime="3000"
+                app:isShowIndicatorOnlyOne="true"
+                app:isShowNumberIndicator="false"
+                app:pageChangeDuration="800"
+                app:pointsContainerBackground="#00000000"
+                app:pointsPosition="CENTER"
+                app:tipTextSize="12sp" />
 
+        </com.goldze.mvvmhabit.ui.corner.ShadowFrameLayout>
 
         <LinearLayout
             android:id="@+id/ll_gonggao"
             android:layout_width="match_parent"
-            android:layout_height="100px"
-            android:layout_below="@id/xbanner"
-            android:layout_marginLeft="@dimen/content_padding"
-            android:layout_marginTop="13px"
-            android:layout_marginRight="@dimen/content_padding"
-            android:background="#f1f5fe"
+            android:layout_height="80px"
+            android:layout_below="@id/sfl"
+            android:layout_marginHorizontal="40px"
+            android:layout_marginTop="30px"
+            android:background="@drawable/gonggao_back_ground"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             binding:onClickCommand="@{viewModel.gotoGonggao}">
 
             <ImageView
-                android:layout_width="45px"
-                android:layout_height="45px"
-                android:layout_marginLeft="8dp"
-                android:src="@drawable/gonggao" />
+                android:layout_width="40px"
+                android:layout_height="40px"
+                android:layout_marginLeft="14px"
+                android:src="@drawable/gonggao_white" />
 
             <TextView
                 android:id="@+id/tv_gonggao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="16px"
                 android:text="暂无公告"
-                android:textColor="#3359e8"
+                android:textColor="#ffffff"
                 android:textSize="40px"
                 android:visibility="visible" />
 
@@ -92,54 +103,52 @@
                 android:id="@+id/ad_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:textColor="#3359e8"
+                android:layout_marginLeft="16px"
+                android:textColor="#ffffff"
                 android:textSize="40px"
                 android:visibility="gone" />
         </LinearLayout>
 
         <ImageView
-            android:layout_width="1000px"
+            android:layout_width="1050px"
             android:layout_height="280px"
             android:layout_above="@id/rl_button"
             android:layout_below="@id/ll_gonggao"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginHorizontal="15px"
             android:src="@drawable/scan"
             binding:onClickCommand="@{viewModel.gotoScan}" />
 
         <RelativeLayout
             android:id="@+id/rl_button"
             android:layout_width="match_parent"
-            android:layout_height="310px"
+            android:layout_height="290px"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="390px"
+            android:layout_marginHorizontal="40px"
+            android:layout_marginBottom="568px"
             android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingLeft="@dimen/content_padding"
-            android:paddingRight="@dimen/content_padding">
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/iv_foucs"
-                android:layout_width="310px"
-                android:layout_height="310px"
+                android:layout_width="300px"
+                android:layout_height="300px"
                 android:src="@drawable/hearttest"
                 binding:onClickCommand="@{viewModel.gotoTest}" />
 
             <ImageView
-                android:layout_width="310px"
-                android:layout_height="310px"
+                android:layout_width="300px"
+                android:layout_height="300px"
                 android:layout_centerHorizontal="true"
-                android:layout_marginLeft="35px"
+                android:layout_marginLeft="50px"
                 android:src="@drawable/heartclass"
                 binding:onClickCommand="@{viewModel.gotoClass}" />
 
             <ImageView
-                android:layout_width="310px"
-                android:layout_height="310px"
+                android:layout_width="300px"
+                android:layout_height="300px"
                 android:layout_alignParentEnd="true"
-                android:layout_marginLeft="35px"
+                android:layout_marginLeft="50px"
                 android:src="@drawable/heartkonws"
                 binding:onClickCommand="@{viewModel.gotoKnows}" />
 
@@ -148,33 +157,33 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="310px"
+            android:layout_height="300px"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="40px"
+            android:layout_marginHorizontal="40px"
+            android:layout_marginBottom="218px"
             android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingLeft="@dimen/content_padding"
-            android:paddingRight="@dimen/content_padding">
+            android:orientation="horizontal">
+
 
             <ImageView
-                android:layout_width="310px"
-                android:layout_height="310px"
+                android:layout_width="300px"
+                android:layout_height="300px"
                 android:src="@drawable/relax"
                 binding:onClickCommand="@{viewModel.gotoRelax}" />
 
             <ImageView
-                android:layout_width="310px"
-                android:layout_height="310px"
+                android:layout_width="300px"
+                android:layout_height="300px"
                 android:layout_centerHorizontal="true"
-                android:layout_marginLeft="35px"
+                android:layout_marginLeft="50px"
                 android:src="@drawable/kepu"
                 binding:onClickCommand="@{viewModel.gotoKepu}" />
 
             <ImageView
-                android:layout_width="310px"
-                android:layout_height="310px"
+                android:layout_width="300px"
+                android:layout_height="300px"
                 android:layout_alignParentEnd="true"
-                android:layout_marginLeft="35px"
+                android:layout_marginLeft="50px"
                 android:src="@drawable/zixun"
                 binding:onClickCommand="@{viewModel.gotoZixun}" />
 

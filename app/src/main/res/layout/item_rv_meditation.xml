@@ -16,16 +16,16 @@
         xmlns:binding="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="390px"
-        android:gravity="center_vertical"
+        android:gravity="top"
         android:orientation="vertical"
         binding:onClickCommand="@{viewModel.itemClick}"
         binding:onLongClickCommand="@{viewModel.itemLongClick}">
 
         <LinearLayout
-            android:paddingHorizontal="39px"
+            android:paddingHorizontal="40px"
             android:layout_width="match_parent"
-            android:layout_height="380px"
-            android:gravity="center_vertical"
+            android:layout_height="340px"
+            android:gravity="top"
             android:orientation="horizontal">
 
             <com.goldze.mvvmhabit.ui.corner.ShadowFrameLayout
@@ -44,7 +44,7 @@
             <FrameLayout
                 android:layout_width="0dp"
                 android:layout_height="300px"
-                android:layout_marginHorizontal="18px"
+                android:layout_marginLeft="44px"
                 android:layout_weight="1">
 
                 <TextView
@@ -63,29 +63,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="top|start"
-                    android:layout_marginTop="60px"
+                    android:layout_marginTop="84px"
                     android:text="专业视角，深度思考"
                     android:textColor="@color/text_color_subtitle"
                     android:textSize="36px" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|end"
-                    android:background="@drawable/shape_stroke_label_select"
-                    android:paddingHorizontal="60px"
-                    android:paddingVertical="12px"
-                    android:text="开始训练"
-                    android:textColor="@color/white"
-                    android:textSize="39px" />
 
             </FrameLayout>
 
         </LinearLayout>
 
         <View
+            android:layout_marginHorizontal="40px"
             android:layout_width="match_parent"
-            android:layout_height="2px"
+            android:layout_height="4px"
             android:background="@color/gray_line" />
     </LinearLayout>
 </layout>
