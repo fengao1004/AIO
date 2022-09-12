@@ -12,8 +12,8 @@
         android:layout_height="150px">
         <ImageView
             android:id="@+id/iv_logo"
-            android:layout_width="60px"
-            android:layout_height="60px"
+            android:layout_width="80px"
+            android:layout_height="80px"
             android:layout_centerVertical="true"
             android:layout_marginRight="18dp"
             android:layout_toLeftOf="@id/tv_app_title"
@@ -21,7 +21,8 @@
         <TextView
             android:id="@+id/tv_app_title"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:gravity="center"
             android:layout_centerHorizontal="true"
             android:text="111"

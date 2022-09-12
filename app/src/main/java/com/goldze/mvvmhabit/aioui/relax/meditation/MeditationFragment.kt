@@ -41,6 +41,7 @@ class MeditationFragment : AIOViewPagerFragment() {
                     "点击数：${entity.clickCount.toString()}"
                 )
                 entity.clickCount = (entity.clickCount ?: 0) + 1
+                entity.clickCountOb( entity.clickCount)
                 val intent = Intent(context, VideoActivity::class.java).apply {
                     putExtra("videoBean", videoBean)
                 }

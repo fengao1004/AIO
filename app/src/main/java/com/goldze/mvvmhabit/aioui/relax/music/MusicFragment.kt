@@ -294,13 +294,14 @@ class MusicFragment : BaseFragment<FragmentMusicBinding, MusicModel>() {
         }
         // 控制部分 UI 更新
         binding.title.text = entity.name ?: ""
-        if (entity.brief.isNullOrEmpty()) {
-            binding.desc.visibility = View.GONE
-            binding.desc.text = ""
-        } else {
-            binding.desc.visibility = View.VISIBLE
-            binding.desc.text = entity.brief
-        }
+        binding.desc.visibility = View.GONE
+//        if (entity.brief.isNullOrEmpty()) {
+//            binding.desc.visibility = View.GONE
+//            binding.desc.text = ""
+//        } else {
+//            binding.desc.visibility = View.VISIBLE
+//            binding.desc.text = entity.brief
+//        }
         ImageUtil.display(
             entity.faceImage,
             binding.musicMainIcon,

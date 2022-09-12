@@ -31,6 +31,10 @@ class MeditationRvBindingAdapter : AIORvBindingAdapter() {
             }
             binding.title.text = record.name
             binding.desc.text = record.brief
+            binding.tvNum.text = "点击量："+record.clickCount
+            record.clickCountOb = {
+                binding.tvNum.text = "点击量：" + record.clickCount
+            }
         }
     }
 }
