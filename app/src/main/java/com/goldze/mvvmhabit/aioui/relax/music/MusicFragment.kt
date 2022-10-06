@@ -76,12 +76,15 @@ class MusicFragment : BaseFragment<FragmentMusicBinding, MusicModel>() {
         var playId = arguments?.getString("musicId")
         viewModel.playId = playId ?: ""
         Log.i("fengao_xiaomi", "initData: ${viewModel.playId}")
-        initVolumeBar()
         initPlayBar()
         updateSeekBar()
         initPlayControl()
-
-
+        initVolumeBar()
+        sPlayerManager.playingMusicResult.observe(this){
+            if (it.allTime == it.nowTime){
+                toNext()
+            }
+        }
         //给ViewPager设置adapter
         binding.adapter = MusicViewPagerBindingAdapter()
         // viewpager tl 关联
@@ -135,26 +138,29 @@ class MusicFragment : BaseFragment<FragmentMusicBinding, MusicModel>() {
             }
         }
         binding.playerForward.setOnClickListener {
-            val musics = sPlayerManager.album?.musics
-            if (musics != null && musics.isNotEmpty()) {
-                sendBroadcast(PlayerService.NOTIFY_NEXT)
-                binding.playerPlayIcon.setImageResource(R.drawable.player_pause)
-
-                var currentIndex = sPlayerManager.albumIndex
-                val nextIndex =
-                    if (++currentIndex >= sPlayerManager.albumMusics.size) 0 else currentIndex
-                syncControlUi(sPlayerManager.albumMusics[nextIndex].record)
-                syncAllRecyclerView(nextIndex, mActiveTabPosition)
-            } else {
-                ToastUtils.showShort("播放列表没有音乐")
-            }
-
+            toNext()
         }
 
         binding.playerPlayIcon.setOnClickListener {
             if (it is ImageView) {
                 dealWithPauseOrPlay(it)
             }
+        }
+    }
+
+    fun toNext(){
+        val musics = sPlayerManager.album?.musics
+        if (musics != null && musics.isNotEmpty()) {
+            sendBroadcast(PlayerService.NOTIFY_NEXT)
+            binding.playerPlayIcon.setImageResource(R.drawable.player_pause)
+
+            var currentIndex = sPlayerManager.albumIndex
+            val nextIndex =
+                if (++currentIndex >= sPlayerManager.albumMusics.size) 0 else currentIndex
+            syncControlUi(sPlayerManager.albumMusics[nextIndex].record)
+            syncAllRecyclerView(nextIndex, mActiveTabPosition)
+        } else {
+            ToastUtils.showShort("播放列表没有音乐")
         }
     }
 
@@ -295,13 +301,6 @@ class MusicFragment : BaseFragment<FragmentMusicBinding, MusicModel>() {
         // 控制部分 UI 更新
         binding.title.text = entity.name ?: ""
         binding.desc.visibility = View.GONE
-//        if (entity.brief.isNullOrEmpty()) {
-//            binding.desc.visibility = View.GONE
-//            binding.desc.text = ""
-//        } else {
-//            binding.desc.visibility = View.VISIBLE
-//            binding.desc.text = entity.brief
-//        }
         ImageUtil.display(
             entity.faceImage,
             binding.musicMainIcon,
@@ -364,7 +363,7 @@ class MusicFragment : BaseFragment<FragmentMusicBinding, MusicModel>() {
             binding.currentProgress.text = sPlayerManager.getTrackTime(currentPosition)
             binding.musicDuration.text = sPlayerManager.getTrackTime(duration)
 
-            initVolumeBar()
+//            initVolumeBar()
         }
     }
 }

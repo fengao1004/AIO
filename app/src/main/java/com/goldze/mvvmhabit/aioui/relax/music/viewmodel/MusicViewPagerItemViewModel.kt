@@ -2,6 +2,8 @@ package com.goldze.mvvmhabit.aioui.relax.music.viewmodel
 
 import android.annotation.SuppressLint
 import android.app.Application
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableList
@@ -17,6 +19,7 @@ import com.goldze.mvvmhabit.aioui.common.viewpagerfragment.viewmodel.AIOViewPage
 import com.goldze.mvvmhabit.aioui.http.impl.MusicRepository
 import com.goldze.mvvmhabit.data.DemoRepository
 import com.goldze.mvvmhabit.entity.DemoEntity
+import io.reactivex.android.MainThreadDisposable
 import io.reactivex.observers.DisposableObserver
 import me.goldze.mvvmhabit.base.BaseViewModel
 import me.goldze.mvvmhabit.binding.command.BindingAction
@@ -118,22 +121,25 @@ class MusicViewPagerItemViewModel(
                         uiChangeObservable.finishRefreshing.call()
                         Log.i("fengao_xiaomi", "onNext: $id")
                         Log.i("fengao_xiaomi", "onNext: ${parentViewModel?.playId}")
-                        if (id == "null" && parentViewModel?.playId?.isNotEmpty() == true) {
-                            records.forEachIndexed { index, baseRecord ->
-                                Log.i("fengao_xiaomi", "onNext: ${baseRecord.id}")
-                                if (baseRecord.id.toString() == parentViewModel!!.playId) {
-                                    (records[index] as MusicRecord).itemPosition = index
-                                    parentViewModel?.itemClickEvent?.value = records[index]
-                                    parentViewModel?.playId = ""
-                                    return@forEachIndexed
+                        var handle = Handler(Looper.myLooper()){
+                            if (id == "null" && parentViewModel?.playId?.isNotEmpty() == true) {
+                                records.forEachIndexed { index, baseRecord ->
+                                    Log.i("fengao_xiaomi", "onNext: ${baseRecord.id}")
+                                    if (baseRecord.id.toString() == parentViewModel!!.playId) {
+                                        (records[index] as MusicRecord).itemPosition = index
+                                        parentViewModel?.itemClickEvent?.value = records[index]
+                                        parentViewModel?.playId = ""
+                                        return@forEachIndexed
+                                    }
                                 }
+                            }else if (id == "null" && parentViewModel?.playId?.isEmpty() == true) {
+                                (records[0] as MusicRecord).itemPosition = 0
+                                parentViewModel?.itemClickEvent?.value = records[0]
                             }
-                        }
-//                        if (id == "null" && parentViewModel?.playId?.isNotEmpty() == true) {
-//                            (records[0] as MusicRecord).itemPosition = 0
-//                            parentViewModel?.itemClickEvent?.value = records[0]
-//                        }
 
+                            return@Handler true
+                        }
+                        handle.sendEmptyMessageDelayed(0,500)
                     }
 
                     override fun onError(throwable: Throwable) {

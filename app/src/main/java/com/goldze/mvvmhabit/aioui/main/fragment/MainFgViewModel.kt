@@ -20,9 +20,11 @@ import com.goldze.mvvmhabit.aioui.main.bean.GetAnnounListRequestBean
 import com.goldze.mvvmhabit.aioui.main.bean.GetAnnounListRequestBeanRequestBody
 import com.goldze.mvvmhabit.aioui.main.bean.GetAnnounListRequestBeanRequestHeader
 import com.goldze.mvvmhabit.aioui.relax.RelaxActivity
+import com.goldze.mvvmhabit.aioui.scan.ScanActivity
 import com.goldze.mvvmhabit.aioui.test.TestActivity
 import com.goldze.mvvmhabit.aioui.zixun.ZixunActivity
 import com.goldze.mvvmhabit.aioui.zixun.input.InputActivity
+import com.goldze.mvvmhabit.aioui.zixun.phone.PhoneListActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import me.goldze.mvvmhabit.base.BaseViewModel
@@ -49,8 +51,8 @@ class MainFgViewModel(application: Application) : BaseViewModel<HttpRepository>(
     var bannerLiveData: MutableLiveData<List<BannerBeanData>> = MutableLiveData()
     var sbLiveData: MutableLiveData<String> = MutableLiveData()
     var gotoScan: BindingCommand<String> = BindingCommand(BindingAction {
-//        startActivity(VideoActivity::class.java)
-        ToastUtils.showShort("功能暂未实现")
+        startActivity(ScanActivity::class.java)
+//        ToastUtils.showShort("功能暂未实现")
     })
 
     var gotoTest: BindingCommand<String> = BindingCommand(BindingAction {
@@ -75,24 +77,28 @@ class MainFgViewModel(application: Application) : BaseViewModel<HttpRepository>(
 
     @SuppressLint("CheckResult")
     var gotoZixun: BindingCommand<String> = BindingCommand(BindingAction {
-        model.api.getPhoneList(
-            CommentRequestBean(
-                CommentRequestBean.DEFAULT,
-                CommentRequestBean.getHeader()
-            )
-        )
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                if (it.success && !it.data.records.isNullOrEmpty()) {
-                    startActivity(ZixunActivity::class.java)
-                } else {
-                    startActivity(InputActivity::class.java)
-                }
-            }, {
-                startActivity(InputActivity::class.java)
-            })
-
+//        model.api.getPhoneList(
+//            CommentRequestBean(
+//                CommentRequestBean.DEFAULT,
+//                CommentRequestBean.getHeader()
+//            )
+//        )
+//            .subscribeOn(Schedulers.io())
+//            .observeOn(AndroidSchedulers.mainThread())
+//            .subscribe({
+//                if (it.success && !it.data.records.isNullOrEmpty()) {
+//                    startActivity(ZixunActivity::class.java)
+//                } else {
+//                    startActivity(InputActivity::class.java)
+//                }
+//            }, {
+//                startActivity(InputActivity::class.java)
+//            })
+        if (Util.shebeiXq?.isCanAppointment?.equals(1) == true) {
+            startActivity(ZixunActivity::class.java)
+        }else{
+            startActivity(PhoneListActivity::class.java)
+        }
     })
 
     var gotoGonggao: BindingCommand<String> = BindingCommand(BindingAction {

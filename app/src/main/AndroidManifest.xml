@@ -12,6 +12,11 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.USB_PERMISSION" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
     <application
         android:name=".app.AppApplication"
         android:allowBackup="true"
@@ -51,6 +56,8 @@
         <activity android:name=".aioui.webview.WebViewActivity" />
         <activity android:name=".aioui.zixun.phone.PhoneListActivity" />
         <activity android:name=".aioui.scan.ScanActivity" />
+        <activity android:name=".aioui.scan.yinsi.YinsiActivity" />
+        <activity android:name=".aioui.scan.qingxu.QingxuActivity" />
         <activity android:name=".aioui.test.TestActivity" />
         <activity android:name=".aioui.test.result.FunnyResultActivity" />
         <activity android:name=".aioui.knows.content.KnowsContentActivity" />

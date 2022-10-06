@@ -22,4 +22,12 @@ class ScanActivity : BaseActivity<ActivityScanBinding, ScanModel>() {
         super.initData()
         binding.brRootView.setPageTitle("情绪扫描")
     }
+
+    fun setCheck(agree: Boolean) {
+        if (agree) {
+            binding.iv.setImageResource(R.drawable.check)
+        } else {
+            binding.iv.setImageResource(R.drawable.un_check)
+        }
+    }
 }

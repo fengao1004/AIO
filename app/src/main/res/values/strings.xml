@@ -6,4 +6,5 @@
     <string name="play">播放</string>
     <string name="notify_of_play">播放时的通知栏展示</string>
     <string name="network_unconnected">网络断开了</string>
+    <string name="please_restart_device_or_app">请尝试重启应用或重启设备(Err: %d)</string>
 </resources>

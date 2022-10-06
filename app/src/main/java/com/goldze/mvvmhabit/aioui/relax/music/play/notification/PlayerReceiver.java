@@ -5,6 +5,7 @@ package com.goldze.mvvmhabit.aioui.relax.music.play.notification;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.KeyEvent;
 
 
@@ -16,7 +17,7 @@ public class PlayerReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-
+        Log.i("fengao_xiaomi", "onReceive getAction: "+intent.getAction());
         if (Objects.equals(intent.getAction(), Intent.ACTION_MEDIA_BUTTON)) {
             if (intent.getExtras() == null) {
                 return;
@@ -28,7 +29,7 @@ public class PlayerReceiver extends BroadcastReceiver {
             if (keyEvent.getAction() != KeyEvent.ACTION_DOWN) {
                 return;
             }
-
+            Log.i("fengao_xiaomi", "onReceive: keyEvent: "+keyEvent.getKeyCode());
             switch (keyEvent.getKeyCode()) {
                 case KeyEvent.KEYCODE_HEADSETHOOK:
                 case KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE:

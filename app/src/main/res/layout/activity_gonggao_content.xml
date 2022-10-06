@@ -26,6 +26,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/titleBar_height"
             android:gravity="center_horizontal"
+            android:layout_marginHorizontal="40px"
             android:orientation="vertical">
 
             <TextView

@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableStringBuilder
+import android.text.TextUtils
 import android.text.style.ForegroundColorSpan
 import android.util.TypedValue
 import android.view.LayoutInflater
@@ -82,6 +83,8 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainFgViewModel>() {
             binding.tvGonggao.visibility = View.GONE
             binding.adTextview.visibility = View.VISIBLE
             binding.adTextview.init(it) { textView, index ->
+                textView.setSingleLine(true)
+                textView.ellipsize = TextUtils.TruncateAt.END
                 textView.setTextColor(Color.parseColor("#ffffff"))
                 textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, 40.0f)
                 textView.setOnClickListener {

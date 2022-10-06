@@ -51,6 +51,9 @@ android {
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode AppVersion.getVersionCode()
         versionName AppVersion.getVersionName()
+        ndk {
+            abiFilters 'armeabi-v7a'
+        }
     }
     signingConfigs {
         debug {
@@ -95,6 +98,11 @@ android {
             it.outputs.each {
                 it.outputFileName = "${rootProject.name}-${AppVersion.versionName}.apk"
             }
+        }
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
         }
     }
 }

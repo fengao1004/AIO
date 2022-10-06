@@ -86,6 +86,14 @@ public class PlayerManager implements IPlayController<AIOAlbum, AIOAlbum.AIOMusi
                     }
                 },
                 url -> mProxy.getProxyUrl(url));
+
+        Enum<PlayingInfoManager.RepeatMode> repeatMode = mController.getRepeatMode();
+        while (repeatMode != PlayingInfoManager.RepeatMode.SINGLE_CYCLE) {
+            mController.changeMode();
+            repeatMode = mController.getRepeatMode();
+            Log.i("fengao_xiaomi", "init: " + mController.getRepeatMode());
+        }
+        Log.i("fengao_xiaomi", "init: " + mController.getRepeatMode());
     }
 
     @Override
