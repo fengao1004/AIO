@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/titleBar_height"
-            android:background="@drawable/scan_bg"
+            android:background="@drawable/bg_qingxu_b"
             android:orientation="vertical">
 
             <TextView
@@ -71,7 +71,7 @@
                     android:layout_height="24px"
                     android:layout_gravity="center_vertical"
                     android:layout_marginRight="14px"
-                    android:src="@drawable/un_check"
+                    android:src="@drawable/check"
                     binding:onClickCommand="@{viewModel.check}" />
 
                 <TextView

@@ -4,18 +4,18 @@
     package="com.goldze.mvvmhabit">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.USB_PERMISSION" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <application
         android:name=".app.AppApplication"
@@ -50,6 +50,7 @@
         <activity android:name=".aioui.gonggao.GonggaoActivity" />
         <activity android:name=".aioui.knows.Knows2Activity" />
         <activity android:name=".aioui.webview.WebViewFromUrlActivity" />
+        <activity android:name=".aioui.webview.WebViewFromUrlActivityA" />
         <activity android:name=".aioui.zixun.input.InputActivity" />
         <activity android:name=".aioui.notice.NoticeActivity" />
         <activity android:name=".aioui.relax.RelaxActivity" />

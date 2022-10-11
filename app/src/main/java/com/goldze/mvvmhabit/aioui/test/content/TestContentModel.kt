@@ -358,7 +358,7 @@ class TestContentModel(application: Application) : BaseViewModel<HttpRepository>
                                 url = "/mbti?scaRecId=${scaRecId}"
                             }
                         }
-                        url = HttpRepository.BASE_H5_URL + url
+                        url = HttpRepository.getH5base() + url
                         var intent = Intent(activity, WebViewFromUrlActivity::class.java)
                         intent.putExtra("title", "报告")
                         intent.putExtra("url", url)

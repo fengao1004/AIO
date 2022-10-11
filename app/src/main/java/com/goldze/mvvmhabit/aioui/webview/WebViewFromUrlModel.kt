@@ -16,5 +16,7 @@ import me.goldze.mvvmhabit.binding.command.BindingCommand
  * Time: 4:56 下午
  */
 class WebViewFromUrlModel(application: Application) : BaseViewModel<HttpRepository>(application) {
-
+    init {
+        model = HttpRepository()
+    }
 }

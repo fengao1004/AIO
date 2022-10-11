@@ -3,10 +3,13 @@ package com.goldze.mvvmhabit.aioui.scan.qingxu.mvp;
 import android.graphics.Bitmap;
 import android.view.TextureView;
 
+import com.goldze.mvvmhabit.aioui.scan.qingxu.bean.SubmitResponseBean;
+import com.goldze.mvvmhabit.aioui.scan.qingxu.camera.CameraPreview2;
+
 import org.opencv.core.Mat;
 import org.opencv.core.Rect;
 
-public interface  VerificationContract {
+public interface VerificationContract {
 
     interface View {
 
@@ -32,8 +35,17 @@ public interface  VerificationContract {
 
         void setContent(String content);
 
-        TextureView getTextureView();
+        void updateFaceUi(int x, int y, int width, int height);
+
+        void updateUi(float[] action, float[] emotion, int blink, double heart);
+
+        CameraPreview2 getTextureView();
+
         boolean isActive();
+
+        void jump(SubmitResponseBean bean);
+
+        void exit();
     }
 
     interface Presenter {
@@ -42,5 +54,6 @@ public interface  VerificationContract {
 
         void destroy();
 
+        void submit();
     }
 }

@@ -1,6 +1,9 @@
 package com.goldze.mvvmhabit.aioui.scan.qingxu.camera;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
 import android.util.AttributeSet;
@@ -13,11 +16,12 @@ import androidx.annotation.Nullable;
 import com.goldze.mvvmhabit.aioui.scan.qingxu.constants.ErrorCode;
 import com.goldze.mvvmhabit.aioui.scan.qingxu.mvp.exceptions.CameraUnavailableException;
 
+import java.io.IOException;
 import java.util.List;
 
 public class CameraPreview2 extends TextureView implements TextureView.SurfaceTextureListener {
 
-    private static final int CAMERA_ID = 1;
+    private static final int CAMERA_ID = 0;
 
     private static final String TAG = "CameraPreview";
     @Nullable
@@ -42,6 +46,10 @@ public class CameraPreview2 extends TextureView implements TextureView.SurfaceTe
     public CameraPreview2(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         setSurfaceTextureListener(this);
+//        paint.setStrokeWidth(6);
+//        paint.setAntiAlias(true);
+//        paint.setStyle(Paint.Style.STROKE);
+//        paint.setColor(Color.parseColor("#ff0000"));
     }
 
     public void setCameraCallbacks(CameraCallbacks callbacks) {
@@ -74,6 +82,7 @@ public class CameraPreview2 extends TextureView implements TextureView.SurfaceTe
             if (mCallbacks != null) {
                 mCallbacks.onCameraUnavailable(ErrorCode.CAMERA_UNAVAILABLE_ERROR);
             }
+            throw new RuntimeException(e);
         }
     }
 
@@ -93,7 +102,7 @@ public class CameraPreview2 extends TextureView implements TextureView.SurfaceTe
 
     }
 
-    private void startPreview(SurfaceTexture surface) {
+    private void startPreview(SurfaceTexture surface) throws IOException {
         // The Surface has been created, now tell the camera where to draw the preview.
         if (mCamera == null || mCameraInfo == null) {
             return;
@@ -101,9 +110,12 @@ public class CameraPreview2 extends TextureView implements TextureView.SurfaceTe
         try {
             mCamera.setPreviewTexture(surface);
             List<Camera.Size> sizes = mCamera.getParameters().getSupportedPreviewSizes();
+            for (Camera.Size size : sizes) {
+                Log.i("fengao_xiaomi", "width: " + size.width + " height:  " + size.height);
+            }
             Camera.Size expected = sizes.get(sizes.size() - 1);
             for (Camera.Size size : sizes) {
-                if (size.width == 640 && size.height == 480) {
+                if (size.width == 800 && size.height == 600) {
                     expected = size;
                     break;
                 }
@@ -177,4 +189,40 @@ public class CameraPreview2 extends TextureView implements TextureView.SurfaceTe
     public int getCameraRotation() {
         return mRotation;
     }
+
+    @Override
+    public Bitmap getBitmap() {
+        Bitmap bitmap = Bitmap.createBitmap(600, 800, Bitmap.Config.RGB_565);
+        return super.getBitmap(bitmap);
+    }
+
+//
+//    float faceX = 0.0f;
+//    float faceY = 0.0f;
+//    float faceWidth = 0.0f;
+//    float faceHeight = 0.0f;
+//    Paint paint = new Paint();
+//
+//    public void updateFace(int x, int y, int faceWidth, int faceHeight, float scale) {
+//        this.faceX = x * scale;
+//        this.faceY = y * scale;
+//        this.faceWidth = faceWidth * scale;
+//        this.faceHeight = faceHeight * scale;
+//        invalidate();
+//    }
+
+
+//    onDraw(canvas:Canvas?) {
+//        super.onDraw(canvas)
+//        canvas ?.drawColor(Color.TRANSPARENT);
+//        if (faceHeight * faceHeight > 0) {
+//            Log.i("fengao_xiaomi", "onDraw: $x $y $faceHeight $faceWidth")
+//            var rect = RectF()
+//            rect.left = x;
+//            rect.right = (x + faceWidth);
+//            rect.top = y;
+//            rect.bottom = (y + faceHeight);
+//            canvas ?.drawRect(rect, paint);
+//        }
+//    }
 }

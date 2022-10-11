@@ -5,6 +5,21 @@ public class ActionUnit {
         System.loadLibrary("SeetaActionUnit600_java");
     }
 
+    public enum Property {
+
+        PROPERTY_NUMBER_THREADS(4),
+        PROPERTY_ARM_CPU_MODE(5);
+
+        private int value;
+        private Property(int value) {
+            this.value = value;
+        }
+
+        public int getValue(){
+            return value;
+        }
+    }
+
     public long impl = 0;
     private native void construct(SeetaModelSetting seeting);
     public ActionUnit(SeetaModelSetting setting){
@@ -26,4 +41,7 @@ public class ActionUnit {
 
     public native boolean ExtractCroppedFace(SeetaImageData face, float[] features);
     public native boolean Extract(SeetaImageData image, SeetaPointF[] points, float[] features);
+
+    public native void set(Property property, double value);
+    public native double get(Property property);
 }

@@ -12,10 +12,15 @@ import com.goldze.mvvmhabit.aioui.kepu.content.KepuItemBean
 import com.goldze.mvvmhabit.aioui.knows.KnowsDetailBean
 import com.goldze.mvvmhabit.aioui.knows.KnowsRecord
 import com.goldze.mvvmhabit.aioui.main.bean.*
+import com.goldze.mvvmhabit.aioui.scan.qingxu.bean.SubmitBean
+import com.goldze.mvvmhabit.aioui.scan.qingxu.bean.SubmitResponseBean
+import com.goldze.mvvmhabit.aioui.scan.qingxu.bean.UploadResponseBean
 import com.goldze.mvvmhabit.aioui.test.bean.*
+import com.goldze.mvvmhabit.aioui.webview.bean.TuijianBean
 import com.goldze.mvvmhabit.aioui.zixun.input.InputRequestBean
 import com.goldze.mvvmhabit.aioui.zixun.phone.PhoneListBean
 import io.reactivex.Observable
+import okhttp3.MultipartBody
 import retrofit2.http.*
 
 /**
@@ -122,6 +127,19 @@ interface Api {
 
     @POST("/client/scaRec/notLogin/saveScaBasic")
     fun commitBasic(@Body bean: List<BasicAnserBean>): Observable<AnserReponseData>
+
+    @POST("/client/face/notLogin/saveReport")
+    fun faceSubmit(@Body bean: SubmitBean): Observable<SubmitResponseBean>
+
+    @GET("/client/face/notLogin/getRecommend")
+    fun tuijian(
+        @Query("length") length: Int,
+        @Query("reportId") reportId: Long
+    ): Observable<TuijianBean>
+
+    @Multipart
+    @POST("/client/face/notLogin/upload")
+    fun updateFacePic(@Part parts: List<MultipartBody.Part>): Observable<UploadResponseBean>
 
 
 }

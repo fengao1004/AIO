@@ -4,6 +4,7 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.goldze.mvvmhabit.BuildConfig;
+import com.goldze.mvvmhabit.aioui.http.HttpRepository;
 
 import java.io.File;
 import java.util.Map;
@@ -39,7 +40,16 @@ public class RetrofitClient {
     //缓存时间
     private static final int CACHE_TIMEOUT = 10 * 1024 * 1024;
     //服务端根路径
-    public static String baseUrl = "http://11.client.yixinxd.com/";
+    public static String baseUrl_ = "http://11.client.yixinxd.com/";
+    public static String testUrl_ = "http://11.sit.client.yixinxd.com/";
+
+    public static String getBaseUrl() {
+        if (HttpRepository.isTest) {
+            return testUrl_;
+        } else {
+            return baseUrl_;
+        }
+    }
 
     private static Context mContext = Utils.getContext();
 
@@ -58,13 +68,13 @@ public class RetrofitClient {
     }
 
     private RetrofitClient() {
-        this(baseUrl, null);
+        this(getBaseUrl(), null);
     }
 
     private RetrofitClient(String url, Map<String, String> headers) {
 
         if (TextUtils.isEmpty(url)) {
-            url = baseUrl;
+            url = getBaseUrl();
         }
 
         if (httpCacheDirectory == null) {

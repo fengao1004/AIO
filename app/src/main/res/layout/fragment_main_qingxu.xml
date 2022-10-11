@@ -1,60 +1,538 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipChildren="false"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <com.goldze.mvvmhabit.aioui.scan.qingxu.camera.CameraPreview2
         android:id="@+id/camera_preview"
-        android:layout_width="480px"
-        android:layout_height="640px"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_width="1080px"
+        android:layout_height="1440px"
+        android:layout_gravity="center_horizontal"
+        android:translationY="-180px" />
     <SurfaceView
         android:id="@+id/surfaceViewOverlap"
-        android:layout_width="480px"
-        android:layout_height="640px"
+        android:layout_width="1080px"
+        android:layout_height="600px"
         android:layout_gravity="center_horizontal" />
 
-    <TextView
-        android:id="@+id/txt_name"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="650px"
-        android:layout_marginLeft="36dp"
-        android:background="#212121"
-        android:gravity="center"
-        android:text=""
-        android:textColor="@color/white"
-        android:visibility="visible" />
-
-
-    <EditText
-        android:id="@+id/et_registername"
-        android:layout_width="100dp"
-        android:layout_height="55dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="780px"
-        android:gravity="center"
-        android:hint="enter name" />
-
-    <Button
-        android:id="@+id/btn_register"
-        android:layout_width="80dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="130dp"
-        android:layout_marginTop="780px"
-        android:gravity="center"
-        android:text="注册人脸" />
-    <TextView
-        android:layout_marginTop="950px"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_content"/>
+        android:layout_height="match_parent"
+        android:layout_marginTop="600px"
+        android:background="@drawable/bg_qingxu_a">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="72px"
+            android:layout_marginHorizontal="10px"
+            android:layout_marginTop="30px"
+            android:src="@drawable/bg_item" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="40px"
+            android:layout_marginTop="71px">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:descendantFocusability="blocksDescendants"
+                android:orientation="vertical"
+                android:paddingBottom="50px">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="576px"
+                    android:background="@drawable/bg_qingxu_white"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="231px"
+                        android:layout_marginHorizontal="31px"
+                        android:layout_marginTop="31px"
+                        android:background="#F9F9F9"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="2px"
+                        android:paddingTop="32px"
+                        android:paddingBottom="39px">
+
+                        <RelativeLayout
+                            android:layout_width="0px"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <ImageView
+                                android:layout_width="54px"
+                                android:layout_height="54px"
+                                android:layout_marginLeft="59px"
+                                android:src="@drawable/qingxu" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="54px"
+                                android:layout_marginLeft="129px"
+                                android:gravity="center"
+                                android:text="情绪"
+                                android:textColor="#999999"
+                                android:textSize="32px" />
+
+                            <TextView
+                                android:id="@+id/tv_qx"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginLeft="59px"
+                                android:text="检测中..."
+                                android:textColor="@color/text_black"
+                                android:textSize="50px" />
+                        </RelativeLayout>
+
+                        <ImageView
+                            android:layout_width="2px"
+                            android:layout_height="match_parent"
+                            android:background="#979797" />
+
+                        <RelativeLayout
+                            android:layout_width="0px"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <ImageView
+                                android:layout_width="54px"
+                                android:layout_height="54px"
+                                android:layout_marginLeft="59px"
+                                android:src="@drawable/zhayan" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="54px"
+                                android:layout_marginLeft="129px"
+                                android:gravity="center"
+                                android:text="眨眼次数"
+                                android:textColor="#999999"
+                                android:textSize="32px" />
+
+                            <TextView
+                                android:id="@+id/tv_blink"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginLeft="59px"
+                                android:text="检测中..."
+                                android:textColor="@color/text_black"
+                                android:textSize="50px" />
+                        </RelativeLayout>
+
+                        <ImageView
+                            android:visibility="gone"
+                            android:layout_width="2px"
+                            android:layout_height="match_parent"
+                            android:background="#979797" />
+
+                        <RelativeLayout
+                            android:visibility="gone"
+                            android:layout_width="0px"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <ImageView
+                                android:layout_width="54px"
+                                android:layout_height="54px"
+                                android:layout_marginLeft="59px"
+                                android:src="@drawable/xinlv" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="54px"
+                                android:layout_marginLeft="129px"
+                                android:gravity="center"
+                                android:text="心率"
+                                android:textColor="#999999"
+                                android:textSize="32px" />
+
+                            <TextView
+                                android:id="@+id/tv_heart"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginLeft="59px"
+                                android:text="检测中..."
+                                android:textColor="@color/text_black"
+                                android:textSize="50px" />¬
+                        </RelativeLayout>
+
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="31px"
+                        android:layout_marginTop="25px">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="50px"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="70px"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom"
+                                    android:gravity="bottom|end"
+                                    android:paddingEnd="10px"
+                                    android:text="100"
+                                    android:textColor="@color/text_black"
+                                    android:textSize="32px" />
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1px"
+                                    android:layout_gravity="bottom"
+                                    android:background="#979797" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="80px"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="70px"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom"
+                                    android:gravity="bottom|end"
+                                    android:paddingEnd="10px"
+                                    android:text="50"
+                                    android:textColor="@color/text_black"
+                                    android:textSize="32px" />
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1px"
+                                    android:layout_gravity="bottom"
+                                    android:background="#979797" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="80px"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="70px"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom"
+                                    android:gravity="bottom|end"
+                                    android:paddingEnd="10px"
+                                    android:text="0"
+                                    android:textColor="@color/text_black"
+                                    android:textSize="32px" />
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1px"
+                                    android:layout_gravity="bottom"
+                                    android:background="#979797" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:paddingHorizontal="35px">
+
+                            <LinearLayout
+                                android:layout_width="0px"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center_horizontal"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/tv_ziran_num"
+                                    android:layout_width="64px"
+                                    android:layout_height="0px"
+                                    android:layout_weight="130"
+                                    android:gravity="bottom|center_horizontal"
+                                    android:text="0"
+                                    android:textColor="@color/text_black"
+                                    android:textSize="32px" />
+
+                                <ImageView
+                                    android:id="@+id/iv_ziran"
+                                    android:layout_width="64px"
+                                    android:layout_height="0px"
+                                    android:layout_weight="0"
+                                    android:background="#3F70F8" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="45px"
+                                    android:layout_marginTop="6px"
+                                    android:layout_marginBottom="28px"
+                                    android:gravity="bottom|center_horizontal"
+                                    android:text="自然"
+                                    android:textColor="@color/text_black"
+                                    android:textSize="32px" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0px"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center_horizontal"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/tv_fennu_num"
+                                    android:layout_width="64px"
+                                    android:layout_height="0px"
+                                    android:layout_weight="120"
+                                    android:gravity="bottom|center_horizontal"
+                                    android:text="0"
+                                    android:textColor="@color/text_black"
+                                    android:textSize="32px" />
+
+                                <ImageView
+                                    android:id="@+id/iv_fennu"
+                                    android:layout_width="64px"
+                                    android:layout_height="0px"
+                                    android:layout_weight="0"
+                                    android:background="#3F70F8" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="45px"
+                                    android:layout_marginTop="6px"
+                                    android:layout_marginBottom="28px"
+                                    android:gravity="bottom|center_horizontal"
+                                    android:text="愤怒"
+                                    android:textColor="@color/text_black"
+                                    android:textSize="32px" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0px"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center_horizontal"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/tv_yanwu_num"
+                                    android:layout_width="64px"
+                                    android:layout_height="0px"
+                                    android:layout_weight="130"
+                                    android:gravity="bottom|center_horizontal"
+                                    android:text="0"
+                                    android:textColor="@color/text_black"
+                                    android:textSize="32px" />
+
+                                <ImageView
+                                    android:id="@+id/iv_yanwu"
+                                    android:layout_width="64px"
+                                    android:layout_height="0px"
+                                    android:layout_weight="0"
+                                    android:background="#3F70F8" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="45px"
+                                    android:layout_marginTop="6px"
+                                    android:layout_marginBottom="28px"
+                                    android:gravity="bottom|center_horizontal"
+                                    android:text="厌恶"
+                                    android:textColor="@color/text_black"
+                                    android:textSize="32px" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0px"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center_horizontal"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/tv_kongju_num"
+                                    android:layout_width="64px"
+                                    android:layout_height="0px"
+                                    android:layout_weight="130"
+                                    android:gravity="bottom|center_horizontal"
+                                    android:text="0"
+                                    android:textColor="@color/text_black"
+                                    android:textSize="32px" />
+
+                                <ImageView
+                                    android:id="@+id/iv_kongju"
+                                    android:layout_width="64px"
+                                    android:layout_height="0px"
+                                    android:layout_weight="0"
+                                    android:background="#3F70F8" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="45px"
+                                    android:layout_marginTop="6px"
+                                    android:layout_marginBottom="28px"
+                                    android:gravity="bottom|center_horizontal"
+                                    android:text="恐惧"
+                                    android:textColor="@color/text_black"
+                                    android:textSize="32px" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0px"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center_horizontal"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/tv_gaoxing_num"
+                                    android:layout_width="64px"
+                                    android:layout_height="0px"
+                                    android:layout_weight="130"
+                                    android:gravity="bottom|center_horizontal"
+                                    android:text="0"
+                                    android:textColor="@color/text_black"
+                                    android:textSize="32px" />
+
+                                <ImageView
+                                    android:id="@+id/iv_gaoxing"
+                                    android:layout_width="64px"
+                                    android:layout_height="0px"
+                                    android:layout_weight="0"
+                                    android:background="#3F70F8" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="45px"
+                                    android:layout_marginTop="6px"
+                                    android:layout_marginBottom="28px"
+                                    android:gravity="bottom|center_horizontal"
+                                    android:text="高兴"
+                                    android:textColor="@color/text_black"
+                                    android:textSize="32px" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0px"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center_horizontal"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/tv_shangxin_num"
+                                    android:layout_width="64px"
+                                    android:layout_height="0px"
+                                    android:layout_weight="130"
+                                    android:gravity="bottom|center_horizontal"
+                                    android:text="0"
+                                    android:textColor="@color/text_black"
+                                    android:textSize="32px" />
+
+                                <ImageView
+                                    android:id="@+id/iv_shangxin"
+                                    android:layout_width="64px"
+                                    android:layout_height="0px"
+                                    android:layout_weight="0"
+                                    android:background="#3F70F8" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="45px"
+                                    android:layout_marginTop="6px"
+                                    android:layout_marginBottom="28px"
+                                    android:gravity="bottom|center_horizontal"
+                                    android:text="伤心"
+                                    android:textColor="@color/text_black"
+                                    android:textSize="32px" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0px"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center_horizontal"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/tv_jingya_num"
+                                    android:layout_width="64px"
+                                    android:layout_height="0px"
+                                    android:layout_weight="130"
+                                    android:gravity="bottom|center_horizontal"
+                                    android:text="0"
+                                    android:textColor="@color/text_black"
+                                    android:textSize="32px" />
+
+                                <ImageView
+                                    android:id="@+id/iv_jingya"
+                                    android:layout_width="64px"
+                                    android:layout_height="0px"
+                                    android:layout_weight="0"
+                                    android:background="#3F70F8" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="45px"
+                                    android:layout_marginTop="6px"
+                                    android:layout_marginBottom="28px"
+                                    android:gravity="bottom|center_horizontal"
+                                    android:text="惊讶"
+                                    android:textColor="@color/text_black"
+                                    android:textSize="32px" />
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_action"
+                    android:layout_width="match_parent"
+                    android:layout_height="919px"
+                    android:layout_marginTop="34px"
+                    android:background="@drawable/bg_qingxu_white"
+                    android:paddingTop="20px" />
+            </LinearLayout>
+        </ScrollView>
+
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_timer"
+        android:layout_width="115px"
+        android:layout_height="115px"
+        android:layout_gravity="end"
+        android:layout_marginTop="69px"
+        android:layout_marginRight="96px"
+        android:background="@drawable/bg_time_red"
+        android:gravity="center"
+        android:text="20s"
+        android:textColor="@color/white"
+        android:textSize="32px" />
 
 </FrameLayout>

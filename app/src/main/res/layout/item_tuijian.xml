@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:binding="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="380px"
+    android:layout_marginHorizontal="40px"
+    android:background="@color/white">
+
+    <ImageView
+        android:scaleType="fitXY"
+        android:id="@+id/iv_img"
+        android:layout_width="400px"
+        android:layout_height="300px"
+        android:layout_marginTop="39px" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="44px"
+        android:layout_marginTop="67px"
+        android:layout_toRightOf="@id/iv_img"
+        android:text="标题标题"
+        android:textColor="@color/text_black"
+        android:textSize="50px" />
+
+    <ImageView
+        android:layout_width="40px"
+        android:src="@drawable/eye"
+        android:layout_height="40px"
+        android:layout_marginRight="8px"
+        android:layout_marginBottom="40px"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@id/tv_num" />
+
+    <TextView
+        android:id="@+id/tv_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="39px"
+        android:layout_marginBottom="40px"
+        android:text="点击量"
+        android:textColor="@color/text_gray"
+        android:textSize="32px" />
+</RelativeLayout>

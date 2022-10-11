@@ -5,6 +5,20 @@ public class EyeStateDetector {
         System.loadLibrary("SeetaEyeStateDetector200_java");
     }
 
+    public enum Property {
+
+        PROPERTY_NUMBER_THREADS(4);
+
+        private int value;
+        private Property(int value) {
+            this.value = value;
+        }
+
+        public int getValue(){
+            return value;
+        }
+    }
+
     public long impl = 0;
     public enum  EYE_STATE{
         EYE_CLOSE,
@@ -38,4 +52,7 @@ public class EyeStateDetector {
     }
 
     private native void DetectCore(SeetaImageData imageData, SeetaPointF[] points, int[] eyeStateIndexs);
+
+    public native void set(Property property, double value);
+    public native double get(Property property);
 }

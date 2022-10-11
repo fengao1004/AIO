@@ -1,5 +1,6 @@
 package com.goldze.mvvmhabit.aioui.scan.qingxu.mvp;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Handler;
@@ -10,14 +11,19 @@ import android.os.Process;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.goldze.mvvmhabit.aioui.http.Api;
+import com.goldze.mvvmhabit.aioui.scan.qingxu.bean.SubmitBean;
+import com.goldze.mvvmhabit.aioui.scan.qingxu.bean.SubmitResponseBean;
+import com.goldze.mvvmhabit.aioui.scan.qingxu.bean.UploadResponseBean;
 import com.goldze.mvvmhabit.aioui.scan.qingxu.config.AppConfig;
 import com.goldze.mvvmhabit.aioui.scan.qingxu.utils.FileUtils;
+import com.goldze.mvvmhabit.utils.RetrofitClient;
 import com.seeta.sdk.ActionUnit;
 import com.seeta.sdk.EmotionRecognizer;
+import com.seeta.sdk.EmotionRecognizerWithActionUnits;
 import com.seeta.sdk.EyeStateDetector;
 import com.seeta.sdk.FaceDetector;
 import com.seeta.sdk.FaceLandmarker;
-import com.seeta.sdk.FaceRecognizer;
 import com.seeta.sdk.SeetaDevice;
 import com.seeta.sdk.SeetaHeartRateDetector;
 import com.seeta.sdk.SeetaImageData;
@@ -37,8 +43,21 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
+import me.goldze.mvvmhabit.utils.ToastUtils;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 
 public class PresenterImpl implements VerificationContract.Presenter {
@@ -47,16 +66,24 @@ public class PresenterImpl implements VerificationContract.Presenter {
         System.loadLibrary("opencv_java3");
     }
 
+    boolean isSubmit = false;
+
+    Api api = RetrofitClient.getInstance().create(Api.class);
+    Bitmap faceBitmap = null;
+
+    private List<SubmitBean.SrcDataBean> srcData = new ArrayList<>();
+    SubmitBean.ResultDataBean resultData = new SubmitBean.ResultDataBean();
     private static final String TAG = "PresenterImpl";
 
     private VerificationContract.View mView;
 
     static String fdModel = "/sdcard/seeta/SeetaFaceDetector6.0.IPC.sta";
     public static FaceDetector faceDetector = null;
-    public static EmotionRecognizer emotionRecognizer = null;
-    public static ActionUnit actionUnit = null;
+//    public static EmotionRecognizer emotionRecognizer = null;
+//    public static ActionUnit actionUnit = null;
     public static SeetaHeartRateDetector seetaHeartRateDetector = null;
     public static EyeStateDetector eyeStateDetector = null;
+    public static EmotionRecognizerWithActionUnits emotionRecognizerWithActionUnits = null;
 
     private static int WIDTH = AppConfig.IMAGE_WIDTH;
     private static int HEIGHT = AppConfig.IMAGE_HEIGHT;
@@ -69,9 +96,9 @@ public class PresenterImpl implements VerificationContract.Presenter {
     public static FaceLandmarker faceLandmarker2 = null;
 
     static String frModel = "/sdcard/seeta/SeetaFaceRecognizer.RN30.light.tsm.sta";
-    public static FaceRecognizer faceRecognizer = null;
 
     public static class TrackingInfo {
+        public long time;
         public int personId;
         public Mat matBgr;
         public Mat matGray;
@@ -105,12 +132,12 @@ public class PresenterImpl implements VerificationContract.Presenter {
         Log.d("cacheDir", "" + modelPath);
 
         String fdModel = "SeetaFaceDetector6.0.IPC.sta";
-        String erModel = "SeetaEmotionRecognizer.v1.sta";
+//        String erModel = "SeetaEmotionRecognizer.v1.sta";
         String pdModel = "SeetaFaceLandmarker5.0.tsm.sta";
         String pd2Model = "SeetaFaceLandmarker5.0.pts81.tsm.sta";
-        String frModel = "SeetaFaceRecognizer.RN30.light.tsm.sta";
-        String actionModel = "SeetaActionUnit1.0.0.ext.sta";
+//        String actionModel = "SeetaActionUnit1.0.0.ext.sta";
         String eyeModel = "SeetaEyeBlink.squeezenet.4class.214000.1010.sta";
+        String actionAndEr = "EmotionAU_emotions_action_units-fast.sta";
         // String key = "key.dat";
         if (!isExists(modelPath, fdModel)) {
             File fdFile = new File(cacheDir + "/" + fdModel);
@@ -120,18 +147,14 @@ public class PresenterImpl implements VerificationContract.Presenter {
             File pdFile = new File(cacheDir + "/" + pdModel);
             FileUtils.copyFromAsset(context, pdModel, pdFile, false);
         }
-        if (!isExists(modelPath, frModel)) {
-            File frFile = new File(cacheDir + "/" + frModel);
-            FileUtils.copyFromAsset(context, frModel, frFile, false);
-        }
-        if (!isExists(modelPath, erModel)) {
-            File erFile = new File(cacheDir + "/" + erModel);
-            FileUtils.copyFromAsset(context, erModel, erFile, false);
-        }
-        if (!isExists(modelPath, actionModel)) {
-            File erFile = new File(cacheDir + "/" + actionModel);
-            FileUtils.copyFromAsset(context, actionModel, erFile, false);
-        }
+//        if (!isExists(modelPath, erModel)) {
+//            File erFile = new File(cacheDir + "/" + erModel);
+//            FileUtils.copyFromAsset(context, erModel, erFile, false);
+//        }
+//        if (!isExists(modelPath, actionModel)) {
+//            File erFile = new File(cacheDir + "/" + actionModel);
+//            FileUtils.copyFromAsset(context, actionModel, erFile, false);
+//        }
         if (!isExists(modelPath, pd2Model)) {
             File erFile = new File(cacheDir + "/" + pd2Model);
             FileUtils.copyFromAsset(context, pd2Model, erFile, false);
@@ -139,6 +162,10 @@ public class PresenterImpl implements VerificationContract.Presenter {
         if (!isExists(modelPath, eyeModel)) {
             File erFile = new File(cacheDir + "/" + eyeModel);
             FileUtils.copyFromAsset(context, eyeModel, erFile, false);
+        }
+        if (!isExists(modelPath, actionAndEr)) {
+            File aAeFile = new File(cacheDir + "/" + actionAndEr);
+            FileUtils.copyFromAsset(context, actionAndEr, aAeFile, false);
         }
         // if(!isExists("/sdcard", key))
         // {
@@ -148,15 +175,16 @@ public class PresenterImpl implements VerificationContract.Presenter {
 
         String rootPath = cacheDir + "/";
         try {
-            if (faceDetector == null || faceLandmarker == null || faceRecognizer == null) {
+            if (faceDetector == null || faceLandmarker == null) {
                 faceDetector = new FaceDetector(new SeetaModelSetting(0, new String[]{rootPath + fdModel}, SeetaDevice.SEETA_DEVICE_AUTO));
-                emotionRecognizer = new EmotionRecognizer((new SeetaModelSetting(0, new String[]{rootPath + erModel}, SeetaDevice.SEETA_DEVICE_AUTO)));
+//                emotionRecognizer = new EmotionRecognizer((new SeetaModelSetting(0, new String[]{rootPath + erModel}, SeetaDevice.SEETA_DEVICE_AUTO)));
                 faceLandmarker = new FaceLandmarker(new SeetaModelSetting(0, new String[]{rootPath + pdModel}, SeetaDevice.SEETA_DEVICE_AUTO));
                 faceLandmarker2 = new FaceLandmarker(new SeetaModelSetting(0, new String[]{rootPath + pd2Model}, SeetaDevice.SEETA_DEVICE_AUTO));
-                faceRecognizer = new FaceRecognizer(new SeetaModelSetting(0, new String[]{rootPath + frModel}, SeetaDevice.SEETA_DEVICE_AUTO));
-                actionUnit = new ActionUnit(new SeetaModelSetting(0, new String[]{rootPath + actionModel}, SeetaDevice.SEETA_DEVICE_AUTO));
+//                actionUnit = new ActionUnit(new SeetaModelSetting(0, new String[]{rootPath + actionModel}, SeetaDevice.SEETA_DEVICE_AUTO));
                 eyeStateDetector = new EyeStateDetector(new SeetaModelSetting(0, new String[]{rootPath + eyeModel}, SeetaDevice.SEETA_DEVICE_AUTO));
+                emotionRecognizerWithActionUnits = new EmotionRecognizerWithActionUnits(new SeetaModelSetting(0, new String[]{rootPath + actionAndEr}, SeetaDevice.SEETA_DEVICE_AUTO));
                 seetaHeartRateDetector = new SeetaHeartRateDetector();
+                seetaHeartRateDetector.SetFrameNum(10);
             }
             faceDetector.set(FaceDetector.Property.PROPERTY_MIN_FACE_SIZE, 80);
         } catch (Exception e) {
@@ -186,30 +214,25 @@ public class PresenterImpl implements VerificationContract.Presenter {
         return appCacheDir;
     }
 
+    boolean hasSave = false;
     int frequency;
     private Handler mFaceTrackingHandler = new Handler(mFaceTrackThread.getLooper()) {
         @Override
         public void handleMessage(Message msg) {
-            long t = System.currentTimeMillis();
+            resultData.frames++;
             final TrackingInfo trackingInfo = (TrackingInfo) msg.obj;
-
             trackingInfo.matBgr.get(0, 0, imageData.data);
-
-            //测试输入到算法中的图像数据
-//            Mat inputDataMat = new Mat(imageData.height, imageData.width, CvType.CV_8UC3);
-//            inputDataMat.put(0, 0, imageData.data);
-//            saveImgage(trackingInfo.matBgr, "/sdcard/rlsb_mi8", "l-" + frequency++ + ".jpg");
-
+            long startTime = System.currentTimeMillis();
+            faceDetector.set(FaceDetector.Property.PROPERTY_NUMBER_THREADS, 2);
             SeetaRect[] faces = faceDetector.Detect(imageData);
-
+            long endTime = System.currentTimeMillis();
+            Log.i("time_tag", "人脸检测: " + (endTime - startTime) +"人脸数："+faces.length);
             //设一个初始值
             trackingInfo.faceInfo.x = (int) 0;
             trackingInfo.faceInfo.y = 0;
             trackingInfo.faceInfo.width = 0;
             trackingInfo.faceInfo.height = 0;
-
             if (faces.length != 0) {
-
                 int maxIndex = 0;
                 double maxWidth = 0;
                 for (int i = 0; i < faces.length; ++i) {
@@ -218,28 +241,19 @@ public class PresenterImpl implements VerificationContract.Presenter {
                         maxWidth = faces[i].width;
                     }
                 }
-
                 trackingInfo.faceInfo = faces[maxIndex];
 
                 trackingInfo.faceRect.x = (int) faces[maxIndex].x;
                 trackingInfo.faceRect.y = (int) faces[maxIndex].y;
                 trackingInfo.faceRect.width = (int) faces[maxIndex].width;
                 trackingInfo.faceRect.height = (int) faces[maxIndex].height;
+                mView.updateFaceUi(trackingInfo.faceRect.x, trackingInfo.faceRect.y, trackingInfo.faceRect.width, trackingInfo.faceRect.height);
                 trackingInfo.lastProccessTime = System.currentTimeMillis();
 
-                int limitX = trackingInfo.faceRect.x + trackingInfo.faceRect.width;
-                int limitY = trackingInfo.faceRect.y + trackingInfo.faceRect.height;
-                if (limitX < WIDTH && limitY < HEIGHT) {
-                    Mat faceMatBGR = new Mat(trackingInfo.matBgr, trackingInfo.faceRect);
-                    Imgproc.resize(faceMatBGR, faceMatBGR, new Size(200, 240));
-                    Mat faceMatBGRA = new Mat();
-                    Imgproc.cvtColor(faceMatBGR, faceMatBGRA, Imgproc.COLOR_BGR2RGBA);
-                    Bitmap faceBmp = Bitmap.createBitmap(faceMatBGR.width(), faceMatBGR.height(),
-                            Bitmap.Config.ARGB_8888);
-                    Utils.matToBitmap(faceMatBGRA, faceBmp);
-                    mView.drawFaceImage(faceBmp);
-
-//                    saveImgage(faceMatBGR, "/sdcard/rlsb", "l-" + frequency++ + ".jpg");
+//                保存图片 只保存一次
+                if (!hasSave) {
+                    faceBitmap = mView.getTextureView().getBitmap();
+                    hasSave = true;
                 }
 
                 mFasHandler.removeMessages(0);
@@ -257,195 +271,121 @@ public class PresenterImpl implements VerificationContract.Presenter {
         }
     };
 
+
+    EyeStateDetector.EYE_STATE eye_state_left = EyeStateDetector.EYE_STATE.EYE_UNKNOWN;
+    EyeStateDetector.EYE_STATE eye_state_right = EyeStateDetector.EYE_STATE.EYE_UNKNOWN;
     private Handler mFasHandler = new Handler(mFasThread.getLooper()) {
 
         @Override
         public void handleMessage(Message msg) {
+            SubmitBean.SrcDataBean srcDataBean = new SubmitBean.SrcDataBean();
             final TrackingInfo trackingInfo = (TrackingInfo) msg.obj;
+            Log.i("fengao_xiaomi", "handleMessage: start " + trackingInfo.time + "    " + System.currentTimeMillis());
             trackingInfo.matGray = new Mat();
             final Rect faceRect = trackingInfo.faceRect;
             trackingInfo.matBgr.get(0, 0, imageData.data);
+            float[] f = new float[7];
+            float[] f1 = new float[19];
 
-            String targetName = "unknown";
+            long startTime = System.currentTimeMillis();
 
-            //注册人脸
-            QingxuFragment qingxuFragment = (QingxuFragment) mView;
-//            float[] f = new float[7];
-//            emotionRecognizer.RecognizeEmotionWithCroppedFace(imageData, f);
-//            float[] f1 = new float[19];
-//            actionUnit.ExtractCroppedFace(imageData, f1);
-//            String content = "自然: " + f[0] + "\r\n" +
-//                    "愤怒: " + f[1] + "\r\n" +
-//                    "厌恶: " + f[2] + "\r\n" +
-//                    "恐惧: " + f[3] + "\r\n" +
-//                    "高兴: " + f[4] + "\r\n" +
-//                    "伤心: " + f[5] + "\r\n" +
-//                    "惊讶: " + f[6] + "\r\n";
-//
-//            content += "内眉上扬: " + f1[0] + "\r\n" +
-//                    "外眉上扬: " + f1[1] + "\r\n" +
-//                    "眉毛下压: " + f1[2] + "\r\n" +
-//                    "上眼睑上扬: " + f1[3] + "\r\n" +
-//                    "脸颊抬起: " + f1[4] + "\r\n" +
-//                    "眼睑收紧: " + f1[5] + "\r\n" +
-//                    "鼻子蹙皱: " + f1[6] + "\r\n" +
-//                    "上唇抬起: " + f1[7] + "\r\n" +
-//                    "嘴角上扬: " + f1[8] + "\r\n" +
-//                    "收缩嘴角: " + f1[9] + "\r\n" +
-//                    "嘴角下拉: " + f1[10] + "\r\n" +
-//                    "？？: " + f1[11] + "\r\n" +
-//                    "下巴缩紧: " + f1[12] + "\r\n" +
-//                    "噘嘴: " + f1[13] + "\r\n" +
-//                    "嘴唇舒展: " + f1[14] + "\r\n" +
-//                    "嘴唇收缩: " + f1[15] + "\r\n" +
-//                    "嘴唇压紧: " + f1[16] + "\r\n" +
-//                    "上下唇分开: " + f1[17] + "\r\n" +
-//                    "下颚下拉: " + f1[18] + "\r\n";
-//            mView.setContent(content);
-
-            boolean canRegister = true;
-            float[] feats = new float[faceRecognizer.GetExtractFeatureSize()];
+            long endTime;
 
             //特征点检测
             SeetaPointF[] points = new SeetaPointF[5];
+            faceLandmarker.set(FaceLandmarker.Property.PROPERTY_NUMBER_THREADS, 2);
+            faceLandmarker.set(FaceLandmarker.Property.PROPERTY_ARM_CPU_MODE, 0);
             faceLandmarker.mark(imageData, trackingInfo.faceInfo, points);
-
+            endTime = System.currentTimeMillis();
+            Log.i("time_tag", "5点定位: " + (endTime - startTime));
             //特征点检测
+            startTime = System.currentTimeMillis();
             SeetaPointF[] points2 = new SeetaPointF[81];
+            faceLandmarker2.set(FaceLandmarker.Property.PROPERTY_NUMBER_THREADS, 2);
+            faceLandmarker2.set(FaceLandmarker.Property.PROPERTY_ARM_CPU_MODE, 0);
             faceLandmarker2.mark(imageData, trackingInfo.faceInfo, points2);
-//
-//            //特征提取
-//            faceRecognizer.Extract(imageData, points, feats);
+            endTime = System.currentTimeMillis();
+            Log.i("time_tag", "81点定位: " + (endTime - startTime));
 
 
-//            EyeStateDetector.EYE_STATE[] f2 = new EyeStateDetector.EYE_STATE[2];
-//            eyeStateDetector.Detect(imageData,points,f2);
-//            Log.i("fengao_xiaomi", "handleMessage: f2 0 " + f2[0].name());
-//            Log.i("fengao_xiaomi", "handleMessage: f2 1 " + f2[1].name());
+            startTime = System.currentTimeMillis();
+            EyeStateDetector.EYE_STATE[] f2 = new EyeStateDetector.EYE_STATE[2];
+            eyeStateDetector.set(EyeStateDetector.Property.PROPERTY_NUMBER_THREADS, 2);
+            eyeStateDetector.Detect(imageData, points, f2);
+            endTime = System.currentTimeMillis();
+            Log.i("time_tag", "眼部检测: " + (endTime - startTime));
+            srcDataBean.eyeInfo = f2[0].ordinal();
 
-            float[] f1 = new float[19];
-            actionUnit.Extract(imageData, points, f1);
-            String content = "内眉上扬: " + f1[0] + "\r\n" +
-                    "外眉上扬: " + f1[1] + "\r\n" +
-                    "眉毛下压: " + f1[2] + "\r\n" +
-                    "上眼睑上扬: " + f1[3] + "\r\n" +
-                    "脸颊抬起: " + f1[4] + "\r\n" +
-                    "眼睑收紧: " + f1[5] + "\r\n" +
-                    "鼻子蹙皱: " + f1[6] + "\r\n" +
-                    "上唇抬起: " + f1[7] + "\r\n" +
-                    "嘴角上扬: " + f1[8] + "\r\n" +
-                    "收缩嘴角: " + f1[9] + "\r\n" +
-                    "嘴角下拉: " + f1[10] + "\r\n" +
-                    "？？: " + f1[11] + "\r\n" +
-                    "下巴缩紧: " + f1[12] + "\r\n" +
-                    "噘嘴: " + f1[13] + "\r\n" +
-                    "嘴唇舒展: " + f1[14] + "\r\n" +
-                    "嘴唇收缩: " + f1[15] + "\r\n" +
-                    "嘴唇压紧: " + f1[16] + "\r\n" +
-                    "上下唇分开: " + f1[17] + "\r\n" +
-                    "下颚下拉: " + f1[18] + "\r\n";
-            mView.setContent(content);
-            seetaHeartRateDetector.SetFrameNum(10);
+//            startTime = System.currentTimeMillis();
+//            actionUnit.set(ActionUnit.Property.PROPERTY_NUMBER_THREADS, 4);
+//            actionUnit.set(ActionUnit.Property.PROPERTY_ARM_CPU_MODE, 0);
+//            actionUnit.Extract(imageData, points, f1);
+//            endTime = System.currentTimeMillis();
+//            Log.i("time_tag", "动作检测: " + (endTime - startTime));
+
+            startTime = System.currentTimeMillis();
+//            emotionRecognizer.set(EmotionRecognizer.Property.PROPERTY_NUMBER_THREADS, 4);
+//            emotionRecognizer.set(EmotionRecognizer.Property.PROPERTY_ARM_CPU_MODE, 0);
+//            emotionRecognizer.RecognizeEmotion(imageData, points, f);
+            emotionRecognizerWithActionUnits.set(EmotionRecognizerWithActionUnits.Property.PROPERTY_NUMBER_THREADS, 2);
+            emotionRecognizerWithActionUnits.set(EmotionRecognizerWithActionUnits.Property.PROPERTY_ARM_CPU_MODE, 0);
+            emotionRecognizerWithActionUnits.RecognizeEmotionAndActionUnitsWithCrop(imageData,points,f,f1);
+            endTime = System.currentTimeMillis();
+            Log.i("time_tag", "表情+动作 检测: " + (endTime - startTime));
+
+
+            startTime = System.currentTimeMillis();
             seetaHeartRateDetector.GetSignal(imageData, System.currentTimeMillis(), points2);
-            Log.i("fengao_xiaomi", "handleMessage: " + seetaHeartRateDetector.GetHeartRate());
-//            Log.i("fengao_xiaomi", "handleMessage: " + seetaHeartRateDetector.GetHeartRate());
-//            if (mainFragment.needFaceRegister) {
-//                String registeredName = "";
-//                boolean canRegister = true;
-//                float[] feats = new float[faceRecognizer.GetExtractFeatureSize()];
-//
-//                if (trackingInfo.faceInfo.width != 0) {
-//                    //特征点检测
-//                    SeetaPointF[] points = new SeetaPointF[5];
-//                    faceLandmarker.mark(imageData, trackingInfo.faceInfo, points);
-//
-//                    //特征提取
-//                    faceRecognizer.Extract(imageData, points, feats);
-//
-//                    if ("".equals(mainFragment.registeredName)) {
-//                        canRegister = false;
-//                        final String tip = "注册名称不能为空";
-//                        new Handler(Looper.getMainLooper()).post(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                mView.showSimpleTip(tip);
-//                            }
-//                        });
-//                    }
-//
-//                    for (String key : trackingInfo.name2feats.keySet()) {
-//                        if (key.equals(mainFragment.registeredName)) {
-//                            canRegister = false;
-//                            final String tip = mainFragment.registeredName + "已经注册";
-//                            new Handler(Looper.getMainLooper()).post(new Runnable() {
-//                                @Override
-//                                public void run() {
-//                                    mView.showSimpleTip(tip);
-//                                }
-//                            });
-//                        }
-//                    }
-//                }
-//
-//                //进行人脸的注册
-//                if (canRegister) {
-//                    trackingInfo.name2feats.put(mainFragment.registeredName, feats);
-//                    final String tip = mainFragment.registeredName + "名称已经注册成功";
-//                    new Handler(Looper.getMainLooper()).post(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            mView.FaceRegister(tip);
-//                        }
-//                    });
-//                }
-//            }
+            double heart = seetaHeartRateDetector.GetHeartRate();
+            endTime = System.currentTimeMillis();
+            Log.i("time_tag", "心率检测: " + (endTime - startTime));
 
-            //进行人脸识别
-//            if (trackingInfo.faceInfo.width != 0) {
-//                //特征点检测
-//                SeetaPointF[] points = new SeetaPointF[5];
-//                faceLandmarker.mark(imageData, trackingInfo.faceInfo, points);
-//
-//                //特征提取
-//                if (!trackingInfo.name2feats.isEmpty()) {//不空进行特征提取，并比对
-//                    float[] feats = new float[faceRecognizer.GetExtractFeatureSize()];
-//                    faceRecognizer.Extract(imageData, points, feats);
-//
-//                    int galleryNum = trackingInfo.name2feats.size();
-//                    float maxSimilarity = 0.0f;
-//
-//                    for (String name : trackingInfo.name2feats.keySet()) {
-//                        float sim = faceRecognizer.CalculateSimilarity(feats, trackingInfo.name2feats.get(name));
-//                        if (sim > maxSimilarity && sim > thresh) {
-//                            maxSimilarity = sim;
-//                            targetName = name;
-//                        }
-//                    }
-//                }
-//            }
+            int blink = 0;
+            if (eye_state_left == EyeStateDetector.EYE_STATE.EYE_CLOSE && f2[0] == EyeStateDetector.EYE_STATE.EYE_OPEN) {
+                blink++;
+            }
+            if (eye_state_right == EyeStateDetector.EYE_STATE.EYE_CLOSE && f2[1] == EyeStateDetector.EYE_STATE.EYE_OPEN) {
+                blink++;
+            }
+            eye_state_left = f2[0];
+            eye_state_right = f2[1];
+            srcDataBean.heartInfo = Double.valueOf(heart).intValue();
 
-            final String pickedName = targetName;
-            Log.e("recognized name:", pickedName);
-            new Handler(Looper.getMainLooper()).post(new Runnable() {
-                @Override
-                public void run() {
-                    mView.setName(pickedName, trackingInfo.matBgr, faceRect);
+            srcDataBean.faceInfo.add(0.0f);
+            srcDataBean.faceInfo.add(0.0f);
+            srcDataBean.faceInfo.add(0.0f);
+            for (int i = 0; i < f.length; i++) {
+                srcDataBean.emotion.add(f[i]);
+            }
+
+            for (int i = 0; i < f1.length; i++) {
+                if (i == 10) {
+                    continue;
                 }
-            });
+                srcDataBean.microAction.add(f1[i]);
+            }
+            srcData.add(srcDataBean);
+            resultData.heartRate = Double.valueOf(heart).intValue();
+            resultData.blinkNum += blink;
+            resultData.valid_frames++;
+            mView.updateUi(f1, f, blink, heart);
         }
     };
 
     @Override
     public void detect(byte[] data, int width, int height, int rotation) {
+        if (isSubmit) {
+            return;
+        }
         TrackingInfo trackingInfo = new TrackingInfo();
-
+        trackingInfo.time = System.currentTimeMillis();
         matNv21.put(0, 0, data);
         trackingInfo.matBgr = new Mat(AppConfig.CAMERA_PREVIEW_HEIGHT, AppConfig.CAMERA_PREVIEW_WIDTH, CvType.CV_8UC3);
         trackingInfo.matGray = new Mat();
 
         Imgproc.cvtColor(matNv21, trackingInfo.matBgr, Imgproc.COLOR_YUV2BGR_NV21);
-
         Core.transpose(trackingInfo.matBgr, trackingInfo.matBgr);
+        Core.rotate(trackingInfo.matBgr, trackingInfo.matBgr, Core.ROTATE_180);
         Core.flip(trackingInfo.matBgr, trackingInfo.matBgr, 0);
         Core.flip(trackingInfo.matBgr, trackingInfo.matBgr, 1);
 
@@ -458,29 +398,22 @@ public class PresenterImpl implements VerificationContract.Presenter {
         mFaceTrackingHandler.obtainMessage(1, trackingInfo).sendToTarget();
     }
 
-    public void saveImgage(Mat bgr, String path, String imageName) {
-        Mat rgba = bgr.clone();
-        Imgproc.cvtColor(rgba, rgba, Imgproc.COLOR_BGR2RGBA);
-
-        Bitmap mBitmap = null;
-        mBitmap = Bitmap.createBitmap(rgba.cols(), rgba.rows(), Bitmap.Config.ARGB_8888);
-        Utils.matToBitmap(rgba, mBitmap);
-
+    public void saveImgage(Bitmap bitmap, String path, String imageName) {
         File f = new File(path, imageName);
         if (f.exists()) {
             f.delete();
         }
         try {
+            f.getParentFile().mkdirs();
+            f.createNewFile();
             FileOutputStream out = new FileOutputStream(f);
-            mBitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 30, out);
             out.flush();
             out.close();
             Log.i(TAG, "已经保存");
         } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -489,5 +422,78 @@ public class PresenterImpl implements VerificationContract.Presenter {
     public void destroy() {
         mFaceTrackThread.quitSafely();
         mFasThread.quitSafely();
+    }
+
+    @Override
+    public void submit() {
+        final ProgressDialog dialog = new ProgressDialog(mView.getTextureView().getContext());
+        dialog.setCancelable(false);
+        dialog.setMessage("分析中。。。");
+        dialog.show();
+        isSubmit = true;
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                Log.i("fengao_xiaomi", "run: 开始保存");
+                if (faceBitmap != null) {
+                    saveImgage(faceBitmap, "/sdcard/rlsb", "face.jpg");
+                }
+                faceBitmap.recycle();
+                faceBitmap = null;
+                Log.i("fengao_xiaomi", "run: 开始结束");
+                File file = new File("/sdcard/rlsb/face.jpg");
+                RequestBody body = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+                MultipartBody multipartBody = new MultipartBody.Builder()
+                        .addFormDataPart("file", "face.jpg", body)
+                        .setType(MultipartBody.FORM)
+                        .build();
+                resultData.fps = resultData.frames / 20;
+                SubmitBean bean = new SubmitBean();
+                bean.resultData = resultData;
+                bean.srcData = srcData;
+                api.updateFacePic(multipartBody.parts())
+                        .flatMap(uploadResponseBean -> {
+                            if (uploadResponseBean.success) {
+                                bean.facePicUrl = uploadResponseBean.data;
+                                return api.faceSubmit(bean);
+                            } else {
+                                throw new RuntimeException("");
+                            }
+                        })
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Observer<SubmitResponseBean>() {
+                            @Override
+                            public void onSubscribe(Disposable d) {
+
+                            }
+
+                            @Override
+                            public void onNext(SubmitResponseBean bean) {
+                                dialog.dismiss();
+                                if (bean.success) {
+                                    mView.jump(bean);
+                                } else {
+                                    ToastUtils.showShort("发生了一些错误，请重新尝试");
+                                    mView.exit();
+                                }
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                dialog.dismiss();
+                                ToastUtils.showShort("发生了一些错误，请重新尝试");
+                                mView.exit();
+                            }
+
+                            @Override
+                            public void onComplete() {
+
+                            }
+                        });
+            }
+        }.start();
+
     }
 }
