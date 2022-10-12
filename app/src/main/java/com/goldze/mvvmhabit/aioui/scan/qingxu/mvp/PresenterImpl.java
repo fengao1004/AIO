@@ -12,6 +12,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.goldze.mvvmhabit.aioui.http.Api;
+import com.goldze.mvvmhabit.aioui.http.HttpRepository;
 import com.goldze.mvvmhabit.aioui.scan.qingxu.bean.SubmitBean;
 import com.goldze.mvvmhabit.aioui.scan.qingxu.bean.SubmitResponseBean;
 import com.goldze.mvvmhabit.aioui.scan.qingxu.bean.UploadResponseBean;
@@ -385,7 +386,9 @@ public class PresenterImpl implements VerificationContract.Presenter {
 
         Imgproc.cvtColor(matNv21, trackingInfo.matBgr, Imgproc.COLOR_YUV2BGR_NV21);
         Core.transpose(trackingInfo.matBgr, trackingInfo.matBgr);
-        Core.rotate(trackingInfo.matBgr, trackingInfo.matBgr, Core.ROTATE_180);
+        if (!HttpRepository.isTest){
+            Core.rotate(trackingInfo.matBgr, trackingInfo.matBgr, Core.ROTATE_180);
+        }
         Core.flip(trackingInfo.matBgr, trackingInfo.matBgr, 0);
         Core.flip(trackingInfo.matBgr, trackingInfo.matBgr, 1);
 

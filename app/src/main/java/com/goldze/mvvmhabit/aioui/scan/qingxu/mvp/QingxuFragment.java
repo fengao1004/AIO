@@ -390,55 +390,62 @@ public class QingxuFragment extends Fragment
         canvas.drawColor(0, PorterDuff.Mode.CLEAR);
 
         if (faceRect != null) {
-            faceRect.left = 1080 - ((float) (x * 1.8f));
+//            faceRect.left = ((float) (x * 1.8f));
+//            faceRect.right = ((x + width) * 1.8f);
+            faceRect.top = ((float) (y * 1.8f)) - 180;
+            faceRect.bottom = (((y + height) * 1.8f)) - 180;
+
+            faceRect.left = 1080 - ((float) (x * 1.8f)); //镜像版本
             faceRect.right = 1080 - ((x + width) * 1.8f);
-            faceRect.top = (1440 - (float) (y * 1.8f)) - 180;
-            faceRect.bottom = (1440 - ((y + height) * 1.8f)) - 180;
+//            faceRect.top = (1440 - (float) (y * 1.8f)) - 180;
+//            faceRect.bottom = (1440 - ((y + height) * 1.8f)) - 180;
+//
+
             canvas.drawRect(faceRect, mFaceRectPaint);
         }
-        if (faceRect != null && (faceRect.bottom < 0 || faceRect.right < 0 || faceRect.left > 1080 || faceRect.top > 560)) {
+        if (faceRect != null && (faceRect.top < 0 || faceRect.left < 0 || faceRect.right > 1080 || faceRect.bottom > 600)) {
             canvas.drawText("请调整与摄像头的距离", 300, 300, mFaceNamePaint);
-        } else {
-            int maxIndex = 0;
-            for (int i = 0; i < targetf1.length; i++) {
-                if (targetf1[i] > targetf1[maxIndex]) {
-                    maxIndex = i;
-                }
-            }
-            String text = "";
-            switch (maxIndex) {
-                case 0: {
-                    text = "自然";
-                    break;
-                }
-                case 1: {
-                    text = "愤怒";
-                    break;
-                }
-                case 2: {
-                    text = "厌恶";
-                    break;
-                }
-                case 3: {
-                    text = "恐惧";
-                    break;
-                }
-                case 4: {
-                    text = "高兴";
-                    break;
-                }
-                case 5: {
-                    text = "伤心";
-                    break;
-                }
-                case 6: {
-                    text = "惊讶";
-                    break;
-                }
-            }
-            text = text + Float.valueOf(tempf1[maxIndex] * 100).intValue();
-            canvas.drawText(text, (faceRect.left + faceRect.right) / 2 - 125, faceRect.top + 50, mFaceNamePaint);
         }
+
+        int maxIndex = 0;
+        for (int i = 0; i < targetf1.length; i++) {
+            if (targetf1[i] > targetf1[maxIndex]) {
+                maxIndex = i;
+            }
+        }
+        String text = "";
+        switch (maxIndex) {
+            case 0: {
+                text = "自然";
+                break;
+            }
+            case 1: {
+                text = "愤怒";
+                break;
+            }
+            case 2: {
+                text = "厌恶";
+                break;
+            }
+            case 3: {
+                text = "恐惧";
+                break;
+            }
+            case 4: {
+                text = "高兴";
+                break;
+            }
+            case 5: {
+                text = "伤心";
+                break;
+            }
+            case 6: {
+                text = "惊讶";
+                break;
+            }
+        }
+        text = text + Float.valueOf(tempf1[maxIndex] * 100).intValue();
+        canvas.drawText(text, (faceRect.left + faceRect.right) / 2 - 75, faceRect.top - 70, mFaceNamePaint);
         mOverlapHolder.unlockCanvasAndPost(canvas);
     }
 

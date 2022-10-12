@@ -13,6 +13,7 @@ import android.view.TextureView;
 
 import androidx.annotation.Nullable;
 
+import com.goldze.mvvmhabit.aioui.http.HttpRepository;
 import com.goldze.mvvmhabit.aioui.scan.qingxu.constants.ErrorCode;
 import com.goldze.mvvmhabit.aioui.scan.qingxu.mvp.exceptions.CameraUnavailableException;
 
@@ -22,6 +23,7 @@ import java.util.List;
 public class CameraPreview2 extends TextureView implements TextureView.SurfaceTextureListener {
 
     private static final int CAMERA_ID = 0;
+    private static final int TEST_CAMERA_ID = 1;
 
     private static final String TAG = "CameraPreview";
     @Nullable
@@ -61,7 +63,11 @@ public class CameraPreview2 extends TextureView implements TextureView.SurfaceTe
         try {
             openCamera();
             Camera.CameraInfo info = new Camera.CameraInfo();
-            Camera.getCameraInfo(CAMERA_ID, info);
+            if (HttpRepository.isTest) {
+                Camera.getCameraInfo(TEST_CAMERA_ID, info);
+            } else {
+                Camera.getCameraInfo(CAMERA_ID, info);
+            }
 //            int rotation = Surface.ROTATION_0;
 //            if (getContext() instanceof Activity) {
 //                rotation = ((Activity) getContext())
@@ -159,7 +165,11 @@ public class CameraPreview2 extends TextureView implements TextureView.SurfaceTe
     private void openCamera() throws CameraUnavailableException {
         if (Camera.getNumberOfCameras() > 0) {
             try {
-                mCamera = Camera.open(CAMERA_ID);
+                if (HttpRepository.isTest) {
+                    mCamera = Camera.open(TEST_CAMERA_ID);
+                } else {
+                    mCamera = Camera.open(CAMERA_ID);
+                }
                 assert mCamera != null;
             } catch (Exception e) {
                 throw new CameraUnavailableException(e);
