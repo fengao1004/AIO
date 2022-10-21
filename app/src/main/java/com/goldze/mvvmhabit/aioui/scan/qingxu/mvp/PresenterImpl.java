@@ -11,6 +11,7 @@ import android.os.Process;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.goldze.mvvmhabit.aioui.Util;
 import com.goldze.mvvmhabit.aioui.http.Api;
 import com.goldze.mvvmhabit.aioui.http.HttpRepository;
 import com.goldze.mvvmhabit.aioui.scan.qingxu.bean.SubmitBean;
@@ -187,7 +188,7 @@ public class PresenterImpl implements VerificationContract.Presenter {
                 seetaHeartRateDetector = new SeetaHeartRateDetector();
                 seetaHeartRateDetector.SetFrameNum(10);
             }
-            faceDetector.set(FaceDetector.Property.PROPERTY_MIN_FACE_SIZE, 80);
+            faceDetector.set(FaceDetector.Property.PROPERTY_MIN_FACE_SIZE, 40);
         } catch (Exception e) {
             Log.e(TAG, "init exception:" + e.toString());
         }
@@ -453,6 +454,7 @@ public class PresenterImpl implements VerificationContract.Presenter {
                         .build();
                 resultData.fps = resultData.frames / 20;
                 SubmitBean bean = new SubmitBean();
+                bean.serialNumber = Util.INSTANCE.getSerialNumber();
                 bean.resultData = resultData;
                 bean.srcData = srcData;
                 api.updateFacePic(multipartBody.parts())

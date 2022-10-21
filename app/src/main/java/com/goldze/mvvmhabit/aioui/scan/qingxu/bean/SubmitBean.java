@@ -1,5 +1,7 @@
 package com.goldze.mvvmhabit.aioui.scan.qingxu.bean;
 
+import com.google.android.exoplayer2.util.Util;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +13,7 @@ import java.util.List;
  */
 public class SubmitBean {
     public String facePicUrl = "";
+    public String serialNumber = "";
 
     public SubmitBean() {
         userFaces = new ArrayList<>();
