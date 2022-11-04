@@ -436,7 +436,7 @@ public class QingxuFragment extends Fragment
                 break;
             }
             case 5: {
-                text = "伤心";
+                text = "低落";
                 break;
             }
             case 6: {
