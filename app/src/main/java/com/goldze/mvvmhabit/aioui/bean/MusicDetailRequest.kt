@@ -12,7 +12,7 @@ data class MusicDetailRequest(
 )
 
 class MusicDetailRequestBody {
-    var deptId: Int = 0
+    var deptId: Long = 0
     var id: Long = 0
     var isDel: Int = 0
     var pageNum: Int = 0

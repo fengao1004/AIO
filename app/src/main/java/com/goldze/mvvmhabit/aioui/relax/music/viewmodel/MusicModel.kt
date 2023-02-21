@@ -123,7 +123,7 @@ class MusicModel(application: Application) : BaseViewModel<MusicRepository>(appl
         entity.clickCount = (entity.clickCount ?: 0) + 1
         entity.clickCountOb(entity.clickCount)
         var body = MusicDetailRequestBody()
-        body.deptId = entity.deptId ?: 0
+        body.deptId = entity.deptId ?: 0L
         body.id = entity.id
         body.isDel = entity.isDel
         body.status = entity.status ?: 0

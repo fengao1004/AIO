@@ -17,7 +17,7 @@ data class GonggaoContentBeanData(
     val clickCount: Int,
     val content: String,
     val createTime: String,
-    val deptId: Int,
+    val deptId: Long,
     val id: Long,
     val isDel: Int,
     val name: String,

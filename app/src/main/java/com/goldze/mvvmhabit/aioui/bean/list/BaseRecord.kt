@@ -10,7 +10,7 @@ open class BaseRecord : Serializable {
     @Transient
     var clickCountOb: (count: Int?) -> Unit = { }
     var createTime: String? = null
-    var deptId: Int? = null
+    var deptId: Long? = null
     var id: Long = 0
     var isDel: Int = 0
     var name: String? = null

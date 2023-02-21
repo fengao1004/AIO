@@ -7,6 +7,7 @@ import com.goldze.mvvmhabit.BuildConfig;
 import com.goldze.mvvmhabit.aioui.http.HttpRepository;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -72,7 +73,10 @@ public class RetrofitClient {
     }
 
     private RetrofitClient(String url, Map<String, String> headers) {
-
+        if (headers == null){
+            headers = new HashMap<>();
+        }
+        headers.put("systemCode","client_machine");
         if (TextUtils.isEmpty(url)) {
             url = getBaseUrl();
         }
