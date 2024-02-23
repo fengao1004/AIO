@@ -14,7 +14,9 @@ import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.hardware.Camera;
+import android.media.CamcorderProfile;
 import android.media.Image;
+import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -53,7 +55,10 @@ import com.seeta.sdk.SeetaImageData;
 
 import org.opencv.core.Mat;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -110,9 +115,10 @@ public class QingxuFragment extends Fragment
     public String registeredName = "";//注册的名称
 
     public String recognizedName = "";
-
+    MediaRecorder mediaRecorder = null;
+    boolean isRecording = false;
     public SeetaImageData imageData = new SeetaImageData(600, 800, 3);
-
+    public boolean startRecording = false;
     private CameraCallbacks mCameraCallbacks = new CameraCallbacks() {
         @Override
         public void onCameraUnavailable(int errorCode) {
@@ -122,11 +128,20 @@ public class QingxuFragment extends Fragment
 
         @Override
         public void onPreviewFrame(byte[] data, Camera camera) {
+            Log.i("fengao_xiaomi", "onPreviewFrame: ");
             if (mPreviewSize == null) {
                 mPreviewSize = camera.getParameters().getPreviewSize();
             }
             mPresenter.detect(data, mPreviewSize.width, mPreviewSize.height,
                     mCameraPreview.getCameraRotation());
+            if(!startRecording){
+                synchronized (QingxuFragment.class){
+                    if(!startRecording){
+                        startRecording = true;
+                        startRecording("/sdcard/rlsb/face.mp4",mCameraPreview.mCamera);
+                    }
+                }
+            }
         }
     };
 
@@ -226,6 +241,9 @@ public class QingxuFragment extends Fragment
                     @Override
                     public void onComplete() {
                         mPresenter.submit();
+                        if (isRecording){
+                            stopRecording(mCameraPreview.mCamera);
+                        }
                     }
                 });
     }
@@ -645,6 +663,49 @@ public class QingxuFragment extends Fragment
                                            @NonNull int[] grantResults) {
         if (requestCode == REQUEST_CAMERA_PERMISSION) {
             getActivity().recreate();
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (isRecording){
+            stopRecording(mCameraPreview.mCamera);
+        }
+    }
+
+    private void startRecording(String path, Camera camera) {
+        try {
+            Log.i("fengao_xiaomi", "startRecording: ");
+            camera.unlock();
+            File file = new File(path);
+            if (file.exists())
+                file.delete();
+            mediaRecorder = new MediaRecorder();
+            mediaRecorder.setCamera(camera);
+            mediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
+//            mediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_720P));
+            mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
+//            mediaRecorder.setOrientationHint(270);
+            mediaRecorder.setVideoSize(800, 600);
+            mediaRecorder.setVideoEncodingBitRate(1000000);
+            mediaRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.H264);
+            mediaRecorder.setOutputFile(path);
+            mediaRecorder.prepare();
+            mediaRecorder.start();
+            isRecording = true;
+        } catch (IOException e) {
+            Log.e("MainActivity", "prepare() failed");
+        }
+    }
+
+    private void stopRecording(Camera camera) {
+        if (isRecording){
+            mediaRecorder.stop();
+            mediaRecorder.release();
+            mediaRecorder = null;
+            isRecording = false;
+            camera.lock();
         }
     }
 

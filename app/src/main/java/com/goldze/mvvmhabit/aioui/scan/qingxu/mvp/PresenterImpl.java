@@ -17,11 +17,10 @@ import com.goldze.mvvmhabit.aioui.http.HttpRepository;
 import com.goldze.mvvmhabit.aioui.scan.qingxu.bean.SubmitBean;
 import com.goldze.mvvmhabit.aioui.scan.qingxu.bean.SubmitResponseBean;
 import com.goldze.mvvmhabit.aioui.scan.qingxu.bean.UploadResponseBean;
+import com.goldze.mvvmhabit.aioui.scan.qingxu.bean.VideoSubmitBean;
 import com.goldze.mvvmhabit.aioui.scan.qingxu.config.AppConfig;
 import com.goldze.mvvmhabit.aioui.scan.qingxu.utils.FileUtils;
 import com.goldze.mvvmhabit.utils.RetrofitClient;
-import com.seeta.sdk.ActionUnit;
-import com.seeta.sdk.EmotionRecognizer;
 import com.seeta.sdk.EmotionRecognizerWithActionUnits;
 import com.seeta.sdk.EyeStateDetector;
 import com.seeta.sdk.FaceDetector;
@@ -33,28 +32,26 @@ import com.seeta.sdk.SeetaModelSetting;
 import com.seeta.sdk.SeetaPointF;
 import com.seeta.sdk.SeetaRect;
 
-import org.opencv.android.Utils;
 import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.Rect;
-import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import me.goldze.mvvmhabit.utils.ToastUtils;
 import okhttp3.MediaType;
@@ -478,7 +475,13 @@ public class PresenterImpl implements VerificationContract.Presenter {
                             public void onNext(SubmitResponseBean bean) {
                                 dialog.dismiss();
                                 if (bean.success) {
-                                    mView.jump(bean);
+                                    new Thread() {
+                                        @Override
+                                        public void run() {
+                                            VideoUtil.uploadVideo(bean.data+"",api);
+                                        }
+                                    }.start();
+//                                    mView.jump(bean);
                                 } else {
                                     ToastUtils.showShort("发生了一些错误，请重新尝试");
                                     mView.exit();
@@ -501,4 +504,62 @@ public class PresenterImpl implements VerificationContract.Presenter {
         }.start();
 
     }
+
+}
+
+class VideoUtil {
+    public static void uploadVideo(String data,Api api) {
+        Log.i("fengao_xiaomi", "uploadVideo: ");
+        File file = new File("/sdcard/rlsb/face.mp4");
+        if (!file.exists() || file.length() < 1) {
+            return;
+        }
+        Log.i("fengao_xiaomi", "uploadVideo: 开始上传");
+        RequestBody body = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+        MultipartBody multipartBody = new MultipartBody.Builder()
+                .addFormDataPart("file", "face.mp4", body)
+                .setType(MultipartBody.FORM)
+                .build();
+        api.updateFacePic(multipartBody.parts())
+                .flatMap(uploadResponseBean -> {
+                    Log.i("fengao_xiaomi", "uploadVideo: flatMap" + uploadResponseBean);
+                    if (uploadResponseBean.success) {
+                        Date date = new Date();
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        String faceVideoEndTime = sdf.format(date);
+                        Date dateStart = new Date(date.getTime() - 1000 * 20);
+                        String faceVideoStartTime = sdf.format(dateStart);
+                        String url = uploadResponseBean.data;
+                        String infoId = data;
+                        VideoSubmitBean videoSubmitBean = new VideoSubmitBean(url,infoId,faceVideoStartTime,faceVideoEndTime);
+                        return api.saveVideo(videoSubmitBean);
+                    } else {
+                        throw new RuntimeException("");
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<UploadResponseBean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        Log.i("fengao_xiaomi", "onSubscribe: ");
+                    }
+
+                    @Override
+                    public void onNext(UploadResponseBean bean) {
+                        Log.i("fengao_xiaomi", "onNext: " + bean);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.i("fengao_xiaomi", "onError: " + e.toString());
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
 }

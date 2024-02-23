@@ -57,7 +57,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:gravity="center"
-                    android:text="机构介绍"
+                    android:text="项目介绍"
                     android:textColor="#F7F7F7"
                     android:textSize="32px"
                     binding:realState="@{viewModel.showState}"

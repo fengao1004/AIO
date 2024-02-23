@@ -15,6 +15,7 @@ import com.goldze.mvvmhabit.aioui.main.bean.*
 import com.goldze.mvvmhabit.aioui.scan.qingxu.bean.SubmitBean
 import com.goldze.mvvmhabit.aioui.scan.qingxu.bean.SubmitResponseBean
 import com.goldze.mvvmhabit.aioui.scan.qingxu.bean.UploadResponseBean
+import com.goldze.mvvmhabit.aioui.scan.qingxu.bean.VideoSubmitBean
 import com.goldze.mvvmhabit.aioui.test.bean.*
 import com.goldze.mvvmhabit.aioui.webview.bean.TuijianBean
 import com.goldze.mvvmhabit.aioui.zixun.input.InputRequestBean
@@ -140,6 +141,9 @@ interface Api {
     @Multipart
     @POST("/client/face/notLogin/upload")
     fun updateFacePic(@Part parts: List<MultipartBody.Part>): Observable<UploadResponseBean>
+
+    @POST("/client/face/notLogin/saveVideo")
+    fun saveVideo(@Body bean: VideoSubmitBean): Observable<UploadResponseBean>
 
 
 }

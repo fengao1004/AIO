@@ -31,7 +31,7 @@ class IntroduceFragment : BaseFragment<FragmentIntroduceBinding, IntroduceFgView
 
     override fun initData() {
         super.initData()
-        binding.baseRoot.setPageTitle("机构介绍")
+        binding.baseRoot.setPageTitle("项目介绍")
         binding.baseRoot.setAppTitle(Util.shebeiXq?.name ?: "")
         binding.baseRoot.setLogo(Util.shebeiXq?.logo ?: "")
         binding.webView.setInitialScale(220)

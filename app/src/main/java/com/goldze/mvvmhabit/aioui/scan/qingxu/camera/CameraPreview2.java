@@ -27,7 +27,7 @@ public class CameraPreview2 extends TextureView implements TextureView.SurfaceTe
 
     private static final String TAG = "CameraPreview";
     @Nullable
-    private Camera mCamera;
+    public Camera mCamera;
     @Nullable
     private Camera.CameraInfo mCameraInfo;
     private CameraCallbacks mCallbacks;

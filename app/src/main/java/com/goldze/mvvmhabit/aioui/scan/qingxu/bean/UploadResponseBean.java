@@ -12,4 +12,14 @@ public class UploadResponseBean {
     public String data;
     public String message;
     public Boolean success;
+
+    @Override
+    public String toString() {
+        return "UploadResponseBean{" +
+                "code='" + code + '\'' +
+                ", data='" + data + '\'' +
+                ", message='" + message + '\'' +
+                ", success=" + success +
+                '}';
+    }
 }

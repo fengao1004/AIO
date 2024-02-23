@@ -3,10 +3,12 @@ package com.goldze.mvvmhabit.aioui.main.fragment
 import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.TextUtils
 import android.text.style.ForegroundColorSpan
+import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -24,6 +26,7 @@ import com.goldze.mvvmhabit.aioui.gonggao.GonggaoActivity
 import com.goldze.mvvmhabit.databinding.FragmentMainBinding
 import com.stx.xhb.androidx.entity.BaseBannerInfo
 import me.goldze.mvvmhabit.base.BaseFragment
+import me.goldze.mvvmhabit.http.NetworkUtil
 import me.goldze.mvvmhabit.utils.ToastUtils
 
 
@@ -39,6 +42,14 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainFgViewModel>() {
         savedInstanceState: Bundle?
     ): Int {
         return R.layout.fragment_main
+    }
+    val WHAT_CHECK_NEW = 1
+
+    var handler = Handler(){
+        if (it.what == WHAT_CHECK_NEW){
+            startLoopCheckNet()
+        }
+        false
     }
 
     override fun initVariableId(): Int {
@@ -128,9 +139,27 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainFgViewModel>() {
             }
 
         }
-        if (viewModel.loadId()) {
+        if (viewModel.loadId() && NetworkUtil.isNetworkAvailable(context)) {
             viewModel.loadData()
         }
+        if (!NetworkUtil.isNetworkAvailable(context)){
+            startLoopCheckNet()
+        }
+    }
+
+    private fun startLoopCheckNet() {
+        Log.i("fengao_xiaomi", "startLoopCheckNet: ")
+        handler.removeMessages(WHAT_CHECK_NEW)
+        if (NetworkUtil.isNetworkAvailable(context)){
+            viewModel.loadData()
+        } else {
+            handler.sendEmptyMessageDelayed( WHAT_CHECK_NEW, 2000)
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        handler.removeMessages(WHAT_CHECK_NEW)
     }
 }
 
