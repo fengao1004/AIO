@@ -3,6 +3,7 @@ package com.goldze.mvvmhabit.aioui.scan.qingxu.mvp;
 import android.Manifest;
 import android.animation.ValueAnimator;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -14,6 +15,7 @@ import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.hardware.Camera;
+import android.media.AudioManager;
 import android.media.CamcorderProfile;
 import android.media.Image;
 import android.media.MediaRecorder;
@@ -450,7 +452,7 @@ public class QingxuFragment extends Fragment
                 break;
             }
             case 4: {
-                text = "高兴";
+                text = "愉悦";
                 break;
             }
             case 5: {
@@ -653,7 +655,7 @@ public class QingxuFragment extends Fragment
 
     @SuppressWarnings("unused")
     private void requestCameraPermission() {
-        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA},
+        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA,Manifest.permission.MODIFY_AUDIO_SETTINGS,Manifest.permission.ACCESS_NOTIFICATION_POLICY},
                 REQUEST_CAMERA_PERMISSION);
     }
 
@@ -688,7 +690,7 @@ public class QingxuFragment extends Fragment
             mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
 //            mediaRecorder.setOrientationHint(270);
             mediaRecorder.setVideoSize(800, 600);
-            mediaRecorder.setVideoEncodingBitRate(1000000);
+            mediaRecorder.setVideoEncodingBitRate(10000000);
             mediaRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.H264);
             mediaRecorder.setOutputFile(path);
             mediaRecorder.prepare();

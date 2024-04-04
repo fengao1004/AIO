@@ -425,7 +425,7 @@
                                     android:layout_marginTop="6px"
                                     android:layout_marginBottom="28px"
                                     android:gravity="bottom|center_horizontal"
-                                    android:text="高兴"
+                                    android:text="愉悦"
                                     android:textColor="@color/text_black"
                                     android:textSize="32px" />
                             </LinearLayout>

@@ -16,8 +16,6 @@ import com.goldze.mvvmhabit.aioui.http.Api;
 import com.goldze.mvvmhabit.aioui.http.HttpRepository;
 import com.goldze.mvvmhabit.aioui.scan.qingxu.bean.SubmitBean;
 import com.goldze.mvvmhabit.aioui.scan.qingxu.bean.SubmitResponseBean;
-import com.goldze.mvvmhabit.aioui.scan.qingxu.bean.UploadResponseBean;
-import com.goldze.mvvmhabit.aioui.scan.qingxu.bean.VideoSubmitBean;
 import com.goldze.mvvmhabit.aioui.scan.qingxu.config.AppConfig;
 import com.goldze.mvvmhabit.aioui.scan.qingxu.utils.FileUtils;
 import com.goldze.mvvmhabit.utils.RetrofitClient;
@@ -478,12 +476,15 @@ public class PresenterImpl implements VerificationContract.Presenter {
                                     new Thread() {
                                         @Override
                                         public void run() {
-                                            VideoUtil.uploadVideo(bean.data+"",api);
+                                            File file1 = new File("/sdcard/rlsb/face.mp4");
+                                            File file2 = new File("/sdcard/rlsb/face_"+ bean.data +".mp4");
+                                            file1.renameTo(file2);
+                                            VideoUtils.start();
                                         }
                                     }.start();
-//                                    mView.jump(bean);
+                                    mView.jump(bean);
                                 } else {
-                                    ToastUtils.showShort("发生了一些错误，请重新尝试");
+                                    ToastUtils.showShort("发生了一些错误，请重新尝试" + bean.message);
                                     mView.exit();
                                 }
                             }
@@ -508,58 +509,6 @@ public class PresenterImpl implements VerificationContract.Presenter {
 }
 
 class VideoUtil {
-    public static void uploadVideo(String data,Api api) {
-        Log.i("fengao_xiaomi", "uploadVideo: ");
-        File file = new File("/sdcard/rlsb/face.mp4");
-        if (!file.exists() || file.length() < 1) {
-            return;
-        }
-        Log.i("fengao_xiaomi", "uploadVideo: 开始上传");
-        RequestBody body = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-        MultipartBody multipartBody = new MultipartBody.Builder()
-                .addFormDataPart("file", "face.mp4", body)
-                .setType(MultipartBody.FORM)
-                .build();
-        api.updateFacePic(multipartBody.parts())
-                .flatMap(uploadResponseBean -> {
-                    Log.i("fengao_xiaomi", "uploadVideo: flatMap" + uploadResponseBean);
-                    if (uploadResponseBean.success) {
-                        Date date = new Date();
-                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                        String faceVideoEndTime = sdf.format(date);
-                        Date dateStart = new Date(date.getTime() - 1000 * 20);
-                        String faceVideoStartTime = sdf.format(dateStart);
-                        String url = uploadResponseBean.data;
-                        String infoId = data;
-                        VideoSubmitBean videoSubmitBean = new VideoSubmitBean(url,infoId,faceVideoStartTime,faceVideoEndTime);
-                        return api.saveVideo(videoSubmitBean);
-                    } else {
-                        throw new RuntimeException("");
-                    }
-                })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<UploadResponseBean>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                        Log.i("fengao_xiaomi", "onSubscribe: ");
-                    }
 
-                    @Override
-                    public void onNext(UploadResponseBean bean) {
-                        Log.i("fengao_xiaomi", "onNext: " + bean);
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.i("fengao_xiaomi", "onError: " + e.toString());
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
-    }
 
 }

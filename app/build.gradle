@@ -137,6 +137,11 @@ dependencies {
     //androidX 版本使用下面的依赖
     implementation 'com.github.xiaohaibin:XBanner:androidx_v1.2.6'
     implementation 'com.github.getActivity:XXPermissions:16.2'
+    //FFMPEG 旋转视频用
+    implementation 'com.arthenica:mobile-ffmpeg-full:4.4'
+//    implementation 'com.arthenica:mobile-ffmpeg-full-gpl:4.4'
+//    implementation 'com.arthenica:mobile-ffmpeg-full-gpl:4.5.0.LTS'
+
     configurations.all {
         resolutionStrategy {
             force 'androidx.core:core:1.6.0'	//两个依赖根据搜索出的关键字选择

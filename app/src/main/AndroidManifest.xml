@@ -16,7 +16,7 @@
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
-
+    <uses-sdk tools:overrideLibrary="com.arthenica.mobileffmpeg"/>
     <application
         android:name=".app.AppApplication"
         android:allowBackup="true"
