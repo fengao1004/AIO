@@ -45,6 +45,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.goldze.mvvmhabit.R;
+import com.goldze.mvvmhabit.aioui.Util;
 import com.goldze.mvvmhabit.aioui.http.HttpRepository;
 import com.goldze.mvvmhabit.aioui.scan.qingxu.adapter.ActionAdapter;
 import com.goldze.mvvmhabit.aioui.scan.qingxu.bean.ActionBean;
@@ -52,6 +53,7 @@ import com.goldze.mvvmhabit.aioui.scan.qingxu.bean.SubmitResponseBean;
 import com.goldze.mvvmhabit.aioui.scan.qingxu.camera.CameraCallbacks;
 import com.goldze.mvvmhabit.aioui.scan.qingxu.camera.CameraPreview2;
 import com.goldze.mvvmhabit.aioui.scan.qingxu.view.FaceView;
+import com.goldze.mvvmhabit.aioui.scan.qrcode.QRCodeActivity;
 import com.goldze.mvvmhabit.aioui.webview.WebViewFromUrlActivityA;
 import com.seeta.sdk.SeetaImageData;
 
@@ -618,15 +620,26 @@ public class QingxuFragment extends Fragment
 
     @Override
     public void jump(SubmitResponseBean bean) {
-        Intent intent = new Intent(this.getActivity(), WebViewFromUrlActivityA.class);
+        boolean isShowQRCode = Util.INSTANCE.getShebeiXq() != null && Util.INSTANCE.getShebeiXq().isCanScan() == 1;
         String url = HttpRepository.Companion.getQXH5base() + "/emotion/report?reportId=" + bean.data;
+
+        Intent intent;
+        if (isShowQRCode) {
+            intent = new Intent(this.getActivity(), QRCodeActivity.class);
+            intent.putExtra("title", "报告");
+        } else {
+            // 直接跳的情况
+            intent = new Intent(this.getActivity(), WebViewFromUrlActivityA.class);
+            // 添加来源
+            url += "&source=device";
 //        String url = HttpRepository.Companion.getQXH5base() + "/emotion/report?reportId=" + 1578392827360108546L;
 
 
+            intent.putExtra("title", "情绪分析");
+            //        intent.putExtra("id", 1578392827360108546L);
+        }
         intent.putExtra("url", url);
-        intent.putExtra("title", "情绪分析");
         intent.putExtra("id", bean.data);
-//        intent.putExtra("id", 1578392827360108546L);
         startActivity(intent);
         getActivity().finish();
     }

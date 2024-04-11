@@ -438,7 +438,9 @@ public class PresenterImpl implements VerificationContract.Presenter {
                 if (faceBitmap != null) {
                     saveImgage(faceBitmap, "/sdcard/rlsb", "face.jpg");
                 }
-                faceBitmap.recycle();
+                if (faceBitmap != null) {
+                    faceBitmap.recycle();
+                }
                 faceBitmap = null;
                 Log.i("fengao_xiaomi", "run: 开始结束");
                 File file = new File("/sdcard/rlsb/face.jpg");
