@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.widget.ImageView
 import com.goldze.mvvmhabit.BR
 import com.goldze.mvvmhabit.R
-import com.goldze.mvvmhabit.aioui.scan.qingxu.QingxuActivity
+import com.goldze.mvvmhabit.aioui.scan.ScanActivity
 import com.goldze.mvvmhabit.databinding.ActivityQrCodeBinding
 import me.goldze.mvvmhabit.base.BaseActivity
 
@@ -48,7 +48,7 @@ class QRCodeActivity : BaseActivity<ActivityQrCodeBinding, QRCodeModel>() {
     }
 
     fun gotoScan() {
-        startActivity(QingxuActivity::class.java)
+        startActivity(ScanActivity::class.java)
         finish()
     }
 
