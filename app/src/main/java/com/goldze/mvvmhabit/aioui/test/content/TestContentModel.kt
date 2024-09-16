@@ -275,90 +275,90 @@ class TestContentModel(application: Application) : BaseViewModel<HttpRepository>
                         var scaCode = detail.data.scaVo.code
                         var scaRecId = it.data.scaRecId
                         var url = ""
-                        when (scaCode) {
-                            "JiaoLvCeYan_GAD-7-GuangFanXingJi" -> {
-                                url = "/anxiety?scaRecId=${scaRecId}"
-                            }
-                            "YiYuZhengZhuangShaiChaCeYan" -> {
-                                url = "/depressive?scaRecId=${scaRecId}"
-                            }
-                            "ShuiMianZiCeAISLiangBiaoBaoGao" -> {
-                                url = "/sleep?scaRecId=${scaRecId}"
-                            }
-                            "AiSenKeRenGeWenJuanBaoGao" -> {
-                                url = "/aiSenKe?scaRecId=${scaRecId}"
-                            }
-                            "DaWuRenGeWenJuan" -> {
-                                url = "/fiveRG?scaRecId=${scaRecId}"
-                            }
-                            "LingWuSheHuiZhiChiLiangBiao" -> {
-                                url = "/comprehend?scaRecId=${scaRecId}"
-                            }
-                            "XinLiFuYuanLiCeYan" -> {
-                                url = "/resilience?scaRecId=${scaRecId}"
-                            }
-                            "GongZuoJuanDaiLiangBiao" -> {
-                                url = "/workJD?scaRecId=${scaRecId}"
-                            }
-                            "XinLiJianKangCeYan" -> {
-                                url = "/psychological?scaRecId=${scaRecId}"
-                            }
-                            "YingDuiFangShiLiangBiao" -> {
-                                url = "/yingduifs?scaRecId=${scaRecId}"
-                            }
-                            "QingXuWenDingXingWenJuan-EPQ" -> {
-                                url = "/qingxuwd?scaRecId=${scaRecId}"
-                            }
-                            "GongZuoTouRu" -> {
-                                url = "/workTR?scaRecId=${scaRecId}"
-                            }
-                            "ZhongXiaoXueShengXinLiJianKang" -> {
-                                url = "/zxxxl?scaRecId=${scaRecId}"
-                            }
-                            "XueYeChengJiuZeRen" -> {
-                                url = "/xycj?scaRecId=${scaRecId}"
-                            }
-                            "ZhongXiaoXueShengShiYingNengLi" -> {
-                                url = "/zxxsy?scaRecId=${scaRecId}"
-                            }
-                            "JiaTingGouTongZiNvBan" -> {
-                                url = "/familyGT?scaRecId=${scaRecId}"
-                            }
-                            "TongXueGuanXiChuGaoZhong" -> {
-                                url = "/tongxuegx?scaRecId=${scaRecId}"
-                            }
-                            "YiYuZiPingLiangBiao" -> {
-                                url = "/yysas?scaRecId=${scaRecId}"
-                            }
-                            "JiaoLvZiPingLiangBiao" -> {
-                                url = "/jlsas?scaRecId=${scaRecId}"
-                            }
-                            "XinLiJianKangHeXinZhiShiZhiXiaoLv" -> {
-                                url = "/xljkhx?scaRecId=${scaRecId}"
-                            }
-                            "JiYiZhangAiZiPingLiangBiao" -> {
-                                url = "/jiyiza?scaRecId=${scaRecId}"
-                            }
-                            "AiDingBaoYiYuCeYan" -> {
-                                url = "/adbyy?scaRecId=${scaRecId}"
-                            }
-                            "ChengJiuDongJiCeYan" -> {
-                                url = "/cjdj?scaRecId=${scaRecId}"
-                            }
-                            "GongZuoKongZhiYuanLiangBiao" -> {
-                                url = "/gzkzy?scaRecId=${scaRecId}"
-                            }
-                            "QinZiRongQiaXingWenJuan" -> {
-                                url = "/qzrqia?scaRecId=${scaRecId}"
-                            }
-                            "OIsonHunYinZhiLiangWenJuan" -> {
-                                url = "/olson?scaRecId=${scaRecId}"
-                            }
-                            "MBTIXingGeCeYan" -> {
-                                url = "/mbti?scaRecId=${scaRecId}"
-                            }
-                        }
-                        url = HttpRepository.getH5base() + url
+//                        when (scaCode) {
+//                            "JiaoLvCeYan_GAD-7-GuangFanXingJi" -> {
+//                                url = "/anxiety?scaRecId=${scaRecId}"
+//                            }
+//                            "YiYuZhengZhuangShaiChaCeYan" -> {
+//                                url = "/depressive?scaRecId=${scaRecId}"
+//                            }
+//                            "ShuiMianZiCeAISLiangBiaoBaoGao" -> {
+//                                url = "/sleep?scaRecId=${scaRecId}"
+//                            }
+//                            "AiSenKeRenGeWenJuanBaoGao" -> {
+//                                url = "/aiSenKe?scaRecId=${scaRecId}"
+//                            }
+//                            "DaWuRenGeWenJuan" -> {
+//                                url = "/fiveRG?scaRecId=${scaRecId}"
+//                            }
+//                            "LingWuSheHuiZhiChiLiangBiao" -> {
+//                                url = "/comprehend?scaRecId=${scaRecId}"
+//                            }
+//                            "XinLiFuYuanLiCeYan" -> {
+//                                url = "/resilience?scaRecId=${scaRecId}"
+//                            }
+//                            "GongZuoJuanDaiLiangBiao" -> {
+//                                url = "/workJD?scaRecId=${scaRecId}"
+//                            }
+//                            "XinLiJianKangCeYan" -> {
+//                                url = "/psychological?scaRecId=${scaRecId}"
+//                            }
+//                            "YingDuiFangShiLiangBiao" -> {
+//                                url = "/yingduifs?scaRecId=${scaRecId}"
+//                            }
+//                            "QingXuWenDingXingWenJuan-EPQ" -> {
+//                                url = "/qingxuwd?scaRecId=${scaRecId}"
+//                            }
+//                            "GongZuoTouRu" -> {
+//                                url = "/workTR?scaRecId=${scaRecId}"
+//                            }
+//                            "ZhongXiaoXueShengXinLiJianKang" -> {
+//                                url = "/zxxxl?scaRecId=${scaRecId}"
+//                            }
+//                            "XueYeChengJiuZeRen" -> {
+//                                url = "/xycj?scaRecId=${scaRecId}"
+//                            }
+//                            "ZhongXiaoXueShengShiYingNengLi" -> {
+//                                url = "/zxxsy?scaRecId=${scaRecId}"
+//                            }
+//                            "JiaTingGouTongZiNvBan" -> {
+//                                url = "/familyGT?scaRecId=${scaRecId}"
+//                            }
+//                            "TongXueGuanXiChuGaoZhong" -> {
+//                                url = "/tongxuegx?scaRecId=${scaRecId}"
+//                            }
+//                            "YiYuZiPingLiangBiao" -> {
+//                                url = "/yysas?scaRecId=${scaRecId}"
+//                            }
+//                            "JiaoLvZiPingLiangBiao" -> {
+//                                url = "/jlsas?scaRecId=${scaRecId}"
+//                            }
+//                            "XinLiJianKangHeXinZhiShiZhiXiaoLv" -> {
+//                                url = "/xljkhx?scaRecId=${scaRecId}"
+//                            }
+//                            "JiYiZhangAiZiPingLiangBiao" -> {
+//                                url = "/jiyiza?scaRecId=${scaRecId}"
+//                            }
+//                            "AiDingBaoYiYuCeYan" -> {
+//                                url = "/adbyy?scaRecId=${scaRecId}"
+//                            }
+//                            "ChengJiuDongJiCeYan" -> {
+//                                url = "/cjdj?scaRecId=${scaRecId}"
+//                            }
+//                            "GongZuoKongZhiYuanLiangBiao" -> {
+//                                url = "/gzkzy?scaRecId=${scaRecId}"
+//                            }
+//                            "QinZiRongQiaXingWenJuan" -> {
+//                                url = "/qzrqia?scaRecId=${scaRecId}"
+//                            }
+//                            "OIsonHunYinZhiLiangWenJuan" -> {
+//                                url = "/olson?scaRecId=${scaRecId}"
+//                            }
+//                            "MBTIXingGeCeYan" -> {
+//                                url = "/mbti?scaRecId=${scaRecId}"
+//                            }
+//                        }
+                        url = HttpRepository.getH5base() + "/reportJump?scaCode=$scaCode&scaRecId=$scaRecId"
                         var intent = Intent(activity, WebViewFromUrlActivity::class.java)
                         intent.putExtra("title", "报告")
                         intent.putExtra("url", url)

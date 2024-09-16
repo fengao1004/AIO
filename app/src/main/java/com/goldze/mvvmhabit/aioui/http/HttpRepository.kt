@@ -12,7 +12,7 @@ import me.goldze.mvvmhabit.base.BaseModel
 open class HttpRepository : BaseModel() {
     companion object {
         const val isTest = false
-        const val H5_URL = "http://11.client.yixinxd.com/report/index.html#" //正式环境
+        const val H5_URL = "http://11.client.yixinxd.com/psyClientWeb/index.html#" //正式环境
         const val TEST_H5_URL = "http://11.sit.client.yixinxd.com/psyClientWeb/#" //测试环境
         const val QX_H5_URL = "http://11.client.yixinxd.com/report/index.html#" //测试环境
         const val QX_TEST_H5_URL = "http://11.sit.client.yixinxd.com/report/index.html#" //测试环境

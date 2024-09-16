@@ -136,7 +136,7 @@ dependencies {
     implementation 'com.github.gzu-liyujiang.AndroidPicker:WheelPicker:4.1.7'
     //androidX 版本使用下面的依赖
     implementation 'com.github.xiaohaibin:XBanner:androidx_v1.2.6'
-    implementation 'com.github.getActivity:XXPermissions:16.2'
+    implementation 'com.github.getActivity:XXPermissions:18.68'
     //FFMPEG 旋转视频用
     implementation 'com.arthenica:mobile-ffmpeg-full:4.4'
 //    implementation 'com.arthenica:mobile-ffmpeg-full-gpl:4.4'

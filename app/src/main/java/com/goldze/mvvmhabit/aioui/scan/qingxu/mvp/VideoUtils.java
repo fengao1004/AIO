@@ -66,7 +66,7 @@ public class VideoUtils {
                                 String name = f.getName();
                                 String data = name.replace("face_","");
                                 data = data.replace(".mp4","");
-                                rotateVideo(f.getAbsolutePath(), "/sdcard/rlsb/face_90.mp4", data, 270);
+                                rotateVideo(f.getAbsolutePath(), "/sdcard/rlsb/face_90.mp4", data, 90);
                             }
                         }.start();
                         return;
