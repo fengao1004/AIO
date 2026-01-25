@@ -6,6 +6,7 @@ import android.content.Intent
 import android.util.Log
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableInt
+import com.goldze.mvvmhabit.aioui.Util
 import com.goldze.mvvmhabit.aioui.Util.delHTMLTag
 import com.goldze.mvvmhabit.aioui.bean.CommentRequestBean
 import com.goldze.mvvmhabit.aioui.bean.TextObserver
@@ -53,7 +54,7 @@ class TestDecModel(application: Application) : BaseViewModel<HttpRepository>(app
         this.type = type!!
         if (type == "normal") {
             scaCode = code!!
-            model.api.getScaBasics(scaCode)
+            model.api.getScaBasics(scaCode, Util.serialNumber, Util.uniqueCode)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
@@ -66,7 +67,9 @@ class TestDecModel(application: Application) : BaseViewModel<HttpRepository>(app
                         ScaDetailsRequestBean(
                             scaCode = code!!,
                             onceId = onceId
-                        )
+                        ),
+                        Util.serialNumber,
+                        Util.uniqueCode
                     )
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())

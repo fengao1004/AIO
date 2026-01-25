@@ -9,6 +9,7 @@ import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableInt
 import com.goldze.mvvmhabit.BR
 import com.goldze.mvvmhabit.R
+import com.goldze.mvvmhabit.aioui.Util
 import com.goldze.mvvmhabit.aioui.bean.TextObserver
 import com.goldze.mvvmhabit.aioui.http.HttpRepository
 import com.goldze.mvvmhabit.aioui.test.bean.*
@@ -260,8 +261,12 @@ class TestContentModel(application: Application) : BaseViewModel<HttpRepository>
                 listA.add(quesData)
             }
             var data =
-                AnserRequestData(AnserRequestDataParam(marry, sex), listA, detail.data.scaRecId)
-            model.api.commit(data)
+                AnserRequestData(
+                    AnserRequestDataParam(marry, sex), 
+                    listA, 
+                    detail.data.scaRecId
+                )
+            model.api.commit(data, Util.serialNumber, Util.uniqueCode)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({

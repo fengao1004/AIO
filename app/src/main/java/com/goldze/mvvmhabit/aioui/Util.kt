@@ -111,7 +111,7 @@ object Util {
                 var jumpBasic = false
                 var onceId = ""
                 var basicBean: BasicDetailsResponseBeanData? = null
-                model.api.getScaBasics(code)
+                model.api.getScaBasics(code, serialNumber, uniqueCode)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({
@@ -124,7 +124,9 @@ object Util {
                             ScaDetailsRequestBean(
                                 scaCode = code!!,
                                 onceId = onceId
-                            )
+                            ),
+                            serialNumber,
+                            uniqueCode
                         ).subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe({

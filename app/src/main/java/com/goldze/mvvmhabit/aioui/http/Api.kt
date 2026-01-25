@@ -32,14 +32,22 @@ import retrofit2.http.*
  */
 interface Api {
     @POST("/client/scaRec/notLogin/create")
-    fun getScaDetails(@Body bean: ScaDetailsRequestBean): Observable<ScaDetailsResponseBean>
+    fun getScaDetails(
+        @Body bean: ScaDetailsRequestBean,
+        @Header("serialNumber") serialNumber: String,
+        @Header("uniqueCode") uniqueCode: String
+    ): Observable<ScaDetailsResponseBean>
 
 
     @POST("/client/api/interest/detail")
     fun getFunnyDetails(@Body bean: CommentRequestBean): Observable<FunnyTestBean>
 
     @POST("/client/scaRec/notLogin/calc")
-    fun commit(@Body bean: AnserRequestData): Observable<AnserReponseData>
+    fun commit(
+        @Body bean: AnserRequestData,
+        @Header("serialNumber") serialNumber: String,
+        @Header("uniqueCode") uniqueCode: String
+    ): Observable<AnserReponseData>
 
     @POST("/client/api/announcement/getPageList")
     fun getAnnounList(@Body bean: GetAnnounListRequestBean): Observable<GetAnnounListReponseBean>
@@ -124,7 +132,11 @@ interface Api {
 
     @POST("/client/scaRec/notLogin/getScaBasics")
     @FormUrlEncoded
-    fun getScaBasics(@Field("scaCode") scaCode: String): Observable<BasicDetailsResponseBean>
+    fun getScaBasics(
+        @Field("scaCode") scaCode: String,
+        @Header("serialNumber") serialNumber: String,
+        @Header("uniqueCode") uniqueCode: String
+    ): Observable<BasicDetailsResponseBean>
 
     @POST("/client/scaRec/notLogin/saveScaBasic")
     fun commitBasic(@Body bean: List<BasicAnserBean>): Observable<AnserReponseData>
